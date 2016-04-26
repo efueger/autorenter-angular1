@@ -29,7 +29,6 @@ are two different things. Let's not confuse the two...
 
 * Classes and interfaces are named using ```PascalCase```.
 * Other types are named using ```camelCase```.
-* Do *not* prefix interfaces with `I`.
 
 ### File naming
 
