@@ -12,34 +12,35 @@ services:
     volumes:
       - redis-data:/var/lib/redis
     container_name: autorenter-redis
-  # api:
-  #   image: ""
-  #   ports:
-  #     - "3000:3000"
-  #   links:
-  #     - postgres
-  #     - redis
-  #   depends_on:
-  #     - postgres
-  #     - redis
-  #   volumes:
-  #     - .:/home/api/
-  #   container_name: autorenter-api
+  api:
+    build: "../autorenter_nodeexpress_api/" # Change to image outside of dev
+    ports:
+      - "3000:3000"
+    links:
+      - postgres
+      - redis
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ../autorenter_nodeexpress_api/:/home/api/
+    container_name: autorenter-api
   angular:
     build: .
     ports:
       - "9000:80"
-    # links:
-    #   - postgres
-    #   - redis
-    #   - api
-    # depends_on:
-    #   - postgres
-    #   - redis
-    #   - api
+    links:
+      - postgres
+      - redis
+      - api
+    depends_on:
+      - postgres
+      - redis
+      - api
     volumes:
       - ./dist/app:/usr/share/nginx/html
     restart: always
+    container_name: autorenter-ui
 volumes:
   redis-data:
     driver: local
