@@ -1,0 +1,47 @@
+version: '2'
+services:
+  postgres:
+    image: "postgres:9.5.2"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432
+    container_name: autorenter-postgres
+  redis:
+    image: "redis:3.0.7"
+    volumes:
+      - redis-data:/var/lib/redis
+    container_name: autorenter-redis
+  # api:
+  #   image: ""
+  #   ports:
+  #     - "3000:3000"
+  #   links:
+  #     - postgres
+  #     - redis
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  #   volumes:
+  #     - .:/home/api/
+  #   container_name: autorenter-api
+  angular:
+    build: .
+    ports:
+      - "9000:80"
+    # links:
+    #   - postgres
+    #   - redis
+    #   - api
+    # depends_on:
+    #   - postgres
+    #   - redis
+    #   - api
+    volumes:
+      - ./dist/app:/usr/share/nginx/html
+    restart: always
+volumes:
+  redis-data:
+    driver: local
+  postgres-data:
+    driver: local
