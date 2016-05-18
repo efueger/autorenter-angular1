@@ -8,4 +8,6 @@ RUN mkdir -p /tmp/nginx/client-body
 COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY config/default.conf /etc/nginx/conf.d/defult.conf
 
+COPY ./dist/app /usr/share/nginx/html
+
 CMD ["nginx", "-g", "daemon off;"]

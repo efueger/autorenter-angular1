@@ -19,18 +19,8 @@ coverage
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
-# Dependency directories
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
-node_modules
-
 # Debug log from npm
 npm-debug.log
-
-# Optional npm cache directory
-.npm
-
-# Optional REPL history
-.node_repl_history
 
 # DevOps
 *.box
@@ -48,6 +38,7 @@ npm-debug.log
 .node-gyp
 .npm
 .npm_packages
-
-# User uploads
-userdata/documents/**/*
+.gitignore
+.git/
+readme.md
+docker-compose.yml
