@@ -1,0 +1,92 @@
+{
+  "name": "autorenter_angular1",
+  "version": "0.0.1",
+  "description": "AutoRenter UI",
+  "keywords": [
+    "angular",
+    "npm",
+    "reference"
+  ],
+  "author": "Fusion Alliance",
+  "contributors": [
+    {
+      "name": "Allen Buckley <allensb@gmail.com>"
+    },
+    {
+      "name": "Ray Clanan <rclanan@utopianconcept.com>"
+    },
+    {
+      "name": "Jarred Keuch <jkeuch@fusionalliance.com>"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.fusionalliance.com:7999/fusadip/autorenter_nodeexpress_api.git"
+  },
+  "bugs": {
+    "email": "code@fusionalliance.com",
+    "url": "https://jira.fusionalliance.com/browse/AUT"
+  },
+  "license": "MIT",
+  "scripts": {
+    "start": "npm install && npm run dev -s",
+    "clean": "rimraf dist && mkdirp dist",
+    "watch": "parallelshell 'npm run watch:js -s' 'npm run watch:css -s' 'npm run watch:assets -s' 'npm run watch:html -s'",
+    "lint": "eslint --ignore-pattern src/assets src/app/**/*.js",
+    "browser-sync": "browser-sync start --files 'dist' --server 'dist'",
+    "prebuild": "npm run clean -s",
+    "build": "echo '=> build the project' && npm run copy:assets -s && npm run copy:html -s && npm run build:js -s && npm run lint -s && npm run copy:angular -s && npm run copy:bootstrap -s",
+    "prebuild:js": "mkdirp dist/scripts && mkdirp dist/assets/bootstrap",
+    "build:js": "echo '=> build:js' && uglifyjs src/app/*.js src/app/**/*.js -o dist/app/app.js",
+    "watch:js": "echo '=> watch:js' && onchange src/app/*.js src/app/**/*.js -- npm run build:js -s",
+    "build:css": "echo '=> build:css' && pleeease compile",
+    "watch:css": "onchange 'src/assets/css/*.css' -- npm run build:css -s",
+    "copy:assets": "echo '=> copy:assets' && cp -rf src/assets/ dist/assets",
+    "watch:assets": "onchange 'src/assets' -- npm run copy:assets -s",
+    "copy:html": "echo '=> copy:html' && mkdirp dist/app && cp src/app/**/*.html dist/app && cp index.html dist",
+    "watch:html": "onchange '*.html' 'src/app/**/*.html' -- npm run copy:html -s",
+    "copy:angular": "cp node_modules/angular/angular.js dist/scripts && cp node_modules/angular-ui-router/release/angular-ui-router.js dist/scripts",
+    "copy:bootstrap": "cp node_modules/bootstrap/dist/js/bootstrap.min.js dist/assets/bootstrap && cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/assets/bootstrap && npm run copy:jquery -s",
+    "copy:jquery": "cp node_modules/jquery/dist/jquery.min.js dist/assets/bootstrap",
+    "predev": "npm run clean -s",
+    "dev": "npm run lint -s && npm run build -s && parallelshell 'npm run browser-sync -s' 'npm run watch -s'",
+    "reinstall": "npm cache clean && npm install",
+    "test": "karma start --single-run",
+    "test:watch": "karma start"
+  },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
+  "dependencies": {
+    "angular": "1.5.5",
+    "angular-ui-router": "^0.3.0",
+    "angulartics": "1.0.3",
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.3",
+    "lodash": "4.11.1"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.5.5",
+    "browser-sync": "2.12.5",
+    "chai": "3.5.0",
+    "eslint": "^2.10.2",
+    "eslint-config-airbnb-base": "^3.0.1",
+    "eslint-plugin-import": "^1.8.1",
+    "karma": "^0.13.22",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^1.0.1",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "mkdirp": "0.5.1",
+    "mocha": "^2.4.5",
+    "npm-html2js": "0.1.8",
+    "onchange": "2.4.0",
+    "parallelshell": "2.0.0",
+    "phantomjs-prebuilt": "^2.1.7",
+    "pleeease": "4.0.4",
+    "pre-commit": "1.1.3",
+    "remap-istanbul": "0.6.3",
+    "rimraf": "2.5.2",
+    "uglifyjs": "2.4.10"
+  }
+}

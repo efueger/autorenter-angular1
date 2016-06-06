@@ -19,18 +19,16 @@ coverage
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
-# Debug log from npm
-npm-debug.log
-
-# DevOps
+# Virtualization
 *.box
 .vagrant
 
+# WebStorm
 .idea/
+
+# Misc
 .DS_Store
-
 .envrc
-
 .bashrc
 .bash_history
 .cache
@@ -41,4 +39,3 @@ npm-debug.log
 .gitignore
 .git/
 readme.md
-docker-compose.yml
