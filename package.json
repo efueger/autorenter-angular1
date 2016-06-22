@@ -52,7 +52,8 @@
     "dev": "npm run lint -s && npm run build -s && parallelshell 'npm run browser-sync -s' 'npm run watch -s'",
     "reinstall": "npm cache clean && npm install",
     "test": "karma start --single-run",
-    "test:watch": "karma start"
+    "test:watch": "karma start",
+    "dev:build": "npm install && npm run prebuild && npm run build"
   },
   "pre-commit": [
     "lint",

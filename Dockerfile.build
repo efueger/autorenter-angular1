@@ -1,0 +1,13 @@
+FROM node:6.2.2
+
+MAINTAINER Fusion Alliance <code@fusionalliance.com>
+
+ENV DEBUG=app
+ENV HOME=/home/app
+
+RUN mkdir -p $HOME
+WORKDIR $HOME
+
+RUN npm install -g node-gyp
+
+CMD ["npm", "run", "dev:build"]
