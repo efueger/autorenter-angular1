@@ -29,7 +29,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "npm install && npm run dev -s",
+    "start": "npm install --no-bin-links && npm run dev -s",
     "clean": "rimraf dist && mkdirp dist",
     "watch": "parallelshell 'npm run watch:js' 'npm run watch:css' 'npm run watch:assets' 'npm run watch:html'",
     "lint": "eslint --ignore-pattern src/assets src/app/**/*.js",
