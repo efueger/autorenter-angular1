@@ -31,7 +31,7 @@
   "scripts": {
     "start": "npm install && npm run dev -s",
     "clean": "rimraf dist && mkdirp dist",
-    "watch": "parallelshell 'npm run watch:js -s' 'npm run watch:css -s' 'npm run watch:assets -s' 'npm run watch:html -s'",
+    "watch": "parallelshell 'npm run watch:js' 'npm run watch:css' 'npm run watch:assets' 'npm run watch:html'",
     "lint": "eslint --ignore-pattern src/assets src/app/**/*.js",
     "browser-sync": "browser-sync start --files 'dist' --server 'dist'",
     "prebuild": "npm run clean -s",
