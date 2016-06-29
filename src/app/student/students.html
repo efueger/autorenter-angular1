@@ -15,17 +15,7 @@
         <br />
       </div>
     </div>
+    <!--Prove you can hit the API-->
+    <div id="api-response" class="row">{{student.apiResponse}}</div>
   </div>
-
-  <!--Prove you can hit the API-->
-  <div id="api-response"></div>
-  <script type="text/javascript">
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://192.168.99.100:3000/", false);
-    xhr.send();
-
-    var container = document.getElementById("api-response");
-    container.innerHTML = xhr.responseText;
-  </script>
-
 </div>

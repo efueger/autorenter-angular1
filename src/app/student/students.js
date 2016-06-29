@@ -1,5 +1,5 @@
 (function init() {
-  function StudentCtrl() {
+  function StudentCtrl($http) {
     this.students = [
       { name: 'Josh' },
       { name: 'Chris' },
@@ -8,6 +8,12 @@
     this.addStudent = function addStudent(name) {
       this.students.push({ name: name });
     };
+
+    $http.get('').success(function apiSuccess(data) {
+      this.apiResponse = data;
+    }).error(function apiError() {
+      // log error
+    });
   }
 
   angular

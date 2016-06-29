@@ -8,6 +8,6 @@ ENV HOME=/home/app
 RUN mkdir -p $HOME
 WORKDIR $HOME
 
-RUN npm install -g node-gyp parallelshell
+RUN npm install -g node-gyp parallelshell watch
 
-CMD ["npm", "run", "watch"]
+CMD ["npm", "run", "watch:dev"]

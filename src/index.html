@@ -22,5 +22,16 @@
     <main role="main" class="container-fluid" ui-view></main>
 
     <script src="app/app.js"></script>
+
+    <!--Prove you can hit the API-->
+    <div id="api-response"></div>
+    <script type="text/javascript">
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "http://192.168.99.100:3000/", false);
+      xhr.send();
+
+      var container = document.getElementById("api-response");
+      container.innerHTML = xhr.responseText;
+    </script>
   </body>
 </html>
