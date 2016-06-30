@@ -21,7 +21,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "ssh://git@stash.fusionalliance.com:7999/fusadip/autorenter_nodeexpress_api.git"
+    "url": "ssh://git@stash.fusionalliance.com:7999/fusadip/autorenter_angular1.git"
   },
   "bugs": {
     "email": "code@fusionalliance.com",
