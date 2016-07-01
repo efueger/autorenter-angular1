@@ -1,3 +1,9 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Compiled output
+/dist
+/tmp
+
 # Logs
 logs
 *.log
@@ -20,34 +26,35 @@ coverage
 build/Release
 
 # Dependency directories
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
 node_modules
 
-# Debug log from npm
-npm-debug.log
-
-# Optional npm cache directory
+# npm caches
 .npm
+.npm_packages
 
 # Optional REPL history
 .node_repl_history
 
-# DevOps
+# Virtualization
 *.box
 .vagrant
 
+# WebStorm
 .idea/
+
+# Visual Studio
+obj/
+.vs
+*.njsproj
+*.sln
+
+# Misc
 .DS_Store
-
 .envrc
-
 .bashrc
 .bash_history
 .cache
 .config
 .node-gyp
-.npm
-.npm_packages
-
-# User uploads
-userdata/documents/**/*
+/.sass-cache
+/connect.lock

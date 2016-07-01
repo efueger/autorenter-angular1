@@ -1,0 +1,21 @@
+<div class="container">
+  <br />
+  <h4>Students</h4>
+  <br />
+  <div class="add-student">
+    <label for="name_input">Add Student...</label>
+    <div class="form-group">
+      <input class="add-student-input form-control" type="text" id="name_input" ng-model="name">
+      <button ng-click="student.addStudent(name)" class="btn btn-primary student-theme">Add</button>
+    </div>
+    <br />
+    <div class="row">
+      <div ng-repeat="student in student.students" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <student-detail student="student"></student-detail>
+        <br />
+      </div>
+    </div>
+    <!--Prove you can hit the API-->
+    <div id="api-response" class="row">{{student.apiResponse}}</div>
+  </div>
+</div>
