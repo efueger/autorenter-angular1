@@ -54,7 +54,7 @@
     "test": "karma start --single-run",
     "dev:build": "npm install --no-bin-links && npm run prebuild && npm run build",
     "dev:watch": "npm run lint && npm run test && npm run build",
-    "watch:dev": "watch 'npm run dev:watch' ./src -d"
+    "watch:dev": "watch 'npm run dev:watch' ./src ./tests -d"
   },
   "pre-commit": [
     "lint",
