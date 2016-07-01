@@ -52,7 +52,6 @@
     "dev": "npm run lint -s && npm run build -s && parallelshell 'npm run browser-sync -s' 'npm run watch -s'",
     "reinstall": "npm cache clean && npm install --no-bin-links",
     "test": "karma start --single-run",
-    "test:watch": "karma start",
     "dev:build": "npm install --no-bin-links && npm run prebuild && npm run build",
     "dev:watch": "npm run lint && npm run test && npm run build",
     "watch:dev": "watch 'npm run dev:watch' ./src -d"
