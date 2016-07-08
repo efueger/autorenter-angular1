@@ -32,7 +32,7 @@
     "start": "npm install --no-bin-links && npm run dev -s",
     "clean": "rimraf dist && mkdirp dist",
     "watch": "parallelshell 'npm run watch:js' 'npm run watch:css' 'npm run watch:assets' 'npm run watch:html'",
-    "lint": "eslint 'src/app/**/*.js'",
+    "lint": "eslint '**/*.js'",
     "browser-sync": "browser-sync start --files 'dist' --server 'dist'",
     "prebuild": "npm run clean -s",
     "build": "echo '=> build the project' && npm run copy:assets -s && npm run copy:html -s && npm run build:js -s && npm run lint -s && npm run copy:angular -s && npm run copy:bootstrap -s",
@@ -54,7 +54,7 @@
     "test": "karma start --single-run",
     "dev:build": "npm install --no-bin-links && npm run prebuild && npm run build",
     "dev:watch": "npm run lint && npm run test && npm run build",
-    "watch:dev": "watch 'npm run dev:watch' ./src -d"
+    "watch:dev": "watch 'npm run dev:watch' ./src ./tests -d"
   },
   "pre-commit": [
     "lint",
