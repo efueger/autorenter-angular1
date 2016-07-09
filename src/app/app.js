@@ -2,7 +2,8 @@
   'use strict';
 
   var app = angular.module('app', [
-    'ui.router'
+    'ui.router',
+    'app.common'
   ]);
 
   app.config([

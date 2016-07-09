@@ -1,5 +1,5 @@
 (function init() {
-  function StudentCtrl($http) {
+  function StudentCtrl($http, $log) {
     this.students = [
       { name: 'Josh' },
       { name: 'Chris' },
@@ -7,6 +7,10 @@
 
     this.addStudent = function addStudent(name) {
       this.students.push({ name: name });
+      $log.debug('debug added ' + name);
+      $log.info('some info for testing');
+      $log.warn('a warning for testing');
+      $log.error('an error for testing');
     };
 
     $http.get('').success(function apiSuccess(data) {
@@ -18,5 +22,5 @@
 
   angular
     .module('app')
-    .controller('StudentCtrl', StudentCtrl);
+    .controller('StudentCtrl', ['$http', '$log', StudentCtrl]);
 }());
