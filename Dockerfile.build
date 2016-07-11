@@ -8,6 +8,4 @@ ENV HOME=/home/app
 RUN mkdir -p $HOME
 WORKDIR $HOME
 
-# RUN npm install -g node-gyp rimraf mkdirp uglifyjs eslint-config-es5 eslint-plugin-import eslint
-
 CMD ["npm", "run", "dev:build"]
