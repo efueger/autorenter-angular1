@@ -10,7 +10,7 @@
       $log.debug('debug added ' + name);
       $log.info('some info for testing');
       $log.warn('a warning for testing');
-      $log.error('an error for testing');
+      $log.error('an error for testing!');
     };
 
     $http.get('').success(function apiSuccess(data) {
