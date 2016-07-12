@@ -15,19 +15,8 @@
       $log.error('an error for testing!');
     };
 
-    // $http.get('http://192.168.99.100:3000/').then(function apiSuccess(res) {
-    //   self.apiResponse = res.data;
-    // }, function apiError() {
-    //   // log error
-    // });
-
-    var payload = JSON.stringify({
-      message: 'testing',
-      level: 'debug',
-      username: 'bill'
-    });
-    $http.post('http://192.168.99.100:3000/api/log/', payload).then(function apiSuccess(data) {
-      self.apiResponse = data;
+    $http.get('http://192.168.99.100:3000/').then(function apiSuccess(res) {
+      self.apiResponse = res.data;
     }, function apiError() {
       // log error
     });
