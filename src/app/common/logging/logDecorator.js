@@ -12,15 +12,16 @@
             // Do NOT use $http in the context of logging because it creates a circular dependency, initiates the digest
             // loop, and makes logging to the API impossible if Angular itself if hosed.
             var READY_STATE = 4;
-            var SUCCESS_CODE = 200;
-            var payload = angular.toJson({
+            var SUCCESS_CODE = 201;
+            var payload = {
               message: message,
               level: severity,
               username: 'bill'
-            });
-            var xhr = new XMLHttpRequest(); // $xhrFactory('POST', 'api/log');
-            xhr.open('POST', 'http://192.168.99.100:3000/api/log', true);
-            xhr.setRequestHeader('Content-Type', 'application/json');
+            };
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://192.168.99.100:3000/api/log');
+            xhr.setRequestHeader('Accept', 'application/json, text/plain, */*');
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
             xhr.onreadystatechange = function onReadyStateChange() {
               if (xhr.readyState === READY_STATE && xhr.status !== SUCCESS_CODE) {
                 console.log('oops, state is ' + xhr.readyState);
