@@ -4,10 +4,9 @@
   angular
     .module('app.common', [])
     .config([
-      '$provide',
-      function provide($provide) {
+      '$provide', 'strings',
+      function provide($provide, strings) {
         var logDecorator = function $logDecorator($delegate) {
-          console.log('decorating the warn function...');
           function logToApi(message, severity) {
             // Do NOT use $http in the context of logging because it creates a circular dependency, initiates the digest
             // loop, and makes logging to the API impossible if Angular itself if hosed.
@@ -24,9 +23,13 @@
             xhr.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
             xhr.onreadystatechange = function onReadyStateChange() {
               if (xhr.readyState === READY_STATE && xhr.status !== SUCCESS_CODE) {
-                console.log('oops, state is ' + xhr.readyState);
-                console.log('oops, status is ' + xhr.status);
-                throw new Error('A logging error has occurred.');
+                var errorMessageFormat =
+                  'A logging error has occurred: readyState = \'{state}\', statusCode = \'{status}\'';
+                var errorMessage = strings.format(errorMessageFormat, {
+                  state: xhr.readyState,
+                  status: xhr.status
+                });
+                throw new Error(errorMessage);
               }
             };
             xhr.send(JSON.stringify(payload));
@@ -35,7 +38,6 @@
           $delegate.warn = function decoratedWarn() {
             var args = [].slice.call(arguments);
             args[0] = 'decorated! ' + args[0];
-            console.info('args = ' + JSON.stringify(args));
             originalWarn.apply($delegate, args);
             logToApi(args[0], 'warn');
           };

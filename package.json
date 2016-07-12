@@ -36,7 +36,7 @@
     "lint": "eslint '**/*.js' '**/**/*.js'",
     "browser-sync": "browser-sync start --files 'dist' --server 'dist'",
     "prebuild": "npm run clean -s",
-    "build": "echo '=> build the project' && npm run copy:assets -s && npm run copy:html -s && npm run build:js -s && npm run lint -s && npm run copy:angular -s && npm run copy:bootstrap -s",
+    "build": "echo '=> build the project' && npm run copy:assets -s && npm run copy:html -s && npm run build:js -s && npm run lint -s && npm run copy:angular -s && npm run copy:bootstrap -s && npm run copy:strings -s",
     "prebuild:js": "mkdirp dist/scripts && mkdirp dist/assets/bootstrap",
     "build:js": "echo '=> build:js' && uglifyjs src/app/*.js src/app/**/*.js src/app/**/**/*.js -o dist/app/app.js",
     "watch:js": "echo '=> watch:js' && onchange src/app/*.js src/app/**/*.js src/app/**/**/*.js -- npm run build:js -s",
@@ -49,6 +49,7 @@
     "copy:angular": "cp node_modules/angular/angular.js dist/scripts && cp node_modules/angular-ui-router/release/angular-ui-router.js dist/scripts",
     "copy:bootstrap": "cp node_modules/bootstrap/dist/js/bootstrap.min.js dist/assets/bootstrap && cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/assets/bootstrap && npm run copy:jquery -s",
     "copy:jquery": "cp node_modules/jquery/dist/jquery.min.js dist/assets/bootstrap",
+    "copy:strings": "cp node_modules/strings.js/dist/strings.1.0.0.min.js dist/scripts",
     "predev": "npm run clean -s",
     "dev": "npm run lint -s && npm run build -s && parallelshell 'npm run browser-sync -s' 'npm run watch -s'",
     "reinstall": "npm cache clean && npm run install",
@@ -67,7 +68,8 @@
     "angulartics": "1.0.3",
     "bootstrap": "3.3.6",
     "jquery": "2.2.3",
-    "lodash": "4.11.1"
+    "lodash": "4.11.1",
+    "strings.js": "github:fusionalliance/strings.js"
   },
   "devDependencies": {
     "angular-mocks": "1.5.5",
