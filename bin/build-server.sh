@@ -25,8 +25,7 @@ fi
 UI_WATCH_ID=$(docker ps -a --filter=name=aur-watch-ui -q)
 if [ -z $UI_WATCH_ID ]
 then
-  echo '=> Building ui watch image' && docker build -t aur-watch-ui-image:latest -f Dockerfile.watch .
-  echo '=> Starting ui watch' && docker run -it -v $(pwd):/home/app --name aur-watch-ui aur-watch-ui-image
+  echo '=> Starting ui watch' && docker run -it -v $(pwd):/home/app --name aur-watch-ui aur-build-ui-image npm run watch:dev
 else
   echo '=> Found non-running ui watch container with id $UI_WATCH_ID'
   echo '=> Restarting ui watch' && docker start $UI_WATCH_ID
