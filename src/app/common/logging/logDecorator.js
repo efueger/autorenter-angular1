@@ -25,8 +25,8 @@
               if (xhr.readyState === READY_STATE && xhr.status !== SUCCESS_CODE) {
                 var errorMessageFormat =
                   'A logging error has occurred: readyState = \'{state}\', statusCode = \'{status}\'.';
-                var string = $windowProvider.$get().strings;
-                var errorMessage = string.format(errorMessageFormat, {
+                var strings = $windowProvider.$get().strings;
+                var errorMessage = strings.format(errorMessageFormat, {
                   state: xhr.readyState,
                   status: xhr.status
                 });
@@ -35,16 +35,35 @@
             };
             xhr.send(JSON.stringify(payload));
           }
-          var originalWarn = $delegate.warn;
-          $delegate.warn = function decoratedWarn() {
-            var args = [].slice.call(arguments);
-            args[0] = 'decorated! ' + args[0];
-            originalWarn.apply($delegate, args);
-            logToApi(args[0], 'warn');
-          };
 
-          // Special... only needed to support angular-mocks expectations.
-          $delegate.warn.logs = $delegate.warn.logs || [];
+          function decorate() {
+            var messageIndex = 0;
+            var originalInfo = $delegate.info;
+            $delegate.info = function decoratedInfo() {
+              var args = [].slice.call(arguments);
+              originalInfo.apply($delegate, args);
+              logToApi(args[messageIndex], 'info');
+            };
+            var originalWarn = $delegate.warn;
+            $delegate.warn = function decoratedWarn() {
+              var args = [].slice.call(arguments);
+              originalWarn.apply($delegate, args);
+              logToApi(args[messageIndex], 'warn');
+            };
+            var originalError = $delegate.error;
+            $delegate.error = function decoratedError() {
+              var args = [].slice.call(arguments);
+              originalError.apply($delegate, args);
+              logToApi(args[messageIndex], 'error');
+            };
+
+            // Special... only needed to support angular-mocks expectations.
+            $delegate.info.logs = $delegate.info.logs || [];
+            $delegate.warn.logs = $delegate.warn.logs || [];
+            $delegate.error.logs = $delegate.error.logs || [];
+          }
+
+          decorate();
 
           return $delegate;
         };

@@ -9,10 +9,10 @@
 
     self.addStudent = function addStudent(name) {
       self.students.push({ name: name });
-      $log.debug('debug added ' + name);
-      $log.info('some info for testing');
-      $log.warn('a warning for testing');
-      $log.error('an error for testing!');
+      $log.debug('added ' + name);
+      $log.info('added ' + name);
+      $log.warn('added ' + name);
+      $log.error('added ' + name);
     };
 
     $http.get('http://192.168.99.100:3000/').then(function apiSuccess(res) {
