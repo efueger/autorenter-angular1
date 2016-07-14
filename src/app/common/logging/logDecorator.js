@@ -4,8 +4,8 @@
   angular
     .module('app.common', [])
     .config([
-      '$provide', 'strings',
-      function provide($provide, strings) {
+      '$provide', '$windowProvider',
+      function provide($provide, $windowProvider) {
         var logDecorator = function $logDecorator($delegate) {
           function logToApi(message, severity) {
             // Do NOT use $http in the context of logging because it creates a circular dependency, initiates the digest
@@ -24,8 +24,9 @@
             xhr.onreadystatechange = function onReadyStateChange() {
               if (xhr.readyState === READY_STATE && xhr.status !== SUCCESS_CODE) {
                 var errorMessageFormat =
-                  'A logging error has occurred: readyState = \'{state}\', statusCode = \'{status}\'';
-                var errorMessage = strings.format(errorMessageFormat, {
+                  'A logging error has occurred: readyState = \'{state}\', statusCode = \'{status}\'.';
+                var string = $windowProvider.$get().strings;
+                var errorMessage = string.format(errorMessageFormat, {
                   state: xhr.readyState,
                   status: xhr.status
                 });
