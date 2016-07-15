@@ -52,7 +52,6 @@
     "copy:bootstrap": "cp node_modules/bootstrap/dist/js/bootstrap.min.js dist/assets/bootstrap && cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/assets/bootstrap && npm run copy:jquery -s",
     "copy:jquery": "cp node_modules/jquery/dist/jquery.min.js dist/assets/bootstrap",
     "copy:strings": "cp node_modules/strings.js/dist/strings.1.0.0.min.js dist/scripts",
-    "copy:strings": "cp node_modules/strings.js/dist/strings.1.0.0.min.js dist/scripts",
     "predev": "npm run clean -s",
     "dev": "npm run lint -s && npm run build -s && node ./node_modules/parallelshell/index.js 'npm run browser-sync -s' 'npm run watch -s'",
     "reinstall": "npm cache clean && npm run install",
