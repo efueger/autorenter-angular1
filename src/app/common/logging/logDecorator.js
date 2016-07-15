@@ -38,24 +38,14 @@
 
           function decorate() {
             var messageIndex = 0;
-            var originalInfo = $delegate.info;
-            $delegate.info = function decoratedInfo() {
+            var loggingMethods = [/* 'log', */ 'info', 'warn', 'error'];
+
+            loggingMethods.forEach(function decorateLogging(logLevel) {
+              var original = $delegate[logLevel];
               var args = [].slice.call(arguments);
-              originalInfo.apply($delegate, args);
-              logToApi(args[messageIndex], 'info');
-            };
-            var originalWarn = $delegate.warn;
-            $delegate.warn = function decoratedWarn() {
-              var args = [].slice.call(arguments);
-              originalWarn.apply($delegate, args);
-              logToApi(args[messageIndex], 'warn');
-            };
-            var originalError = $delegate.error;
-            $delegate.error = function decoratedError() {
-              var args = [].slice.call(arguments);
-              originalError.apply($delegate, args);
-              logToApi(args[messageIndex], 'error');
-            };
+              original.apply($delegate, args);
+              logToApi(args[messageIndex], logLevel);
+            });
 
             // Special... only needed to support angular-mocks expectations.
             $delegate.info.logs = $delegate.info.logs || [];
