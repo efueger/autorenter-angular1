@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('app')
+    .module('app.common.navbar')
     .component('navBar', {
       templateUrl: 'app/nav-bar.html',
       bindings: {}

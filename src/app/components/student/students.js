@@ -17,6 +17,6 @@
   }
 
   angular
-    .module('app')
+    .module('app.components.student')
     .controller('StudentCtrl', StudentCtrl);
 }());
