@@ -51,7 +51,7 @@
     "copy:angular": "cp node_modules/angular/angular.js dist/scripts && cp node_modules/angular-ui-router/release/angular-ui-router.js dist/scripts",
     "copy:bootstrap": "cp node_modules/bootstrap/dist/js/bootstrap.min.js dist/assets/bootstrap && cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/assets/bootstrap && npm run copy:jquery -s",
     "copy:jquery": "cp node_modules/jquery/dist/jquery.min.js dist/assets/bootstrap",
-    "copy:strings": "cp node_modules/strings.js/dist/strings.1.0.0.min.js dist/scripts",
+    "copy:strings": "cp node_modules/fa-strings.js/dist/strings.1.0.0.min.js dist/scripts",
     "predev": "npm run clean -s",
     "dev": "npm run lint -s && npm run build -s && node ./node_modules/parallelshell/index.js 'npm run browser-sync -s' 'npm run watch -s'",
     "reinstall": "npm cache clean && npm run install",
@@ -69,9 +69,9 @@
     "angular-ui-router": "0.3.0",
     "angulartics": "1.0.3",
     "bootstrap": "3.3.6",
+    "fa-strings.js": "1.0.0",
     "jquery": "2.2.3",
-    "lodash": "4.11.1",
-    "strings.js": "github:fusionalliance/strings.js"
+    "lodash": "4.11.1"
   },
   "devDependencies": {
     "angular-mocks": "1.5.5",
