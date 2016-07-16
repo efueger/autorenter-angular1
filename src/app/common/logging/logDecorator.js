@@ -38,13 +38,15 @@
 
           function decorate() {
             var messageIndex = 0;
-            var loggingMethods = [/* 'log', */ 'info', 'warn', 'error'];
+            var loggingMethods = ['info', 'warn', 'error'];
 
             loggingMethods.forEach(function decorateLogging(logLevel) {
               var original = $delegate[logLevel];
-              var args = [].slice.call(arguments);
-              original.apply($delegate, args);
-              logToApi(args[messageIndex], logLevel);
+              $delegate[logLevel] = function decoratedLogFxn() {
+                var args = [].slice.call(arguments);
+                original.apply($delegate, args);
+                logToApi(args[messageIndex], logLevel);
+              };
             });
 
             // Special... only needed to support angular-mocks expectations.
