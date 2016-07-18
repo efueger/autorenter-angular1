@@ -38,11 +38,11 @@
 
           function decorate() {
             var messageIndex = 0;
-            var loggingMethods = ['info', 'warn', 'error'];
+            var loggingMethods = ['info', 'warn', 'error']; // NOTE: 'log' and 'debug' were deliberately skipped.
 
             loggingMethods.forEach(function decorateLogging(logLevel) {
               var original = $delegate[logLevel];
-              $delegate[logLevel] = function decoratedLogFxn() {
+              $delegate[logLevel] = function logToApiDecorator() {
                 var args = [].slice.call(arguments);
                 original.apply($delegate, args);
                 logToApi(args[messageIndex], logLevel);
