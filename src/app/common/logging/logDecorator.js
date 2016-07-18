@@ -4,8 +4,8 @@
   angular
     .module('app.common', [])
     .config([
-      '$provide', '$windowProvider',
-      function provide($provide, $windowProvider) {
+      '$provide', '$windowProvider', 'generalConfig',
+      function provide($provide, $windowProvider, generalConfig) {
         var logDecorator = function $logDecorator($delegate) {
           function logToApi(message, severity) {
             // Do NOT use $http in the context of logging because it creates a circular dependency, initiates the digest
@@ -18,7 +18,7 @@
               username: 'bill'
             };
             var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'http://192.168.99.100:3000/api/log');
+            xhr.open('POST', generalConfig.apiUrl + 'api/log');
             xhr.setRequestHeader('Accept', 'application/json, text/plain, */*');
             xhr.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
             xhr.onreadystatechange = function onReadyStateChange() {
