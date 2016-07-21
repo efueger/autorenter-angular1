@@ -1,7 +1,7 @@
 (function init() {
   'use strict';
 
-  function provide($provide, loggingApi, loggingMethods) {
+  function provide($provide, logApi, loggingMethods) {
     var logDecorator = function $logDecorator($delegate) {
       function decorate() {
         var messageIndex = 0;
@@ -13,7 +13,7 @@
           $delegate[logLevel] = function logToApiDecorator() {
             var args = Array.prototype.slice.call(arguments);
             original.apply($delegate, args);
-            loggingApi.logToApi(args[messageIndex], logLevel);
+            logApi.logToApi(args[messageIndex], logLevel);
           };
         });
       }
@@ -27,7 +27,7 @@
     ]);
   }
 
-  provide.$inject = ['$provide', 'loggingApi', 'loggingMethods'];
+  provide.$inject = ['$provide', 'logApi', 'loggingMethods'];
 
   angular.module('app.common').config(provide);
 })();

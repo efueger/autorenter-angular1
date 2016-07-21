@@ -1,6 +1,6 @@
 (function init() {
   'use strict';
-  angular.module('app.common').constant('loggingMethods', {
+  angular.module('loggingApi').constant('loggingMethods', {
     info: 'info',
     warn: 'warn',
     error: 'error',
