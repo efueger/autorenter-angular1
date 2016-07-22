@@ -18,7 +18,4 @@ After performing a build and executing the run command you should be able to run
 
 ## Style Guide ##
 
-We will be using the Todd Motto style guide linked below. We are not using ES2015 in this version so anything related to ES2015 in that guide will be ignored. 
-We are absolutely using the directory structure and use the new Component Directives when appropriate.
-
-[Todd Motto Style Guide](https://github.com/toddmotto/angular-styleguide)
+Please refer to the team's Angular 1 Style Guide, located [here](https://stash.fusionalliance.com/projects/FUSADIP/repos/autorenter_spec/browse/styleguide_angular1.md).
