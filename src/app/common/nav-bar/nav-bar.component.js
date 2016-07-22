@@ -3,8 +3,8 @@
 
   angular
     .module('app.common.navbar')
-    .component('navBar', {
-      templateUrl: 'app/nav-bar.html',
+    .component('faNavBar', {
+      templateUrl: 'app/nav-bar.component.html',
       bindings: {}
     }
   );

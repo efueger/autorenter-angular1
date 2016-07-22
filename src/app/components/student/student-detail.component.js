@@ -3,8 +3,8 @@
 
   angular
     .module('app.components.student')
-    .component('studentDetail', {
-      templateUrl: 'app/student-detail.html',
+    .component('faStudentDetail', {
+      templateUrl: 'app/student-detail.component.html',
       bindings: {
         student: '<'
       }
