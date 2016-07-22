@@ -11,8 +11,8 @@
         .state('student', {
           url: '/',
           templateUrl: 'app/students.html',
-          controller: 'StudentCtrl',
-          controllerAs: 'student'
+          controller: 'StudentsController',
+          controllerAs: 'students'
         });
 
       $urlRouterProvider.otherwise('/');
