@@ -1,5 +1,5 @@
 (function init() {
-  function StudentCtrl($http) {
+  function StudentsController($http) {
     this.students = [
       { name: 'Josh' },
       { name: 'Chris' },
@@ -17,6 +17,6 @@
   }
 
   angular
-    .module('app')
-    .controller('StudentCtrl', StudentCtrl);
+    .module('app.components.student')
+    .controller('StudentsController', StudentsController);
 }());

@@ -1,9 +1,7 @@
 (function init() {
   'use strict';
 
-  var app = angular.module('app', [
-    'ui.router'
-  ]);
+  var app = angular.module('app');
 
   app.config([
     '$stateProvider',
@@ -13,12 +11,10 @@
         .state('student', {
           url: '/',
           templateUrl: 'app/students.html',
-          controller: 'StudentCtrl',
-          controllerAs: 'student'
+          controller: 'StudentsController',
+          controllerAs: 'students'
         });
 
       $urlRouterProvider.otherwise('/');
     }]);
-
-  app.run();
 }());

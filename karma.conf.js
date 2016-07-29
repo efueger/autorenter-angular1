@@ -16,7 +16,8 @@ module.exports = function karmaConfig(config) {
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'node_modules/angular-ui-router/release/angular-ui-router.js',
-      'src/app/*.js',
+      'src/app/app.module.js',
+      'src/app/app.config.js',
       'src/app/**/*.js',
       'tests/app/*.js',
       'tests/app/**/*.js'

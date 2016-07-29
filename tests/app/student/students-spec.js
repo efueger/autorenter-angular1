@@ -3,7 +3,7 @@ describe('App > ', function init() {
 
   describe('students >', function testStudent() {
     it('should add students correctly', inject(function test1($controller) {
-      var myController = $controller('StudentCtrl');
+      var myController = $controller('StudentsController');
 
       myController.addStudent('Bob');
 
