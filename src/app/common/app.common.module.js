@@ -1,3 +1,5 @@
+require('logging/loggingApi.module.js');
+
 (function appCommonInit() {
   'use strict';
 

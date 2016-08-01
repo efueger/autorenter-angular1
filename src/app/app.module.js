@@ -1,3 +1,5 @@
+require('common/app.common.module');
+
 (function init() {
   'use strict';
 
