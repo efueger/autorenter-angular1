@@ -1,3 +1,6 @@
+require('../strings.angularImport');
+require('./xhrStates.constant');
+
 (function logStateChangeHandling() {
   'use strict';
 

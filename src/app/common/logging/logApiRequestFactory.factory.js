@@ -1,3 +1,5 @@
+require('./logStateChangeHandling.factory');
+
 (function logRequestApiFactory() {
   'use strict';
 

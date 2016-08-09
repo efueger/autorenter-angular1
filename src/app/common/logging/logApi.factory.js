@@ -1,3 +1,5 @@
+require('./logRequestApiFactory.factory');
+
 (function logApiFactory() {
   'use strict';
 

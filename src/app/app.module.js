@@ -1,4 +1,5 @@
-require('common/app.common.module');
+require('./common/app.common.module');
+require('./app.config');
 
 (function init() {
   'use strict';

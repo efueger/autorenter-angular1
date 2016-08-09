@@ -1,3 +1,6 @@
+require('./logging/loggingMethods.constant');
+require('./logging/logApi.factory');
+
 (function init() {
   'use strict';
 
