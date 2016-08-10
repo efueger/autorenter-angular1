@@ -1,13 +1,16 @@
 'use strict';
 
 var angular = require('angular');
+require('angular-ui-router');
 
 // components
-var appCommon = require('./common/app.common.module');
+var appConfig = require('./config/app.config');
+var appCommon = require('./common/app.common');
 var students = require('./student/students');
 
 module.exports =  angular.module('app', [
   'ui.router',
+  appConfig.name,
   appCommon.name,
   students.name
 ]);
