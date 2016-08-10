@@ -3,7 +3,7 @@
 var angular = require('angular');
 var appCommon = require('./common/app.common.module');
 var appConfig = require('./app.config');
-var students = require('./student/students.module');
+var students = require('./student/students');
 
 var app = angular.module('app', [
   appConfig.name,

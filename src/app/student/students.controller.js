@@ -1,9 +1,9 @@
 'use strict';
 
-var angular = require('angular');
 var appConfig = require('../app.config');
+var students = require('./students.module');
 
-function StudentCtrl($http, $log) {
+function buildStudentCtrl($http, $log) {
   var self = this;
 
   self.students = [
@@ -26,6 +26,6 @@ function StudentCtrl($http, $log) {
   });
 }
 
-angular
-  .module('students')
-  .controller('StudentCtrl', ['$http', '$log', StudentCtrl, appConfig.name]);
+buildStudentCtrl.$inject = ['$http', '$log', appConfig.name];
+
+students.controller('StudentCtrl', buildStudentCtrl);

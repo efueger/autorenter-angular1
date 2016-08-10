@@ -12,3 +12,5 @@ var configData = {
 angular.forEach(configData, function configInit(key, value) {
   configModule.constant(value, key);
 });
+
+module.exports = configModule;

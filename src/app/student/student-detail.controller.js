@@ -1,7 +1,9 @@
 'use strict';
 
-var angular = require('angular');
+var students = require('./students.module');
 
-angular
-  .module('students')
-  .controller('studentDetailCtrl', ['$scope', function studentDetailCtrl() {}]);
+function buildStudentDetailCtrl() {}
+
+buildStudentDetailCtrl.$inject = ['$scope'];
+
+students.controller('studentDetailCtrl', buildStudentDetailCtrl);
