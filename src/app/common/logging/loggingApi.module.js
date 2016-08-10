@@ -1,6 +1,5 @@
-require('../strings.angularImport');
+'use strict';
 
-(function loggingApiInit() {
-  'use strict';
-  angular.module('loggingApi', ['strings']);
-})();
+var strings = require('../strings.angularImport');
+
+angular.module('loggingApi', [strings.name]);

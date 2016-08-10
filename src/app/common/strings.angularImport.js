@@ -1,15 +1,13 @@
-(function init() {
-  'use strict';
+'use strict';
 
-  function buildStrings($windowProvider) {
-    function strings() {
-      return $windowProvider.$get().strings;
-    }
-
-    return { strings: strings };
+function buildStrings($windowProvider) {
+  function strings() {
+    return $windowProvider.$get().strings;
   }
 
-  buildStrings.$inject = ['$windowProvider'];
+  return { strings: strings };
+}
 
-  angular.module('strings', []).constant('strings', buildStrings);
-})();
+buildStrings.$inject = ['$windowProvider'];
+
+angular.module('strings', []).constant('strings', buildStrings);

@@ -1,29 +1,29 @@
-require('./common/app.common.module');
-require('./app.config');
+'use strict';
 
-(function init() {
-  'use strict';
+var appCommon = require('./common/app.common.module');
+var appConfig = require('./app.config');
+// var students = require('./student/students.module');
 
-  var app = angular.module('app', [
-    'app.config',
-    'ui.router',
-    'app.common'
-  ]);
+var app = angular.module('app', [
+  appConfig.name,
+  'ui.router',
+  appCommon.name,
+  //students.name
+]);
 
-  app.config([
-    '$stateProvider',
-    '$urlRouterProvider',
-    function configureRoutes($stateProvider, $urlRouterProvider) {
-      $stateProvider
-        .state('student', {
-          url: '/',
-          templateUrl: 'app/students.html',
-          controller: 'StudentCtrl',
-          controllerAs: 'student'
-        });
+app.config([
+  '$stateProvider',
+  '$urlRouterProvider',
+  function configureRoutes($stateProvider, $urlRouterProvider) {
+    $stateProvider
+      .state('student', {
+        url: '/',
+        templateUrl: 'app/students.html',
+        controller: 'StudentCtrl',
+        controllerAs: 'student'
+      });
 
-      $urlRouterProvider.otherwise('/');
-    }]);
+    $urlRouterProvider.otherwise('/');
+  }]);
 
-  app.run();
-}());
+app.run();

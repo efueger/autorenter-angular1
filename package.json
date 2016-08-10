@@ -57,7 +57,7 @@
     "reinstall": "npm cache clean && npm run install",
     "test": "node ./node_modules/karma/bin/karma start --single-run",
     "dev:build": "npm run install && npm run prebuild && npm run build",
-    "dev:watch": "npm run lint && npm run test && node ./node_modules/webpack/bin/webpack.js --display-modules --display-reasons --progress",
+    "dev:watch": "npm run lint && node ./node_modules/webpack/bin/webpack.js --display-modules --display-reasons --progress",
     "watch:dev": "node ./node_modules/watch/cli.js 'npm run dev:watch' ./src -d"
   },
   "pre-commit": [

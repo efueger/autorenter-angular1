@@ -1,8 +1,6 @@
-require('./logging/loggingApi.module.js');
-require('../app.config');
+'use strict';
 
-(function appCommonInit() {
-  'use strict';
+var loggingApi = require('./logging/loggingApi.module');
+var appConfig = require('../app.config');
 
-  angular.module('app.common', ['loggingApi', 'app.config']);
-}());
+angular.module('app.common', [loggingApi.name, appConfig.name]);

@@ -1,3 +1,5 @@
+'use strict';
+
 var configModule = angular.module('app.config', []);
 
 var configData = {

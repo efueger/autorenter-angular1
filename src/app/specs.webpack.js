@@ -4,5 +4,7 @@
  * */
 // require('angular');
 
+require('./app.module');
+
 var testsContext = require.context('./', true, /.spec$/);
 testsContext.keys().forEach(testsContext);
