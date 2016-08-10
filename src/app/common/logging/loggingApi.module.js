@@ -3,4 +3,4 @@
 var angular = require('angular');
 var strings = require('../strings.angularImport');
 
-angular.module('loggingApi', [strings.name]);
+module.exports = angular.module('loggingApi', [strings.name]);
