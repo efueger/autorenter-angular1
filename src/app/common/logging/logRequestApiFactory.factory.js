@@ -19,6 +19,6 @@ function buildLogRequestApiFactory() {
   };
 }
 
-buildLogRequestApiFactory.$inject = [logStateChangeHandling.name];
+buildLogRequestApiFactory.$inject = [];
 
 loggingApi.factory('logRequestApiFactory', buildLogRequestApiFactory);

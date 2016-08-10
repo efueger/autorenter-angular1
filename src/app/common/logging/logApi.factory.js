@@ -21,6 +21,6 @@ function buildLogApi() {
   return { logToApi: logToApi };
 }
 
-buildLogApi.$inject = [logRequestApiFactory.name];
+buildLogApi.$inject = [];
 
 loggingApi.factory('logApi', buildLogApi);

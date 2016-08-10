@@ -30,6 +30,6 @@ function provide($provide) {
   ]);
 }
 
-provide.$inject = ['$provide', logApi.name, loggingMethods.name];
+provide.$inject = ['$provide'];
 
 appCommon.config(provide);

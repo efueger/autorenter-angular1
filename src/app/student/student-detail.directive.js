@@ -14,4 +14,6 @@ function buildStudentDetail() {
   };
 }
 
+buildStudentDetail.$inject = [];
+
 students.directive('studentDetail', buildStudentDetail);

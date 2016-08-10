@@ -24,6 +24,6 @@ function buildLogStateChangeHandling() {
   };
 }
 
-buildLogStateChangeHandling.$inject = [strings.name, xhrStates.name];
+buildLogStateChangeHandling.$inject = [];
 
 loggingApi.factory('logStateChangeHandling', buildLogStateChangeHandling);
