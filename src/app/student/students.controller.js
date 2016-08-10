@@ -1,5 +1,6 @@
 'use strict';
 
+var angular = require('angular');
 var appConfig = require('../app.config');
 
 function StudentCtrl($http, $log) {

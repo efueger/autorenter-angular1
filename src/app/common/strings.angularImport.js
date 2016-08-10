@@ -1,5 +1,7 @@
 'use strict';
 
+var angular = require('angular');
+
 function buildStrings($windowProvider) {
   function strings() {
     return $windowProvider.$get().strings;

@@ -1,5 +1,6 @@
 'use strict';
 
+var angular = require('angular');
 var configModule = angular.module('app.config', []);
 
 var configData = {

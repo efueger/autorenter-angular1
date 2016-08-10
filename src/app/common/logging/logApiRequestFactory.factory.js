@@ -1,5 +1,6 @@
 'use strict';
 
+var angular = require('angular');
 var logStateChangeHandling = require('./logStateChangeHandling.factory');
 
 function buildLogRequestApiFactory() {

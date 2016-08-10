@@ -1,14 +1,15 @@
 'use strict';
 
+var angular = require('angular');
 var appCommon = require('./common/app.common.module');
 var appConfig = require('./app.config');
-// var students = require('./student/students.module');
+var students = require('./student/students.module');
 
 var app = angular.module('app', [
   appConfig.name,
   'ui.router',
   appCommon.name,
-  //students.name
+  students.name
 ]);
 
 app.config([

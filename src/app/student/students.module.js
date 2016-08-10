@@ -1,3 +1,5 @@
 'use strict';
 
-angular.module('students', []);
+var angular = require('angular');
+
+module.exports = angular.module('students', []);

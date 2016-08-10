@@ -1,5 +1,6 @@
 'use strict';
 
+var angular = require('angular');
 var logRequestApiFactory = require('./logRequestApiFactory.factory');
 
 function buildLogApi() {

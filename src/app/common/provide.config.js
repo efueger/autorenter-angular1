@@ -1,5 +1,6 @@
 'use strict';
 
+var angular = require('angular');
 var loggingMethods = require('./logging/loggingMethods.constant');
 var logApi = require('./logging/logApi.factory');
 
