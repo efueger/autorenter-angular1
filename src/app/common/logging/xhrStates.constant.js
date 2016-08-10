@@ -1,8 +1,8 @@
 'use strict';
 
-var angular = require('angular');
+var loggingApi = require('./loggingApi.module');
 
-angular.module('loggingApi').constant('xhrStates', {
+loggingApi.constant('xhrStates', {
   READY_STATE: 4,
   SUCCESS_CODE: 201
 });

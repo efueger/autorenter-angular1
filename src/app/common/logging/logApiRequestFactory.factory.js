@@ -1,6 +1,6 @@
 'use strict';
 
-var angular = require('angular');
+var loggingApi = require('./loggingApi.module');
 var logStateChangeHandling = require('./logStateChangeHandling.factory');
 
 function buildLogRequestApiFactory() {
@@ -21,4 +21,4 @@ function buildLogRequestApiFactory() {
 
 buildLogRequestApiFactory.$inject = [logStateChangeHandling.name];
 
-angular.module('loggingApi').factory('logRequestApiFactory', buildLogRequestApiFactory);
+loggingApi.factory('logRequestApiFactory', buildLogRequestApiFactory);

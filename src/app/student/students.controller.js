@@ -1,9 +1,8 @@
 'use strict';
 
-var appConfig = require('../app.config');
 var students = require('./students.module');
 
-function buildStudentCtrl($http, $log) {
+function StudentCtrl($http, $log, generalConfig) {
   var self = this;
 
   self.students = [
@@ -19,13 +18,13 @@ function buildStudentCtrl($http, $log) {
     $log.error('added ' + name);
   };
 
-  $http.get(appConfig.generalConfig.apiUrl).then(function apiSuccess(res) {
+  $http.get(generalConfig.apiUrl).then(function apiSuccess(res) {
     self.apiResponse = res.data;
   }, function apiError() {
     // log error
   });
 }
 
-buildStudentCtrl.$inject = ['$http', '$log', appConfig.name];
+StudentCtrl.$inject = ['$http', '$log', 'generalConfig'];
 
-students.controller('StudentCtrl', buildStudentCtrl);
+students.controller('StudentCtrl', StudentCtrl);

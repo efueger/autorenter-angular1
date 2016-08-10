@@ -1,6 +1,6 @@
 'use strict';
 
-var angular = require('angular');
+var loggingApi = require('./loggingApi.module');
 var logRequestApiFactory = require('./logRequestApiFactory.factory');
 
 function buildLogApi() {
@@ -23,4 +23,4 @@ function buildLogApi() {
 
 buildLogApi.$inject = [logRequestApiFactory.name];
 
-angular.module('loggingApi').factory('logApi', buildLogApi);
+loggingApi.factory('logApi', buildLogApi);

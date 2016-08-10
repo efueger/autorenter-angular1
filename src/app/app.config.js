@@ -1,16 +1,11 @@
 'use strict';
 
-var angular = require('angular');
-var configModule = angular.module('app.config', []);
+var app = require('./app.module');
 
-var configData = {
-  generalConfig: {
-    apiUrl: 'http://192.168.99.100:3000/'
-  }
-};
+function config() {
 
-angular.forEach(configData, function configInit(key, value) {
-  configModule.constant(value, key);
-});
+}
 
-module.exports = configModule;
+config.$inject = [];
+
+app.run(config);

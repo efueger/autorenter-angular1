@@ -1,7 +1,7 @@
 'use strict';
 
-var angular = require('angular');
-var strings = require('../strings.angularImport');
+var loggingApi = require('./loggingApi.module');
+var strings = require('../../imports/strings.angularImport');
 var xhrStates = require('./xhrStates.constant');
 
 function buildLogStateChangeHandling() {
@@ -26,4 +26,4 @@ function buildLogStateChangeHandling() {
 
 buildLogStateChangeHandling.$inject = [strings.name, xhrStates.name];
 
-angular.module('loggingApi').factory('logStateChangeHandling', buildLogStateChangeHandling);
+loggingApi.factory('logStateChangeHandling', buildLogStateChangeHandling);

@@ -1,6 +1,6 @@
 'use strict';
 
-var angular = require('angular');
+var appCommon = require('./app.common.module');
 var loggingMethods = require('./logging/loggingMethods.constant');
 var logApi = require('./logging/logApi.factory');
 
@@ -32,4 +32,4 @@ function provide($provide) {
 
 provide.$inject = ['$provide', logApi.name, loggingMethods.name];
 
-angular.module('app.common').config(provide);
+appCommon.config(provide);

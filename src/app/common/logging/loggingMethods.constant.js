@@ -1,8 +1,8 @@
 'use strict';
 
-var angular = require('angular');
+var loggingApi = require('./loggingApi.module');
 
-angular.module('loggingApi').constant('loggingMethods', {
+loggingApi.constant('loggingMethods', {
   info: 'info',
   warn: 'warn',
   error: 'error',
