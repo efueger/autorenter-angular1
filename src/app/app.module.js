@@ -1,14 +1,18 @@
-(function init() {
-  'use strict';
+'use strict';
 
-  angular.module('app.layout.navbar', []);
-  angular.module('app.components.student', []);
+var angular = require('angular');
+require('angular-ui-router');
 
-  var app = angular.module('app', [
-    'ui.router',
-    'app.layout.navbar',
-    'app.components.student'
-  ]);
+// components
+var appConfig = require('./config/app.config');
+var appCommon = require('./common/app.common');
+var students = require('./student/students');
+var navBar = require('./nav-bar/nav-bar');
 
-  app.run();
-}());
+module.exports =  angular.module('app', [
+  'ui.router',
+  appConfig.name,
+  appCommon.name,
+  students.name,
+  navBar.name
+]);

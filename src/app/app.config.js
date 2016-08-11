@@ -1,20 +1,11 @@
-(function init() {
-  'use strict';
+'use strict';
 
-  var app = angular.module('app');
+var app = require('./app.module');
 
-  app.config([
-    '$stateProvider',
-    '$urlRouterProvider',
-    function configureRoutes($stateProvider, $urlRouterProvider) {
-      $stateProvider
-        .state('student', {
-          url: '/',
-          templateUrl: 'app/students.html',
-          controller: 'StudentsController',
-          controllerAs: 'students'
-        });
+function config() {
 
-      $urlRouterProvider.otherwise('/');
-    }]);
-}());
+}
+
+config.$inject = [];
+
+app.run(config);
