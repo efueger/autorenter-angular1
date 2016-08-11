@@ -1,10 +1,8 @@
 'use strict';
 
 var loggingApi = require('./loggingApi.module');
-var strings = require('../../imports/strings.angularImport');
-var xhrStates = require('./xhrStates.constant');
 
-function buildLogStateChangeHandling() {
+function buildLogStateChangeHandling(xhrStates, strings) {
   function buildReadyStateChangeHandler(xhr) {
     return function logReadyStateChangeHandler() {
       if (xhr.readyState === xhrStates.READY_STATE && xhr.status !== xhrStates.SUCCESS_CODE) {
@@ -24,6 +22,6 @@ function buildLogStateChangeHandling() {
   };
 }
 
-buildLogStateChangeHandling.$inject = [];
+buildLogStateChangeHandling.$inject = ['xhrStates', 'strings'];
 
 loggingApi.factory('logStateChangeHandling', buildLogStateChangeHandling);

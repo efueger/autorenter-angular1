@@ -1,9 +1,8 @@
 'use strict';
 
 var loggingApi = require('./loggingApi.module');
-var logRequestApiFactory = require('./logRequestApiFactory.factory');
 
-function buildLogApi() {
+function buildLogApi(logRequestApiFactory) {
   function logToApi(baseApiUrl, message, severity) {
     // Do NOT use $http in the context of logging because it creates a circular dependency, initiates the digest
     // loop, and makes logging to the API impossible if Angular itself if hosed.
@@ -21,6 +20,6 @@ function buildLogApi() {
   return { logToApi: logToApi };
 }
 
-buildLogApi.$inject = [];
+buildLogApi.$inject = ['logRequestApiFactory'];
 
 loggingApi.factory('logApi', buildLogApi);

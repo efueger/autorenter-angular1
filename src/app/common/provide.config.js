@@ -1,10 +1,8 @@
 'use strict';
 
 var appCommon = require('./app.common.module');
-var loggingMethods = require('./logging/loggingMethods.constant');
-var logApi = require('./logging/logApi.factory');
 
-function provide($provide) {
+function provide($provide,  loggingMethods, logApi) {
   var logDecorator = function $logDecorator($delegate) {
     function decorate() {
       var messageIndex = 0;
@@ -30,6 +28,6 @@ function provide($provide) {
   ]);
 }
 
-provide.$inject = ['$provide'];
+provide.$inject = ['$provide', 'loggingMethods', 'logApi'];
 
 appCommon.config(provide);

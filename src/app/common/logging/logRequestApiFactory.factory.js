@@ -1,9 +1,8 @@
 'use strict';
 
 var loggingApi = require('./loggingApi.module');
-var logStateChangeHandling = require('./logStateChangeHandling.factory');
 
-function buildLogRequestApiFactory() {
+function buildLogRequestApiFactory(logStateChangeHandling) {
   function buildBaseLogToApiRequest(apiBaseUrl) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', apiBaseUrl + 'api/log');
@@ -19,6 +18,6 @@ function buildLogRequestApiFactory() {
   };
 }
 
-buildLogRequestApiFactory.$inject = [];
+buildLogRequestApiFactory.$inject = ['logStateChangeHandling'];
 
 loggingApi.factory('logRequestApiFactory', buildLogRequestApiFactory);
