@@ -2,7 +2,7 @@
 
 var students = require('./students.module');
 
-function StudentCtrl($http, $log, generalConfig) {
+function StudentsController($http, $log, generalConfig) {
   var self = this;
 
   self.students = [
@@ -25,6 +25,6 @@ function StudentCtrl($http, $log, generalConfig) {
   });
 }
 
-StudentCtrl.$inject = ['$http', '$log', 'generalConfig'];
+StudentsController.$inject = ['$http', '$log', 'generalConfig'];
 
-students.controller('StudentCtrl', StudentCtrl);
+students.controller('StudentsController', StudentsController);

@@ -7,7 +7,7 @@ function routeConfig($stateProvider, $urlRouterProvider) {
   .state('student', {
     url: '/',
     templateUrl: 'app/students.html',
-    controller: 'StudentCtrl',
+    controller: 'StudentsController',
     controllerAs: 'student'
   });
 
