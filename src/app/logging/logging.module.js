@@ -4,4 +4,4 @@ var angular = require('angular');
 
 var config = require('../config/config');
 
-module.exports = angular.module('app.logging', [config.name]);
+module.exports = angular.module('fa.logging', [config.name]);

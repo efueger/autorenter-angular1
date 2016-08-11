@@ -2,4 +2,4 @@
 
 var angular = require('angular');
 
-module.exports = angular.module('app.layout.navbar', []);
+module.exports = angular.module('fa.navbar', []);
