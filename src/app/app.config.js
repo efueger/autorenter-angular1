@@ -8,4 +8,4 @@ function config() {
 
 config.$inject = [];
 
-app.run(config);
+app.config(config);
