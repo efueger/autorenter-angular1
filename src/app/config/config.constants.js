@@ -1,6 +1,6 @@
 'use strict';
 
-var configModule = require('./app.config.module');
+var configModule = require('./config.module');
 
 var configData = {
   generalConfig: {

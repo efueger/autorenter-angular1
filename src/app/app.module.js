@@ -4,15 +4,15 @@ var angular = require('angular');
 require('angular-ui-router');
 
 // components
-var appConfig = require('./config/app.config');
-var appCommon = require('./common/app.common');
+var config = require('./config/config');
+var logging = require('./logging/logging');
 var students = require('./student/students');
 var navBar = require('./nav-bar/nav-bar');
 
 module.exports =  angular.module('app', [
   'ui.router',
-  appConfig.name,
-  appCommon.name,
+  config.name,
+  logging.name,
   students.name,
   navBar.name
 ]);

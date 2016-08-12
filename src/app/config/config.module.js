@@ -2,4 +2,4 @@
 
 var angular = require('angular');
 
-module.exports = angular.module('fa.navbar', []);
+module.exports = angular.module('fa.config', []);

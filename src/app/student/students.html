@@ -6,16 +6,16 @@
     <label for="name_input">Add Student...</label>
     <div class="form-group">
       <input class="add-student-input form-control" type="text" id="name_input" ng-model="name">
-      <button ng-click="students.addStudent(name)" class="btn btn-primary student-theme">Add</button>
+      <button ng-click="studentsController.addStudent(name)" class="btn btn-primary student-theme">Add</button>
     </div>
     <br />
     <div class="row">
-      <div ng-repeat="student in students.students" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+      <div ng-repeat="student in studentsController.students" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
         <fa-student-detail student="student"></fa-student-detail>
         <br />
       </div>
     </div>
     <!--Prove you can hit the API-->
-    <div id="api-response" class="row">{{student.apiResponse}}</div>
+    <div id="api-response" class="row">{{studentsController.apiResponse}}</div>
   </div>
 </div>
