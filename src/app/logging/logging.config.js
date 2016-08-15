@@ -2,35 +2,17 @@
 
 var logging = require('./logging.module');
 
-function provide($provide, $windowProvider, generalConfig) {
+function provide($provide, xhrProvider) {
   var logDecorator = function $logDecorator($delegate) {
     function logToApi(message, severity) {
       // Do NOT use $http in the context of logging because it creates a circular dependency, initiates the digest
       // loop, and makes logging to the API impossible if Angular itself if hosed.
-      var READY_STATE = 4;
-      var SUCCESS_CODE = 201;
       var payload = {
         message: message,
         level: severity,
         username: 'bill'
       };
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', generalConfig.apiUrl + 'api/log');
-      xhr.setRequestHeader('Accept', 'application/json, text/plain, */*');
-      xhr.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
-      xhr.onreadystatechange = function onReadyStateChange() {
-        if (xhr.readyState === READY_STATE && xhr.status !== SUCCESS_CODE) {
-          var errorMessageFormat =
-            'A logging error has occurred: readyState = \'{state}\', statusCode = \'{status}\'.';
-          var strings = $windowProvider.$get().strings;
-          var errorMessage = strings.format(errorMessageFormat, {
-            state: xhr.readyState,
-            status: xhr.status
-          });
-          throw new Error(errorMessage);
-        }
-      };
-      xhr.send(JSON.stringify(payload));
+      xhrProvider.$get().send(JSON.stringify(payload));
     }
 
     function decorate() {
@@ -61,6 +43,6 @@ function provide($provide, $windowProvider, generalConfig) {
   ]);
 }
 
-provide.$inject = ['$provide', '$windowProvider', 'generalConfig'];
+provide.$inject = ['$provide', 'xhrProvider'];
 
 logging.config(provide);
