@@ -8,7 +8,7 @@ function xhrFactory(generalConfig, strings) {
       var READY_STATE = 4;
       var SUCCESS_CODE = 201;
       var xhr = new XMLHttpRequest();
-      xhr.open('POST', generalConfig.apiUrl + 'api/log');
+      xhr.open('POST', strings.format('{apiUrl}api/log', {apiUrl: generalConfig.apiUrl}));
       xhr.setRequestHeader('Accept', 'application/json, text/plain, */*');
       xhr.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
       xhr.onreadystatechange = function onReadyStateChange() {
