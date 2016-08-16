@@ -2,7 +2,7 @@
 
 var logging = require('./logging.module');
 
-function provide($provide, xhrProvider) {
+function provide($provide, logApiProvider) {
   var logDecorator = function $logDecorator($delegate) {
     function logToApi(message, severity) {
       // Do NOT use $http in the context of logging because it creates a circular dependency, initiates the digest
@@ -12,7 +12,7 @@ function provide($provide, xhrProvider) {
         level: severity,
         username: 'bill'
       };
-      xhrProvider.$get().send(JSON.stringify(payload));
+      logApiProvider.$get().send(JSON.stringify(payload));
     }
 
     function decorate() {
@@ -43,6 +43,6 @@ function provide($provide, xhrProvider) {
   ]);
 }
 
-provide.$inject = ['$provide', 'xhrProvider'];
+provide.$inject = ['$provide', 'logApiProvider'];
 
 logging.config(provide);

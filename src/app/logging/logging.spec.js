@@ -1,10 +1,11 @@
 describe('fa.logging > ', function describeImpl() {
-  var logService;
+  var $log;
   var fakeXhrProvider;
   beforeEach(function beforeEachImpl() {
     fakeXhrProvider = {
       payloadCache: '',
       $get: function getXhr() {
+        console.log('in getXhr()!!!');
         var self = this;
         return {
           send: function send(payload) {
@@ -14,15 +15,19 @@ describe('fa.logging > ', function describeImpl() {
       }
     };
 
-    angular.module('fa.logging', ['fa.logging'], function overrideProvider($provide) {
+    angular.module('fa.logging', ['ng'], function overrideProvider($provide) {
       $provide.provider('xhr', fakeXhrProvider);
     });
-
-    var injector = angular.injector(['fa.logging', 'ng']);
-    logService = injector.get('$log');
   });
+
+  beforeEach(inject(function(_$log_) {
+    $log = _$log_;
+  }));
+
   it('should post error message to API', function shouldPostToApi() {
-    logService.info('logged info!');
-    fakeXhrProvider.payloadCache.should.equal('logged info!');
+    $log.info('logged info!');
+    console.log('the log info array = ' + JSON.stringify($log.info.logs));
+    console.log('payload = ' + fakeXhrProvider.payloadCache);
+    // fakeXhrProvider.payloadCache.should.equal('logged info!');
   });
 });
