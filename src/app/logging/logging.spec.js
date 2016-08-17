@@ -1,8 +1,12 @@
 describe('fa.logging > ', function describeImpl() {
-  var $log;
-  var fakeXhrProvider;
+  var logDecorator;
+  var fakeLogService;
+  var fakeLogApiProvider;
   beforeEach(function beforeEachImpl() {
-    fakeXhrProvider = {
+    angular.module('fa.logging');
+  });
+  beforeEach(function beforeEachImpl() {
+    fakeLogApiProvider = {
       payloadCache: '',
       $get: function getXhr() {
         console.log('in getXhr()!!!');
@@ -14,20 +18,28 @@ describe('fa.logging > ', function describeImpl() {
         };
       }
     };
-
-    angular.module('fa.logging', ['ng'], function overrideProvider($provide) {
-      $provide.provider('xhr', fakeXhrProvider);
-    });
+    fakeLogService = {
+      log: function log() {},
+      debug: function debug() {},
+      info: function info() {},
+      warn: function warn() {},
+      error: function error() {}
+    };
   });
 
-  beforeEach(inject(function(_$log_) {
-    $log = _$log_;
-  }));
+  // beforeEach(inject(function injectImpl(_logDecorator_) {
+  //   logDecorator = _logDecorator_;
+  //   logDecorator.decorateLogService(fakeLogService, fakeLogApiProvider);
+  // }));
 
   it('should post error message to API', function shouldPostToApi() {
-    $log.info('logged info!');
-    console.log('the log info array = ' + JSON.stringify($log.info.logs));
-    console.log('payload = ' + fakeXhrProvider.payloadCache);
-    // fakeXhrProvider.payloadCache.should.equal('logged info!');
+    console.log('logDecorator = ' + logDecorator);
+    console.log('fakeLogService', fakeLogService);
+    console.log('fakeLogApiProvider', fakeLogApiProvider);
+    //
+    // fakeLogService.info('logged info!');
+    // console.log('the log info array = ' + JSON.stringify(fakeLogService.info.logs));
+    // console.log('payload = ' + fakeLogApiProvider.payloadCache);
+    // fakeLogApiProvider.payloadCache.should.equal('logged info!');
   });
 });

@@ -4,12 +4,12 @@ var loggingModule = require('./logging.module');
 
 loggingModule
   .constant('xhr', {
-    create: function() {
+    create: function create() {
       return new XMLHttpRequest();
     }
   })
   .constant('logDecorator', {
-    decorateLogService: function(logService, logApiProvider) {
+    decorateLogService: function decorateLogService(logService, logApiProvider) {
       function logToApi(message, severity) {
         // Do NOT use $http in the context of logging because it creates a circular dependency, initiates the digest
         // loop, and makes logging to the API impossible if Angular itself if hosed.
