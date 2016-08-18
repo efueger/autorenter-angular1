@@ -3,11 +3,6 @@
 var loggingModule = require('./logging.module');
 
 loggingModule
-  .constant('xhr', {
-    create: function create() {
-      return new XMLHttpRequest();
-    }
-  })
   .constant('logDecorator', {
     decorateLogService: function decorateLogService(logService, logApiProvider) {
       function logToApi(message, severity) {

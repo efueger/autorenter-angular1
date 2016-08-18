@@ -34,7 +34,7 @@
     "install:recover": "npm run install:cleanup && npm run install",
 
     "clean": "node ./node_modules/rimraf/bin.js dist && node ./node_modules/mkdirp/bin/cmd.js dist",
-    "lint": "node ./node_modules/eslint/bin/eslint.js '**/*.js' '**/**/*.js'",
+    "lint": "node ./node_modules/eslint/bin/eslint.js './src/**/*.js'",
     "test": "node ./node_modules/karma/bin/karma start --single-run",
 
     "prebuild": "npm run clean -s",

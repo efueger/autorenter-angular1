@@ -2,12 +2,12 @@
 
 var logging = require('./logging.module');
 
-function logApi(generalConfig, strings, xhr) {
+function logApi(generalConfig, strings) {
   return {
     $get: function getXhr() {
       var READY_STATE = 4;
       var SUCCESS_CODE = 201;
-      var ajax = xhr.create();
+      var ajax = new XMLHttpRequest();
       ajax.open('POST', strings.format('{apiUrl}api/log', {apiUrl: generalConfig.apiUrl}));
       ajax.setRequestHeader('Accept', 'application/json, text/plain, */*');
       ajax.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
@@ -27,6 +27,6 @@ function logApi(generalConfig, strings, xhr) {
   };
 }
 
-logApi.$inject = ['generalConfig', 'strings', 'xhr'];
+logApi.$inject = ['generalConfig', 'strings'];
 
 logging.provider('logApi', logApi);
