@@ -85,6 +85,7 @@
     "pleeease-cli": "4.0.0",
     "remap-istanbul": "0.6.3",
     "rimraf": "2.5.2",
+    "sinon": "1.17.5",
     "watch": "0.19.1",
     "webpack": "1.13.1"
   }
