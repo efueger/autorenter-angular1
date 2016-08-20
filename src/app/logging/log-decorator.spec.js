@@ -1,8 +1,10 @@
 describe('fa.logging > ', function describeImpl() {
-  beforeEach(angular.mock.module('app'));
   var logDecorator;
   var fakeLogService;
   var fakeLogApiProvider;
+
+  beforeEach(angular.mock.module('app'));
+
   beforeEach(function beforeEachImpl() {
     fakeLogApiProvider = {
       payloadCache: {},
