@@ -34,7 +34,7 @@
     "install:recover": "npm run install:cleanup && npm run install",
 
     "clean": "node ./node_modules/rimraf/bin.js dist && node ./node_modules/mkdirp/bin/cmd.js dist",
-    "lint": "node ./node_modules/eslint/bin/eslint.js '**/*.js' '**/**/*.js'",
+    "lint": "node ./node_modules/eslint/bin/eslint.js './src/**/*.js'",
     "test": "node ./node_modules/karma/bin/karma start --single-run",
 
     "prebuild": "npm run clean -s",
@@ -75,6 +75,8 @@
     "karma-chai": "0.1.0",
     "karma-mocha": "1.0.1",
     "karma-phantomjs-launcher": "1.0.0",
+    "karma-sinon": "1.0.5",
+    "karma-sinon-chai": "0.1.5",
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "1.7.0",
     "mkdirp": "0.5.1",
@@ -85,6 +87,7 @@
     "pleeease-cli": "4.0.0",
     "remap-istanbul": "0.6.3",
     "rimraf": "2.5.2",
+    "sinon": "1.17.5",
     "watch": "0.19.1",
     "webpack": "1.13.1"
   }
