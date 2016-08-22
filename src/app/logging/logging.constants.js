@@ -4,9 +4,12 @@ var loggingModule = require('./logging.module');
 
 loggingModule
   .constant('logDecorator', {
+    // To facilitate unit testing, we have separated this decoration functionality from the difficult-to-test wire-up
+    // code associated with the logging config function (see logging.config.js). The config function uses angular
+    // injection and then invokes this, passing the injected logService and logApiProvider as ordinary parameters.
     decorateLogService: function decorateLogService(logService, logApiProvider) {
       function logToApi(message, severity) {
-        // Do NOT use $http in the context of logging because it creates a circular dependency, initiates the digest
+        // We do NOT use $http in the context of logging because it creates a circular dependency, initiates the digest
         // loop, and makes logging to the API impossible if Angular itself if hosed.
         var payload = {
           message: message,
