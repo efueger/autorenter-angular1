@@ -3,7 +3,7 @@ describe('fa.logging.logApi > ', function describeImpl() {
   var request;
   var generalConfig;
 
-  beforeEach(angular.mock.module('app'));
+  beforeEach(angular.mock.module('fa.logging'));
 
   beforeEach(function proxyXhrCreation() {
     fakeXhr = sinon.useFakeXMLHttpRequest();
