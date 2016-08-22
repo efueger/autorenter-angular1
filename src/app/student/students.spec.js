@@ -1,5 +1,5 @@
 describe('App > ', function init() {
-  beforeEach(angular.mock.module('app'));
+  beforeEach(angular.mock.module('fa.students'));
 
   describe('students >', function testStudent() {
     it('should add students correctly', inject(function test1($controller) {

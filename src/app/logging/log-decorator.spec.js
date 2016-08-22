@@ -3,7 +3,7 @@ describe('fa.logging > ', function describeImpl() {
   var fakeLogService;
   var fakeLogApiProvider;
 
-  beforeEach(angular.mock.module('app'));
+  beforeEach(angular.mock.module('fa.logging'));
 
   beforeEach(function beforeEachImpl() {
     fakeLogApiProvider = {
