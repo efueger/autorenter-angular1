@@ -1,6 +1,6 @@
 'use strict';
 
 var angular = require('angular');
-// var uiRouter = require('angular-ui-router');
+var uiRouter = require('angular-ui-router');
 
-module.exports = angular.module('fa.admin', []);
+module.exports = angular.module('fa.admin', [uiRouter]);
