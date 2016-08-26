@@ -2,10 +2,10 @@
 
 var app = require('./app.module');
 
-function config() {
-
+function config($locationProvider) {
+  $locationProvider.html5Mode(true);
 }
 
-config.$inject = [];
+config.$inject = ['$locationProvider'];
 
 app.config(config);
