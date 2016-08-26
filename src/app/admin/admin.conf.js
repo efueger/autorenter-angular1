@@ -1,3 +1,5 @@
+'use strict';
+
 var admin = require('./admin.module');
 
 function adminRouteConfig($stateProvider) {
