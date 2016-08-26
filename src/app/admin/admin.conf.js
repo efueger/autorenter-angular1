@@ -1,8 +1,3 @@
-/**
- * Adds the admin routes to the Auto Renter application
- */
-'use strict';
-
 var admin = require('./admin.module');
 
 function adminRouteConfig($stateProvider) {
