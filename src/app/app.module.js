@@ -7,6 +7,7 @@ require('angular-ui-router');
 var config = require('./config/config');
 var logging = require('./logging/logging');
 var students = require('./student/students');
+var admin = require('./admin/admin');
 var navBar = require('./nav-bar/nav-bar');
 
 module.exports =  angular.module('app', [
@@ -14,5 +15,6 @@ module.exports =  angular.module('app', [
   config.name,
   logging.name,
   students.name,
+  admin.name,
   navBar.name
 ]);
