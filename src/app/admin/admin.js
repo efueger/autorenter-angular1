@@ -2,7 +2,7 @@
 
 var admin = require('./admin.module');
 
-require('./admin.conf');
+require('./admin.config');
 require('./admin.controller');
 
 module.exports = admin;
