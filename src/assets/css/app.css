@@ -1,29 +1,8 @@
-.navbar {
-    background-color: #003366;
-    border-color: #003366;
-    border-radius: 0;
-    min-height: 28px;
-    color: #fff;
-    text-align: center;
-    padding-top: 15px;
-    font-size: 20px;
-    margin: -8px;
-}
-
-a {
-    font-weight: bold;
-}
 
 .center {
     margin: 0 auto;
     width: 600px;
     text-align: center;
-}
-
-.navbar a {
-    color: #fff;
-    font-weight: 300;
-    text-decoration: none;
 }
 
 .container {
