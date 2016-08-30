@@ -2,7 +2,7 @@
 
 var students = require('./students.module');
 
-function StudentsController($http, $log, generalConfig) {
+function StudentsController($http, $log, generalConfig, notificationService) {
   var self = this;
 
   self.students = [
@@ -18,6 +18,30 @@ function StudentsController($http, $log, generalConfig) {
     $log.error('added ' + name);
   };
 
+  self.showFatal = function showFatal() {
+    notificationService.notifyFatal();
+  };
+
+  self.showError = function showError() {
+    notificationService.notifyError();
+  };
+
+  self.showWarning = function showWarning() {
+    notificationService.notifyWarning();
+  };
+
+  self.showInfo = function showInfo() {
+    notificationService.notifyInfo();
+  };
+
+  self.showSuccess = function showSuccess() {
+    notificationService.notifySuccess();
+  };
+
+  self.showDebug = function showDebug() {
+    notificationService.notifyDebug();
+  };
+
   $http.get(generalConfig.apiUrl).then(function apiSuccess(res) {
     self.apiResponse = res.data;
   }, function apiError() {
@@ -25,6 +49,6 @@ function StudentsController($http, $log, generalConfig) {
   });
 }
 
-StudentsController.$inject = ['$http', '$log', 'generalConfig'];
+StudentsController.$inject = ['$http', '$log', 'generalConfig', 'NotificationService'];
 
 students.controller('StudentsController', StudentsController);
