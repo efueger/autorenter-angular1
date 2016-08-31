@@ -19,27 +19,38 @@ function StudentsController($http, $log, generalConfig, notificationService) {
   };
 
   self.showFatal = function showFatal() {
-    notificationService.notifyFatal();
+    notificationService.notifyFatal({
+      userMessage: 'the fatal error'
+    });
   };
 
   self.showError = function showError() {
-    notificationService.notifyError();
+    notificationService.notifyError({
+      title: 'The error title',
+      userMessage: 'Oops, an error!',
+      technicalMessage: 'technical error message'
+    });
   };
 
   self.showWarning = function showWarning() {
-    notificationService.notifyWarning();
+    notificationService.notifyWarning({
+      userMessage: 'A warning',
+      technicalMessage: 'technical warning message'
+    });
   };
 
   self.showInfo = function showInfo() {
-    notificationService.notifyInfo();
+    notificationService.notifyInfo({
+      userMessage: 'An informational message',
+      technicalMessage: 'technical info message'
+    });
   };
 
   self.showSuccess = function showSuccess() {
-    notificationService.notifySuccess();
-  };
-
-  self.showDebug = function showDebug() {
-    notificationService.notifyDebug();
+    notificationService.notifySuccess({
+      userMessage: 'Hooray, it worked!',
+      technicalMessage: 'technical success message'
+    });
   };
 
   $http.get(generalConfig.apiUrl).then(function apiSuccess(res) {

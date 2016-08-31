@@ -5,56 +5,71 @@ var notifications = require('./notifications.module');
 function NotificationService($log, toaster) {
   var self = this;
 
-  self.notifyFatal = function notifyFatal() {
+  var defaultTitle = 'System Notification';
+
+  var defaultUserMessage = 'The system was unable to process your request. ' +
+    'If the problem persists, please contact technical support.';
+
+  self.notifyFatal = function notifyFatal(notificationData) {
     toaster.pop({
       type: 'error',
-      title: 'the fatal title',
-      body: 'the fatal message',
+      title: notificationData.title || defaultTitle,
+      body: notificationData.userMessage || defaultUserMessage,
       timeout: 0
     });
   };
 
-  self.notifyError = function notifyError() {
+  self.notifyError = function notifyError(notificationData) {
     toaster.pop({
       type: 'error',
-      title: 'the error title',
-      body: 'the error message',
+      title: notificationData.title || defaultTitle,
+      body: notificationData.userMessage || defaultUserMessage,
       timeout: 0
     });
-    $log.error('the error message');
+
+    if (notificationData.technicalMessage) {
+      $log.error(notificationData.technicalMessage);
+    } else {
+      $log.error('No technical message was provided for the following error: \'${notificationData.technicalMessage}\'');
+    }
   };
 
-  self.notifyWarning = function notifyWarning() {
+  self.notifyWarning = function notifyWarning(notificationData) {
     toaster.pop({
       type: 'warning',
-      title: 'the warning title',
-      body: 'the warning message',
+      title: notificationData.title || defaultTitle,
+      body: notificationData.userMessage || defaultUserMessage,
       timeout: 0
     });
-    $log.warn('the warn message');
+
+    if (notificationData.technicalMessage) {
+      $log.warn(notificationData.technicalMessage);
+    }
   };
 
-  self.notifyInfo = function notifyInfo() {
+  self.notifyInfo = function notifyInfo(notificationData) {
     toaster.pop({
       type: 'info',
-      title: 'the info title',
-      body: 'the info message',
+      title: notificationData.title || defaultTitle,
+      body: notificationData.userMessage || defaultUserMessage,
       timeout: 0
     });
-    $log.info('the info message');
+
+    if (notificationData.technicalMessage) {
+      $log.info(notificationData.technicalMessage);
+    }
   };
 
-  self.notifyDebug = function notifyDebug() {
-    $log.debug('the debug message');
-  };
-
-  self.notifySuccess = function notifySuccess() {
+  self.notifySuccess = function notifySuccess(notificationData) {
     toaster.pop({
       type: 'success',
-      title: 'the success title',
-      body: 'the success message'
+      title: notificationData.title || defaultTitle,
+      body: notificationData.userMessage || defaultUserMessage,
     });
-    $log.info('the success message');
+
+    if (notificationData.technicalMessage) {
+      $log.info(notificationData.technicalMessage);
+    }
   };
 }
 
