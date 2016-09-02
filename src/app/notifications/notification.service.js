@@ -2,7 +2,7 @@
 
 var notifications = require('./notifications.module');
 
-function NotificationService($log, toaster) {
+function NotificationService($log, toaster, strings) {
   var self = this;
 
   var defaultTitle = 'System Notification';
@@ -11,6 +11,7 @@ function NotificationService($log, toaster) {
     'If the problem persists, please contact technical support.';
 
   self.notifyFatal = function notifyFatal(notificationData) {
+    // No logging because API is unreachable. This is a last gasp effort to present something to the user.
     toaster.pop({
       type: 'error',
       title: notificationData.title || defaultTitle,
@@ -20,17 +21,21 @@ function NotificationService($log, toaster) {
   };
 
   self.notifyError = function notifyError(notificationData) {
+    var body = notificationData.userMessage || defaultUserMessage;
     toaster.pop({
       type: 'error',
       title: notificationData.title || defaultTitle,
-      body: notificationData.userMessage || defaultUserMessage,
+      body: body,
       timeout: 0
     });
 
     if (notificationData.technicalMessage) {
       $log.error(notificationData.technicalMessage);
     } else {
-      $log.error('No technical message was provided for the following error: \'${notificationData.technicalMessage}\'');
+      var technicalMessageFormat =
+        'No technical message was provided for the following error: \'{body}\'';
+      var technicalMessage = strings.format(technicalMessageFormat, { body: body });
+      $log.error(technicalMessage);
     }
   };
 
@@ -73,6 +78,6 @@ function NotificationService($log, toaster) {
   };
 }
 
-NotificationService.$inject = ['$log', 'toaster'];
+NotificationService.$inject = ['$log', 'toaster', 'strings'];
 
 notifications.service('notificationService', NotificationService);
