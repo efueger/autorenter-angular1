@@ -53,6 +53,10 @@ function StudentsController($http, $log, generalConfig, notificationService) {
     });
   };
 
+  self.throwException = function throwException() {
+    throw new Error('the test exception');
+  };
+
   $http.get(generalConfig.apiUrl).then(function apiSuccess(res) {
     self.apiResponse = res.data;
   }, function apiError() {
@@ -60,6 +64,6 @@ function StudentsController($http, $log, generalConfig, notificationService) {
   });
 }
 
-StudentsController.$inject = ['$http', '$log', 'generalConfig', 'NotificationService'];
+StudentsController.$inject = ['$http', '$log', 'generalConfig', 'notificationService'];
 
 students.controller('StudentsController', StudentsController);

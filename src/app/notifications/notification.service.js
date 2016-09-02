@@ -75,4 +75,4 @@ function NotificationService($log, toaster) {
 
 NotificationService.$inject = ['$log', 'toaster'];
 
-notifications.service('NotificationService', NotificationService);
+notifications.service('notificationService', NotificationService);
