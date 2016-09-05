@@ -19,8 +19,8 @@ function StudentsController($http, $log, generalConfig, notificationService) {
   };
 
   self.showFatal = function showFatal() {
-    notificationService.notifyFatal({
-      userMessage: 'the fatal error'
+    notificationService.notifyFatalNoLogAvailable({
+      technicalMessage: 'the fatal error tech message'
     });
   };
 

@@ -10,14 +10,15 @@ function NotificationService($log, toaster, strings) {
   var defaultUserMessage = 'The system was unable to process your request. ' +
     'If the problem persists, please contact technical support.';
 
-  self.notifyFatal = function notifyFatal(notificationData) {
+  self.notifyFatalNoLogAvailable = function notifyFatal(notificationData) {
     // No logging because API is unreachable. This is a last gasp effort to present something to the user.
     toaster.pop({
       type: 'error',
-      title: notificationData.title || defaultTitle,
-      body: notificationData.userMessage || defaultUserMessage,
+      title: 'Logging Notification',
+      body: 'The system was unable to communicate with the logging service. Please contact technical support.',
       timeout: 0
     });
+    console.error(notificationData.technicalMessage ); // eslint-disable-line no-console
   };
 
   self.notifyError = function notifyError(notificationData) {

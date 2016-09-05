@@ -16,7 +16,7 @@ loggingModule
           level: severity,
           username: 'bill'
         };
-        logApiProvider.$get().send(JSON.stringify(payload));
+        logApiProvider.$get().getXhr().send(JSON.stringify(payload));
       }
 
       function decorate() {

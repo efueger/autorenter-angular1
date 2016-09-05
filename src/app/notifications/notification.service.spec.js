@@ -35,28 +35,20 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
     logService.info.restore();
   });
 
-  describe('notifyFatal', function notifyFatalDescribeImpl() {
-    it('should invoke pop method with correct default values', function testImpl() {
-      notificationService.notifyFatal({});
-      var actualParam = popSpy.getCall(0).args[0];
-      actualParam.should.deep.equal({
-        type: 'error',
-        title: defaultTitle,
-        body: defaultUserMessage,
-        timeout: 0
-      });
-    });
-
-    it('should invoke pop method with custom values', function testImpl() {
-      notificationService.notifyFatal({
-        title: customTitle,
-        userMessage: customUserMessage
+  describe('notifyFatalNoLogAvailable', function notifyFatalDescribeImpl() {
+    it('should invoke pop method with correct values', function testImpl() {
+      var title = 'Logging Notification';
+      var message =
+        'The system was unable to communicate with the logging service. Please contact technical support.';
+      notificationService.notifyFatalNoLogAvailable({
+        title: title,
+        userMessage: message
       });
       var actualParam = popSpy.getCall(0).args[0];
       actualParam.should.deep.equal({
         type: 'error',
-        title: customTitle,
-        body: customUserMessage,
+        title: title,
+        body: message,
         timeout: 0
       });
     });
