@@ -2,12 +2,16 @@
 
 var errorHandling = require('./error-handling.module');
 
+var exceptionHandlerFactory = function exceptionHandlerFactory($injector) {
+  return function myExceptionHandler(exception) {
+    var notificationService = $injector.get('notificationService'); // Needed to get around circular dependency...
+    notificationService.notifyError({
+      technicalMessage: exception.toString()
+    });
+  };
+};
+
+errorHandling.$inject = ['$injector'];
+
 errorHandling
-  .factory('$exceptionHandler', ['$injector', function factoryImpl($injector) {
-    return function myExceptionHandler(exception) {
-      var notificationService = $injector.get('notificationService'); // Needed to get around circular dependency...
-      notificationService.notifyError({
-        technicalMessage: exception.toString()
-      });
-    };
-  }]);
+  .factory('$exceptionHandler', exceptionHandlerFactory);
