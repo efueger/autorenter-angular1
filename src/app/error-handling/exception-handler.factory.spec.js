@@ -13,7 +13,7 @@ describe('fa.errorHandling.$exceptionHandler > ', function describeImpl() {
     var notifyErrorSpy = sinon.spy(notificationService, 'notifyError');
     var error = new Error('oops!');
     exceptionHandler(error);
-    var actualParam = notifyErrorSpy.getCall(0).args[0];
-    actualParam.should.deep.equal({technicalMessage: error.toString()});
+    var actualArgs = notifyErrorSpy.getCall(0).args[0];
+    actualArgs.should.deep.equal({technicalMessage: error.toString()});
   });
 });

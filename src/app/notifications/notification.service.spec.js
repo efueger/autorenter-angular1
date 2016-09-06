@@ -44,8 +44,8 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
         title: title,
         userMessage: message
       });
-      var actualParam = popSpy.getCall(0).args[0];
-      actualParam.should.deep.equal({
+      var actualArgs = popSpy.getCall(0).args[0];
+      actualArgs.should.deep.equal({
         type: 'error',
         title: title,
         body: message,
@@ -57,8 +57,8 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
   describe('notifyError', function notifyErrorDescribeImpl() {
     it('should invoke pop method with correct default values', function testImpl() {
       notificationService.notifyError({});
-      var actualParam = popSpy.getCall(0).args[0];
-      actualParam.should.deep.equal({
+      var actualArgs = popSpy.getCall(0).args[0];
+      actualArgs.should.deep.equal({
         type: 'error',
         title: defaultTitle,
         body: defaultUserMessage,
@@ -71,8 +71,8 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
         title: customTitle,
         userMessage: customUserMessage
       });
-      var actualParam = popSpy.getCall(0).args[0];
-      actualParam.should.deep.equal({
+      var actualArgs = popSpy.getCall(0).args[0];
+      actualArgs.should.deep.equal({
         type: 'error',
         title: customTitle,
         body: customUserMessage,
@@ -82,8 +82,8 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
 
     it('should invoke error method with correct default value', function testImpl() {
       notificationService.notifyError({});
-      var actualParam = errorSpy.getCall(0).args[0];
-      actualParam.should.equal(
+      var actualArgs = errorSpy.getCall(0).args[0];
+      actualArgs.should.equal(
         'No technical message was provided for the following error: \'' + defaultUserMessage + '\'');
     });
 
@@ -91,16 +91,16 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
       notificationService.notifyError({
         technicalMessage: customTechnicalMessage
       });
-      var actualParam = errorSpy.getCall(0).args[0];
-      actualParam.should.equal(customTechnicalMessage);
+      var actualArgs = errorSpy.getCall(0).args[0];
+      actualArgs.should.equal(customTechnicalMessage);
     });
   });
 
   describe('notifyWarning', function notifyWarningDescribeImpl() {
     it('should invoke pop method with correct default values', function testImpl() {
       notificationService.notifyWarning({});
-      var actualParam = popSpy.getCall(0).args[0];
-      actualParam.should.deep.equal({
+      var actualArgs = popSpy.getCall(0).args[0];
+      actualArgs.should.deep.equal({
         type: 'warning',
         title: defaultTitle,
         body: defaultUserMessage,
@@ -113,8 +113,8 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
         title: customTitle,
         userMessage: customUserMessage
       });
-      var actualParam = popSpy.getCall(0).args[0];
-      actualParam.should.deep.equal({
+      var actualArgs = popSpy.getCall(0).args[0];
+      actualArgs.should.deep.equal({
         type: 'warning',
         title: customTitle,
         body: customUserMessage,
@@ -131,16 +131,16 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
       notificationService.notifyWarning({
         technicalMessage: customTechnicalMessage
       });
-      var actualParam = warnSpy.getCall(0).args[0];
-      actualParam.should.equal(customTechnicalMessage);
+      var actualArgs = warnSpy.getCall(0).args[0];
+      actualArgs.should.equal(customTechnicalMessage);
     });
   });
 
   describe('notifyInfo', function notifyInfoDescribeImpl() {
     it('should invoke pop method with correct default values', function testImpl() {
       notificationService.notifyInfo({});
-      var actualParam = popSpy.getCall(0).args[0];
-      actualParam.should.deep.equal({
+      var actualArgs = popSpy.getCall(0).args[0];
+      actualArgs.should.deep.equal({
         type: 'info',
         title: defaultTitle,
         body: defaultUserMessage,
@@ -153,8 +153,8 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
         title: customTitle,
         userMessage: customUserMessage
       });
-      var actualParam = popSpy.getCall(0).args[0];
-      actualParam.should.deep.equal({
+      var actualArgs = popSpy.getCall(0).args[0];
+      actualArgs.should.deep.equal({
         type: 'info',
         title: customTitle,
         body: customUserMessage,
@@ -171,16 +171,16 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
       notificationService.notifyInfo({
         technicalMessage: customTechnicalMessage
       });
-      var actualParam = infoSpy.getCall(0).args[0];
-      actualParam.should.equal(customTechnicalMessage);
+      var actualArgs = infoSpy.getCall(0).args[0];
+      actualArgs.should.equal(customTechnicalMessage);
     });
   });
 
   describe('notifySuccess', function notifySuccessDescribeImpl() {
     it('should invoke pop method with correct default values', function testImpl() {
       notificationService.notifySuccess({});
-      var actualParam = popSpy.getCall(0).args[0];
-      actualParam.should.deep.equal({
+      var actualArgs = popSpy.getCall(0).args[0];
+      actualArgs.should.deep.equal({
         type: 'success',
         title: defaultTitle,
         body: defaultUserMessage
@@ -192,8 +192,8 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
         title: customTitle,
         userMessage: customUserMessage
       });
-      var actualParam = popSpy.getCall(0).args[0];
-      actualParam.should.deep.equal({
+      var actualArgs = popSpy.getCall(0).args[0];
+      actualArgs.should.deep.equal({
         type: 'success',
         title: customTitle,
         body: customUserMessage
@@ -209,8 +209,8 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
       notificationService.notifySuccess({
         technicalMessage: customTechnicalMessage
       });
-      var actualParam = infoSpy.getCall(0).args[0];
-      actualParam.should.equal(customTechnicalMessage);
+      var actualArgs = infoSpy.getCall(0).args[0];
+      actualArgs.should.equal(customTechnicalMessage);
     });
   });
 });
