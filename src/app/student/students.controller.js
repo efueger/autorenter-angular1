@@ -57,6 +57,36 @@ function StudentsController($http, $log, generalConfig, notificationService) {
     throw new Error('the test exception');
   };
 
+  self.checkHttpErrorHandlerSuccess = function checkHttpErrorHandler() {
+    $http({
+      method: 'GET',
+      url: generalConfig.apiUrl
+    }).then(function successCallback(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+      console.log('success - response = ' + response.status);
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log('error - response = ' + response.status);
+    });
+  };
+
+  self.checkHttpErrorHandlerError = function checkHttpErrorHandler() {
+    $http({
+      method: 'GET',
+      url: generalConfig.apiUrl + 'foo'
+    }).then(function successCallback(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+      console.log('success - response = ' + response.status);
+    }, function errorCallback(response) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log('error - response = ' + response.status);
+    });
+  };
+
   $http.get(generalConfig.apiUrl).then(function apiSuccess(res) {
     self.apiResponse = res.data;
   }, function apiError() {
