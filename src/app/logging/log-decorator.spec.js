@@ -3,16 +3,21 @@ describe('fa.logging > ', function describeImpl() {
   var fakeLogService;
   var fakeLogApiProvider;
 
+  beforeEach(angular.mock.module('fa.notifications'));
   beforeEach(angular.mock.module('fa.logging'));
 
   beforeEach(function beforeEachImpl() {
     fakeLogApiProvider = {
       payloadCache: {},
-      $get: function getXhr() {
+      $get: function get() {
         var self = this;
         return {
-          send: function send(payload) {
-            self.payloadCache = payload;
+          getXhr: function getXhr() {
+            return {
+              send: function send(payload) {
+                self.payloadCache = payload;
+              }
+            };
           }
         };
       }

@@ -38,8 +38,8 @@
     "test": "node ./node_modules/karma/bin/karma start --single-run",
 
     "prebuild": "npm run clean -s",
-    "build": "echo '=> build the project' && npm run copy:assets -s && npm run copy:html -s && npm run build:js -s && npm run copy:angular -s && npm run copy:bootstrap -s && npm run copy:strings -s",
-    "prebuild:js": "node ./node_modules/mkdirp/bin/cmd.js dist/scripts && node ./node_modules/mkdirp/bin/cmd.js dist/assets/bootstrap",
+    "build": "echo '=> build the project' && npm run copy:assets -s && npm run copy:html -s && npm run build:js -s && npm run copy:angular -s && npm run copy:bootstrap -s && npm run copy:strings -s && npm run copy:toaster -s",
+    "prebuild:js": "node ./node_modules/mkdirp/bin/cmd.js dist/scripts && node ./node_modules/mkdirp/bin/cmd.js dist/assets/bootstrap && node ./node_modules/mkdirp/bin/cmd.js dist/assets/toaster",
     "build:js": "echo '=> build:js' && node ./node_modules/webpack/bin/webpack.js --display-modules --display-reasons --progress",
     "build:css": "echo '=> build:css' && node ./node_modules/pleeease-cli/bin/pleeease compile",
 
@@ -49,6 +49,7 @@
     "copy:bootstrap": "cp node_modules/bootstrap/dist/js/bootstrap.min.js dist/assets/bootstrap && cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/assets/bootstrap && npm run copy:jquery -s",
     "copy:jquery": "cp node_modules/jquery/dist/jquery.min.js dist/assets/bootstrap",
     "copy:strings": "cp node_modules/fa-strings.js/dist/strings.1.0.0.min.js dist/scripts/",
+    "copy:toaster": "cp node_modules/angularjs-toaster/toaster.min.js dist/assets/toaster && cp node_modules/angularjs-toaster/toaster.min.css dist/assets/toaster",
 
     "dev:build": "npm run install && npm run prebuild && npm run lint && npm run test && npm run build",
     "dev:watch": "npm run prebuild && npm run lint && npm run test && npm run build",
@@ -57,6 +58,7 @@
   "dependencies": {
     "angular": "1.5.5",
     "angular-ui-router": "0.3.0",
+    "angularjs-toaster": "2.0.0",
     "angulartics": "1.0.3",
     "bootstrap": "3.3.6",
     "fa-strings.js": "1.0.0",

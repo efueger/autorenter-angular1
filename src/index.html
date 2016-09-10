@@ -5,15 +5,33 @@
     <title>AutoRenter Angular1</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Angular -->
+    <script src="scripts/angular.js"></script>
+
     <!-- Bootstrap -->
     <script src="assets/bootstrap/jquery.min.js"></script>
     <script src="assets/bootstrap/bootstrap.min.js"></script>
     <link href="assets/bootstrap/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Toaster -->
+    <link href="assets/toaster/toaster.min.css" rel="stylesheet" />
+    <script src="assets/toaster/toaster.min.js"></script>
+
     <link href="assets/css/app.css" rel="stylesheet">
   </head>
   <body ng-app="app">
-    <fa-nav-bar></fa-nav-bar>
+    <toaster-container
+      toaster-options="{
+      'newest-on-top': true,
+      'limit': 10,
+      'close-button': true,
+      'position-class': 'toast-top-right',
+      'tap-to-dismiss': true
+      }">
+    </toaster-container>
+
+
+  <fa-nav-bar></fa-nav-bar>
 
     <main role="main" class="container-fluid" ui-view></main>
 

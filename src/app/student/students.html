@@ -17,5 +17,20 @@
     </div>
     <!--Prove you can hit the API-->
     <div id="api-response" class="row">{{studentsController.apiResponse}}</div>
+
+    <!-- Testing the toaster -->
+    <div class="form-group">
+      <button ng-click="studentsController.showFatal()" class="btn btn-primary student-theme">Fatal</button>
+      <button ng-click="studentsController.showError()" class="btn btn-primary student-theme">Error</button>
+      <button ng-click="studentsController.showWarning()" class="btn btn-primary student-theme">Warning</button>
+      <button ng-click="studentsController.showInfo()" class="btn btn-primary student-theme">Info</button>
+      <button ng-click="studentsController.showSuccess()" class="btn btn-primary student-theme">Success</button>
+    </div>
+
+    <!-- Testing exception handling -->
+    <div class="form-group">
+      <button ng-click="studentsController.throwException()" class="btn btn-primary student-theme">Throw Exception</button>
+    </div>
+
   </div>
 </div>
