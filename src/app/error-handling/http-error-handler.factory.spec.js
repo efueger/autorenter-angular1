@@ -1,13 +1,13 @@
 describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
-  var httpErrorHandler;
-  var $rootScope;
   var notifyErrorSpy;
+  var $http;
+  var $httpBackend;
 
   beforeEach(angular.mock.module('fa.errorHandling'));
 
-  beforeEach(inject(function injectImpl(_httpErrorHandler_, _notificationService_, _$rootScope_) {
-    httpErrorHandler = _httpErrorHandler_;
-    $rootScope = _$rootScope_;
+  beforeEach(inject(function injectImpl(_notificationService_, _$http_, _$httpBackend_) {
+    $http = _$http_;
+    $httpBackend = _$httpBackend_;
 
     notifyErrorSpy = sinon.spy(_notificationService_, 'notifyError');
   }));
@@ -15,14 +15,12 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
   it('should notify user on status code 400', function testImpl() {
     var actualArgs;
     var userMessage = 'some validation error message';
-    httpErrorHandler.responseError({
-      status: 400,
-      data: {message: userMessage}
-    })
-      .catch(function catchHandler() {
+    $httpBackend.when('GET', '/foo').respond(400, {message: userMessage});
+    $http.get('/foo')
+      .catch(function handleResponseError() {
         actualArgs = notifyErrorSpy.getCall(0).args[0];
       });
-    $rootScope.$apply();
+    $httpBackend.flush();
     actualArgs.should.deep.equal({
       title: 'Validation error',
       userMessage: userMessage,
@@ -32,38 +30,35 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
 
   it('should notify user on status code 413', function testImpl() {
     var actualArgs;
-    httpErrorHandler.responseError({
-      status: 413
-    })
-      .catch(function catchHandler() {
+    $httpBackend.when('GET', '/foo').respond(413);
+    $http.get('/foo')
+      .catch(function handleResponseError() {
         actualArgs = notifyErrorSpy.getCall(0).args[0];
       });
-    $rootScope.$apply();
+    $httpBackend.flush();
     actualArgs.should.deep.equal({
       userMessage: 'The request could not be processed because it is too large for the system to handle.'
         + ' Please contact technical support.'
     });
   });
 
-  describe('should notify for', function positiveRangeTest() {
+  describe('should notify user on', function positiveRangeTest() {
     var statusCodes = [];
     for (var i = 500; i < 600; i++) {
       statusCodes.push(i);
     }
-
     statusCodes.forEach(function statusTest(status) {
       it('status code ' + status, function testImpl() {
         var actualArgs;
-        httpErrorHandler.responseError({
-          status: status
-        })
-          .catch(function catchHandler() {
+        $httpBackend.when('GET', '/foo').respond(status);
+        $http.get('/foo')
+          .catch(function handleResponseError() {
             actualArgs = notifyErrorSpy.getCall(0).args[0];
           });
-        $rootScope.$apply();
+        $httpBackend.flush();
         actualArgs.should.deep.equal({
           userMessage: 'The server is unavailable. Please try again.'
-          + ' If the problem persists, please notify technical support.',
+            + ' If the problem persists, please notify technical support.',
           noLog: true
         });
       });
@@ -72,41 +67,45 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
 
   it('should notify user on status code 404', function testImpl() {
     var actualArgs;
-    httpErrorHandler.responseError({
-      status: 404
-    })
-      .catch(function catchHandler() {
+    $httpBackend.when('GET', '/foo').respond(404);
+    $http.get('/foo')
+      .catch(function handleResponseError() {
         actualArgs = notifyErrorSpy.getCall(0).args[0];
       });
-    $rootScope.$apply();
+    $httpBackend.flush();
     actualArgs.should.deep.equal({
       title: 'Document not found',
       userMessage: 'The data you are requesting does not exist.'
     });
   });
 
-  describe('should not notify for', function negativeRangeTest() {
+  describe('should not notify user on', function negativeRangeTest() {
     var statusCodes = [401, 403];
     statusCodes.forEach(function statusTest(status) {
       it('status code ' + status, function testImpl() {
         var isCalled;
-        httpErrorHandler.responseError({status: status})
-          .catch(function catchHandler() {
+        $httpBackend.when('GET', '/foo').respond(status);
+        $http.get('/foo')
+          .then(function handleResponseSuccess() {
+            isCalled = notifyErrorSpy.called;
+          })
+          .catch(function handleResponseError() {
             isCalled = notifyErrorSpy.called;
           });
-        $rootScope.$apply();
+        $httpBackend.flush();
         isCalled.should.be.false;
       });
     });
   });
 
-  it('should notify user on other status code', function testImpl() {
+  it('should notify user with general message on other status code', function testImpl() {
     var actualArgs;
-    httpErrorHandler.responseError({status: 600})
-      .catch(function catchHandler() {
+    $httpBackend.when('GET', '/foo').respond(600);
+    $http.get('/foo')
+      .catch(function handleResponseError() {
         actualArgs = notifyErrorSpy.getCall(0).args[0];
       });
-    $rootScope.$apply();
+    $httpBackend.flush();
     actualArgs.should.deep.equal({
       title: 'General response error'
     });
