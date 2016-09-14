@@ -14,7 +14,7 @@ var httpErrorHandlerFactory = function httpErrorHandlerFactory($q, notificationS
 
     if (errorCode === 413) {
       return {
-        userMessage: 'The upload could not be processed because it is too large for the system to handle.'
+        userMessage: 'The request could not be processed because it is too large for the system to handle.'
           + ' Please contact technical support.'
       };
     }
