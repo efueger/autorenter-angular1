@@ -45,19 +45,40 @@ describe('fa.logging.logApi > ', function describeImpl() {
     });
   });
 
-  it('should notify on fail', function testImpl() {
-    var notifySpy = sinon.spy(notificationService, 'notifyFatalNoLogAvailable');
-    var applySpy = sinon.spy(scope, '$apply');
+  describe('on fail', function onFail() {
     var READY_STATE = 4;
     var SERVER_ERROR_CODE = 500;
-    request.status = SERVER_ERROR_CODE;
-    request.readyState = READY_STATE;
-    request.onreadystatechange();
 
-    var errorMessage = 'A logging error has occurred: readyState = \'' + READY_STATE
-      + '\', statusCode = \'' + SERVER_ERROR_CODE + '\'.';
-    var actualArgs = notifySpy.getCall(0).args[0];
-    actualArgs.should.deep.equal({ technicalMessage: errorMessage });
-    applySpy.calledOnce.should.be.true;
+    beforeEach(function beforeEachImpl() {
+      request.status = SERVER_ERROR_CODE;
+      request.readyState = READY_STATE;
+
+      sinon.spy(console, 'error');
+    });
+
+    afterEach(function afterEachImpl() {
+      console.error.restore(); // eslint-disable-line no-console
+    });
+
+    it('should log error to console', function testImpl() {
+      request.onreadystatechange();
+      var technicalMessage = 'A logging error has occurred: readyState = \'' + READY_STATE
+        + '\', statusCode = \'' + SERVER_ERROR_CODE + '\'.';
+      console.error.getCall(0).args[0].should.equal(technicalMessage); // eslint-disable-line no-console
+    });
+
+    it('should report error via the notification service', function testImpl() {
+      var notifySpy = sinon.spy(notificationService, 'notifyError');
+      var applySpy = sinon.spy(scope, '$apply');
+      request.onreadystatechange();
+
+      var actualArgs = notifySpy.getCall(0).args[0];
+      actualArgs.should.deep.equal({
+        title: 'Logging Notification',
+        userMessage: 'The system was unable to communicate with the logging service. Please contact technical support.',
+        noLog: true
+      });
+      applySpy.calledOnce.should.be.true;
+    });
   });
 });

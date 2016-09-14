@@ -3,33 +3,34 @@
 var errorHandling = require('./error-handling.module');
 
 var httpErrorHandlerFactory = function httpErrorHandlerFactory($q, notificationService) {
-  var getNotificationMessage = function getNotificationMessage(errorCode, data) {
+  var getResponseNotificationMessage = function getResponseNotificationMessage(errorCode, data) {
     if (errorCode === 400) {
       return {
+        title: 'Validation error',
         userMessage: data.message,
-        title: 'Validation error'
+        noLog: true
       };
     }
 
     if (errorCode === 413) {
       return {
-        userMessage: 'The file could not be uploaded because it is too large for the system to handle.'
-          + ' Please contact technical support.',
-        title: 'Uploaded file is too large'
+        userMessage: 'The upload could not be processed because it is too large for the system to handle.'
+          + ' Please contact technical support.'
       };
     }
 
     if (errorCode >= 500 && errorCode < 600) {
       return {
         userMessage: 'The server is unavailable. Please try again.'
-          + ' If the problem persists, please notify technical support.'
+          + ' If the problem persists, please notify technical support.',
+        noLog: true
       };
     }
 
     if (errorCode === 404) {
       return {
-        userMessage: 'The data you are requesting does not exist.',
-        title: 'Document not found'
+        title: 'Document not found',
+        userMessage: 'The data you are requesting does not exist.'
       };
     }
 
@@ -39,14 +40,16 @@ var httpErrorHandlerFactory = function httpErrorHandlerFactory($q, notificationS
     }
 
     return {
-      userMessage: 'TODO - meaningful error message'
+      title: 'General response error'
     };
   };
 
   return {
-    responseError: function(response) {
-      var notificationData = getNotificationMessage(response.status, response.data);
-      notificationService.notifyError(notificationData);
+    responseError: function handleResponseError(response) {
+      var notificationData = getResponseNotificationMessage(response.status, response.data);
+      if (notificationData) {
+        notificationService.notifyError(notificationData);
+      }
       return $q.reject(response);
     }
   };
@@ -55,4 +58,4 @@ var httpErrorHandlerFactory = function httpErrorHandlerFactory($q, notificationS
 httpErrorHandlerFactory.$inject = ['$q', 'notificationService'];
 
 errorHandling
-  .factory('httpErrorHandlerFactory', httpErrorHandlerFactory);
+  .factory('httpErrorHandler', httpErrorHandlerFactory);

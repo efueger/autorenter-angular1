@@ -2,8 +2,8 @@
 
 var errorHandling = require('./error-handling.module');
 
-var config = function($httpProvider) {
-  $httpProvider.interceptors.push('httpErrorHandlerFactory');
+var config = function config($httpProvider) {
+  $httpProvider.interceptors.push('httpErrorHandler');
 };
 
 config.$inject = ['$httpProvider'];

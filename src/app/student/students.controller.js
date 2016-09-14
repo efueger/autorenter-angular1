@@ -18,12 +18,6 @@ function StudentsController($http, $log, generalConfig, notificationService) {
     $log.error('added ' + name);
   };
 
-  self.showFatal = function showFatal() {
-    notificationService.notifyFatalNoLogAvailable({
-      technicalMessage: 'the fatal error tech message'
-    });
-  };
-
   self.showError = function showError() {
     notificationService.notifyError({
       title: 'The error title',
@@ -62,13 +56,9 @@ function StudentsController($http, $log, generalConfig, notificationService) {
       method: 'GET',
       url: generalConfig.apiUrl
     }).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-      console.log('success - response = ' + response.status);
+      console.log('success - response = ' + response.status); // eslint-disable-line no-console
     }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-      console.log('error - response = ' + response.status);
+      console.log('unexpected error - response = ' + response.status); // eslint-disable-line no-console
     });
   };
 
@@ -77,13 +67,9 @@ function StudentsController($http, $log, generalConfig, notificationService) {
       method: 'GET',
       url: generalConfig.apiUrl + 'foo'
     }).then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-      console.log('success - response = ' + response.status);
+      console.log('unexpected success - response = ' + response.status); // eslint-disable-line no-console
     }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-      console.log('error - response = ' + response.status);
+      console.log('error - response = ' + response.status); // eslint-disable-line no-console
     });
   };
 
