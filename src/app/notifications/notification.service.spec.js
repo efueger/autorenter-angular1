@@ -35,25 +35,6 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
     logService.info.restore();
   });
 
-  describe('notifyFatalNoLogAvailable', function notifyFatalDescribeImpl() {
-    it('should invoke pop method with correct values', function testImpl() {
-      var title = 'Logging Notification';
-      var message =
-        'The system was unable to communicate with the logging service. Please contact technical support.';
-      notificationService.notifyFatalNoLogAvailable({
-        title: title,
-        userMessage: message
-      });
-      var actualArgs = popSpy.getCall(0).args[0];
-      actualArgs.should.deep.equal({
-        type: 'error',
-        title: title,
-        body: message,
-        timeout: 0
-      });
-    });
-  });
-
   describe('notifyError', function notifyErrorDescribeImpl() {
     it('should invoke pop method with correct default values', function testImpl() {
       notificationService.notifyError({});
@@ -87,12 +68,25 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
         'No technical message was provided for the following error: \'' + defaultUserMessage + '\'');
     });
 
+    it('should not invoke error method with default value', function testImpl() {
+      notificationService.notifyError({noLog: true});
+      errorSpy.called.should.be.false;
+    });
+
     it('should invoke error method with custom value', function testImpl() {
       notificationService.notifyError({
         technicalMessage: customTechnicalMessage
       });
       var actualArgs = errorSpy.getCall(0).args[0];
       actualArgs.should.equal(customTechnicalMessage);
+    });
+
+    it('should not invoke error method with custom value', function testImpl() {
+      notificationService.notifyError({
+        technicalMessage: customTechnicalMessage,
+        noLog: true
+      });
+      errorSpy.called.should.be.false;
     });
   });
 

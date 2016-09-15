@@ -20,7 +20,6 @@
 
     <!-- Testing the toaster -->
     <div class="form-group">
-      <button ng-click="studentsController.showFatal()" class="btn btn-primary student-theme">Fatal</button>
       <button ng-click="studentsController.showError()" class="btn btn-primary student-theme">Error</button>
       <button ng-click="studentsController.showWarning()" class="btn btn-primary student-theme">Warning</button>
       <button ng-click="studentsController.showInfo()" class="btn btn-primary student-theme">Info</button>
@@ -30,6 +29,12 @@
     <!-- Testing exception handling -->
     <div class="form-group">
       <button ng-click="studentsController.throwException()" class="btn btn-primary student-theme">Throw Exception</button>
+    </div>
+
+    <!-- Testing http error handling -->
+    <div class="form-group">
+      <button ng-click="studentsController.checkHttpErrorHandlerSuccess()" class="btn btn-primary student-theme">Http Success</button>
+      <button ng-click="studentsController.checkHttpErrorHandlerError()" class="btn btn-primary student-theme">Http Error</button>
     </div>
 
   </div>

@@ -28,13 +28,19 @@ function logApi(generalConfig, strings) {
       ajax.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
       ajax.onreadystatechange = function onReadyStateChange() {
         if (ajax.readyState === READY_STATE && ajax.status !== SUCCESS_CODE) {
-          var errorMessageFormat =
+          // No logging because API is unreachable. This is a last gasp effort to present something to the user.
+          var technicalMessageFormat =
             'A logging error has occurred: readyState = \'{state}\', statusCode = \'{status}\'.';
-          var errorMessage = strings.format(errorMessageFormat, {
+          var technicalMessage = strings.format(technicalMessageFormat, {
             state: ajax.readyState,
             status: ajax.status
           });
-          self._notificationService.notifyFatalNoLogAvailable({technicalMessage: errorMessage});
+          console.error(technicalMessage); // eslint-disable-line no-console
+          self._notificationService.notifyError({
+            title: 'Logging Notification',
+            userMessage: 'The system was unable to communicate with the logging service. Please contact technical support.',
+            noLog: true
+          });
           self._scope.$apply();
         }
       };

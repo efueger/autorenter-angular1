@@ -18,12 +18,6 @@ function StudentsController($http, $log, generalConfig, notificationService) {
     $log.error('added ' + name);
   };
 
-  self.showFatal = function showFatal() {
-    notificationService.notifyFatalNoLogAvailable({
-      technicalMessage: 'the fatal error tech message'
-    });
-  };
-
   self.showError = function showError() {
     notificationService.notifyError({
       title: 'The error title',
@@ -55,6 +49,28 @@ function StudentsController($http, $log, generalConfig, notificationService) {
 
   self.throwException = function throwException() {
     throw new Error('the test exception');
+  };
+
+  self.checkHttpErrorHandlerSuccess = function checkHttpErrorHandler() {
+    $http({
+      method: 'GET',
+      url: generalConfig.apiUrl
+    }).then(function successCallback(response) {
+      console.log('success - response = ' + response.status); // eslint-disable-line no-console
+    }, function errorCallback(response) {
+      console.log('unexpected error - response = ' + response.status); // eslint-disable-line no-console
+    });
+  };
+
+  self.checkHttpErrorHandlerError = function checkHttpErrorHandler() {
+    $http({
+      method: 'GET',
+      url: generalConfig.apiUrl + 'foo'
+    }).then(function successCallback(response) {
+      console.log('unexpected success - response = ' + response.status); // eslint-disable-line no-console
+    }, function errorCallback(response) {
+      console.log('error - response = ' + response.status); // eslint-disable-line no-console
+    });
   };
 
   $http.get(generalConfig.apiUrl).then(function apiSuccess(res) {

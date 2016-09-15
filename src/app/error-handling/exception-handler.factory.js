@@ -11,7 +11,7 @@ var exceptionHandlerFactory = function exceptionHandlerFactory($injector) {
   };
 };
 
-errorHandling.$inject = ['$injector'];
+exceptionHandlerFactory.$inject = ['$injector'];
 
 errorHandling
   .factory('$exceptionHandler', exceptionHandlerFactory);
