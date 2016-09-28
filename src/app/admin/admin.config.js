@@ -43,4 +43,7 @@ function adminRouteConfig($stateProvider) {
     });
 }
 
-admin.config(['$stateProvider', adminRouteConfig]);
+adminRouteConfig.$inject = ['$stateProvider'];
+
+
+admin.config(adminRouteConfig);

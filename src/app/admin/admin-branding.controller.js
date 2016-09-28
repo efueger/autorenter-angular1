@@ -4,5 +4,5 @@ var admin = require('./admin.module');
 
 function adminBrandingController() {}
 
-admin.controller('AdminBrandingController', [adminBrandingController]);
+admin.controller('AdminBrandingController', adminBrandingController);
 

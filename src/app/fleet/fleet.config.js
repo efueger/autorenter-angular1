@@ -46,4 +46,6 @@ function fleetRouteConfig($stateProvider) {
     });
 }
 
-fleet.config(['$stateProvider', fleetRouteConfig]);
+fleetRouteConfig.$inject = ['$stateProvider'];
+
+fleet.config(fleetRouteConfig);
