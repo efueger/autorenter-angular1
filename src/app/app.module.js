@@ -2,6 +2,7 @@
 
 var angular = require('angular');
 require('angular-ui-router');
+require('angular-breadcrumb');
 
 // components
 var config = require('./config/config');
@@ -15,6 +16,7 @@ var navBar = require('./nav-bar/nav-bar');
 
 module.exports =  angular.module('app', [
   'ui.router',
+  'ncy-angular-breadcrumb',
   config.name,
   logging.name,
   errorHandling.name,

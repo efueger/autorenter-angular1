@@ -2,11 +2,14 @@
 <html>
   <head>
     <base href="/">
-    <title>AutoRenter Angular1</title>
+    <title>Auto Renter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Angular -->
     <script src="scripts/angular.js"></script>
+
+    <!-- Breadcrumb -->
+    <script src="assets/breadcrumb/angular-breadcrumb.min.js"></script>
 
     <!-- Bootstrap -->
     <script src="assets/bootstrap/jquery.min.js"></script>
@@ -31,7 +34,9 @@
     </toaster-container>
 
 
-  <fa-nav-bar></fa-nav-bar>
+    <fa-nav-bar></fa-nav-bar>
+
+    <div class="container-fluid module-header" data-ui-view="moduleHeader"></div>
 
     <main role="main" class="container-fluid" ui-view></main>
 

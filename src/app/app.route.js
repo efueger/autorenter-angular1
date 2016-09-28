@@ -8,7 +8,10 @@ function routeConfig($stateProvider, $urlRouterProvider) {
     url: '/',
     templateUrl: 'app/students.html',
     controller: 'StudentsController',
-    controllerAs: 'studentsController'
+    controllerAs: 'studentsController',
+    ncyBreadcrumb: {
+      label: 'students'
+    }
   });
 
   $urlRouterProvider.otherwise('/');

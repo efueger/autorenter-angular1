@@ -3,6 +3,7 @@
 var admin = require('./admin.module');
 
 require('./admin.config');
-require('./admin.controller');
+require('./admin-users.controller');
+require('./admin-branding.controller');
 
 module.exports = admin;
