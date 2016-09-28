@@ -3,6 +3,7 @@
 var fleet = require('./fleet.module');
 
 require('./fleet.config');
-require('./fleet.controller');
+require('./fleet-locations.controller');
+require('./fleet-reports.controller');
 
 module.exports = fleet;

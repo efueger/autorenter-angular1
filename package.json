@@ -38,8 +38,8 @@
     "test": "node ./node_modules/karma/bin/karma start --single-run",
 
     "prebuild": "npm run clean -s",
-    "build": "echo '=> build the project' && npm run copy:assets -s && npm run copy:html -s && npm run build:js -s && npm run copy:angular -s && npm run copy:bootstrap -s && npm run copy:strings -s && npm run copy:toaster -s",
-    "prebuild:js": "node ./node_modules/mkdirp/bin/cmd.js dist/scripts && node ./node_modules/mkdirp/bin/cmd.js dist/assets/bootstrap && node ./node_modules/mkdirp/bin/cmd.js dist/assets/toaster",
+    "build": "echo '=> build the project' && npm run copy:assets -s && npm run copy:html -s && npm run build:js -s && npm run copy:angular -s && npm run copy:bootstrap -s && npm run copy:strings -s && npm run copy:toaster -s && npm run copy:breadcrumb -s",
+    "prebuild:js": "node ./node_modules/mkdirp/bin/cmd.js dist/scripts && node ./node_modules/mkdirp/bin/cmd.js dist/assets/bootstrap && node ./node_modules/mkdirp/bin/cmd.js dist/assets/toaster && node ./node_modules/mkdirp/bin/cmd.js dist/assets/breadcrumb",
     "build:js": "echo '=> build:js' && node ./node_modules/webpack/bin/webpack.js --display-modules --display-reasons --progress",
     "build:css": "echo '=> build:css' && node ./node_modules/pleeease-cli/bin/pleeease compile",
 
@@ -47,6 +47,7 @@
     "copy:html": "echo '=> copy:html' && node ./node_modules/mkdirp/bin/cmd.js dist/app && cp src/app/**/*.html dist/app && cp src/index.html dist",
     "copy:angular": "cp node_modules/angular/angular.js dist/scripts/ && cp node_modules/angular-ui-router/release/angular-ui-router.js dist/scripts/",
     "copy:bootstrap": "cp node_modules/bootstrap/dist/js/bootstrap.min.js dist/assets/bootstrap && cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/assets/bootstrap && npm run copy:jquery -s",
+    "copy:breadcrumb": "cp node_modules/angular-breadcrumb/dist/angular-breadcrumb.min.js dist/assets/breadcrumb",
     "copy:jquery": "cp node_modules/jquery/dist/jquery.min.js dist/assets/bootstrap",
     "copy:strings": "cp node_modules/fa-strings.js/dist/strings.1.0.0.min.js dist/scripts/",
     "copy:toaster": "cp node_modules/angularjs-toaster/toaster.min.js dist/assets/toaster && cp node_modules/angularjs-toaster/toaster.min.css dist/assets/toaster",
@@ -57,6 +58,7 @@
   },
   "dependencies": {
     "angular": "1.5.5",
+    "angular-breadcrumb": "0.4.1",
     "angular-ui-router": "0.3.0",
     "angularjs-toaster": "2.0.0",
     "angulartics": "1.0.3",
