@@ -26,3 +26,8 @@
     background-color: #00967A !important;
     color: #fff !important;
 }
+
+.list-grid {
+  width: 90%;
+  height: 500px;
+}

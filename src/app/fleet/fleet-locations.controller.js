@@ -2,6 +2,33 @@
 
 var fleet = require('./fleet.module');
 
-function fleetLocationsController() {}
+function FleetLocationsController() {
+  var myData = [
+    {
+      'firstName': 'Cox',
+      'lastName': 'Carney',
+      'company': 'Enormo',
+      'employed': true
+    },
+    {
+      'firstName': 'Lorraine',
+      'lastName': 'Wise',
+      'company': 'Comveyer',
+      'employed': false
+    },
+    {
+      'firstName': 'Nancy',
+      'lastName': 'Waters',
+      'company': 'Fuelton',
+      'employed': false
+    }
+  ];
 
-fleet.controller('FleetLocationsController', fleetLocationsController);
+  this.gridOptions = {
+    data: myData
+  };
+}
+
+// FleetLocationsController.$inject = ['$scope'];
+
+fleet.controller('FleetLocationsController', FleetLocationsController);

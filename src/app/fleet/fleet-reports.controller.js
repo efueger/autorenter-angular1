@@ -2,6 +2,6 @@
 
 var fleet = require('./fleet.module');
 
-function fleetReportsController() {}
+function FleetReportsController() {}
 
-fleet.controller('FleetReportsController', fleetReportsController);
+fleet.controller('FleetReportsController', FleetReportsController);
