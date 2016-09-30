@@ -10,9 +10,11 @@
 
 var angular = require('angular');
 var uiRouter = require('angular-ui-router');
+var dataAccess = require('../data-access/data-access');
 
 module.exports = angular.module('fa.fleet',
   [
     uiRouter,
-    'ui.grid'
+    'ui.grid',
+    dataAccess.name
   ]);

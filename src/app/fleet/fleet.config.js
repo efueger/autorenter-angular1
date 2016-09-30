@@ -28,6 +28,34 @@ function fleetRouteConfig($stateProvider) {
         label: 'Locations'
       }
     })
+    .state('fleet.locations.view', {
+      url: '/{id}/view',
+      views: {
+        '@': {
+          templateUrl: 'app/fleet-location-details.html',
+          controller: 'FleetLocationDetailsController',
+          controllerAs: 'vm'
+        }
+      },
+      ncyBreadcrumb: {
+        label: '{{::vm.location.siteId}}'
+      },
+      parent: 'fleet.locations.list'
+    })
+    .state('fleet.locations.edit', {
+      url: '/{id}/edit',
+      views: {
+        '@': {
+          templateUrl: 'app/fleet-location-details.html',
+          controller: 'FleetLocationDetailsController',
+          controllerAs: 'vm'
+        }
+      },
+      ncyBreadcrumb: {
+        label: '{{::vm.location.siteId}}'
+      },
+      parent: 'fleet.locations.list'
+    })
     .state('fleet.reports', {
       abstract: true
     })

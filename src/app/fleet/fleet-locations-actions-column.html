@@ -1,0 +1,13 @@
+<div class="ui-grid-cell-contents">
+  <a ui-sref="fleet.locations.edit({id: COL_FIELD})">
+    Edit
+  </a>
+
+  <a ui-sref="fleet.locations.vehicles({id: COL_FIELD})">
+    Vehicles
+  </a>
+
+  <a ng-click="grid.appScope.vm.deleteLocation(row.entity)" href="">
+    Delete
+  </a>
+</div>
