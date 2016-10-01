@@ -7,7 +7,29 @@ function FleetLocationsController(locationsDataService) {
 
   self.gridOptions;
 
-  function getColumnDefs() {
+  self.deleteLocation = function deleteLocation(location) {
+    // TODO - confirm delete
+    locationsDataService.deleteLocation(location.id)
+      .then(function repopulateGrid() {
+        self.populateGrid();
+      });
+  };
+
+  self.initialize = function initialize() {
+    self.configureGrid();
+  };
+
+  self.configureGrid = function configureGrid() {
+    self.gridOptions = {
+      flatEntityAccess: true,
+      enableColumnResizing: true,
+      enableColumnMenus: false,
+      columnDefs: self.getColumnDefs(),
+      onRegisterApi: self.onRegisterGridApi.bind(self)
+    };
+  };
+
+  self.getColumnDefs = function getColumnDefs() {
     var currentPath = 'app/';
     return [
       {
@@ -54,41 +76,20 @@ function FleetLocationsController(locationsDataService) {
         cellTemplate: currentPath + 'fleet-locations-actions-column.html'
       }
     ];
-  }
+  };
 
-  function populateGrid() {
+  self.onRegisterGridApi = function onRegisterGridApi() {
+    self.populateGrid();
+  };
+
+  self.populateGrid = function populateGrid() {
     locationsDataService.getLocations()
       .then(function assignData(response) {
         self.gridOptions.data = response.data;
       });
-  }
-
-  function onRegisterGridApi() {
-    populateGrid();
-  }
-
-  function configureGrid() {
-    self.gridOptions = {
-      flatEntityAccess: true,
-      enableColumnMenus: false,
-      columnDefs: getColumnDefs(),
-      onRegisterApi: onRegisterGridApi.bind(self)
-    };
-  }
-
-  function initialize() {
-    configureGrid();
-  }
-
-  initialize();
-
-  self.deleteLocation = function deleteLocation(location) {
-    // TODO - confirm delete
-    locationsDataService.deleteLocation(location.id)
-      .then(function repopulateGrid() {
-        populateGrid();
-      });
   };
+
+  self.initialize();
 }
 
 FleetLocationsController.$inject = ['locationsDataService'];

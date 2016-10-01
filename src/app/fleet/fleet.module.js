@@ -16,5 +16,6 @@ module.exports = angular.module('fa.fleet',
   [
     uiRouter,
     'ui.grid',
+    'ui.grid.resizeColumns',
     dataAccess.name
   ]);

@@ -11,7 +11,7 @@ var locationsDataService = function locationsDataService($q) {
       name: 'Indianapolis International Airport',
       vehicleCount: 255,
       city: 'Indianapolis',
-      state: 'in'
+      state: 'IN'
     },
     {
       id: '2',
@@ -19,9 +19,11 @@ var locationsDataService = function locationsDataService($q) {
       name: 'Chicago O\'Hare Airport',
       vehicleCount: 515,
       city: 'Chicago',
-      state: 'il'
+      state: 'IL'
     }
   ];
+
+  var nextLocationId = 3;
 
   function getLocations() {
     var deferred = $q.defer();
@@ -30,6 +32,7 @@ var locationsDataService = function locationsDataService($q) {
   }
 
   function addLocation(location) {
+    location.id = nextLocationId++;
     var deferred = $q.defer();
     locations.push(location);
     deferred.resolve({});
@@ -48,6 +51,12 @@ var locationsDataService = function locationsDataService($q) {
     return deferred.promise;
   }
 
+  function updateLocation(location) { // eslint-disable-line no-unused-vars
+    var deferred = $q.defer();
+    deferred.resolve({});
+    return deferred.promise;
+  }
+
   function deleteLocation(locationId) {
     var deferred = $q.defer();
     getLocation(locationId)
@@ -63,6 +72,7 @@ var locationsDataService = function locationsDataService($q) {
     getLocations: getLocations,
     addLocation: addLocation,
     getLocation: getLocation,
+    updateLocation: updateLocation,
     deleteLocation: deleteLocation
   };
 };
