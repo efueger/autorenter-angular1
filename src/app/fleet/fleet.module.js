@@ -11,6 +11,7 @@
 var angular = require('angular');
 var uiRouter = require('angular-ui-router');
 var dataAccess = require('../data-access/data-access');
+var confirmations = require('../confirmations/confirmations');
 var strings = require('../imports/strings.import.js');
 
 module.exports = angular.module('fa.fleet',
@@ -20,5 +21,6 @@ module.exports = angular.module('fa.fleet',
     'ui.grid',
     'ui.grid.resizeColumns',
     dataAccess.name,
+    confirmations.name,
     strings.name
   ]);

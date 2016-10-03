@@ -38,8 +38,8 @@
     "test": "node ./node_modules/karma/bin/karma start --single-run",
 
     "prebuild": "npm run clean -s",
-    "build": "echo '=> build the project' && npm run copy:assets -s && npm run copy:html -s && npm run build:js -s && npm run copy:angular -s && npm run copy:bootstrap -s && npm run copy:strings -s && npm run copy:toaster -s && npm run copy:breadcrumb -s && npm run copy:grid -s",
-    "prebuild:js": "node ./node_modules/mkdirp/bin/cmd.js dist/scripts && node ./node_modules/mkdirp/bin/cmd.js dist/assets/bootstrap && node ./node_modules/mkdirp/bin/cmd.js dist/assets/toaster && node ./node_modules/mkdirp/bin/cmd.js dist/assets/breadcrumb && node ./node_modules/mkdirp/bin/cmd.js dist/assets/grid",
+    "build": "echo '=> build the project' && npm run copy:assets -s && npm run copy:html -s && npm run build:js -s && npm run copy:angular -s && npm run copy:bootstrap -s && npm run copy:strings -s && npm run copy:toaster -s && npm run copy:breadcrumb -s && npm run copy:grid -s && npm run copy:ui-bootstrap -s",
+    "prebuild:js": "node ./node_modules/mkdirp/bin/cmd.js dist/scripts && node ./node_modules/mkdirp/bin/cmd.js dist/assets/bootstrap && node ./node_modules/mkdirp/bin/cmd.js dist/assets/toaster && node ./node_modules/mkdirp/bin/cmd.js dist/assets/breadcrumb && node ./node_modules/mkdirp/bin/cmd.js dist/assets/grid && node ./node_modules/mkdirp/bin/cmd.js dist/assets/ui-bootstrap",
     "build:js": "echo '=> build:js' && node ./node_modules/webpack/bin/webpack.js --display-modules --display-reasons --progress",
     "build:css": "echo '=> build:css' && node ./node_modules/pleeease-cli/bin/pleeease compile",
 
@@ -47,6 +47,7 @@
     "copy:html": "echo '=> copy:html' && node ./node_modules/mkdirp/bin/cmd.js dist/app && cp src/app/**/*.html dist/app && cp src/index.html dist",
     "copy:angular": "cp node_modules/angular/angular.js dist/scripts/ && cp node_modules/angular-ui-router/release/angular-ui-router.js dist/scripts/",
     "copy:bootstrap": "cp node_modules/bootstrap/dist/js/bootstrap.min.js dist/assets/bootstrap && cp node_modules/bootstrap/dist/css/bootstrap.min.css dist/assets/bootstrap && npm run copy:jquery -s",
+    "copy:ui-bootstrap": "cp node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js dist/assets/ui-bootstrap && cp node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css dist/assets/ui-bootstrap",
     "copy:breadcrumb": "cp node_modules/angular-breadcrumb/dist/angular-breadcrumb.min.js dist/assets/breadcrumb",
     "copy:jquery": "cp node_modules/jquery/dist/jquery.min.js dist/assets/bootstrap",
     "copy:strings": "cp node_modules/fa-strings.js/dist/strings.1.0.0.min.js dist/scripts/",
@@ -65,6 +66,7 @@
     "angularjs-toaster": "2.0.0",
     "angulartics": "1.0.3",
     "bootstrap": "3.3.6",
+    "angular-ui-bootstrap": "2.1.4",
     "fa-strings.js": "1.0.0",
     "jquery": "2.2.3",
     "lodash": "4.11.1"

@@ -2,16 +2,18 @@
 
 var fleet = require('./fleet.module');
 
-function FleetLocationsController(locationsDataService) {
+function FleetLocationsController(locationsDataService, confirmationService, strings) {
   var self = this;
 
   self.gridOptions;
 
   self.deleteLocation = function deleteLocation(location) {
-    // TODO - confirm delete
-    locationsDataService.deleteLocation(location.id)
-      .then(function repopulateGrid() {
-        self.populateGrid();
+    confirmationService.show(strings.format('Delete location \'{siteId}\'?', {siteId: location.siteId}))
+      .then(function deleteIt() {
+        locationsDataService.deleteLocation(location.id)
+          .then(function repopulateGrid() {
+            self.populateGrid();
+          });
       });
   };
 
@@ -92,6 +94,10 @@ function FleetLocationsController(locationsDataService) {
   self.initialize();
 }
 
-FleetLocationsController.$inject = ['locationsDataService'];
+FleetLocationsController.$inject = [
+  'locationsDataService',
+  'confirmationService',
+  'strings'
+];
 
 fleet.controller('FleetLocationsController', FleetLocationsController);

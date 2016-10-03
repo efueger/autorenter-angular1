@@ -1,0 +1,12 @@
+<div class="confirmation-dialog">
+  <div class="modal-header">
+    <h3 class="modal-title">Confirm Action</h3>
+  </div>
+  <div class="modal-body">
+    <span>{{::modalVm.popupText}}</span>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="modalVm.confirm()">OK</button>
+    <button class="btn btn-warning" ng-click="modalVm.cancel()">Cancel</button>
+  </div>
+</div>
