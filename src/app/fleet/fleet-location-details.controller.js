@@ -2,7 +2,7 @@
 
 var fleet = require('./fleet.module');
 
-function FleetLocationDetailsController($q, $state, locationsDataService, statesDataService) {
+function FleetLocationDetailsController($state, fleetLocationStrategyFactory, fleetLocationDetailsModeService) {
   var self = this;
 
   self.location;
@@ -11,67 +11,33 @@ function FleetLocationDetailsController($q, $state, locationsDataService, states
 
   self.selectedState;
 
+  var implementationStrategy;
+
   self.initialize =  function initialize() {
-    var statesPromise = statesDataService.getStates()
-      .then(function populate(response) {
-        self.states = response.data;
+    implementationStrategy = fleetLocationStrategyFactory.getStrategy();
+    implementationStrategy.getInitializationData($state.params.id)
+      .then(function init(initializationData) {
+        self.location = initializationData.location;
+        self.states = initializationData.states;
+        self.selectedState = initializationData.selectedState;
       });
-
-    if (self.isAddMode()) {
-      self.location = {};
-    } else {
-      var locationPromise = locationsDataService.getLocation($state.params.id)
-        .then(function populate(response) {
-          self.location = response.data;
-        });
-
-      if (!self.isEditable()) {
-        $q.all([locationPromise, statesPromise])
-          .then(function setSelectedState() {
-            self.states.forEach(function setState(stateElement) {
-              if (stateElement.stateCode === self.location.state) {
-                self.selectedState = stateElement;
-              }
-            });
-          });
-      }
-    }
-  };
-
-  self.isAddMode = function isAddMode() {
-    return $state.current.name === 'fleet.locations.add';
-  };
-
-  self.isEditMode = function isEditMode() {
-    return $state.current.name === 'fleet.locations.edit';
   };
 
   self.isEditable = function isEditable() {
-    return self.isAddMode() || self.isEditMode();
+    return fleetLocationDetailsModeService.isAddMode() || fleetLocationDetailsModeService.isEditMode();
   };
 
   self.save = function save() {
-    var savePromise;
-    if (self.isAddMode()) {
-      savePromise =  locationsDataService.addLocation(self.location);
-    } else {
-      savePromise = locationsDataService.updateLocation(self.location);
-    }
-
-    savePromise
-      .then(function notify() {
-        $state.go('fleet.locations.list');
-      });
+    implementationStrategy.save(self.location);
   };
 
   self.initialize();
 }
 
 FleetLocationDetailsController.$inject = [
-  '$q',
   '$state',
-  'locationsDataService',
-  'statesDataService'
+  'fleetLocationStrategyFactory',
+  'fleetLocationDetailsModeService'
 ];
 
 fleet.controller('FleetLocationDetailsController', FleetLocationDetailsController);
