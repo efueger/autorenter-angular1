@@ -1,0 +1,114 @@
+<form name="locationForm"
+      ng-submit="locationForm.$valid && vm.save()"
+      novalidate>
+
+  <div class="panel">
+    <div class="panel-body">
+
+      <div class="form-group row"
+           ng-class="{'has-error': locationForm.siteId.$invalid && (locationForm.$submitted || locationForm.siteId.$touched)}">
+        <label for="siteId" class="col-sm-2 control-label">Site ID</label>
+
+        <div class="col-sm-6"
+             ng-init="siteIdMaxLen='10'">
+          <input class="form-control" ng-if="vm.isEditable()"
+                 ng-model="vm.location.siteId" id="siteId"
+                 ng-maxlength="{{siteIdMaxLen}}"
+                 name="siteId" required>
+
+          <span class="help-block text-danger" ng-if="locationForm.siteId.$error.required">
+                                "Site ID" is a required field
+                            </span>
+          <span class="help-block text-danger" ng-if="locationForm.siteId.$error.maxlength">
+                                "Site ID" exceeds the maximum length of {{siteIdMaxLen}}
+                            </span>
+
+          <p id="siteIdText" class="form-control-static"
+             ng-if="!vm.isEditable()">
+            {{::vm.location.siteId}}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group row"
+           ng-class="{'has-error': locationForm.name.$invalid && (locationForm.$submitted || locationForm.name.$touched)}">
+        <label for="name" class="col-sm-2 control-label">Name</label>
+
+        <div class="col-sm-6"
+             ng-init="nameMaxLen='50'">
+          <input class="form-control" ng-if="vm.isEditable()"
+                 ng-model="vm.location.name" id="name"
+                 ng-maxlength="{{nameMaxLen}}"
+                 name="name" required>
+
+          <span class="help-block text-danger" ng-if="locationForm.name.$error.required">
+                                "Name" is a required field
+                            </span>
+          <span class="help-block text-danger" ng-if="locationForm.name.$error.maxlength">
+                                "Name" exceeds the maximum length of {{nameMaxLen}}
+                            </span>
+
+          <p id="nameText" class="form-control-static"
+             ng-if="!vm.isEditable()">
+            {{::vm.location.name}}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group row"
+           ng-class="{'has-error': locationForm.city.$invalid && (locationForm.$submitted || locationForm.city.$touched)}">
+        <label for="city" class="col-sm-2 control-label">City</label>
+
+        <div class="col-sm-6"
+             ng-init="cityMaxLen='25'">
+          <input class="form-control" ng-if="vm.isEditable()"
+                 ng-model="vm.location.city" id="city"
+                 ng-maxlength="{{cityMaxLen}}"
+                 name="city">
+
+          <span class="help-block text-danger" ng-if="locationForm.city.$error.maxlength">
+                                "City" exceeds the maximum length of {{cityMaxLen}}
+                            </span>
+
+          <p id="cityText" class="form-control-static"
+             ng-if="!vm.isEditable()">
+            {{::vm.location.city}}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="state" class="col-sm-2 control-label">State</label>
+
+        <div class="col-sm-6">
+          <select class="form-control"  ng-if="vm.isEditable()"
+                  ng-model="vm.location.state" id="state"
+                  name="state">
+            <option ng-repeat="state in vm.states"
+                    value="{{state.stateCode}}">
+              {{state.name}}
+            </option>
+          </select>
+
+          <p id="stateText" class="form-control-static"
+             ng-if="!vm.isEditable()">
+            {{::vm.selectedState.name}}
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="form-group" ng-if="vm.isEditable()">
+    <div class="col-sm-8 text-right">
+      <button type="submit" class="btn btn-default"
+              ng-disabled="locationForm.$invalid">
+        Submit
+      </button>
+      <button type="button" class="btn btn-default" ui-sref="fleet.locations.list">Cancel</button>
+    </div>
+  </div>
+
+</form>
+

@@ -1,1 +1,14 @@
-<h2>Fleet Locations Panel</h2>
+<div class="row">
+  <span>
+    <input name="filter">
+    <button type="button" class="btn btn-primary">Apply</button>
+    <button type="button" class="btn btn-default">Clear</button>
+  </span>
+
+  <span>
+    <button type="button" class="btn btn-primary" ui-sref="fleet.locations.add">New</button>
+  </span>
+
+</div>
+
+<div id="grid1" ui-grid="vm.gridOptions" ui-grid-resize-columns="true" class="list-grid ui-grid-auto-resize>"></div>

@@ -2,7 +2,7 @@
 
 var admin = require('./admin.module');
 
-function adminBrandingController() {}
+function AdminBrandingController() {}
 
-admin.controller('AdminBrandingController', adminBrandingController);
+admin.controller('AdminBrandingController', AdminBrandingController);
 
