@@ -3,7 +3,7 @@
 var dataAccess = require('./data-access.module');
 
 var locationsDataService = function locationsDataService($q) {
-  // This implementation will be replaced once we have API support...
+  // TODO: This implementation will be replaced once we have API support...
   var locations = [
     {
       id: '1',
