@@ -1,6 +1,8 @@
 describe('fa.confirmations.FleetLocationsController > ', function describeImpl() {
   var controller;
-  var siteIdString = "abc";
+  var locationsDataService;
+  var confirmationService;
+  var siteIdString = 'abc';
 
   beforeEach(angular.mock.module('fa.fleet'));
 
@@ -9,11 +11,15 @@ describe('fa.confirmations.FleetLocationsController > ', function describeImpl()
       '$controller',
       function assignController($controller) {
         controller = $controller('FleetLocationsController', {
-            'locationsDataService': locationsDataService,
-            'confirmationService': confirmationService,
-            'strings': siteIdString
+          'locationsDataService': locationsDataService,
+          'confirmationService': confirmationService,
+          'strings': siteIdString
         });
       }
     ]);
+
+    it('hello world', function testImpl() {
+      controller.confirm();
+    });
   });
 });
