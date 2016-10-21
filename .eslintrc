@@ -33,6 +33,7 @@
       "angular": true,
       "inject": true,
       "sinon": true,
-      "assert": true
+      "assert": true,
+      "should": true
   }
 }
