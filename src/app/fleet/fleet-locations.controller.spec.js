@@ -108,7 +108,79 @@ describe('fa.fleet.FleetLocationsController > ', function describeImpl() {
     });
   });
 
-  // locationsDataService.getLocations = function() {
-  //   $q.when({data: []});
-  // };
+  it('getColumnDefs should return expected data', function testImpl() {
+    var currentPath = 'app/';
+    var expectedColumnDefs = [
+      {
+        displayName: 'Site ID',
+        field: 'siteId',
+        type: 'string',
+        enableSorting: true,
+        suppressRemoveSort: true,
+        sort: {
+          priority: 0,
+          direction: 'asc'
+        },
+        cellTemplate: currentPath + 'fleet-locations-id-column.html'
+      },
+      {
+        displayName: 'Name',
+        field: 'name',
+        type: 'string',
+        enableSorting: false,
+      },
+      {
+        displayName: 'Vehicles',
+        field: 'vehicleCount',
+        type: 'number',
+        enableSorting: false,
+      },
+      {
+        displayName: 'City',
+        field: 'city',
+        type: 'string',
+        enableSorting: false,
+      },
+      {
+        displayName: 'State',
+        field: 'state',
+        type: 'string',
+        enableSorting: false,
+      },
+      {
+        displayName: 'Actions',
+        width: 200,
+        field: 'id',
+        enableSorting: false,
+        cellTemplate: currentPath + 'fleet-locations-actions-column.html'
+      }
+    ];
+
+    var actualColumnDefs = controller.getColumnDefs();
+    actualColumnDefs.should.deep.equal(expectedColumnDefs);
+  });
+
+  it('onRegisterGridApi should populate grid', function testImpl() {
+    var populateFunctionWasInvoked;
+    controller.populateGrid = function populateGrid() {
+      populateFunctionWasInvoked = true;
+    };
+
+    controller.onRegisterGridApi();
+    populateFunctionWasInvoked.should.be.true;
+  });
+
+  it('populateGrid should set grid data', function testImpl() {
+    var expectedData = [location];
+    locationsDataService.getLocations = function getLocations() {
+      var deferred = $q.defer();
+      deferred.resolve({data: expectedData});
+      return deferred.promise;
+    };
+
+    controller.populateGrid();
+    $rootScope.$apply();
+
+    controller.gridOptions.data.should.equal(expectedData);
+  });
 });
