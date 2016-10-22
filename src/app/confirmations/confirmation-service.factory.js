@@ -21,7 +21,7 @@ function confirmationService($uibModal) {
   };
 }
 
-confirmations.$inject = [
+confirmationService.$inject = [
   '$uibModal'
 ];
 
