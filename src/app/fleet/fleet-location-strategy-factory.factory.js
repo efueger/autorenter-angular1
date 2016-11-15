@@ -2,7 +2,7 @@
 
 var fleet = require('./fleet.module');
 
-var fleetLocationStrategyFactory = function fleetLocationStrategyFactory($q, $state, strings, fleetLocationDetailsModeService,
+var fleetLocationStrategyFactory = function fleetLocationStrategyFactory(strings, fleetLocationDetailsModeService,
                                                                          fleetLocationAddStrategy, fleetLocationEditStrategy,
                                                                          fleetLocationViewStrategy) {
   function getStrategy() {
@@ -14,8 +14,9 @@ var fleetLocationStrategyFactory = function fleetLocationStrategyFactory($q, $st
     } else if (fleetLocationDetailsModeService.isViewMode()) {
       strategy = fleetLocationViewStrategy;
     } else {
-      throw new Error(strings.format('Unsupported mode for navigation state \'{navState}\'.'),
+      var errorMessage = strings.format('Unsupported mode for navigation state \'{navState}\'.',
         {navState: fleetLocationDetailsModeService.getNavigationStateName()});
+      throw new Error(errorMessage);
     }
 
     return strategy;
@@ -27,8 +28,6 @@ var fleetLocationStrategyFactory = function fleetLocationStrategyFactory($q, $st
 };
 
 fleetLocationStrategyFactory.$inject = [
-  '$q',
-  '$state',
   'strings',
   'fleetLocationDetailsModeService',
   'fleetLocationAddStrategy',

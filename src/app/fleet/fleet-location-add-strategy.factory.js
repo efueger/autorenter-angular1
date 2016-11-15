@@ -2,18 +2,13 @@
 
 var fleet = require('./fleet.module');
 
-var fleetLocationAddStrategy = function fleetLocationAddStrategy($q, $state, notificationService, strings,
+var fleetLocationAddStrategy = function fleetLocationAddStrategy($state, notificationService, strings,
                                                                  statesDataService, locationsDataService) {
   function getInitializationData() {
-    var deferred = $q.defer();
-    statesDataService.getStates()
+    return statesDataService.getStates()
       .then(function setResult(response) {
-        deferred.resolve({
-          states: response.data
-        });
+        return { states: response.data };
       });
-
-    return deferred.promise;
   }
 
   function notifySuccess(siteId) {
@@ -38,7 +33,6 @@ var fleetLocationAddStrategy = function fleetLocationAddStrategy($q, $state, not
 };
 
 fleetLocationAddStrategy.$inject = [
-  '$q',
   '$state',
   'notificationService',
   'strings',
