@@ -1,11 +1,11 @@
-describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
+describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
   var $q;
   var $rootScope;
   var $state;
   var notificationService;
   var statesDataService;
   var locationsDataService;
-  var fleetLocationAddStrategy;
+  var fleetLocationEditStrategy;
 
   beforeEach(angular.mock.module('fa.fleet'));
 
@@ -15,17 +15,17 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
                                         _notificationService_,
                                         _statesDataService_,
                                         _locationsDataService_,
-                                        _fleetLocationAddStrategy_) {
+                                        _fleetLocationEditStrategy_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
     $state = _$state_;
     notificationService = _notificationService_;
     statesDataService = _statesDataService_;
     locationsDataService = _locationsDataService_;
-    fleetLocationAddStrategy = _fleetLocationAddStrategy_;
+    fleetLocationEditStrategy = _fleetLocationEditStrategy_;
   }));
 
-  it('getInitializationData returns states', function testImpl() {
+  it('getInitializationData returns state and location data', function testImpl() {
     var states = [
       {
         'stateCode': 'IL',
@@ -36,15 +36,35 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
         'name': 'Indiana'
       }
     ];
-    var expectedResponse = {states: states};
+    var location = {
+      id: '1',
+      siteId: 'ind',
+      name: 'Indianapolis International Airport',
+      vehicleCount: 255,
+      city: 'Indianapolis',
+      state: 'IN'
+    };
+    var expectedResponse = {
+      states: states,
+      location: location
+    };
     sinon.stub(statesDataService, 'getStates', function getStates() {
       var deferred = $q.defer();
       deferred.resolve({data: states});
       return deferred.promise;
     });
+    sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {
+      var deferred = $q.defer();
+      if (locationId === location.id) {
+        deferred.resolve({data: location});
+      } else {
+        deferred.reject();
+      }
+      return deferred.promise;
+    });
 
     var actualResponse;
-    fleetLocationAddStrategy.getInitializationData()
+    fleetLocationEditStrategy.getInitializationData(location.id)
       .then(function setResponse(response) {
         actualResponse = response;
       });
@@ -53,11 +73,11 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
     actualResponse.should.deep.equal(expectedResponse);
   });
 
-  it('notifySuccess notifies user of successful add', function testImpl() {
+  it('notifySuccess notifies user of successful update', function testImpl() {
     var notifySuccessSpy = sinon.spy(notificationService, 'notifySuccess');
-    fleetLocationAddStrategy.notifySuccess('9876C');
+    fleetLocationEditStrategy.notifySuccess('9876C');
     var actualNotificationArgs = notifySuccessSpy.getCall(0).args;
-    var expectedNotificationArgs = [{ userMessage: 'Location \'9876C\' was added successfully.'}];
+    var expectedNotificationArgs = [{ userMessage: 'Location \'9876C\' was updated successfully.'}];
     actualNotificationArgs.should.deep.equal(expectedNotificationArgs);
   });
 
@@ -65,18 +85,18 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
     var siteId = '98765U';
     var location = {siteId: siteId};
 
-    it('persists the new location', function testImpl() {
-      var addLocationSpy = sinon.spy(locationsDataService, 'addLocation');
-      fleetLocationAddStrategy.save(location);
-      addLocationSpy.calledWith(location).should.be.true;
+    it('persists the modified location', function testImpl() {
+      var updateLocationSpy = sinon.spy(locationsDataService, 'updateLocation');
+      fleetLocationEditStrategy.save(location);
+      updateLocationSpy.calledWith(location).should.be.true;
     });
 
-    it('notifies user of successful add', function testImpl() {
+    it('notifies user of successful update', function testImpl() {
       // Just stub it out to avoid the 'No more request expected' error.
       sinon.stub($state, 'go');
-      var notifySuccessStub = sinon.stub(fleetLocationAddStrategy, 'notifySuccess');
+      var notifySuccessStub = sinon.stub(fleetLocationEditStrategy, 'notifySuccess');
 
-      fleetLocationAddStrategy.save(location);
+      fleetLocationEditStrategy.save(location);
       $rootScope.$apply();
 
       notifySuccessStub.calledWith(siteId).should.be.true;
@@ -84,10 +104,10 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
 
     it('navigates to the locations list', function testImpl() {
       // Just stub it out to avoid the 'No more request expected' error.
-      sinon.stub(fleetLocationAddStrategy, 'notifySuccess');
+      sinon.stub(fleetLocationEditStrategy, 'notifySuccess');
       var goStub = sinon.stub($state, 'go');
 
-      fleetLocationAddStrategy.save(location);
+      fleetLocationEditStrategy.save(location);
       $rootScope.$apply();
 
       goStub.calledWith('fleet.locations.list').should.be.true;
