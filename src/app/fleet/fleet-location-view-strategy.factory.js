@@ -2,7 +2,7 @@
 
 var fleet = require('./fleet.module');
 
-var fleetLocationViewStrategy = function fleetLocationViewStrategy($state, fleetLocationEditStrategy) {
+var fleetLocationViewStrategy = function fleetLocationViewStrategy(fleetLocationEditStrategy) {
   var getInitializationData = function getInitializationData(locationId) {
     return fleetLocationEditStrategy.getInitializationData(locationId)
       .then(function setResult(initializationData) {
@@ -22,7 +22,6 @@ var fleetLocationViewStrategy = function fleetLocationViewStrategy($state, fleet
 };
 
 fleetLocationViewStrategy.$inject = [
-  '$state',
   'fleetLocationEditStrategy'
 ];
 
