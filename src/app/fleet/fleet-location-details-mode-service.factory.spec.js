@@ -17,14 +17,14 @@ describe('fa.fleet.fleetLocationDetailsModeService > ', function describeImpl() 
 
   describe('isAddMode', function isAddModeTest() {
     it('returns false', function testImpl() {
-      fleetLocationDetailsModeService.getNavigationStateName = function() {
+      fleetLocationDetailsModeService.getNavigationStateName = function getNavigationStateName() {
         return 'fleet.locations.add.foo';
       };
       fleetLocationDetailsModeService.isAddMode().should.be.false;
     });
 
     it('returns true', function testImpl() {
-      fleetLocationDetailsModeService.getNavigationStateName = function() {
+      fleetLocationDetailsModeService.getNavigationStateName = function getNavigationStateName() {
         return 'fleet.locations.add';
       };
       fleetLocationDetailsModeService.isAddMode().should.be.true;
@@ -33,14 +33,14 @@ describe('fa.fleet.fleetLocationDetailsModeService > ', function describeImpl() 
 
   describe('isEditMode', function isEditModeTest() {
     it('returns false', function testImpl() {
-      fleetLocationDetailsModeService.getNavigationStateName = function() {
+      fleetLocationDetailsModeService.getNavigationStateName = function getNavigationStateName() {
         return 'fleet.locations.edit.foo';
       };
       fleetLocationDetailsModeService.isEditMode().should.be.false;
     });
 
     it('returns true', function testImpl() {
-      fleetLocationDetailsModeService.getNavigationStateName = function() {
+      fleetLocationDetailsModeService.getNavigationStateName = function getNavigationStateName() {
         return 'fleet.locations.edit';
       };
       fleetLocationDetailsModeService.isEditMode().should.be.true;
@@ -49,14 +49,14 @@ describe('fa.fleet.fleetLocationDetailsModeService > ', function describeImpl() 
 
   describe('isViewMode', function isViewModeTest() {
     it('returns false', function testImpl() {
-      fleetLocationDetailsModeService.getNavigationStateName = function() {
+      fleetLocationDetailsModeService.getNavigationStateName = function getNavigationStateName() {
         return 'fleet.locations.view.foo';
       };
       fleetLocationDetailsModeService.isViewMode().should.be.false;
     });
 
     it('returns true', function testImpl() {
-      fleetLocationDetailsModeService.getNavigationStateName = function() {
+      fleetLocationDetailsModeService.getNavigationStateName = function getNavigationStateName() {
         return 'fleet.locations.view';
       };
       fleetLocationDetailsModeService.isViewMode().should.be.true;

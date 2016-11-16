@@ -4,6 +4,8 @@ var fleet = require('./fleet.module');
 
 var fleetLocationAddStrategy = function fleetLocationAddStrategy($state, notificationService, strings,
                                                                  statesDataService, locationsDataService) {
+  var fleetLocationAddStrategyInstance;
+
   function getInitializationData() {
     return statesDataService.getStates()
       .then(function setResult(response) {
@@ -21,15 +23,17 @@ var fleetLocationAddStrategy = function fleetLocationAddStrategy($state, notific
   function save(location) {
     locationsDataService.addLocation(location)
       .then(function notifyAndNavigate() {
-        notifySuccess(location.siteId);
+        fleetLocationAddStrategyInstance.notifySuccess(location.siteId);
         $state.go('fleet.locations.list');
       });
   }
 
-  return {
+  fleetLocationAddStrategyInstance = {
     getInitializationData: getInitializationData,
-    save: save
+    save: save,
+    notifySuccess: notifySuccess
   };
+  return fleetLocationAddStrategyInstance;
 };
 
 fleetLocationAddStrategy.$inject = [
