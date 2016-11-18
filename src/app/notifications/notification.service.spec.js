@@ -35,7 +35,7 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
     logService.info.restore();
   });
 
-  describe('notifyError', function notifyErrorDescribeImpl() {
+  describe('notifyError', function notifyErrorTest() {
     it('should invoke pop method with correct default values', function testImpl() {
       notificationService.notifyError({});
       var actualArgs = popSpy.getCall(0).args[0];
@@ -90,7 +90,7 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
     });
   });
 
-  describe('notifyWarning', function notifyWarningDescribeImpl() {
+  describe('notifyWarning', function notifyWarningTest() {
     it('should invoke pop method with correct default values', function testImpl() {
       notificationService.notifyWarning({});
       var actualArgs = popSpy.getCall(0).args[0];
@@ -130,7 +130,7 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
     });
   });
 
-  describe('notifyInfo', function notifyInfoDescribeImpl() {
+  describe('notifyInfo', function notifyInfoTest() {
     it('should invoke pop method with correct default values', function testImpl() {
       notificationService.notifyInfo({});
       var actualArgs = popSpy.getCall(0).args[0];
@@ -170,7 +170,7 @@ describe('fa.notifications.notificationService > ', function describeImpl() {
     });
   });
 
-  describe('notifySuccess', function notifySuccessDescribeImpl() {
+  describe('notifySuccess', function notifySuccessTest() {
     it('should invoke pop method with correct default values', function testImpl() {
       notificationService.notifySuccess({});
       var actualArgs = popSpy.getCall(0).args[0];

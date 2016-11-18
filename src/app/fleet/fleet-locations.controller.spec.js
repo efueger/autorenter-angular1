@@ -61,7 +61,7 @@ describe('fa.fleet.FleetLocationsController > ', function describeImpl() {
     });
   });
 
-  describe('delete', function deleteImpl() {
+  describe('delete', function deleteTest() {
     beforeEach(function beforeEachImpl() {
       controller.populateGrid = function populateGrid() {
       };

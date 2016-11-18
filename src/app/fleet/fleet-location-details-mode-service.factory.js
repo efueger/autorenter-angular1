@@ -3,28 +3,31 @@
 var fleet = require('./fleet.module');
 
 var fleetLocationDetailsModeService = function fleetLocationDetailsModeService($state) {
+  var fleetLocationDetailsModeServiceInstance;
+
   function getNavigationStateName() {
     return $state.current.name;
   }
 
   function isAddMode() {
-    return getNavigationStateName() === 'fleet.locations.add';
+    return fleetLocationDetailsModeServiceInstance.getNavigationStateName() === 'fleet.locations.add';
   }
 
   function isEditMode() {
-    return getNavigationStateName() === 'fleet.locations.edit';
+    return fleetLocationDetailsModeServiceInstance.getNavigationStateName() === 'fleet.locations.edit';
   }
 
   function isViewMode() {
-    return getNavigationStateName() === 'fleet.locations.view';
+    return fleetLocationDetailsModeServiceInstance.getNavigationStateName() === 'fleet.locations.view';
   }
 
-  return {
+  fleetLocationDetailsModeServiceInstance = {
     isAddMode: isAddMode,
     isEditMode: isEditMode,
     isViewMode: isViewMode,
     getNavigationStateName: getNavigationStateName
   };
+  return fleetLocationDetailsModeServiceInstance;
 };
 
 fleetLocationDetailsModeService.$inject = [

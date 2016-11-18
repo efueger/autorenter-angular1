@@ -45,7 +45,7 @@ describe('fa.logging.logApi > ', function describeImpl() {
     });
   });
 
-  describe('on fail', function onFail() {
+  describe('on fail', function onFailTest() {
     var READY_STATE = 4;
     var SERVER_ERROR_CODE = 500;
 
