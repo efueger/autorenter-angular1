@@ -4,14 +4,11 @@ var app = require('./app.module');
 
 function routeConfig($stateProvider, $urlRouterProvider) {
   $stateProvider
-  .state('student', {
+  .state('main', {
     url: '/',
-    templateUrl: 'app/students.html',
-    controller: 'StudentsController',
-    controllerAs: 'studentsController',
-    ncyBreadcrumb: {
-      label: 'students'
-    }
+    templateUrl: 'app/main.html',
+    controller: 'MainController',
+    controllerAs: 'vm'
   });
 
   $urlRouterProvider.otherwise('/');
