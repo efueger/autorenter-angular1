@@ -2,7 +2,7 @@
 
 var admin = require('./admin.module');
 
-require('./admin.config');
+require('./admin.route.config');
 require('./admin-users.controller');
 require('./admin-branding.controller');
 
