@@ -7,7 +7,7 @@ var fleetLocationViewStrategy = function fleetLocationViewStrategy(fleetLocation
     return fleetLocationEditStrategy.getInitializationData(locationId)
       .then(function setResult(initializationData) {
         initializationData.states.forEach(function setState(stateElement) {
-          if (stateElement.stateCode === initializationData.location.state) {
+          if (stateElement.stateCode === initializationData.location.stateCode) {
             initializationData.selectedState = stateElement;
           }
         });

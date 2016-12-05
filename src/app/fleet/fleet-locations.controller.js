@@ -66,7 +66,7 @@ function FleetLocationsController(locationsDataService, confirmationService, str
       },
       {
         displayName: 'State',
-        field: 'state',
+        field: 'stateCode',
         type: 'string',
         enableSorting: false,
       },
