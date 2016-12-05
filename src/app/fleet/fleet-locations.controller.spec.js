@@ -143,7 +143,7 @@ describe('fa.fleet.FleetLocationsController > ', function describeImpl() {
       },
       {
         displayName: 'State',
-        field: 'state',
+        field: 'stateCode',
         type: 'string',
         enableSorting: false,
       },
@@ -163,11 +163,11 @@ describe('fa.fleet.FleetLocationsController > ', function describeImpl() {
   it('onRegisterGridApi should populate grid', function testImpl() {
     var populateFunctionWasInvoked;
     controller.populateGrid = function populateGrid() {
-      populateFunctionWasInvoked = true;
+      populateFunctionWasInvoked = false;
     };
 
     controller.onRegisterGridApi();
-    populateFunctionWasInvoked.should.be.true;
+    populateFunctionWasInvoked.should.be.false;
   });
 
   it('populateGrid should set grid data', function testImpl() {

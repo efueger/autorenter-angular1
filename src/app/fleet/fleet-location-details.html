@@ -83,7 +83,7 @@
 
         <div class="col-sm-6">
           <select class="form-control"  ng-if="vm.isEditable()"
-                  ng-model="vm.location.state" id="state"
+                  ng-model="vm.location.stateCode" id="state"
                   name="state">
             <option ng-repeat="state in vm.states"
                     value="{{state.stateCode}}">

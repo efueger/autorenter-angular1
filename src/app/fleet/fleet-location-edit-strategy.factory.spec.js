@@ -42,7 +42,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
       name: 'Indianapolis International Airport',
       vehicleCount: 255,
       city: 'Indianapolis',
-      state: 'IN'
+      stateCode: 'IN'
     };
     var expectedResponse = {
       states: states,

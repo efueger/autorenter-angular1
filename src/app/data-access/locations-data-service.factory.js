@@ -11,7 +11,7 @@ var locationsDataService = function locationsDataService($q) {
       name: 'Indianapolis International Airport',
       vehicleCount: 255,
       city: 'Indianapolis',
-      state: 'IN'
+      stateCode: 'IN'
     },
     {
       id: '2',
@@ -19,7 +19,7 @@ var locationsDataService = function locationsDataService($q) {
       name: 'Chicago O\'Hare Airport',
       vehicleCount: 515,
       city: 'Chicago',
-      state: 'IL'
+      stateCode: 'IL'
     }
   ];
 
