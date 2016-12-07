@@ -154,10 +154,11 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
         enableSorting: false,
       },
       {
-        displayName: 'Rent To Own',
+        displayName: 'Rent to Own',
         field: 'isRentToOwn',
         type: 'boolean',
         enableSorting: false,
+        cellTemplate: currentPath + 'fleet-location-vehicles-rent-to-own-column.html'
       },
       {
         displayName: 'Actions',

@@ -26,7 +26,7 @@ var vehiclesDataService = function vehiclesDataService($q) {
           year: 1994,
           miles: 282563,
           color: 'Silver',
-          isRentToOwn: false,
+          isRentToOwn: true,
         }]
     },
     {
@@ -40,7 +40,7 @@ var vehiclesDataService = function vehiclesDataService($q) {
           year: 1996,
           miles: 452303,
           color: 'Black',
-          isRentToOwn: false,
+          isRentToOwn: true,
         },
         {
           id: 'de',
