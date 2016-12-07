@@ -9,6 +9,8 @@ function FleetVehiclesController($q, $state, vehiclesDataService, confirmationSe
 
   self.vehicles;
 
+  self.location;
+
   self.deleteVehicle = function deleteVehicle(vehicle) {
     confirmationService.show(strings.format('Delete vehicle \'{vin}\'?', { vin: vehicle.vin }))
       .then(function deleteIt() {
@@ -21,6 +23,11 @@ function FleetVehiclesController($q, $state, vehiclesDataService, confirmationSe
 
   self.initialize = function initialize() {
     self.configureGrid();
+    self.initializeLocation($state.params.id);
+  };
+
+  self.initializeLocation = function initializeLocation(locationId) { // eslint-disable-line no-unused-vars
+    // TODO: init the location field using the DS.
   };
 
   self.configureGrid = function configureGrid() {
