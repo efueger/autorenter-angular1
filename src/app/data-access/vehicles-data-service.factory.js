@@ -69,12 +69,6 @@ var vehiclesDataService = function vehiclesDataService($q) {
     return deferred.promise;
   }
 
-  function addVehicle(vehicle) {
-    vehicle.id = nextVehicleId++;
-    var deferred = $q.defer();
-    return deferred.promise;
-  }
-
   function addVehicleToLocation(locationId, vehicle) {
     vehicle.id = nextVehicleId++;
     var deferred = $q.defer();
@@ -127,7 +121,6 @@ var vehiclesDataService = function vehiclesDataService($q) {
 
   return {
     getVehicles: getVehicles,
-    addVehicle: addVehicle,
     addVehicleToLocation: addVehicleToLocation,
     getVehicle: getVehicle,
     updateVehicle: updateVehicle,
