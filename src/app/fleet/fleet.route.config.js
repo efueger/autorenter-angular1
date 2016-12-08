@@ -80,7 +80,8 @@ function fleetRouteConfig($stateProvider) {
         }
       },
       ncyBreadcrumb: {
-        label: 'Vehicles'
+        label: 'Vehicles',
+        parent: 'fleet.locations.view'
       },
       parent: 'fleet.locations.list'
     })

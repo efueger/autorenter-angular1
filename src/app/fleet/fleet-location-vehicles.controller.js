@@ -2,7 +2,7 @@
 
 var fleet = require('./fleet.module');
 
-function FleetVehiclesController($q, $state, vehiclesDataService, confirmationService, strings) {
+function FleetVehiclesController($q, $state, vehiclesDataService, locationsDataService, confirmationService, strings) {
   var self = this;
 
   self.gridOptions;
@@ -23,11 +23,24 @@ function FleetVehiclesController($q, $state, vehiclesDataService, confirmationSe
 
   self.initialize = function initialize() {
     self.configureGrid();
-    self.initializeLocation($state.params.id);
+    self.initializeLocation($state.params.id)
+      .then(function init(initializationData) {
+        self.location = initializationData.location;
+      });
   };
 
-  self.initializeLocation = function initializeLocation(locationId) { // eslint-disable-line no-unused-vars
-    // TODO: init the location field using the DS.
+  self.initializeLocation = function initializeLocation(locationId) {
+    var deferred = $q.defer();
+    var initializationData = {};
+    var locationPromise = locationsDataService.getLocation(locationId)
+      .then(function setResult(response) {
+        initializationData.location = response.data;
+      });
+    $q.all([locationPromise])
+      .then(function setResult() {
+        deferred.resolve(initializationData);
+      });
+    return deferred.promise;
   };
 
   self.configureGrid = function configureGrid() {
@@ -120,6 +133,7 @@ FleetVehiclesController.$inject = [
   '$q',
   '$state',
   'vehiclesDataService',
+  'locationsDataService',
   'confirmationService',
   'strings'
 ];

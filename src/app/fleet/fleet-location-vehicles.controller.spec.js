@@ -1,7 +1,9 @@
 describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
   var $q;
+  var $state;
   var $rootScope;
   var vehiclesDataService;
+  var locationsDataService;
   var confirmationService;
   var controller;
 
@@ -9,19 +11,38 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
     id: 'ab',
     vin: '1XKDPB0X04R047346'
   };
+  var location = {
+    id: '1',
+    siteId: 'ind',
+    name: 'Indianapolis International Airport',
+    vehicleCount: 255,
+    city: 'Indianapolis',
+    stateCode: 'IN'
+  };
 
   beforeEach(angular.mock.module('fa.fleet'));
 
-  beforeEach(inject(function injectImpl(_$q_, _$rootScope_, _vehiclesDataService_, _confirmationService_) {
+  beforeEach(inject(function injectImpl(_$q_, _$rootScope_, _$state_, _vehiclesDataService_, _locationsDataService_, _confirmationService_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
+    $state = _$state_;
     vehiclesDataService = _vehiclesDataService_;
+    locationsDataService = _locationsDataService_;
     confirmationService = _confirmationService_;
+
+    $state = {
+      params: {
+        id: '1'
+      }
+    };
+
     angular.mock.inject([
       '$controller',
       function assignController($controller) {
         controller = $controller('FleetVehiclesController', {
+          '$state': $state,
           'vehiclesDataService': vehiclesDataService,
+          'locationsDataService': locationsDataService,
           'confirmationService': confirmationService
         });
       }
@@ -85,6 +106,14 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
   });
 
   describe('initialize', function initializeImpl() {
+    beforeEach(function beforeEachImpl() {
+      var expectedData = [location];
+      controller.getLocation = function getLocation() {
+        var deferred = $q.defer();
+        deferred.resolve({data: expectedData});
+        return deferred.promise;
+      };
+    });
     it('should initialize gridOptions.flatEntityAccess', function testImpl() {
       controller.gridOptions.flatEntityAccess.should.be.true;
     });
@@ -106,6 +135,35 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
       var onRegisterGridApiName = controller.onRegisterGridApi.name;
       controller.gridOptions.onRegisterApi.name.should.equal(onRegisterGridApiName);
     });
+
+    it('sets the correct location', function testImpl() {
+      $rootScope.$apply();
+      controller.location.should.deep.equal(location);
+    });
+  });
+
+  it('initializeLocation returns location data', function testImpl() {
+    var expectedResponse = {
+      location: location
+    };
+    sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {
+      var deferred = $q.defer();
+      if (locationId === location.id) {
+        deferred.resolve({data: location});
+      } else {
+        deferred.reject();
+      }
+      return deferred.promise;
+    });
+
+    var actualResponse;
+    controller.initializeLocation(location.id)
+      .then(function setResponse(response) {
+        actualResponse = response;
+      });
+    $rootScope.$apply();
+
+    actualResponse.should.deep.equal(expectedResponse);
   });
 
   it('getColumnDefs should return expected data', function testImpl() {
