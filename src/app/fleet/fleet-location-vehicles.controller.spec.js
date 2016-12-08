@@ -1,4 +1,4 @@
-describe.skip('fa.fleet.FleetVehiclesController > ', function describeImpl() {
+describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
   var $q;
   var $state;
   var $rootScope;
@@ -34,6 +34,12 @@ describe.skip('fa.fleet.FleetVehiclesController > ', function describeImpl() {
       params: {
         id: '1'
       }
+    };
+
+    locationsDataService.getLocation = function getLocation() {
+      var deferred = $q.defer();
+      deferred.resolve({data: location});
+      return deferred.promise;
     };
 
     angular.mock.inject([
@@ -129,15 +135,21 @@ describe.skip('fa.fleet.FleetVehiclesController > ', function describeImpl() {
     });
 
     it('should initialize self.location', function testImpl() {
-      var expectedData = [location];
-      controller.initializeLocation = function initializeLocation() {
-        var deferred = $q.defer();
-        deferred.resolve({data: expectedData});
-        return deferred.promise;
-      };
       $rootScope.$apply();
       controller.location.should.deep.equal(location);
     });
+  });
+
+  it('initializeLocation initializes self.location', function testImpl() {
+    var expectedLocation = {id: 'abc123'};
+    sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {
+      var deferred = $q.defer();
+      deferred.resolve(locationId === expectedLocation.id ? {data: expectedLocation} : {});
+      return deferred.promise;
+    });
+    controller.initializeLocation(expectedLocation.id);
+    $rootScope.$apply();
+    controller.location.should.deep.equal(expectedLocation);
   });
 
   it('getColumnDefs should return expected data', function testImpl() {
