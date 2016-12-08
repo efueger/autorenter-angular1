@@ -130,7 +130,7 @@ describe.skip('fa.fleet.FleetVehiclesController > ', function describeImpl() {
 
     it('sets the correct location', function testImpl() {
       var expectedData = [location];
-      controller.getLocation = function getLocation() {
+      controller.initializeLocation = function initializeLocation() {
         var deferred = $q.defer();
         deferred.resolve({data: expectedData});
         return deferred.promise;
@@ -138,30 +138,6 @@ describe.skip('fa.fleet.FleetVehiclesController > ', function describeImpl() {
       $rootScope.$apply();
       controller.location.should.deep.equal(location);
     });
-  });
-
-  it('initializeLocation returns location data', function testImpl() {
-    var expectedResponse = {
-      location: location
-    };
-    sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {
-      var deferred = $q.defer();
-      if (locationId === location.id) {
-        deferred.resolve({data: location});
-      } else {
-        deferred.reject();
-      }
-      return deferred.promise;
-    });
-
-    var actualResponse;
-    controller.initializeLocation(location.id)
-      .then(function setResponse(response) {
-        actualResponse = response;
-      });
-    $rootScope.$apply();
-
-    actualResponse.should.deep.equal(expectedResponse);
   });
 
   it('getColumnDefs should return expected data', function testImpl() {
