@@ -128,7 +128,7 @@ describe.skip('fa.fleet.FleetVehiclesController > ', function describeImpl() {
       controller.gridOptions.onRegisterApi.name.should.equal(onRegisterGridApiName);
     });
 
-    it('sets the correct location', function testImpl() {
+    it('should initialize self.location', function testImpl() {
       var expectedData = [location];
       controller.initializeLocation = function initializeLocation() {
         var deferred = $q.defer();
