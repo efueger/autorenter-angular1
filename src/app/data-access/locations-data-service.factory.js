@@ -23,11 +23,50 @@ var locationsDataService = function locationsDataService($q) {
     }
   ];
 
+  var locationVehicles = [
+    {
+      location: {
+        id: '1',
+        siteId: 'ind',
+        name: 'Indianapolis International Airport',
+        vehicleCount: 255,
+        city: 'Indianapolis',
+        stateCode: 'IN'
+      },
+      vehicles: [{id: 'ab'}, {id: 'bc'}]
+    },
+    {
+      location: {
+        id: '2',
+        siteId: 'ord',
+        name: 'Chicago O\'Hare Airport',
+        vehicleCount: 515,
+        city: 'Chicago',
+        stateCode: 'IL'
+      },
+      vehicles: [{id: 'cd'}, {id: 'de'}]
+    }
+  ];
+
   var nextLocationId = 3;
 
   function getLocations() {
     var deferred = $q.defer();
     deferred.resolve({data: locations});
+    return deferred.promise;
+  }
+
+  function getLocationByVehicleId(vehicleId) {
+    var deferred = $q.defer();
+    var locationByVehicle;
+    locationVehicles.forEach(function getVehicles(locationVehicle) {
+      locationVehicle.vehicles.foreach(function matchVehicleId(vehicle) {
+        if (vehicle.id === vehicleId) {
+          locationByVehicle = locationVehicle.location;
+        }
+      });
+    });
+    deferred.resolve({data: locationByVehicle});
     return deferred.promise;
   }
 
@@ -70,6 +109,7 @@ var locationsDataService = function locationsDataService($q) {
 
   return {
     getLocations: getLocations,
+    getLocationByVehicleId: getLocationByVehicleId,
     addLocation: addLocation,
     getLocation: getLocation,
     updateLocation: updateLocation,

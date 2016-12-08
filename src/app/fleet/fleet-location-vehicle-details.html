@@ -1,0 +1,161 @@
+<form name="vehicleForm"
+      ng-submit="vehicleForm.$valid && vm.save()"
+      fa-route-change-confirmation
+      novalidate>
+
+  <div class="panel">
+    <div class="panel-body">
+
+      <div class="form-group row"
+           ng-class="{'has-error': vehicleForm.vin.$invalid && (vehicleForm.$submitted || vehicleForm.vin.$touched)}">
+        <label for="vin" class="col-sm-2 control-label">VIN</label>
+
+        <div class="col-sm-6"
+             ng-init="vinMaxLen='17'">
+          <input class="form-control" ng-if="vm.isEditable()"
+                 ng-model="vm.vehicle.vin" id="vin"
+                 ng-maxlength="{{vinMaxLen}}"
+                 name="vin" required>
+
+          <span class="help-block text-danger" ng-if="vehicleForm.vin.$error.required">
+                                "VIN" is a required field
+                            </span>
+          <span class="help-block text-danger" ng-if="vehicleForm.vin.$error.maxlength">
+                                "VIN" exceeds the maximum length of {{vinMaxLen}}
+                            </span>
+
+          <p id="vinText" class="form-control-static"
+             ng-if="!vm.isEditable()">
+            {{::vm.vehicle.vin}}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="make" class="col-sm-2 control-label">Make</label>
+
+        <div class="col-sm-6">
+          <select class="form-control"  ng-if="vm.isEditable()"
+                  ng-model="vm.vehicle.make" id="make"
+                  name="make">
+            <option ng-repeat="make in vm.makes"
+                    value="{{make}}">
+              {{make}}
+            </option>
+          </select>
+
+          <p id="makeText" class="form-control-static"
+             ng-if="!vm.isEditable()">
+            {{::vm.selectedMake}}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="model" class="col-sm-2 control-label">Model</label>
+
+        <div class="col-sm-6">
+          <select class="form-control"  ng-if="vm.isEditable()"
+                  ng-model="vm.vehicle.model" id="model"
+                  name="model">
+            <option ng-repeat="model in vm.models"
+                    value="{{model}}">
+              {{model}}
+            </option>
+          </select>
+
+          <p id="modelText" class="form-control-static"
+             ng-if="!vm.isEditable()">
+            {{::vm.selectedModel}}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="year" class="col-sm-2 control-label">Year</label>
+
+        <div class="col-sm-6">
+          <select class="form-control"  ng-if="vm.isEditable()"
+                  ng-model="vm.vehicle.year" id="year"
+                  name="year">
+            <option ng-repeat="year in vm.years"
+                    value="{{year}}">
+              {{year}}
+            </option>
+          </select>
+
+          <p id="yearText" class="form-control-static"
+             ng-if="!vm.isEditable()">
+            {{::vm.selectedYear}}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group row"
+           ng-class="{'has-error': vehicleForm.miles.$invalid && (vehicleForm.$submitted || vehicleForm.miles.$touched)}">
+        <label for="miles" class="col-sm-2 control-label">Name</label>
+
+        <div class="col-sm-6"
+             ng-init="numbersOnly='/^\d+$/'">
+          <input class="form-control" ng-if="vm.isEditable()"
+                 ng-model="vm.vehicle.miles" id="miles"
+                 ng-pattern="numbersOnly"
+                 miles="miles">
+
+          <span class="help-block text-danger" ng-if="vehicleForm.miles.$error.pattern">
+                                Miles must be a numerical value
+                            </span>
+
+          <p id="milesText" class="form-control-static"
+             ng-if="!vm.isEditable()">
+            {{::vm.vehicle.miles}}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="color" class="col-sm-2 control-label">State</label>
+
+        <div class="col-sm-6">
+          <select class="form-control"  ng-if="vm.isEditable()"
+                  ng-model="vm.vehicle.color" id="color"
+                  name="color">
+            <option ng-repeat="color in vm.colors"
+                    value="{{color}}">
+              {{color}}
+            </option>
+          </select>
+
+          <p id="colorText" class="form-control-static"
+             ng-if="!vm.isEditable()">
+            {{::vm.selectedColor}}
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="rentToOwn" class="col-sm-2 control-label">Rent to Own</label>
+
+        <div class="col-sm-6">
+          <input type="checkbox"
+                 ng-model="vm.vehicles.isRentToOwn"
+                 name="rentToOwn" ng-if="vm.isEditable()"
+                 id="rentToOwn">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="form-group" ng-if="vm.isEditable()">
+    <div class="col-sm-8 text-right">
+      <button type="submit" class="btn btn-default"
+              ng-disabled="vehicleForm.$invalid">
+        Submit
+      </button>
+      <button type="button" class="btn btn-default" ui-sref="fleet.locations.vehicles">Cancel</button>
+    </div>
+  </div>
+
+</form>
+

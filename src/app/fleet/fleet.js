@@ -14,5 +14,9 @@ require('./fleet-location-edit-strategy.factory');
 require('./fleet-location-view-strategy.factory');
 require('./fleet-location-strategy-factory.factory');
 require('./fleet-location-details-mode-service.factory');
+require('./fleet-location-vehicle-details.controller');
+require('./fleet-location-vehicle-details-mode-service.factory');
+require('./fleet-location-vehicle-edit-strategy.factory');
+require('./fleet-location-vehicle-view-strategy.factory');
 
 module.exports = fleet;

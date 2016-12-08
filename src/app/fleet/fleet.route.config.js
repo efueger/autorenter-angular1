@@ -85,6 +85,20 @@ function fleetRouteConfig($stateProvider) {
       },
       parent: 'fleet.locations.list'
     })
+    .state('fleet.locations.vehicles.view', {
+      url: '/{id}/view',
+      views: {
+        '@': {
+          templateUrl: 'app/fleet-location-vehicle-details.html',
+          controller: 'FleetLocationVehicleDetailsController',
+          controllerAs: 'vm'
+        }
+      },
+      ncyBreadcrumb: {
+        label: '{{::vm.vehicle.vin}}'
+      },
+      parent: 'fleet.locations.vehicles'
+    })
     .state('fleet.reports', {
       abstract: true
     })
