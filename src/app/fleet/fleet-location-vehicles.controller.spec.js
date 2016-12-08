@@ -106,14 +106,6 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
   });
 
   describe('initialize', function initializeImpl() {
-    beforeEach(function beforeEachImpl() {
-      var expectedData = [location];
-      controller.getLocation = function getLocation() {
-        var deferred = $q.defer();
-        deferred.resolve({data: expectedData});
-        return deferred.promise;
-      };
-    });
     it('should initialize gridOptions.flatEntityAccess', function testImpl() {
       controller.gridOptions.flatEntityAccess.should.be.true;
     });
@@ -137,6 +129,12 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
     });
 
     it('sets the correct location', function testImpl() {
+      var expectedData = [location];
+      controller.getLocation = function getLocation() {
+        var deferred = $q.defer();
+        deferred.resolve({data: expectedData});
+        return deferred.promise;
+      };
       $rootScope.$apply();
       controller.location.should.deep.equal(location);
     });
