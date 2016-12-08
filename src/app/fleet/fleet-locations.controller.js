@@ -2,7 +2,7 @@
 
 var fleet = require('./fleet.module');
 
-function FleetLocationsController(locationsDataService, confirmationService, strings) {
+function FleetLocationsController(generalConfig, locationsDataService, confirmationService, strings) {
   var self = this;
 
   self.gridOptions;
@@ -32,7 +32,7 @@ function FleetLocationsController(locationsDataService, confirmationService, str
   };
 
   self.getColumnDefs = function getColumnDefs() {
-    var currentPath = 'app/';
+    var currentPath = generalConfig.sourcePathRoot;
     return [
       {
         displayName: 'Site ID',
@@ -95,6 +95,7 @@ function FleetLocationsController(locationsDataService, confirmationService, str
 }
 
 FleetLocationsController.$inject = [
+  'generalConfig',
   'locationsDataService',
   'confirmationService',
   'strings'

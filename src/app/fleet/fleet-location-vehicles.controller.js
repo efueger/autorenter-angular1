@@ -2,7 +2,12 @@
 
 var fleet = require('./fleet.module');
 
-function FleetVehiclesController($q, $state, vehiclesDataService, locationsDataService, confirmationService, strings) {
+function FleetVehiclesController(generalConfig,
+                                 $state,
+                                 vehiclesDataService,
+                                 locationsDataService,
+                                 confirmationService,
+                                 strings) {
   var self = this;
 
   self.gridOptions;
@@ -44,7 +49,7 @@ function FleetVehiclesController($q, $state, vehiclesDataService, locationsDataS
   };
 
   self.getColumnDefs = function getColumnDefs() {
-    var currentPath = 'app/';
+    var currentPath = generalConfig.sourcePathRoot;
     return [
       {
         displayName: 'VIN',
@@ -120,7 +125,7 @@ function FleetVehiclesController($q, $state, vehiclesDataService, locationsDataS
 }
 
 FleetVehiclesController.$inject = [
-  '$q',
+  'generalConfig',
   '$state',
   'vehiclesDataService',
   'locationsDataService',
