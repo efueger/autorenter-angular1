@@ -1,4 +1,4 @@
-describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
+describe.skip('fa.fleet.FleetVehiclesController > ', function describeImpl() {
   var $q;
   var $state;
   var $rootScope;
