@@ -23,24 +23,14 @@ function FleetVehiclesController($q, $state, vehiclesDataService, locationsDataS
 
   self.initialize = function initialize() {
     self.configureGrid();
-    self.initializeLocation($state.params.id)
-      .then(function init(initializationData) {
-        self.location = initializationData.location;
-      });
+    self.initializeLocation($state.params.id);
   };
 
   self.initializeLocation = function initializeLocation(locationId) {
-    var deferred = $q.defer();
-    var initializationData = {};
-    var locationPromise = locationsDataService.getLocation(locationId)
-      .then(function setResult(response) {
-        initializationData.location = response.data;
+    locationsDataService.getLocation(locationId)
+      .then(function setLocation(response) {
+        self.location = response.data;
       });
-    $q.all([locationPromise])
-      .then(function setResult() {
-        deferred.resolve(initializationData);
-      });
-    return deferred.promise;
   };
 
   self.configureGrid = function configureGrid() {
