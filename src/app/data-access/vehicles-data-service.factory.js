@@ -9,7 +9,7 @@ var vehiclesDataService = function vehiclesDataService($q) {
       locationId: '1',
       vehicles: [
         {
-          id: 'ab',
+          id: 11,
           vin: '1XKDPB0X04R047346',
           make: 'Toyota',
           model: 'Tercel',
@@ -19,7 +19,7 @@ var vehiclesDataService = function vehiclesDataService($q) {
           isRentToOwn: false,
         },
         {
-          id: 'bc',
+          id: 12,
           vin: '1HVLPHXM4GHA52708',
           make: 'Honda',
           model: 'Civic',
@@ -33,7 +33,7 @@ var vehiclesDataService = function vehiclesDataService($q) {
       locationId: '2',
       vehicles: [
         {
-          id: 'cd',
+          id: 13,
           vin: '2XKDPB0X04R047346',
           make: 'Chevrolet',
           model: 'Impala',
@@ -43,7 +43,7 @@ var vehiclesDataService = function vehiclesDataService($q) {
           isRentToOwn: true,
         },
         {
-          id: 'de',
+          id: 14,
           vin: '2HVLPHXM4GHA52708',
           make: 'Ford',
           model: 'Pinto',
@@ -55,7 +55,7 @@ var vehiclesDataService = function vehiclesDataService($q) {
     }
   ];
 
-  var nextVehicleId = 5;
+  var nextVehicleId = 15;
 
   function getVehicles(locationId) {
     var deferred = $q.defer();
@@ -86,7 +86,7 @@ var vehiclesDataService = function vehiclesDataService($q) {
     var vehicle;
     locationVehicles.forEach(function locationVehicleEach(locationVehicleElement) {
       locationVehicleElement.vehicles.forEach(function findVehicle(vehicleElement) {
-        if (vehicleElement.id + '' === vehicleId) {
+        if (vehicleElement.id + '' === vehicleId + '') {
           vehicle = vehicleElement;
         }
       });

@@ -28,23 +28,15 @@ var locationsDataService = function locationsDataService($q) {
       location: {
         id: '1',
         siteId: 'ind',
-        name: 'Indianapolis International Airport',
-        vehicleCount: 255,
-        city: 'Indianapolis',
-        stateCode: 'IN'
       },
-      vehicles: [{id: 'ab'}, {id: 'bc'}]
+      vehicles: [{id: 11}, {id: 12}]
     },
     {
       location: {
         id: '2',
         siteId: 'ord',
-        name: 'Chicago O\'Hare Airport',
-        vehicleCount: 515,
-        city: 'Chicago',
-        stateCode: 'IL'
       },
-      vehicles: [{id: 'cd'}, {id: 'de'}]
+      vehicles: [{id: 13}, {id: 14}]
     }
   ];
 
@@ -61,7 +53,7 @@ var locationsDataService = function locationsDataService($q) {
     var locationByVehicle;
     locationVehicles.forEach(function getVehicles(locationVehicle) {
       locationVehicle.vehicles.forEach(function matchVehicleId(vehicle) {
-        if (vehicle.id === vehicleId) {
+        if (vehicle.id  === vehicleId) {
           locationByVehicle = locationVehicle.location;
         }
       });
