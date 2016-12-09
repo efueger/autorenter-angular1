@@ -36,6 +36,12 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
       }
     };
 
+    locationsDataService.getLocation = function getLocation() {
+      var deferred = $q.defer();
+      deferred.resolve({data: location});
+      return deferred.promise;
+    };
+
     angular.mock.inject([
       '$controller',
       function assignController($controller) {
@@ -128,40 +134,22 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
       controller.gridOptions.onRegisterApi.name.should.equal(onRegisterGridApiName);
     });
 
-    it('sets the correct location', function testImpl() {
-      var expectedData = [location];
-      controller.getLocation = function getLocation() {
-        var deferred = $q.defer();
-        deferred.resolve({data: expectedData});
-        return deferred.promise;
-      };
+    it('should initialize self.location', function testImpl() {
       $rootScope.$apply();
       controller.location.should.deep.equal(location);
     });
   });
 
-  it('initializeLocation returns location data', function testImpl() {
-    var expectedResponse = {
-      location: location
-    };
+  it('initializeLocation initializes self.location', function testImpl() {
+    var expectedLocation = {id: 'abc123'};
     sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {
       var deferred = $q.defer();
-      if (locationId === location.id) {
-        deferred.resolve({data: location});
-      } else {
-        deferred.reject();
-      }
+      deferred.resolve(locationId === expectedLocation.id ? {data: expectedLocation} : {});
       return deferred.promise;
     });
-
-    var actualResponse;
-    controller.initializeLocation(location.id)
-      .then(function setResponse(response) {
-        actualResponse = response;
-      });
+    controller.initializeLocation(expectedLocation.id);
     $rootScope.$apply();
-
-    actualResponse.should.deep.equal(expectedResponse);
+    controller.location.should.deep.equal(expectedLocation);
   });
 
   it('getColumnDefs should return expected data', function testImpl() {

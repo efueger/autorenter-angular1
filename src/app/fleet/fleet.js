@@ -5,10 +5,9 @@ require('angular-ui-grid');
 var fleet = require('./fleet.module');
 
 require('./fleet.route.config');
+
 require('./fleet-locations.controller');
 require('./fleet-location-vehicles.controller');
-
-require('./fleet-reports.controller');
 
 require('./fleet-location-add-strategy.factory');
 
@@ -26,5 +25,7 @@ require('./fleet-location-vehicle-details-mode-service.factory');
 
 require('./fleet-location-view-strategy.factory');
 require('./fleet-location-vehicle-view-strategy.factory');
+
+require('./fleet-reports.controller');
 
 module.exports = fleet;

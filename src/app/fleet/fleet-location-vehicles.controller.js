@@ -2,7 +2,12 @@
 
 var fleet = require('./fleet.module');
 
-function FleetVehiclesController($q, $state, vehiclesDataService, locationsDataService, confirmationService, strings) {
+function FleetVehiclesController(generalConfig,
+                                 $state,
+                                 vehiclesDataService,
+                                 locationsDataService,
+                                 confirmationService,
+                                 strings) {
   var self = this;
 
   self.gridOptions;
@@ -23,24 +28,14 @@ function FleetVehiclesController($q, $state, vehiclesDataService, locationsDataS
 
   self.initialize = function initialize() {
     self.configureGrid();
-    self.initializeLocation($state.params.id)
-      .then(function init(initializationData) {
-        self.location = initializationData.location;
-      });
+    self.initializeLocation($state.params.id);
   };
 
   self.initializeLocation = function initializeLocation(locationId) {
-    var deferred = $q.defer();
-    var initializationData = {};
-    var locationPromise = locationsDataService.getLocation(locationId)
-      .then(function setResult(response) {
-        initializationData.location = response.data;
+    locationsDataService.getLocation(locationId)
+      .then(function setLocation(response) {
+        self.location = response.data;
       });
-    $q.all([locationPromise])
-      .then(function setResult() {
-        deferred.resolve(initializationData);
-      });
-    return deferred.promise;
   };
 
   self.configureGrid = function configureGrid() {
@@ -54,7 +49,7 @@ function FleetVehiclesController($q, $state, vehiclesDataService, locationsDataS
   };
 
   self.getColumnDefs = function getColumnDefs() {
-    var currentPath = 'app/';
+    var currentPath = generalConfig.sourcePathRoot;
     return [
       {
         displayName: 'VIN',
@@ -130,7 +125,7 @@ function FleetVehiclesController($q, $state, vehiclesDataService, locationsDataS
 }
 
 FleetVehiclesController.$inject = [
-  '$q',
+  'generalConfig',
   '$state',
   'vehiclesDataService',
   'locationsDataService',

@@ -40,13 +40,13 @@
                   name="make">
             <option ng-repeat="make in vm.makes"
                     value="{{make}}">
-              {{make}}
+              {{vm.vehicle.make}}
             </option>
           </select>
 
           <p id="makeText" class="form-control-static"
              ng-if="!vm.isEditable()">
-            {{::vm.selectedMake}}
+            {{::vm.vehicle.make}}
           </p>
         </div>
       </div>
@@ -60,13 +60,13 @@
                   name="model">
             <option ng-repeat="model in vm.models"
                     value="{{model}}">
-              {{model}}
+              {{vm.vehicle.model}}}
             </option>
           </select>
 
           <p id="modelText" class="form-control-static"
              ng-if="!vm.isEditable()">
-            {{::vm.selectedModel}}
+            {{::vm.vehicle.model}}
           </p>
         </div>
       </div>
@@ -86,14 +86,14 @@
 
           <p id="yearText" class="form-control-static"
              ng-if="!vm.isEditable()">
-            {{::vm.selectedYear}}
+            {{::vm.vehicle.year}}
           </p>
         </div>
       </div>
 
       <div class="form-group row"
            ng-class="{'has-error': vehicleForm.miles.$invalid && (vehicleForm.$submitted || vehicleForm.miles.$touched)}">
-        <label for="miles" class="col-sm-2 control-label">Name</label>
+        <label for="miles" class="col-sm-2 control-label">Miles</label>
 
         <div class="col-sm-6"
              ng-init="numbersOnly='/^\d+$/'">
@@ -122,13 +122,13 @@
                   name="color">
             <option ng-repeat="color in vm.colors"
                     value="{{color}}">
-              {{color}}
+              {{vehicle.color}}
             </option>
           </select>
 
           <p id="colorText" class="form-control-static"
              ng-if="!vm.isEditable()">
-            {{::vm.selectedColor}}
+            {{::vm.vehicle.color}}
           </p>
         </div>
       </div>
@@ -139,7 +139,7 @@
         <div class="col-sm-6">
           <input type="checkbox"
                  ng-model="vm.vehicles.isRentToOwn"
-                 name="rentToOwn" ng-if="vm.isEditable()"
+                 name="rentToOwn" ng-disabled="!vm.isEditable()"
                  id="rentToOwn">
         </div>
       </div>

@@ -1,26 +1,22 @@
-describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl() {
+describe('fa.fleet.fleetLocationVehicleViewStrategy > ', function describeImpl() {
   var $q;
   var $rootScope;
-  var vehiclesDataService;
-  var locationsDataService;
   var fleetLocationVehicleEditStrategy;
+  var fleetLocationVehicleViewStrategy;
 
   beforeEach(angular.mock.module('fa.fleet'));
 
   beforeEach(inject(function injectImpl(_$q_,
                                         _$rootScope_,
-                                        _$state_,
-                                        _vehiclesDataService_,
-                                        _locationsDataService_,
-                                        _fleetLocationVehicleEditStrategy_) {
+                                        _fleetLocationVehicleEditStrategy_,
+                                        _fleetLocationVehicleViewStrategy_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
-    vehiclesDataService = _vehiclesDataService_;
-    locationsDataService = _locationsDataService_;
     fleetLocationVehicleEditStrategy = _fleetLocationVehicleEditStrategy_;
+    fleetLocationVehicleViewStrategy = _fleetLocationVehicleViewStrategy_;
   }));
 
-  it('getInitializationData returns vehicle and location data', function testImpl() {
+  it('getInitializationData returns state, location, and selectedState data', function testImpl() {
     var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
     var vehicle = {
       id: 'ab',
@@ -45,19 +41,22 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
       location: location,
       years: years
     };
-    sinon.stub(vehiclesDataService, 'getVehicle', function getVehicle() {
+    sinon.stub(fleetLocationVehicleEditStrategy, 'getInitializationData', function getInitializationData(vehicleId) {
       var deferred = $q.defer();
-      deferred.resolve({data: vehicle});
-      return deferred.promise;
-    });
-    sinon.stub(locationsDataService, 'getLocationByVehicleId', function getLocationByVehicleId() {
-      var deferred = $q.defer();
-      deferred.resolve({data: location});
+      if (vehicleId === vehicle.id) {
+        deferred.resolve({
+          vehicle: vehicle,
+          location: location,
+          years: years
+        });
+      } else {
+        deferred.reject();
+      }
       return deferred.promise;
     });
 
     var actualResponse;
-    fleetLocationVehicleEditStrategy.getInitializationData(vehicle.id)
+    fleetLocationVehicleViewStrategy.getInitializationData(vehicle.id)
       .then(function setResponse(response) {
         actualResponse = response;
       });
