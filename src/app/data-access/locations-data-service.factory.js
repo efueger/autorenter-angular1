@@ -60,7 +60,7 @@ var locationsDataService = function locationsDataService($q) {
     var deferred = $q.defer();
     var locationByVehicle;
     locationVehicles.forEach(function getVehicles(locationVehicle) {
-      locationVehicle.vehicles.foreach(function matchVehicleId(vehicle) {
+      locationVehicle.vehicles.forEach(function matchVehicleId(vehicle) {
         if (vehicle.id === vehicleId) {
           locationByVehicle = locationVehicle.location;
         }
