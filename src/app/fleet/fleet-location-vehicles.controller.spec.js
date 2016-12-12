@@ -8,7 +8,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
   var controller;
 
   var vehicle = {
-    id: 'ab',
+    id: 1,
     vin: '1XKDPB0X04R047346'
   };
   var location = {
@@ -230,7 +230,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
   it('populateGrid should set grid data', function testImpl() {
     var vehicles = [
       {
-        id: 'ab',
+        id: 1,
         vin: '1XKDPB0X04R047346',
         make: 'Toyota',
         model: 'Tercel',
@@ -240,7 +240,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
         rentToOwn: false,
       },
       {
-        id: 'bc',
+        id: 2,
         vin: '1HVLPHXM4GHA52708',
         make: 'Honda',
         model: 'Civic',

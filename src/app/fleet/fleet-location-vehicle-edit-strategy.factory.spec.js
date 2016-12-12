@@ -23,7 +23,7 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
   it('getInitializationData returns vehicle and location data', function testImpl() {
     var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
     var vehicle = {
-      id: 'ab',
+      id: 1,
       vin: '1XKDPB0X04R047346',
       make: 'Toyota',
       model: 'Tercel',
@@ -50,14 +50,14 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
       deferred.resolve({data: vehicle});
       return deferred.promise;
     });
-    sinon.stub(locationsDataService, 'getLocationByVehicleId', function getLocationByVehicleId() {
+    sinon.stub(locationsDataService, 'getLocation', function getLocation() {
       var deferred = $q.defer();
       deferred.resolve({data: location});
       return deferred.promise;
     });
 
     var actualResponse;
-    fleetLocationVehicleEditStrategy.getInitializationData(vehicle.id)
+    fleetLocationVehicleEditStrategy.getInitializationData(vehicle.id, location.id)
       .then(function setResponse(response) {
         actualResponse = response;
       });

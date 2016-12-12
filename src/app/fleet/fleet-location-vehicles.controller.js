@@ -44,7 +44,8 @@ function FleetVehiclesController(generalConfig,
       enableColumnResizing: true,
       enableColumnMenus: false,
       columnDefs: self.getColumnDefs(),
-      onRegisterApi: self.onRegisterGridApi.bind(self)
+      onRegisterApi: self.onRegisterGridApi.bind(self),
+      appScopeProvider: self
     };
   };
 

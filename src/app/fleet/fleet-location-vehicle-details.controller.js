@@ -13,12 +13,10 @@ function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrat
 
   self.initialize =  function initialize() {
     implementationStrategy = fleetLocationVehicleStrategyFactory.getStrategy();
-    implementationStrategy.getInitializationData(parseInt($state.params.vehicleId, 10))
+    implementationStrategy.getInitializationData(parseInt($state.params.vehicleId, 10), $state.params.id)
       .then(function init(initializationData) {
         self.location = initializationData.location;
-        console.log(self.location);
         self.vehicle = initializationData.vehicle;
-        console.log(self.vehicle);
       });
   };
 
@@ -27,7 +25,7 @@ function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrat
   };
 
   self.save = function save() {
-    implementationStrategy.save(self.location);
+    implementationStrategy.save(self.vehicle);
   };
 
   self.initialize();

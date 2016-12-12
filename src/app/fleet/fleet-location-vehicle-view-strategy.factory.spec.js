@@ -19,7 +19,7 @@ describe('fa.fleet.fleetLocationVehicleViewStrategy > ', function describeImpl()
   it('getInitializationData returns state, location, and selectedState data', function testImpl() {
     var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
     var vehicle = {
-      id: 'ab',
+      id: 1,
       vin: '1XKDPB0X04R047346',
       make: 'Toyota',
       model: 'Tercel',

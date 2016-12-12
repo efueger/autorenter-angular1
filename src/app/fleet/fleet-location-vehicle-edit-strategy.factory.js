@@ -13,7 +13,7 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
     return deferred.promise;
   }
 
-  function getInitializationData(vehicleId) {
+  function getInitializationData(vehicleId, locationId) {
     var deferred = $q.defer();
     var initializationData = {};
 
@@ -21,7 +21,7 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
       .then(function setResult(response) {
         initializationData.vehicle = response.data;
       });
-    var locationPromise = locationsDataService.getLocationByVehicleId(vehicleId)
+    var locationPromise = locationsDataService.getLocation(locationId)
       .then(function setResult(response) {
         initializationData.location = response.data;
       });
