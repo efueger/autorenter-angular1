@@ -4,7 +4,7 @@ var configModule = require('./config.module');
 
 var configData = {
   generalConfig: {
-    apiUrl: 'http://192.168.99.100:3000/',
+    apiUrl: 'http://127.0.0.1:3000/',
     sourcePathRoot: 'app/'
   }
 };

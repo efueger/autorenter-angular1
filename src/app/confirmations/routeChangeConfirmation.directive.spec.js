@@ -1,3 +1,5 @@
+require('./routeChangeConfirmation.directive');
+
 describe('fa.confirmations.faRouteChangeConfirmation > ', function describeImpl() {
   var $rootScope;
   var confirmationService;

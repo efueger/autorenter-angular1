@@ -1,6 +1,11 @@
 'use strict';
 
 var fleet = require('./fleet.module');
+var fleetHeaderTemplate = require('./fleet.header.html');
+var fleetLocationsTemplate = require('./fleet-locations.html');
+var fleetLocationDetailsTemplate = require('./fleet-location-details.html');
+var fleetLocationVehiclesTemplate = require('./fleet-location-vehicles.html');
+var fleetReportsTemplate = require('./fleet-reports.html');
 
 function fleetRouteConfig($stateProvider) {
   $stateProvider
@@ -8,7 +13,7 @@ function fleetRouteConfig($stateProvider) {
       abstract: true,
       views: {
         'moduleHeader@': {
-          templateUrl: 'app/fleet.header.html'
+          template: fleetHeaderTemplate
         }
       }
     })
@@ -19,7 +24,7 @@ function fleetRouteConfig($stateProvider) {
       url: '/fleet/locations',
       views: {
         '@': {
-          templateUrl: 'app/fleet-locations.html',
+          template: fleetLocationsTemplate,
           controller: 'FleetLocationsController',
           controllerAs: 'vm'
         }
@@ -32,7 +37,7 @@ function fleetRouteConfig($stateProvider) {
       url: '/add',
       views: {
         '@': {
-          templateUrl: 'app/fleet-location-details.html',
+          template: fleetLocationDetailsTemplate,
           controller: 'FleetLocationDetailsController',
           controllerAs: 'vm'
         }
@@ -46,7 +51,7 @@ function fleetRouteConfig($stateProvider) {
       url: '/{locationId}/view',
       views: {
         '@': {
-          templateUrl: 'app/fleet-location-details.html',
+          template: fleetLocationDetailsTemplate,
           controller: 'FleetLocationDetailsController',
           controllerAs: 'vm'
         }
@@ -60,7 +65,7 @@ function fleetRouteConfig($stateProvider) {
       url: '/{locationId}/edit',
       views: {
         '@': {
-          templateUrl: 'app/fleet-location-details.html',
+          template: fleetLocationDetailsTemplate,
           controller: 'FleetLocationDetailsController',
           controllerAs: 'vm'
         }
@@ -74,7 +79,7 @@ function fleetRouteConfig($stateProvider) {
       url: '/{locationId}/vehicles',
       views: {
         '@': {
-          templateUrl: 'app/fleet-location-vehicles.html',
+          template: fleetLocationVehiclesTemplate,
           controller: 'FleetVehiclesController',
           controllerAs: 'vm'
         }
@@ -120,7 +125,7 @@ function fleetRouteConfig($stateProvider) {
       url: '/fleet/reports',
       views: {
         '@': {
-          templateUrl: 'app/fleet-reports.html',
+          template: fleetReportsTemplate,
           controller: 'FleetReportsController',
           controllerAs: 'vm'
         }

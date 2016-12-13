@@ -1,3 +1,5 @@
+require('./exception-handler.factory');
+
 describe('fa.errorHandling.$exceptionHandler > ', function describeImpl() {
   var exceptionHandler;
   var notificationService;

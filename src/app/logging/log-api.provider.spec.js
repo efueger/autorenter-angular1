@@ -1,3 +1,5 @@
+require('./log-api.provider');
+
 describe('fa.logging.logApi > ', function describeImpl() {
   var generalConfig;
   var logApiProvider;
