@@ -8,9 +8,10 @@ var singleRun = !args.watch;
 // use phantomjs in watch mode
 var browser = 'PhantomJS';
 var files = [unitTestEntry];
-var include = [path.resolve('./source')];
+var include = [path.resolve('./src')];
 
 var preLoaders = [
+  {test: /\.js$/, loader: 'eslint', include: include, exclude: /node_modules/},
   // Process all non-test code with Isparta
   {test: /\.js$/, loader: 'isparta', include: include, exclude: /\.spec\.js$/}
 ];
