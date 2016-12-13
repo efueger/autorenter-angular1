@@ -1,3 +1,7 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
 require('./routeChangeConfirmation.directive');
 
 describe('fa.confirmations.faRouteChangeConfirmation > ', function describeImpl() {
