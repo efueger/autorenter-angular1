@@ -78,7 +78,7 @@ var config = {
     preLoaders: [
       {
         test: /\.js$/,
-        loader: "eslint",
+        loader: 'eslint',
         exclude: /node_modules/
       }
     ],

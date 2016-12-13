@@ -11,7 +11,6 @@ var files = [unitTestEntry];
 var include = [path.resolve('./src')];
 
 var preLoaders = [
-  {test: /\.js$/, loader: 'eslint', include: include, exclude: /node_modules/},
   // Process all non-test code with Isparta
   {test: /\.js$/, loader: 'isparta', include: include, exclude: /\.spec\.js$/}
 ];
