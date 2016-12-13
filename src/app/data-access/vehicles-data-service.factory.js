@@ -9,21 +9,21 @@ var vehiclesDataService = function vehiclesDataService($q) {
       locationId: '1',
       vehicles: [
         {
-          id: 'ab',
+          id: 11,
           vin: '1XKDPB0X04R047346',
           make: 'Toyota',
           model: 'Tercel',
-          year: 1990,
+          year: 2012,
           miles: 452303,
           color: 'Gold',
           isRentToOwn: false,
         },
         {
-          id: 'bc',
+          id: 12,
           vin: '1HVLPHXM4GHA52708',
           make: 'Honda',
           model: 'Civic',
-          year: 1994,
+          year: 2013,
           miles: 282563,
           color: 'Silver',
           isRentToOwn: true,
@@ -33,21 +33,21 @@ var vehiclesDataService = function vehiclesDataService($q) {
       locationId: '2',
       vehicles: [
         {
-          id: 'cd',
+          id: 13,
           vin: '2XKDPB0X04R047346',
           make: 'Chevrolet',
           model: 'Impala',
-          year: 1996,
+          year: 2014,
           miles: 452303,
           color: 'Black',
           isRentToOwn: true,
         },
         {
-          id: 'de',
+          id: 14,
           vin: '2HVLPHXM4GHA52708',
           make: 'Ford',
           model: 'Pinto',
-          year: 1973,
+          year: 2015,
           miles: 282563,
           color: 'Orange',
           isRentToOwn: false,
@@ -55,7 +55,7 @@ var vehiclesDataService = function vehiclesDataService($q) {
     }
   ];
 
-  var nextVehicleId = 5;
+  var nextVehicleId = 15;
 
   function getVehicles(locationId) {
     var deferred = $q.defer();
@@ -86,7 +86,7 @@ var vehiclesDataService = function vehiclesDataService($q) {
     var vehicle;
     locationVehicles.forEach(function locationVehicleEach(locationVehicleElement) {
       locationVehicleElement.vehicles.forEach(function findVehicle(vehicleElement) {
-        if (vehicleElement.id + '' === vehicleId) {
+        if (vehicleElement.id + '' === vehicleId + '') {
           vehicle = vehicleElement;
         }
       });

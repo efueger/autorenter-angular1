@@ -31,7 +31,7 @@ function FleetVehiclesController(generalConfig,
 
   self.initialize = function initialize() {
     self.configureGrid();
-    self.initializeLocation($state.params.id);
+    self.initializeLocation($state.params.locationId);
   };
 
   self.initializeLocation = function initializeLocation(locationId) {
@@ -47,7 +47,8 @@ function FleetVehiclesController(generalConfig,
       enableColumnResizing: true,
       enableColumnMenus: false,
       columnDefs: self.getColumnDefs(),
-      onRegisterApi: self.onRegisterGridApi.bind(self)
+      onRegisterApi: self.onRegisterGridApi.bind(self),
+      appScopeProvider: self
     };
   };
 
@@ -117,7 +118,7 @@ function FleetVehiclesController(generalConfig,
   };
 
   self.populateGrid = function populateGrid() {
-    vehiclesDataService.getVehicles($state.params.id)
+    vehiclesDataService.getVehicles($state.params.locationId)
       .then(function assignData(response) {
         self.gridOptions.data = response.data;
       });
