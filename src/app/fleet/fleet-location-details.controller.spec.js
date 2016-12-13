@@ -50,7 +50,7 @@ describe('fa.fleet.FleetLocationDetailsController > ', function describeImpl() {
 
     $state = {
       params: {
-        id: navigationStateId
+        locationId: navigationStateId
       }
     };
 

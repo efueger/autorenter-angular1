@@ -43,7 +43,7 @@ function fleetRouteConfig($stateProvider) {
       parent: 'fleet.locations.list'
     })
     .state('fleet.locations.view', {
-      url: '/{id}/view',
+      url: '/{locationId}/view',
       views: {
         '@': {
           templateUrl: 'app/fleet-location-details.html',
@@ -57,7 +57,7 @@ function fleetRouteConfig($stateProvider) {
       parent: 'fleet.locations.list'
     })
     .state('fleet.locations.edit', {
-      url: '/{id}/edit',
+      url: '/{locationId}/edit',
       views: {
         '@': {
           templateUrl: 'app/fleet-location-details.html',
@@ -71,7 +71,7 @@ function fleetRouteConfig($stateProvider) {
       parent: 'fleet.locations.list'
     })
     .state('fleet.locations.vehicles', {
-      url: '/{id}/vehicles',
+      url: '/{locationId}/vehicles',
       views: {
         '@': {
           templateUrl: 'app/fleet-location-vehicles.html',

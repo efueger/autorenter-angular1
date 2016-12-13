@@ -32,7 +32,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
 
     $state = {
       params: {
-        id: '1'
+        locationId: '1'
       }
     };
 

@@ -13,7 +13,7 @@ function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrat
 
   self.initialize =  function initialize() {
     implementationStrategy = fleetLocationVehicleStrategyFactory.getStrategy();
-    implementationStrategy.getInitializationData(parseInt($state.params.vehicleId, 10), $state.params.id)
+    implementationStrategy.getInitializationData(parseInt($state.params.vehicleId, 10), $state.params.locationId)
       .then(function init(initializationData) {
         self.location = initializationData.location;
         self.vehicle = initializationData.vehicle;
