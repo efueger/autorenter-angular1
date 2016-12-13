@@ -5,6 +5,7 @@ var fleetHeaderTemplate = require('./fleet.header.html');
 var fleetLocationsTemplate = require('./fleet-locations.html');
 var fleetLocationDetailsTemplate = require('./fleet-location-details.html');
 var fleetLocationVehiclesTemplate = require('./fleet-location-vehicles.html');
+var fleetLocationVehicleDetailsTemplate = require('./fleet-location-vehicle-details.html');
 var fleetReportsTemplate = require('./fleet-reports.html');
 
 function fleetRouteConfig($stateProvider) {
@@ -94,7 +95,7 @@ function fleetRouteConfig($stateProvider) {
       url: '/{vehicleId}/view',
       views: {
         '@': {
-          templateUrl: 'app/fleet-location-vehicle-details.html',
+          template: fleetLocationVehicleDetailsTemplate,
           controller: 'FleetLocationVehicleDetailsController',
           controllerAs: 'vm'
         }
@@ -108,7 +109,7 @@ function fleetRouteConfig($stateProvider) {
       url: '/{vehicleId}/edit',
       views: {
         '@': {
-          templateUrl: 'app/fleet-location-vehicle-details.html',
+          template: fleetLocationVehicleDetailsTemplate,
           controller: 'FleetLocationVehicleDetailsController',
           controllerAs: 'vm'
         }

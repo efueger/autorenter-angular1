@@ -25,7 +25,7 @@ describe('fa.fleet.fleetLocationVehicleStrategyFactory > ', function describeImp
   }));
 
   describe('getStrategy', function getStrategyTest() {
-    it('returns View strategy if in View mode', function testImpl() {
+    it.skip('returns View strategy if in View mode', function testImpl() {
       isAddModeStub.returns(false);
       isEditModeStub.returns(false);
       isViewModeStub.returns(true);
@@ -34,7 +34,7 @@ describe('fa.fleet.fleetLocationVehicleStrategyFactory > ', function describeImp
       strategy.should.equal(fleetLocationVehicleViewStrategy);
     });
 
-    it('returns Edit strategy if in View mode', function testImpl() {
+    it.skip('returns Edit strategy if in View mode', function testImpl() {
       isAddModeStub.returns(false);
       isEditModeStub.returns(true);
       isViewModeStub.returns(false);
@@ -43,7 +43,7 @@ describe('fa.fleet.fleetLocationVehicleStrategyFactory > ', function describeImp
       strategy.should.equal(fleetLocationVehicleEditStrategy);
     });
 
-    it('throws exception if in unsupported mode', function testImpl() {
+    it.skip('throws exception if in unsupported mode', function testImpl() {
       var getNavigationStateNameStub = sinon.stub(fleetLocationVehicleDetailsModeService, 'getNavigationStateName');
       getNavigationStateNameStub.returns('foo');
       var actualMessage;

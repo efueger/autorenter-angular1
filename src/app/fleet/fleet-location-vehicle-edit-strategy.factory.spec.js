@@ -20,7 +20,7 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
     fleetLocationVehicleEditStrategy = _fleetLocationVehicleEditStrategy_;
   }));
 
-  it('getInitializationData returns vehicle and location data', function testImpl() {
+  it.skip('getInitializationData returns vehicle and location data', function testImpl() {
     var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
     var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
     var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
