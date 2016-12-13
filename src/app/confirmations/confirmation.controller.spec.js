@@ -1,3 +1,5 @@
+require('./confirmation.controller');
+
 describe('fa.confirmations.ConfirmationController > ', function describeImpl() {
   var controller;
   var popupText  = 'the text';

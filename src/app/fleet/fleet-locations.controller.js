@@ -1,6 +1,8 @@
 'use strict';
 
 var fleet = require('./fleet.module');
+var fleetLocationIdColumnTemplate = require('./fleet-locations-id-column.html');
+var fleetLocationsActionsColumnTemplate = require('./fleet-locations-actions-column.html');
 
 function FleetLocationsController(generalConfig, locationsDataService, confirmationService, strings) {
   var self = this;
@@ -32,7 +34,6 @@ function FleetLocationsController(generalConfig, locationsDataService, confirmat
   };
 
   self.getColumnDefs = function getColumnDefs() {
-    var currentPath = generalConfig.sourcePathRoot;
     return [
       {
         displayName: 'Site ID',
@@ -44,7 +45,7 @@ function FleetLocationsController(generalConfig, locationsDataService, confirmat
           priority: 0,
           direction: 'asc'
         },
-        cellTemplate: currentPath + 'fleet-locations-id-column.html'
+        cellTemplate: fleetLocationIdColumnTemplate
       },
       {
         displayName: 'Name',
@@ -75,7 +76,7 @@ function FleetLocationsController(generalConfig, locationsDataService, confirmat
         width: 200,
         field: 'id',
         enableSorting: false,
-        cellTemplate: currentPath + 'fleet-locations-actions-column.html'
+        cellTemplate: fleetLocationsActionsColumnTemplate
       }
     ];
   };

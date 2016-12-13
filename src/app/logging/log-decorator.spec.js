@@ -1,3 +1,5 @@
+require('./logging');
+
 describe('fa.logging > ', function describeImpl() {
   var logDecorator;
   var fakeLogService;

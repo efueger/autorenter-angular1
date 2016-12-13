@@ -1,6 +1,13 @@
 'use strict';
 
 var angular = require('angular');
+
+require('../assets/css/app.css');
+require('bootstrap/dist/css/bootstrap.min.css');
+require('angular-ui-bootstrap/dist/ui-bootstrap-csp.css');
+require('angularjs-toaster/toaster.min.css');
+require('angular-ui-grid/ui-grid.css');
+
 require('angular-ui-router');
 require('angular-breadcrumb');
 

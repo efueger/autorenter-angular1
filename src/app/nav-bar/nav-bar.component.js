@@ -1,9 +1,10 @@
 'use strict';
 
 var navBar = require('./nav-bar.module');
+var navBarTemplate = require('./nav-bar.component.html');
 
 navBar.component('faNavBar', {
-  templateUrl: 'app/nav-bar.component.html',
+  template: navBarTemplate,
   bindings: {}
 }
 );
