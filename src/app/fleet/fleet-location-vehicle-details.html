@@ -35,14 +35,8 @@
         <label for="make" class="col-sm-2 control-label">Make</label>
 
         <div class="col-sm-6">
-          <select class="form-control"  ng-if="vm.isEditable()"
-                  ng-model="vm.vehicle.make" id="make"
-                  name="make">
-            <option ng-repeat="make in vm.makes"
-                    value="{{make}}">
-              {{vm.vehicle.make}}
-            </option>
-          </select>
+          <select ng-options="make as make for make in vm.makes" ng-model="vm.vehicle.make" id="make"
+                  name="make" ng-if="vm.isEditable()" class="form-control"></select>
 
           <p id="makeText" class="form-control-static"
              ng-if="!vm.isEditable()">
@@ -55,14 +49,8 @@
         <label for="model" class="col-sm-2 control-label">Model</label>
 
         <div class="col-sm-6">
-          <select class="form-control"  ng-if="vm.isEditable()"
-                  ng-model="vm.vehicle.model" id="model"
-                  name="model">
-            <option ng-repeat="model in vm.models"
-                    value="{{model}}">
-              {{vm.vehicle.model}}}
-            </option>
-          </select>
+          <select ng-options="model as model for model in vm.models" ng-model="vm.vehicle.model" id="model"
+                  name="model" ng-if="vm.isEditable()" class="form-control"></select>
 
           <p id="modelText" class="form-control-static"
              ng-if="!vm.isEditable()">
@@ -75,14 +63,8 @@
         <label for="year" class="col-sm-2 control-label">Year</label>
 
         <div class="col-sm-6">
-          <select class="form-control"  ng-if="vm.isEditable()"
-                  ng-model="vm.vehicle.year" id="year"
-                  name="year">
-            <option ng-repeat="year in vm.years"
-                    value="{{year}}">
-              {{year}}
-            </option>
-          </select>
+          <select ng-options="year as year for year in vm.years" ng-model="vm.vehicle.year" id="year"
+                  name="year" ng-if="vm.isEditable()" class="form-control"></select>
 
           <p id="yearText" class="form-control-static"
              ng-if="!vm.isEditable()">
@@ -95,11 +77,10 @@
            ng-class="{'has-error': vehicleForm.miles.$invalid && (vehicleForm.$submitted || vehicleForm.miles.$touched)}">
         <label for="miles" class="col-sm-2 control-label">Miles</label>
 
-        <div class="col-sm-6"
-             ng-init="numbersOnly='/^\d+$/'">
+        <div class="col-sm-6">
           <input class="form-control" ng-if="vm.isEditable()"
                  ng-model="vm.vehicle.miles" id="miles"
-                 ng-pattern="numbersOnly"
+                 ng-pattern="/^[0-9]{1,7}$/"
                  miles="miles">
 
           <span class="help-block text-danger" ng-if="vehicleForm.miles.$error.pattern">
@@ -114,17 +95,11 @@
       </div>
 
       <div class="form-group row">
-        <label for="color" class="col-sm-2 control-label">State</label>
+        <label for="color" class="col-sm-2 control-label">Color</label>
 
         <div class="col-sm-6">
-          <select class="form-control"  ng-if="vm.isEditable()"
-                  ng-model="vm.vehicle.color" id="color"
-                  name="color">
-            <option ng-repeat="color in vm.colors"
-                    value="{{color}}">
-              {{vehicle.color}}
-            </option>
-          </select>
+          <select ng-options="color as color for color in vm.colors" ng-model="vm.vehicle.color" id="color"
+                  name="color" ng-if="vm.isEditable()" class="form-control"></select>
 
           <p id="colorText" class="form-control-static"
              ng-if="!vm.isEditable()">

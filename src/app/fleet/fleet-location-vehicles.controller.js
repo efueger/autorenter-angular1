@@ -1,6 +1,9 @@
 'use strict';
 
 var fleet = require('./fleet.module');
+var fleetLocationVehiclesIdColumnTemplate = require('./fleet-location-vehicles-id-column.html');
+var fleetLocationVehiclesRentToOwnColumnTemplate = require('./fleet-location-vehicles-rent-to-own-column.html');
+var fleetLocationVehiclesActionsColumnTemplate = require('./fleet-location-vehicles-actions-column.html');
 
 function FleetVehiclesController(generalConfig,
                                  $state,
@@ -50,7 +53,6 @@ function FleetVehiclesController(generalConfig,
   };
 
   self.getColumnDefs = function getColumnDefs() {
-    var currentPath = generalConfig.sourcePathRoot;
     return [
       {
         displayName: 'VIN',
@@ -62,7 +64,7 @@ function FleetVehiclesController(generalConfig,
           priority: 0,
           direction: 'asc'
         },
-        cellTemplate: currentPath + 'fleet-location-vehicles-id-column.html'
+        cellTemplate: fleetLocationVehiclesIdColumnTemplate
       },
       {
         displayName: 'Make',
@@ -99,14 +101,14 @@ function FleetVehiclesController(generalConfig,
         field: 'isRentToOwn',
         type: 'boolean',
         enableSorting: false,
-        cellTemplate: currentPath + 'fleet-location-vehicles-rent-to-own-column.html'
+        cellTemplate: fleetLocationVehiclesRentToOwnColumnTemplate
       },
       {
         displayName: 'Actions',
         width: 200,
         field: 'id',
         enableSorting: false,
-        cellTemplate: currentPath + 'fleet-location-vehicles-actions-column.html'
+        cellTemplate: fleetLocationVehiclesActionsColumnTemplate
       }
     ];
   };

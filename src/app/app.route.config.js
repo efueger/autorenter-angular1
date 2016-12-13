@@ -1,12 +1,13 @@
 'use strict';
 
 var app = require('./app.module');
+var mainTemplate = require('./main/main.html');
 
 function routeConfig($stateProvider, $urlRouterProvider) {
   $stateProvider
   .state('main', {
     url: '/',
-    templateUrl: 'app/main.html',
+    template: mainTemplate,
     controller: 'MainController',
     controllerAs: 'vm'
   });

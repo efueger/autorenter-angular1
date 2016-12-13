@@ -1,3 +1,5 @@
+require('./notification.service');
+
 describe('fa.notifications.notificationService > ', function describeImpl() {
   var toaster;
   var notificationService;

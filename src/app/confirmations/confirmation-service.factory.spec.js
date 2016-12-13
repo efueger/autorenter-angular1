@@ -1,3 +1,5 @@
+require('./confirmation-service.factory');
+
 describe('fa.confirmations.confirmationService > ', function describeImpl() {
   var confirmationService;
   var openSpy;
@@ -23,7 +25,8 @@ describe('fa.confirmations.confirmationService > ', function describeImpl() {
     });
 
     it('calls open with correct templateUrl', function testImpl() {
-      args[0].templateUrl.should.equal('app/confirmation.html');
+      var confirmationTemplate = require('./confirmation.html');
+      args[0].template.should.equal(confirmationTemplate);
     });
 
     it('calls open with correct controllerAs', function testImpl() {

@@ -6,10 +6,32 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
                                                                    vehiclesDataService, locationsDataService) {
   var fleetLocationVehicleEditStrategyInstance;
 
+  var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
   var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
+  var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
+  var makes = ['Chevrolet', 'Ford', 'Honda', 'Toyota'];
+
   function getYears() {
     var deferred = $q.defer();
     deferred.resolve({data: years});
+    return deferred.promise;
+  }
+
+  function getColors() {
+    var deferred = $q.defer();
+    deferred.resolve({data: colors});
+    return deferred.promise;
+  }
+
+  function getMakes() {
+    var deferred = $q.defer();
+    deferred.resolve({data: makes});
+    return deferred.promise;
+  }
+
+  function getModels() {
+    var deferred = $q.defer();
+    deferred.resolve({data: models});
     return deferred.promise;
   }
 
@@ -29,16 +51,44 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
       .then(function setResult(response) {
         initializationData.years = response.data;
       });
-
-    $q.all([locationPromise, vehiclePromise, yearsPromise])
+    var colorsPromise = getColors()
+      .then(function setResult(response) {
+        initializationData.colors = response.data;
+      });
+    var makesPromise = getMakes()
+      .then(function setResult(response) {
+        initializationData.makes = response.data;
+      });
+    var modelsPromise = getModels()
+      .then(function setResult(response) {
+        initializationData.models = response.data;
+      });
+    $q.all([locationPromise, vehiclePromise, yearsPromise, colorsPromise, makesPromise, modelsPromise])
       .then(function setResult() {
         deferred.resolve(initializationData);
       });
     return deferred.promise;
   }
 
+  function notifySuccess(vin) {
+    var message = strings.format('Vehicle \'{vin}\' was updated successfully.', { vin: vin });
+    notificationService.notifySuccess({
+      userMessage: message
+    });
+  }
+
+  function save(vehicle) {
+    vehiclesDataService.updateVehicle(vehicle)
+      .then(function notifyAndNavigate() {
+        fleetLocationVehicleEditStrategyInstance.notifySuccess(vehicle.vin);
+        $state.go('fleet.locations.vehicles');
+      });
+  }
+
   fleetLocationVehicleEditStrategyInstance = {
-    getInitializationData: getInitializationData
+    getInitializationData: getInitializationData,
+    save: save,
+    notifySuccess: notifySuccess
   };
   return fleetLocationVehicleEditStrategyInstance;
 };

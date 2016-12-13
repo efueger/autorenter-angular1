@@ -1,11 +1,12 @@
 'use strict';
 
 var confirmations = require('./confirmations.module');
+var confirmationTemplate = require('./confirmation.html');
 
 function confirmationService($uibModal) {
   function show(popupText) {
     var modalInstance = $uibModal.open({
-      templateUrl: 'app/confirmation.html',
+      template: confirmationTemplate,
       controllerAs: 'modalVm',
       size: 'md',
       controller: 'ConfirmationController',
