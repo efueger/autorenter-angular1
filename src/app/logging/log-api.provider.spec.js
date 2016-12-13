@@ -37,7 +37,7 @@ describe('fa.logging.logApi > ', function describeImpl() {
   });
 
   it('should set url', function testImpl() {
-    request.url.should.equal(generalConfig.apiUrl + 'api/log');
+    request.url.should.equal(generalConfig.apiUrlRoot + 'log');
   });
 
   it('should set request headers', function testImpl() {
