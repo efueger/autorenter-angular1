@@ -122,7 +122,7 @@ var config = {
       chunk: false
     },
     host: '127.0.0.1',
-    port: 80
+    port: 8080
   },
   postcss: function () {
     return [autoprefixer({

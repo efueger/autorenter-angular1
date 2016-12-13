@@ -46,7 +46,7 @@ npm start
 
 ## Browse the App
 
-After successfully starting the UI app, you should be able to run the application by browsing to `http://127.0.0.1:80/`.
+After successfully starting the UI app, you should be able to run the application by browsing to `http://127.0.0.1:8080/`.
 
 ## Recommended Development Workflow
 
