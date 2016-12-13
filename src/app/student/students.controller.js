@@ -54,7 +54,7 @@ function StudentsController($http, $log, generalConfig, notificationService) {
   self.checkHttpErrorHandlerSuccess = function checkHttpErrorHandler() {
     $http({
       method: 'GET',
-      url: generalConfig.apiUrl
+      url: generalConfig.apiUrl + 'api/'
     }).then(function successCallback(response) {
       console.log('success - response = ' + response.status); // eslint-disable-line no-console
     }, function errorCallback(response) {
@@ -73,7 +73,7 @@ function StudentsController($http, $log, generalConfig, notificationService) {
     });
   };
 
-  $http.get(generalConfig.apiUrl).then(function apiSuccess(res) {
+  $http.get(generalConfig.apiUrl + 'api/').then(function apiSuccess(res) {
     self.apiResponse = res.data;
   }, function apiError() {
     // log error
