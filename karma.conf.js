@@ -3,10 +3,13 @@ var webpack = require('webpack');
 var args = require('yargs').argv;
 
 var unitTestEntry = 'src/app/specs.webpack.js';
+
 // run multiple times in watch mode
 var singleRun = !args.watch;
+
 // use phantomjs in watch mode
 var browser = 'PhantomJS';
+
 var files = [unitTestEntry];
 var include = [path.resolve('./src')];
 

@@ -10,6 +10,7 @@ These instructions will cover usage information for the UI.
 
 For now, the api must also be running for the UI to work properly. Please follow directions in the corresponding readme.
 
+- Make sure the project is at a location with minimal file path length (this is especially important in a Windows environment!). For this project we strongly recommend `c:/aur/ui` as the project root.
 - Install [Git](https://git-scm.com/downloads).
 - Install [Node](https://nodejs.org/en/download/) (tested on version 6.2.2)
 
@@ -75,9 +76,15 @@ If you are implementing a new feature, in addition to the previous steps you sho
 	1. Repeat these feature implementation steps until the feature is ready to review.
 1. Open a pull request to merge your feature branch into `development`.
 
-## Style Guide ##
+## Troubleshooting
 
-Please refer to the team's Angular 1 Style Guide, located [here](https://stash.fusionalliance.com/projects/FUSADIP/repos/autorenter_spec/browse/styleguide_angular1.md).
+### npm "Maximum call stack size exceeded"
+
+* Try running `npm install` again. After a few tries it will finally succeed. Usually.
+
+## Style Guide
+
+Please refer to the team's Angular 1 Style Guide, located [here](https://bitbucket.fusionalliance.com/projects/FUSADIP/repos/autorenter_spec/browse/styleguide_angular1.md).
 
 ## Contributing
 
