@@ -35,7 +35,7 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
     return deferred.promise;
   }
 
-  function getInitializationData(vehicleId, locationId) {
+  function getInitializationData(locationId, vehicleId) {
     var deferred = $q.defer();
     var initializationData = {};
 

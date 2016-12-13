@@ -1,5 +1,5 @@
 <div class="ui-grid-cell-contents">
-  <a ui-sref="fleet.locations.vehicles.view({vehicleId: row.entity.id, locationId: {{::grid.appScope.location.id}}})">
+  <a ui-sref="fleet.locations.vehicles.view({locationId: {{::grid.appScope.location.id}}, vehicleId: row.entity.id})">
     {{COL_FIELD}}
   </a>
 </div>
