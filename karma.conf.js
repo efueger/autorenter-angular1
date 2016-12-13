@@ -6,7 +6,7 @@ var unitTestEntry = 'src/app/specs.webpack.js';
 // run multiple times in watch mode
 var singleRun = !args.watch;
 // use phantomjs in watch mode
-var browser = (args.watch || args.ci) ? 'PhantomJS' : 'Chrome';
+var browser = 'PhantomJS';
 var files = [unitTestEntry];
 var include = [path.resolve('./source')];
 
