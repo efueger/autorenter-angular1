@@ -1,24 +1,27 @@
-describe('fa.fleet.fleetLocationStrategyFactory > ', function describeImpl() {
-  var fleetLocationDetailsModeService;
-  var fleetLocationStrategyFactory;
+describe('fa.fleet.fleetLocationVehicleStrategyFactory > ', function describeImpl() {
+  var fleetLocationVehicleDetailsModeService;
+  var fleetLocationVehicleStrategyFactory;
   var isAddModeStub;
   var isEditModeStub;
   var isViewModeStub;
 
-  var fleetLocationViewStrategy;
+  var fleetLocationVehicleViewStrategy;
+  var fleetLocationVehicleEditStrategy;
 
   beforeEach(angular.mock.module('fa.fleet'));
 
-  beforeEach(inject(function injectImpl(_fleetLocationDetailsModeService_,
-                                        _fleetLocationViewStrategy_,
-                                        _fleetLocationStrategyFactory_) {
-    fleetLocationDetailsModeService = _fleetLocationDetailsModeService_;
-    fleetLocationViewStrategy = _fleetLocationViewStrategy_;
-    fleetLocationStrategyFactory = _fleetLocationStrategyFactory_;
+  beforeEach(inject(function injectImpl(_fleetLocationVehicleDetailsModeService_,
+                                        _fleetLocationVehicleViewStrategy_,
+                                        _fleetLocationVehicleEditStrategy_,
+                                        _fleetLocationVehicleStrategyFactory_) {
+    fleetLocationVehicleDetailsModeService = _fleetLocationVehicleDetailsModeService_;
+    fleetLocationVehicleViewStrategy = _fleetLocationVehicleViewStrategy_;
+    fleetLocationVehicleEditStrategy = _fleetLocationVehicleEditStrategy_;
+    fleetLocationVehicleStrategyFactory = _fleetLocationVehicleStrategyFactory_;
 
-    isAddModeStub = sinon.stub(fleetLocationDetailsModeService, 'isAddMode');
-    isEditModeStub = sinon.stub(fleetLocationDetailsModeService, 'isEditMode');
-    isViewModeStub = sinon.stub(fleetLocationDetailsModeService, 'isViewMode');
+    isAddModeStub = sinon.stub(fleetLocationVehicleDetailsModeService, 'isAddMode');
+    isEditModeStub = sinon.stub(fleetLocationVehicleDetailsModeService, 'isEditMode');
+    isViewModeStub = sinon.stub(fleetLocationVehicleDetailsModeService, 'isViewMode');
   }));
 
   describe('getStrategy', function getStrategyTest() {
@@ -27,12 +30,21 @@ describe('fa.fleet.fleetLocationStrategyFactory > ', function describeImpl() {
       isEditModeStub.returns(false);
       isViewModeStub.returns(true);
 
-      var strategy = fleetLocationStrategyFactory.getStrategy();
-      strategy.should.equal(fleetLocationViewStrategy);
+      var strategy = fleetLocationVehicleStrategyFactory.getStrategy();
+      strategy.should.equal(fleetLocationVehicleViewStrategy);
+    });
+
+    it('returns Edit strategy if in View mode', function testImpl() {
+      isAddModeStub.returns(false);
+      isEditModeStub.returns(true);
+      isViewModeStub.returns(false);
+
+      var strategy = fleetLocationVehicleStrategyFactory.getStrategy();
+      strategy.should.equal(fleetLocationVehicleEditStrategy);
     });
 
     it('throws exception if in unsupported mode', function testImpl() {
-      var getNavigationStateNameStub = sinon.stub(fleetLocationDetailsModeService, 'getNavigationStateName');
+      var getNavigationStateNameStub = sinon.stub(fleetLocationVehicleDetailsModeService, 'getNavigationStateName');
       getNavigationStateNameStub.returns('foo');
       var actualMessage;
       var expectedMessage = 'Unsupported mode for navigation state \'foo\'.';
@@ -41,7 +53,7 @@ describe('fa.fleet.fleetLocationStrategyFactory > ', function describeImpl() {
       isViewModeStub.returns(false);
 
       try {
-        fleetLocationStrategyFactory.getStrategy();
+        fleetLocationVehicleStrategyFactory.getStrategy();
       } catch (ex) {
         actualMessage = ex.message;
       }

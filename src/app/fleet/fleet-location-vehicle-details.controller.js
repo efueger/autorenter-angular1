@@ -9,6 +9,10 @@ function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrat
 
   self.vehicle;
 
+  self.years;
+
+  self.colors;
+
   var implementationStrategy;
 
   self.initialize =  function initialize() {
@@ -17,6 +21,10 @@ function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrat
       .then(function init(initializationData) {
         self.location = initializationData.location;
         self.vehicle = initializationData.vehicle;
+        self.colors = initializationData.colors;
+        self.years = initializationData.years;
+        self.makes = initializationData.makes;
+        self.models = initializationData.models;
       });
   };
 
