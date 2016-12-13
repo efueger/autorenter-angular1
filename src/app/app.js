@@ -1,7 +1,7 @@
 'use strict';
 
-require('./app.module');
+require('./index.module.js');
 
-require('./app.config');
-require('./app.route.config');
-require('./app.run');
+require('./index.config.js');
+require('./index.route.config.js');
+require('./index.run.js');
