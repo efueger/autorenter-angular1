@@ -1,9 +1,7 @@
-require('./students');
+require('./students.controller');
 
-describe('App > ', function init() {
-  beforeEach(function(done) {
-    angular.mock.module('fa.students')
-  });
+describe('fa.students.controller > ', function init() {
+  beforeEach(angular.mock.module('fa.students'));
 
   describe('students >', function testStudent() {
     it('should add students correctly', inject(function test1($controller) {

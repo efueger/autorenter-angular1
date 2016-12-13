@@ -1,6 +1,9 @@
 'use strict';
 
 var admin = require('./admin.module');
+var adminHeaderTemplate = require('./admin.header.html');
+var adminUsersTemplate = require('./admin-users.html');
+var adminBrandingTemplate = require('./admin-branding.html');
 
 function adminRouteConfig($stateProvider) {
   $stateProvider
@@ -8,7 +11,7 @@ function adminRouteConfig($stateProvider) {
       abstract: true,
       views: {
         'moduleHeader@': {
-          templateUrl: 'app/admin.header.html'
+          template: adminHeaderTemplate
         }
       }
     })
@@ -19,7 +22,7 @@ function adminRouteConfig($stateProvider) {
       url: '/admin/users',
       views: {
         '@': {
-          templateUrl: 'app/admin-users.html',
+          template: adminUsersTemplate,
           controller: 'AdminUsersController',
           controllerAs: 'vm'
         }
@@ -32,7 +35,7 @@ function adminRouteConfig($stateProvider) {
       url: '/admin/branding',
       views: {
         '@': {
-          templateUrl: 'app/admin-branding.html',
+          template: adminBrandingTemplate,
           controller: 'AdminBrandingController',
           controllerAs: 'vm'
         }

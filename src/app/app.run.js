@@ -1,6 +1,6 @@
 'use strict';
 
-var app = require('./index.module.js');
+var app = require('./app.module.js');
 
 function runBlock() {
 

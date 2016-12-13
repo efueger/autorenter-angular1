@@ -1,64 +1,73 @@
-// Karma configuration
+var path = require('path');
+var webpack = require('webpack');
+var args = require('yargs').argv;
+
+var unitTestEntry = 'src/app/specs.webpack.js';
+// run multiple times in watch mode
+var singleRun = !args.watch;
+// use phantomjs in watch mode
+var browser = (args.watch || args.ci) ? 'PhantomJS' : 'Chrome';
+var files = [unitTestEntry];
+var include = [path.resolve('./source')];
+
+var preLoaders = [
+  // Process all non-test code with Isparta
+  {test: /\.js$/, loader: 'isparta', include: include, exclude: /\.spec\.js$/}
+];
+var loaders = [
+  {test: /\.(png|jpg)$/, loader: 'null'},
+  {test: /\.(html)$/, loader: 'null'}
+];
+var processors = {};
+processors[unitTestEntry] = ['webpack', 'sourcemap'];
+processors['src/app/**/*.js'] = ['webpack', 'sourcemap'];
+
+var reporters = [
+  'mocha', 'coverage'
+];
+var coverageReporters = args.watch ? [
+  {type: 'text-summary'}
+] : [
+  {type: 'lcov', subdir: '.'},
+  {type: 'text-summary'}
+];
+
 module.exports = function karmaConfig(config) {
   config.set({
-
-    // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
-
-    // frameworks to use
-    // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['angular', 'mocha', 'chai', 'sinon-chai'],
-
-    // list of files / patterns to load in the browser
-    files: [
-      'src/app/specs.webpack.js'
-    ],
-
-    // list of files to exclude
-    exclude: [
-    ],
-
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      'src/app/specs.webpack.js': ['webpack', 'sourcemap']
+    basePath: '.',
+    frameworks: ['mocha', 'chai', 'sinon-chai'],
+    exclude: [],
+    files: files,
+    webpack: {
+      devtool: 'inline-source-map',
+      module: {
+        preLoaders: preLoaders,
+        loaders: loaders
+      },
+      cache: true,
+      plugins: [
+        new webpack.ProvidePlugin({
+          $: 'jquery',
+          jQuery: 'jquery',
+          'window.jQuery': 'jquery',
+          _: 'lodash'
+        })
+      ]
     },
-
-    // test results reporter to use
-    // possible values: 'dots', 'progress'
-    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress'],
-
-    // web server port
-    port: 9876,
-
-    // enable / disable colors in the output (reporters and logs)
-    colors: true,
-
-    // level of logging
-    // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
-
-    // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: true,
-
-    // start these browsers
-    // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
-
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: false,
-
-    // Concurrency level
-    // how many browser should be started simultaneous
-    concurrency: Infinity,
-
-    webpack: require('./webpack.config'), // eslint-disable-line global-require
-
-    // Hide webpack build information from output
     webpackMiddleware: {
-      noInfo: 'errors-only'
-    }
+      stats: {
+        chunkModules: false,
+        colors: true
+      }
+    },
+    preprocessors: processors,
+    reporters: reporters,
+    coverageReporter: {
+      dir: './coverage',
+      reporters: coverageReporters
+    },
+    reportSlowerThan: 500,
+    singleRun: singleRun,
+    browsers: [browser]
   });
 };
