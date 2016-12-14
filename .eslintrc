@@ -30,10 +30,6 @@
   },
   "extends": "eslint-config-es5",
   "globals": {
-      "angular": true,
-      "inject": true,
-      "sinon": true,
-      "assert": true,
-      "should": true
+      "inject": true
   }
 }
