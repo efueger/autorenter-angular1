@@ -2,18 +2,18 @@
 
 var dataAccess = require('./data-access.module');
 
-var locationsDataService = function locationsDataService($q, $http, generalConfig) {
+var locationsDataService = function locationsDataService($q, $http, generalConfig, strings) {
   function getLocations() {
     return $http({
       method: 'GET',
-      url: generalConfig.apiUrl + 'api/locations'
+      url: strings.format('{apiUrl}api/locations', {apiUrl: generalConfig.apiUrl})
     });
   }
 
   function addLocation(location) {
     return $http({
       method: 'POST',
-      url: generalConfig.apiUrl + 'api/locations',
+      url: strings.format('{apiUrl}api/locations', {apiUrl: generalConfig.apiUrl}),
       data: location
     });
   }
@@ -21,14 +21,14 @@ var locationsDataService = function locationsDataService($q, $http, generalConfi
   function getLocation(locationId) {
     return $http({
       method: 'GET',
-      url: generalConfig.apiUrl + 'api/locations/' + locationId
+      url: strings.format('{apiUrl}api/locations/{locationId}', {apiUrl: generalConfig.apiUrl, locationId: locationId})
     });
   }
 
-  function updateLocation(location) { // eslint-disable-line no-unused-vars
+  function updateLocation(location) {
     return $http({
       method: 'PUT',
-      url: generalConfig.apiUrl + 'api/locations',
+      url: strings.format('{apiUrl}api/locations', {apiUrl: generalConfig.apiUrl}),
       data: location
     });
   }
@@ -36,7 +36,7 @@ var locationsDataService = function locationsDataService($q, $http, generalConfi
   function deleteLocation(locationId) {
     return $http({
       method: 'DELETE',
-      url: generalConfig.apiUrl + 'api/locations/' + locationId
+      url: strings.format('{apiUrl}api/locations/{locationId}', {apiUrl: generalConfig.apiUrl, locationId: locationId})
     });
   }
 
@@ -52,7 +52,8 @@ var locationsDataService = function locationsDataService($q, $http, generalConfi
 dataAccess.$inject = [
   '$q',
   '$http',
-  'generalConfig'
+  'generalConfig',
+  'strings'
 ];
 
 dataAccess
