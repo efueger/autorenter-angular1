@@ -28,7 +28,7 @@ var locationsDataService = function locationsDataService($q, $http, generalConfi
   function updateLocation(location) {
     return $http({
       method: 'PUT',
-      url: strings.format('{apiUrl}api/locations', {apiUrl: generalConfig.apiUrl}),
+      url: strings.format('{apiUrl}api/locations/{locationId}', {apiUrl: generalConfig.apiUrl, locationId: location.id}),
       data: location
     });
   }
