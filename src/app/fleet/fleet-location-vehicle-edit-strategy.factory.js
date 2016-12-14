@@ -77,7 +77,7 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
     });
   }
 
-  function save(vehicle) {
+  function save(locationId, vehicle) {
     vehiclesDataService.updateVehicle(vehicle)
       .then(function notifyAndNavigate() {
         fleetLocationVehicleEditStrategyInstance.notifySuccess(vehicle.vin);

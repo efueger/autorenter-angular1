@@ -72,8 +72,8 @@ var fleetLocationVehicleAddStrategy = function fleetLocationVehicleAddStrategy($
     });
   }
 
-  function save(vehicle) {
-    vehiclesDataService.addVehicleToLocation($state.params.locationId, vehicle)
+  function save(locationId, vehicle) {
+    vehiclesDataService.addVehicleToLocation(locationId, vehicle)
       .then(function notifyAndNavigate() {
         fleetLocationVehicleAddStrategyInstance.notifySuccess(vehicle.vin);
         $state.go('fleet.locations.vehicles');

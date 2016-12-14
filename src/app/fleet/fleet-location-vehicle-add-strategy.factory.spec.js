@@ -74,16 +74,11 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
   describe('save', function saveTest() {
     var vehicleId = 1000;
     var vehicle = {id: vehicleId, vin: '67012FD65DSA12349'};    
-    $state = {
-        params: {
-            locationId: '1'
-        }
-    }
 
     it('persists the new vehicle', function testImpl() {
       var addVehicleSpy = sinon.spy(vehiclesDataService, 'addVehicleToLocation');
-      fleetLocationVehicleAddStrategy.save(vehicle);
-      addVehicleSpy.calledWith($state.params.locationId, vehicle).should.be.true;
+      fleetLocationVehicleAddStrategy.save(location.id, vehicle);
+      addVehicleSpy.calledWith(location.id, vehicle).should.be.true;
     });
 
     it('notifies user of successful add', function testImpl() {
@@ -91,7 +86,7 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
       sinon.stub($state, 'go');
       var notifySuccessStub = sinon.stub(fleetLocationVehicleAddStrategy, 'notifySuccess');
 
-      fleetLocationVehicleAddStrategy.save(vehicle);
+      fleetLocationVehicleAddStrategy.save(location.id, vehicle);
       $rootScope.$apply();
 
       notifySuccessStub.calledWith(vehicle.vin).should.be.true;
@@ -102,7 +97,7 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
       sinon.stub(fleetLocationVehicleAddStrategy, 'notifySuccess');
       var goStub = sinon.stub($state, 'go');
 
-      fleetLocationVehicleAddStrategy.save(vehicle);
+      fleetLocationVehicleAddStrategy.save(location.id, vehicle);
       $rootScope.$apply();
 
       goStub.calledWith('fleet.locations.vehicles').should.be.true;
