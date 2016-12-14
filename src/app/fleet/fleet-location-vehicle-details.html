@@ -78,14 +78,9 @@
         <label for="miles" class="col-sm-2 control-label">Miles</label>
 
         <div class="col-sm-6">
-          <input class="form-control" ng-if="vm.isEditable()"
-                 ng-model="vm.vehicle.miles" id="miles"
-                 ng-pattern="/^[0-9]{1,7}$/"
+          <input class="form-control" ng-if="vm.isEditable()" type="number"
+                 ng-model="vm.vehicle.miles" id="miles"                 
                  miles="miles">
-
-          <span class="help-block text-danger" ng-if="vehicleForm.miles.$error.pattern">
-                                Miles must be a numerical value
-                            </span>
 
           <p id="milesText" class="form-control-static"
              ng-if="!vm.isEditable()">
