@@ -65,7 +65,7 @@ function StudentsController($http, $log, generalConfig, notificationService) {
   self.checkHttpErrorHandlerError = function checkHttpErrorHandler() {
     $http({
       method: 'GET',
-      url: generalConfig.apiUrl + 'api/raise-error'
+      url: generalConfig.apiUrl + '/raise-error'
     }).then(function successCallback(response) {
       console.log('unexpected success - response = ' + response.status); // eslint-disable-line no-console
     }, function errorCallback(response) {
