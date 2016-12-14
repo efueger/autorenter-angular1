@@ -15,7 +15,7 @@ var fleetLocationEditStrategy = function fleetLocationEditStrategy($q, $state, n
       });
     var locationPromise = locationsDataService.getLocation(locationId)
       .then(function setResult(response) {
-        initializationData.location = response.data;
+        initializationData.location = response.data.data;
       });
     $q.all([locationPromise, statesPromise])
       .then(function setResult() {

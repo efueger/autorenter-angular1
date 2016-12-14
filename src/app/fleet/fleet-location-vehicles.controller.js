@@ -13,11 +13,11 @@ function FleetVehiclesController(generalConfig,
                                  strings) {
   var self = this;
 
-  self.gridOptions;
+  self.gridOptions = {};
 
-  self.vehicles;
+  self.vehicles = {};
 
-  self.location;
+  self.location = {};
 
   self.deleteVehicle = function deleteVehicle(vehicle) {
     confirmationService.show(strings.format('Delete vehicle \'{vin}\'?', { vin: vehicle.vin }))
@@ -37,7 +37,7 @@ function FleetVehiclesController(generalConfig,
   self.initializeLocation = function initializeLocation(locationId) {
     locationsDataService.getLocation(locationId)
       .then(function setLocation(response) {
-        self.location = response.data;
+        self.location = response.data.data;
       });
   };
 
@@ -70,31 +70,31 @@ function FleetVehiclesController(generalConfig,
         displayName: 'Make',
         field: 'make',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Model',
         field: 'model',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Year',
         field: 'year',
         type: 'number',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Miles',
         field: 'miles',
         type: 'number',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Color',
         field: 'color',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Rent to Own',

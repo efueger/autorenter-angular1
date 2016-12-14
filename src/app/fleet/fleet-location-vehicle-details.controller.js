@@ -5,13 +5,13 @@ var fleet = require('./fleet.module');
 function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrategyFactory, fleetLocationVehicleDetailsModeService) {
   var self = this;
 
-  self.location;
+  self.location = {};
 
-  self.vehicle;
+  self.vehicle = {};
 
-  self.years;
+  self.years = {};
 
-  self.colors;
+  self.colors = {};
 
   var implementationStrategy;
 

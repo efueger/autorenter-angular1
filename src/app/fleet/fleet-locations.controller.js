@@ -7,7 +7,7 @@ var fleetLocationsActionsColumnTemplate = require('./fleet-locations-actions-col
 function FleetLocationsController(generalConfig, locationsDataService, confirmationService, strings) {
   var self = this;
 
-  self.gridOptions;
+  self.gridOptions = {};
 
   self.deleteLocation = function deleteLocation(location) {
     confirmationService.show(strings.format('Delete location \'{siteId}\'?', {siteId: location.siteId}))
@@ -51,25 +51,25 @@ function FleetLocationsController(generalConfig, locationsDataService, confirmat
         displayName: 'Name',
         field: 'name',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Vehicles',
         field: 'vehicleCount',
         type: 'number',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'City',
         field: 'city',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'State',
         field: 'stateCode',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Actions',
@@ -88,7 +88,7 @@ function FleetLocationsController(generalConfig, locationsDataService, confirmat
   self.populateGrid = function populateGrid() {
     locationsDataService.getLocations()
       .then(function assignData(response) {
-        self.gridOptions.data = response.data;
+        self.gridOptions.data = response.data.data;
       });
   };
 
