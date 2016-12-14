@@ -1,3 +1,7 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
 require('./fleet-location-details.controller');
 
 describe('fa.fleet.FleetLocationDetailsController > ', function describeImpl() {

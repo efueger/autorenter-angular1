@@ -1,3 +1,7 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
 require('./fleet-locations.controller');
 var fleetLocationsIdColumnTemplate = require('./fleet-locations-id-column.html');
 var fleetLocationsActionsColumnTemplate = require('./fleet-locations-actions-column.html');

@@ -1,3 +1,5 @@
+var angular = require('angular');
+require('angular-mocks');
 require('./logging');
 
 describe('fa.logging > ', function describeImpl() {

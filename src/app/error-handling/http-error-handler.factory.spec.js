@@ -1,3 +1,7 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
 require('./http-error-handler.factory');
 
 describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {

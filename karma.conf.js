@@ -15,7 +15,8 @@ var include = [path.resolve('./src')];
 
 var preLoaders = [
   // Process all non-test code with Isparta
-  {test: /\.js$/, loader: 'isparta', include: include, exclude: /\.spec\.js$/}
+  {test: /\.js$/, loader: 'isparta', include: include, exclude: /\.spec\.js$/},
+  {test: /sinon.*\.js$/,   loader: 'imports?define=>false,require=>false'}
 ];
 var loaders = [
   {test: /\.(png|jpg)$/, loader: 'null'},
@@ -38,14 +39,18 @@ var coverageReporters = args.watch ? [
 module.exports = function karmaConfig(config) {
   config.set({
     basePath: '.',
-    frameworks: ['mocha', 'chai', 'sinon-chai'],
+    frameworks: ['mocha', 'chai'],
     exclude: [],
     files: files,
     webpack: {
       devtool: 'inline-source-map',
       module: {
         preLoaders: preLoaders,
-        loaders: loaders
+        loaders: loaders,
+        // don't run babel-loader through the sinon module
+        noParse: [
+          /node_modules\/sinon\//
+        ]
       },
       cache: true,
       plugins: [
@@ -55,7 +60,12 @@ module.exports = function karmaConfig(config) {
           'window.jQuery': 'jquery',
           _: 'lodash'
         })
-      ]
+      ],
+      resolve: {
+        alias: {
+          sinon: 'sinon/pkg/sinon'
+        }
+      }
     },
     webpackMiddleware: {
       stats: {
