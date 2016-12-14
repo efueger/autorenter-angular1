@@ -119,6 +119,20 @@ function fleetRouteConfig($stateProvider) {
       },
       parent: 'fleet.locations.vehicles'
     })
+    .state('fleet.locations.vehicles.add', {
+      url: '/{vehicleId}/add',
+      views: {
+        '@': {
+          template: fleetLocationVehicleDetailsTemplate,
+          controller: 'FleetLocationVehicleDetailsController',
+          controllerAs: 'vm'
+        }
+      },
+      ncyBreadcrumb: {
+        label: 'Add'
+      },
+      parent: 'fleet.locations.vehicles'
+    })
     .state('fleet.reports', {
       abstract: true
     })

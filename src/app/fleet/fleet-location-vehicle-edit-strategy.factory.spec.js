@@ -65,7 +65,7 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
     });
 
     var actualResponse;
-    fleetLocationVehicleEditStrategy.getInitializationData(vehicle.id, location.id)
+    fleetLocationVehicleEditStrategy.getInitializationData(location.id, vehicle.id)
       .then(function setResponse(response) {
         actualResponse = response;
       });
