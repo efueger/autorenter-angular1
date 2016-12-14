@@ -1,3 +1,8 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
+
 require('./fleet-location-vehicle-strategy.factory');
 
 describe('fa.fleet.fleetLocationVehicleStrategyFactory > ', function describeImpl() {
