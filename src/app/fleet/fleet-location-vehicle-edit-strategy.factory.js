@@ -41,7 +41,7 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
 
     var vehiclePromise = vehiclesDataService.getVehicle(vehicleId)
       .then(function setResult(response) {
-        initializationData.vehicle = response.data;
+        initializationData.vehicle = response.data.data;
       });
     var locationPromise = locationsDataService.getLocation(locationId)
       .then(function setResult(response) {

@@ -2,121 +2,42 @@
 
 var dataAccess = require('./data-access.module');
 
-var vehiclesDataService = function vehiclesDataService($q) {
-  // TODO: This implementation will be replaced once we have API support...
-  var locationVehicles = [
-    {
-      locationId: '1',
-      vehicles: [
-        {
-          id: 11,
-          vin: '1XKDPB0X04R047346',
-          make: 'Toyota',
-          model: 'Tercel',
-          year: 2012,
-          miles: 452303,
-          color: 'Gold',
-          isRentToOwn: false,
-        },
-        {
-          id: 12,
-          vin: '1HVLPHXM4GHA52708',
-          make: 'Honda',
-          model: 'Civic',
-          year: 2013,
-          miles: 282563,
-          color: 'Silver',
-          isRentToOwn: true,
-        }]
-    },
-    {
-      locationId: '2',
-      vehicles: [
-        {
-          id: 13,
-          vin: '2XKDPB0X04R047346',
-          make: 'Chevrolet',
-          model: 'Impala',
-          year: 2014,
-          miles: 452303,
-          color: 'Black',
-          isRentToOwn: true,
-        },
-        {
-          id: 14,
-          vin: '2HVLPHXM4GHA52708',
-          make: 'Ford',
-          model: 'Pinto',
-          year: 2015,
-          miles: 282563,
-          color: 'Orange',
-          isRentToOwn: false,
-        }]
-    }
-  ];
-
-  var nextVehicleId = 15;
-
+var vehiclesDataService = function vehiclesDataService($q, $http, generalConfig, strings) {
   function getVehicles(locationId) {
-    var deferred = $q.defer();
-    var vehicles = [];
-    locationVehicles.forEach(function findVehicles(locationVehicleElement) {
-      if (locationVehicleElement.locationId === locationId) {
-        vehicles = locationVehicleElement.vehicles;
-      }
+    return $http({
+      method: 'GET',
+      url: strings.format('{apiUrl}api/locations/{locationId}/vehicles/', {apiUrl: generalConfig.apiUrl, locationId: locationId})
     });
-    deferred.resolve({ data: vehicles });
-    return deferred.promise;
   }
 
   function addVehicleToLocation(locationId, vehicle) {
-    vehicle.id = nextVehicleId++;
-    var deferred = $q.defer();
-    locationVehicles.forEach(function findLocationVehicle(locationVehicleElement) {
-      if (locationVehicleElement.locationId === locationId) {
-        locationVehicleElement.vehicles.push(vehicle);
-      }
+    return $http({
+      method: 'POST',
+      url: strings.format('{apiUrl}api/locations/{locationId}/vehicles/', {apiUrl: generalConfig.apiUrl, locationId: locationId}),
+      data: vehicle
     });
-    deferred.resolve({});
-    return deferred.promise;
   }
 
   function getVehicle(vehicleId) {
-    var deferred = $q.defer();
-    var vehicle;
-    locationVehicles.forEach(function locationVehicleEach(locationVehicleElement) {
-      locationVehicleElement.vehicles.forEach(function findVehicle(vehicleElement) {
-        if (vehicleElement.id + '' === vehicleId + '') {
-          vehicle = vehicleElement;
-        }
-      });
+    return $http({
+      method: 'GET',
+      url: strings.format('{apiUrl}api/vehicles/{vehicleId}', {apiUrl: generalConfig.apiUrl, vehicleId: vehicleId})
     });
-    deferred.resolve({ data: vehicle });
-    return deferred.promise;
   }
 
-  function updateVehicle(vehicle) { // eslint-disable-line no-unused-vars
-    var deferred = $q.defer();
-    deferred.resolve({});
-    return deferred.promise;
+  function updateVehicle(vehicle) {
+    return $http({
+      method: 'PUT',
+      url: strings.format('{apiUrl}api/vehicles/{vehicleId}', {apiUrl: generalConfig.apiUrl, vehicleId: vehicle.id}),
+      data: vehicle
+    });
   }
 
   function deleteVehicle(vehicleId) {
-    var deferred = $q.defer();
-    getVehicle(vehicleId)
-      .then(function removeFromArray(response) {
-        locationVehicles.forEach(function locationVehicleEach(locationVehicleElement) {
-          var vehicles = locationVehicleElement.vehicles;
-          vehicles.forEach(function findVehicle(vehicleElement) {
-            if (vehicleElement.id + '' === vehicleId) {
-              var indexToRemove = locationVehicleElement.vehicles.indexOf(response.data);
-              locationVehicleElement.vehicles.splice(indexToRemove, 1);
-            }
-          });
-        });
-      });
-    deferred.resolve({});
-    return deferred.promise;
+    return $http({
+      method: 'DELETE',
+      url: strings.format('{apiUrl}api/vehicles/{vehicleId}', {apiUrl: generalConfig.apiUrl, vehicleId: vehicleId})
+    });
   }
 
   return {
@@ -129,7 +50,10 @@ var vehiclesDataService = function vehiclesDataService($q) {
 };
 
 dataAccess.$inject = [
-  '$q'
+  '$q',
+  '$http',
+  'generalConfig',
+  'strings'
 ];
 
 dataAccess

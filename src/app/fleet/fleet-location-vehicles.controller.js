@@ -14,9 +14,7 @@ function FleetVehiclesController(generalConfig,
   var self = this;
 
   self.gridOptions = {};
-
   self.vehicles = {};
-
   self.location = {};
 
   self.deleteVehicle = function deleteVehicle(vehicle) {
@@ -120,7 +118,7 @@ function FleetVehiclesController(generalConfig,
   self.populateGrid = function populateGrid() {
     vehiclesDataService.getVehicles($state.params.locationId)
       .then(function assignData(response) {
-        self.gridOptions.data = response.data;
+        self.gridOptions.data = response.data.data;
       });
   };
 

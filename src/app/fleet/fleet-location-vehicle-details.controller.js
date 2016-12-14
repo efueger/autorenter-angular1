@@ -6,11 +6,8 @@ function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrat
   var self = this;
 
   self.location = {};
-
   self.vehicle = {};
-
   self.years = {};
-
   self.colors = {};
 
   var implementationStrategy;
