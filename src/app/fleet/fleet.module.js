@@ -14,13 +14,14 @@ var dataAccess = require('../data-access/data-access');
 var confirmations = require('../confirmations/confirmations');
 var strings = require('../imports/strings.import.js');
 var configuration = require('../config/config');
+var notifications = require('../notifications/notifications');
 require('angular-ui-grid');
-require('../notifications/notifications');
+
 
 module.exports = angular.module('fa.fleet',
   [
     uiRouter,
-    'fa.notifications',
+    notifications.name,
     'ui.grid',
     'ui.grid.resizeColumns',
     dataAccess.name,

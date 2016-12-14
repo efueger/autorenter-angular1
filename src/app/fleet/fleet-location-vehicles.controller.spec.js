@@ -158,7 +158,6 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
   });
 
   it('getColumnDefs should return expected data', function testImpl() {
-    var currentPath = 'app/';
     var expectedColumnDefs = [
       {
         displayName: 'VIN',
@@ -176,31 +175,31 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
         displayName: 'Make',
         field: 'make',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Model',
         field: 'model',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Year',
         field: 'year',
         type: 'number',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Miles',
         field: 'miles',
         type: 'number',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Color',
         field: 'color',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Rent to Own',
@@ -242,7 +241,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
         year: 1990,
         miles: 452303,
         color: 'Gold',
-        rentToOwn: false,
+        rentToOwn: false
       },
       {
         id: 2,
@@ -252,7 +251,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
         year: 1994,
         miles: 282563,
         color: 'Silver',
-        rentToOwn: false,
+        rentToOwn: false
       }];
     var expectedData = [vehicles];
     vehiclesDataService.getVehicles = function getVehicles() {

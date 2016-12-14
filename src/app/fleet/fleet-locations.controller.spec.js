@@ -130,25 +130,25 @@ describe('fa.fleet.FleetLocationsController > ', function describeImpl() {
         displayName: 'Name',
         field: 'name',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Vehicles',
         field: 'vehicleCount',
         type: 'number',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'City',
         field: 'city',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'State',
         field: 'stateCode',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Actions',

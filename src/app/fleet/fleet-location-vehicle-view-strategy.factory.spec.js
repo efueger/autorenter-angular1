@@ -1,3 +1,5 @@
+require('./fleet-location-vehicle-view-strategy.factory');
+
 describe('fa.fleet.fleetLocationVehicleViewStrategy > ', function describeImpl() {
   var $q;
   var $rootScope;
@@ -16,7 +18,7 @@ describe('fa.fleet.fleetLocationVehicleViewStrategy > ', function describeImpl()
     fleetLocationVehicleViewStrategy = _fleetLocationVehicleViewStrategy_;
   }));
 
-  it.skip('getInitializationData returns state, location, year, make, model, and color data', function testImpl() {
+  it('getInitializationData returns state, location, year, make, model, and color data', function testImpl() {
     var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
     var vehicle = {
       id: 1,
@@ -26,7 +28,7 @@ describe('fa.fleet.fleetLocationVehicleViewStrategy > ', function describeImpl()
       year: 1990,
       miles: 452303,
       color: 'Gold',
-      isRentToOwn: false,
+      isRentToOwn: false
     };
     var location = {
       id: '1',

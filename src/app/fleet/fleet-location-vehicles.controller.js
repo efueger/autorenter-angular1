@@ -70,31 +70,31 @@ function FleetVehiclesController(generalConfig,
         displayName: 'Make',
         field: 'make',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Model',
         field: 'model',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Year',
         field: 'year',
         type: 'number',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Miles',
         field: 'miles',
         type: 'number',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Color',
         field: 'color',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Rent to Own',

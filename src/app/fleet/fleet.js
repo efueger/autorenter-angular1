@@ -1,7 +1,5 @@
 'use strict';
 
-require('angular-ui-grid');
-
 var fleet = require('./fleet.module');
 
 require('./fleet.route.config');
