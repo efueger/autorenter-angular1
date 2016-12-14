@@ -1,3 +1,7 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
 require('./fleet-location-vehicles.controller');
 var fleetLocationVehiclesIdColumnTemplate = require('./fleet-location-vehicles-id-column.html');
 var fleetLocationVehiclesRentToOwnColumnTemplate = require('./fleet-location-vehicles-rent-to-own-column.html');

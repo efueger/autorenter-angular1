@@ -1,6 +1,10 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
 require('./http-error-handler.factory');
 
-describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
+describe.skip('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
   var notifyErrorSpy;
   var $http;
   var $httpBackend;
@@ -21,13 +25,13 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
     $http.get('/foo')
       .catch(function handleResponseError() {
         actualArgs = notifyErrorSpy.getCall(0).args[0];
-        actualArgs.should.deep.equal({
-          title: 'Validation error',
-          userMessage: userMessage,
-          noLog: true
-        });
       });
     $httpBackend.flush();
+    actualArgs.should.deep.equal({
+        title: 'Validation error',
+        userMessage: userMessage,
+        noLog: true
+    });
   });
 
   it('should notify user on status code 413', function testImpl() {
@@ -36,12 +40,12 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
     $http.get('/foo')
       .catch(function handleResponseError() {
         actualArgs = notifyErrorSpy.getCall(0).args[0];
-        actualArgs.should.deep.equal({
-          userMessage: 'The request could not be processed because it is too large for the system to handle.'
-          + ' Please contact technical support.'
-        });
       });
     $httpBackend.flush();
+    actualArgs.should.deep.equal({
+        userMessage: 'The request could not be processed because it is too large for the system to handle.'
+        + ' Please contact technical support.'
+    });
   });
 
   describe('should notify user on', function positiveRangeTest() {
@@ -56,14 +60,13 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
         $http.get('/foo')
           .catch(function handleResponseError() {
             actualArgs = notifyErrorSpy.getCall(0).args[0];
-
-            actualArgs.should.deep.equal({
-              userMessage: 'The server is unavailable. Please try again.'
-              + ' If the problem persists, please notify technical support.',
-              noLog: true
-            });
           });
         $httpBackend.flush();
+        actualArgs.should.deep.equal({
+            userMessage: 'The server is unavailable. Please try again.'
+            + ' If the problem persists, please notify technical support.',
+            noLog: true
+        });
       });
     });
   });
@@ -74,13 +77,12 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
     $http.get('/foo')
       .catch(function handleResponseError() {
         actualArgs = notifyErrorSpy.getCall(0).args[0];
-
-        actualArgs.should.deep.equal({
-          title: 'Document not found',
-          userMessage: 'The data you are requesting does not exist.'
-        });
       });
     $httpBackend.flush();
+    actualArgs.should.deep.equal({
+        title: 'Document not found',
+        userMessage: 'The data you are requesting does not exist.'
+    });
   });
 
   describe('should not notify user on', function negativeRangeTest() {
@@ -108,10 +110,10 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
     $http.get('/foo')
       .catch(function handleResponseError() {
         actualArgs = notifyErrorSpy.getCall(0).args[0];
-        actualArgs.should.deep.equal({
-          title: 'General response error'
-        });
       });
     $httpBackend.flush();
+    actualArgs.should.deep.equal({
+        title: 'General response error'
+    });
   });
 });

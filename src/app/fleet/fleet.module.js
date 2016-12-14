@@ -12,7 +12,7 @@ var angular = require('angular');
 var uiRouter = require('angular-ui-router');
 var dataAccess = require('../data-access/data-access');
 var confirmations = require('../confirmations/confirmations');
-var strings = require('../imports/strings.import.js');
+var strings = require('../imports/strings.import');
 var configuration = require('../config/config');
 var notifications = require('../notifications/notifications');
 require('angular-ui-grid');

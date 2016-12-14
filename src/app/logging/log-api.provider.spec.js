@@ -1,3 +1,7 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
 require('./log-api.provider');
 
 describe('fa.logging.logApi > ', function describeImpl() {
@@ -37,7 +41,7 @@ describe('fa.logging.logApi > ', function describeImpl() {
   });
 
   it('should set url', function testImpl() {
-    request.url.should.equal(generalConfig.apiUrl + '/log');
+    request.url.should.equal(generalConfig.apiUrlRoot + 'log');
   });
 
   it('should set request headers', function testImpl() {
