@@ -1,6 +1,7 @@
 'use strict';
 
 var student = require('./students.module');
+var studentsTemplate = require('./students.html');
 
 function studentsRouteConfig($stateProvider) {
   $stateProvider
@@ -8,7 +9,7 @@ function studentsRouteConfig($stateProvider) {
       url: '/students',
       views: {
         '@': {
-          templateUrl: 'app/students.html',
+          template: studentsTemplate,
           controller: 'StudentsController',
           controllerAs: 'studentsController'
         }
