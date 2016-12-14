@@ -27,7 +27,7 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
     fleetLocationAddStrategy = _fleetLocationAddStrategy_;
   }));
 
-  it.skip('getInitializationData returns states', function testImpl() {
+  it('getInitializationData returns states', function testImpl() {
     var states = [
       {
         'stateCode': 'IL',
@@ -55,7 +55,7 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
     actualResponse.should.deep.equal(expectedResponse);
   });
 
-  it.skip('notifySuccess notifies user of successful add', function testImpl() {
+  it('notifySuccess notifies user of successful add', function testImpl() {
     var notifySuccessSpy = sinon.spy(notificationService, 'notifySuccess');
     fleetLocationAddStrategy.notifySuccess('9876C');
     var actualNotificationArgs = notifySuccessSpy.getCall(0).args;
@@ -67,13 +67,13 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
     var siteId = '98765U';
     var location = {siteId: siteId};
 
-    it.skip('persists the new location', function testImpl() {
+    it('persists the new location', function testImpl() {
       var addLocationSpy = sinon.spy(locationsDataService, 'addLocation');
       fleetLocationAddStrategy.save(location);
       addLocationSpy.calledWith(location).should.be.true;
     });
 
-    it.skip('notifies user of successful add', function testImpl() {
+    it('notifies user of successful add', function testImpl() {
       // Just stub it out to avoid the 'No more request expected' error.
       sinon.stub($state, 'go');
       var notifySuccessStub = sinon.stub(fleetLocationAddStrategy, 'notifySuccess');
@@ -84,7 +84,7 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
       notifySuccessStub.calledWith(siteId).should.be.true;
     });
 
-    it.skip('navigates to the locations list', function testImpl() {
+    it('navigates to the locations list', function testImpl() {
       // Just stub it out to avoid the 'No more request expected' error.
       sinon.stub(fleetLocationAddStrategy, 'notifySuccess');
       var goStub = sinon.stub($state, 'go');

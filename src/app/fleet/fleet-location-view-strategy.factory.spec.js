@@ -18,7 +18,7 @@ describe('fa.fleet.fleetLocationViewStrategy > ', function describeImpl() {
     fleetLocationViewStrategy = _fleetLocationViewStrategy_;
   }));
 
-  it.skip('getInitializationData returns state, location, and selectedState data', function testImpl() {
+  it('getInitializationData returns state, location, and selectedState data', function testImpl() {
     var states = [
       {
         'stateCode': 'IL',

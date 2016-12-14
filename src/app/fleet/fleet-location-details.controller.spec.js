@@ -89,19 +89,19 @@ describe('fa.fleet.FleetLocationDetailsController > ', function describeImpl() {
   }));
 
   describe('initialize', function initializeTest() {
-    it.skip('calls getInitializationData with correct argument', function testImpl() {
+    it('calls getInitializationData with correct argument', function testImpl() {
       getInitializationDataStub.calledWith(navigationStateId).should.be.true;
     });
 
-    it.skip('sets the correct location', function testImpl() {
+    it('sets the correct location', function testImpl() {
       controller.location.should.deep.equal(initializationData.location);
     });
 
-    it.skip('sets the correct states', function testImpl() {
+    it('sets the correct states', function testImpl() {
       controller.states.should.deep.equal(initializationData.states);
     });
 
-    it.skip('sets the correct selected state', function testImpl() {
+    it('sets the correct selected state', function testImpl() {
       controller.selectedState.should.deep.equal(initializationData.selectedState);
     });
   });
@@ -115,26 +115,26 @@ describe('fa.fleet.FleetLocationDetailsController > ', function describeImpl() {
       isEditModeStub = sinon.stub(fleetLocationDetailsModeService, 'isEditMode');
     });
 
-    it.skip('returns true if is in Edit mode', function testImpl() {
+    it('returns true if is in Edit mode', function testImpl() {
       isAddModeStub.returns(false);
       isEditModeStub.returns(true);
       controller.isEditable().should.be.true;
     });
 
-    it.skip('returns true if is in Add mode', function testImpl() {
+    it('returns true if is in Add mode', function testImpl() {
       isAddModeStub.returns(true);
       isEditModeStub.returns(false);
       controller.isEditable().should.be.true;
     });
 
-    it.skip('returns false if is not in Add or Edit mode', function testImpl() {
+    it('returns false if is not in Add or Edit mode', function testImpl() {
       isAddModeStub.returns(false);
       isEditModeStub.returns(false);
       controller.isEditable().should.be.false;
     });
   });
 
-  it.skip('save saves the correct location', function testImpl() {
+  it('save saves the correct location', function testImpl() {
     var saveSpy = sinon.spy(implementationStrategy, 'save');
     controller.save();
     saveSpy.calledWith(initializationData.location).should.be.true;

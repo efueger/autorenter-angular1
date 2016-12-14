@@ -27,7 +27,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
     fleetLocationEditStrategy = _fleetLocationEditStrategy_;
   }));
 
-  it.skip('getInitializationData returns state and location data', function testImpl() {
+  it('getInitializationData returns state and location data', function testImpl() {
     var states = [
       {
         'stateCode': 'IL',
@@ -75,7 +75,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
     actualResponse.should.deep.equal(expectedResponse);
   });
 
-  it.skip('notifySuccess notifies user of successful update', function testImpl() {
+  it('notifySuccess notifies user of successful update', function testImpl() {
     var notifySuccessSpy = sinon.spy(notificationService, 'notifySuccess');
     fleetLocationEditStrategy.notifySuccess('9876C');
     var actualNotificationArgs = notifySuccessSpy.getCall(0).args;
@@ -87,13 +87,13 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
     var siteId = '98765U';
     var location = {siteId: siteId};
 
-    it.skip('persists the modified location', function testImpl() {
+    it('persists the modified location', function testImpl() {
       var updateLocationSpy = sinon.spy(locationsDataService, 'updateLocation');
       fleetLocationEditStrategy.save(location);
       updateLocationSpy.calledWith(location).should.be.true;
     });
 
-    it.skip('notifies user of successful update', function testImpl() {
+    it('notifies user of successful update', function testImpl() {
       // Just stub it out to avoid the 'No more request expected' error.
       sinon.stub($state, 'go');
       var notifySuccessStub = sinon.stub(fleetLocationEditStrategy, 'notifySuccess');
@@ -104,7 +104,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
       notifySuccessStub.calledWith(siteId).should.be.true;
     });
 
-    it.skip('navigates to the locations list', function testImpl() {
+    it('navigates to the locations list', function testImpl() {
       // Just stub it out to avoid the 'No more request expected' error.
       sinon.stub(fleetLocationEditStrategy, 'notifySuccess');
       var goStub = sinon.stub($state, 'go');

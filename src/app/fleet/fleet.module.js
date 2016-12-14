@@ -14,6 +14,8 @@ var dataAccess = require('../data-access/data-access');
 var confirmations = require('../confirmations/confirmations');
 var strings = require('../imports/strings.import.js');
 var configuration = require('../config/config');
+require('angular-ui-grid');
+require('../notifications/notifications');
 
 module.exports = angular.module('fa.fleet',
   [
