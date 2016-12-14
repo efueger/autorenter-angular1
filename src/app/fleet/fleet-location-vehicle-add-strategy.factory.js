@@ -2,10 +2,9 @@
 
 var fleet = require('./fleet.module');
 
-var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy($q, $state, notificationService, strings,
-                                                                   vehiclesDataService, locationsDataService) {
-  var fleetLocationVehicleEditStrategyInstance;
-
+var fleetLocationVehicleAddStrategy = function fleetLocationVehicleAddStrategy($q, $state, notificationService, strings,
+                                                                 locationsDataService, vehiclesDataService) {
+  var fleetLocationVehicleAddStrategyInstance;
   var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
   var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
   var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
@@ -35,14 +34,10 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
     return deferred.promise;
   }
 
-  function getInitializationData(locationId, vehicleId) {
+  function getInitializationData(locationId) {
     var deferred = $q.defer();
     var initializationData = {};
 
-    var vehiclePromise = vehiclesDataService.getVehicle(vehicleId)
-      .then(function setResult(response) {
-        initializationData.vehicle = response.data;
-      });
     var locationPromise = locationsDataService.getLocation(locationId)
       .then(function setResult(response) {
         initializationData.location = response.data;
@@ -63,7 +58,7 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
       .then(function setResult(response) {
         initializationData.models = response.data;
       });
-    $q.all([locationPromise, vehiclePromise, yearsPromise, colorsPromise, makesPromise, modelsPromise])
+    $q.all([locationPromise, yearsPromise, colorsPromise, makesPromise, modelsPromise])
       .then(function setResult() {
         deferred.resolve(initializationData);
       });
@@ -71,36 +66,37 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
   }
 
   function notifySuccess(vin) {
-    var message = strings.format('Vehicle \'{vin}\' was updated successfully.', { vin: vin });
+    var message = strings.format('Vehicle \'{vin}\' was added successfully.', { vin: vin });
     notificationService.notifySuccess({
       userMessage: message
     });
   }
 
   function save(locationId, vehicle) {
-    vehiclesDataService.updateVehicle(vehicle)
+    vehiclesDataService.addVehicleToLocation(locationId, vehicle)
       .then(function notifyAndNavigate() {
-        fleetLocationVehicleEditStrategyInstance.notifySuccess(vehicle.vin);
+        fleetLocationVehicleAddStrategyInstance.notifySuccess(vehicle.vin);
         $state.go('fleet.locations.vehicles');
       });
   }
 
-  fleetLocationVehicleEditStrategyInstance = {
+  fleetLocationVehicleAddStrategyInstance = {
     getInitializationData: getInitializationData,
     save: save,
     notifySuccess: notifySuccess
   };
-  return fleetLocationVehicleEditStrategyInstance;
+  return fleetLocationVehicleAddStrategyInstance;
 };
 
-fleetLocationVehicleEditStrategy.$inject = [
+fleetLocationVehicleAddStrategy.$inject = [
   '$q',
   '$state',
   'notificationService',
   'strings',
-  'vehiclesDataService',
-  'locationsDataService'
+  'locationsDataService',
+  'vehiclesDataService'
 ];
 
 fleet
-  .factory('fleetLocationVehicleEditStrategy', fleetLocationVehicleEditStrategy);
+  .factory('fleetLocationVehicleAddStrategy', fleetLocationVehicleAddStrategy);
+  

@@ -160,6 +160,6 @@ describe('fa.fleet.FleetLocationVehicleDetailsController > ', function describeI
   it('save saves the correct vehicle', function testImpl() {
     var saveSpy = sinon.spy(implementationStrategy, 'save');
     controller.save();
-    saveSpy.calledWith(initializationData.vehicle).should.be.true;
+    saveSpy.calledWith(location.id, initializationData.vehicle).should.be.true;
   });
 });

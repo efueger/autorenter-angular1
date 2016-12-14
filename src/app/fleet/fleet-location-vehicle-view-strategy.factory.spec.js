@@ -23,8 +23,11 @@ describe('fa.fleet.fleetLocationVehicleViewStrategy > ', function describeImpl()
     fleetLocationVehicleViewStrategy = _fleetLocationVehicleViewStrategy_;
   }));
 
-  it('getInitializationData returns state, location, year, make, model, and color data', function testImpl() {
+  it('getInitializationData returns vehicle and location data', function testImpl() {
     var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
+    var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
+    var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
+    var makes = ['Chevrolet', 'Ford', 'Honda', 'Toyota'];
     var vehicle = {
       id: 1,
       vin: '1XKDPB0X04R047346',
@@ -46,15 +49,21 @@ describe('fa.fleet.fleetLocationVehicleViewStrategy > ', function describeImpl()
     var expectedResponse = {
       vehicle: vehicle,
       location: location,
-      years: years
+      years: years,
+      colors: colors,
+      makes: makes,
+      models: models
     };
-    sinon.stub(fleetLocationVehicleEditStrategy, 'getInitializationData', function getInitializationData(vehicleId) {
+    sinon.stub(fleetLocationVehicleEditStrategy, 'getInitializationData', function getInitializationData(locationId, vehicleId) {
       var deferred = $q.defer();
-      if (vehicleId === vehicle.id) {
+      if (locationId === location.id && vehicleId === vehicle.id) {
         deferred.resolve({
           vehicle: vehicle,
           location: location,
-          years: years
+          years: years,
+          colors: colors,
+          makes: makes,
+          models: models
         });
       } else {
         deferred.reject();
@@ -63,7 +72,7 @@ describe('fa.fleet.fleetLocationVehicleViewStrategy > ', function describeImpl()
     });
 
     var actualResponse;
-    fleetLocationVehicleViewStrategy.getInitializationData(vehicle.id)
+    fleetLocationVehicleViewStrategy.getInitializationData(location.id, vehicle.id)
       .then(function setResponse(response) {
         actualResponse = response;
       });
