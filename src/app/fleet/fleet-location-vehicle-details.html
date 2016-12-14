@@ -114,8 +114,11 @@
         <div class="col-sm-6">
           <input type="checkbox"
                  ng-model="vm.vehicle.isRentToOwn"
-                 name="rentToOwn" ng-disabled="!vm.isEditable()"
+                 name="rentToOwn" ng-show="vm.isEditable()"
                  id="rentToOwn" ng-checked="vm.vehicle.isRentToOwn">
+          <div class="ui-grid-cell-contents">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true" ng-hide="vm.isEditable()" ng-if="vm.vehicle.isRentToOwn"></span>
+          </div>
         </div>
       </div>
 
