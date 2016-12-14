@@ -1,3 +1,7 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
 require('./log-api.provider');
 
 describe('fa.logging.logApi > ', function describeImpl() {
