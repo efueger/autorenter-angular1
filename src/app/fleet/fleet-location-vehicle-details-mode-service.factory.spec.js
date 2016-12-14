@@ -1,3 +1,5 @@
+require('./fleet-location-vehicle-details-mode-service.factory');
+
 describe('fa.fleet.fleetLocationVehicleDetailsModeService > ', function describeImpl() {
   var $state;
   var fleetLocationVehicleDetailsModeService;
@@ -9,21 +11,21 @@ describe('fa.fleet.fleetLocationVehicleDetailsModeService > ', function describe
     fleetLocationVehicleDetailsModeService = _fleetLocationVehicleDetailsModeService_;
   }));
 
-  it.skip('getNavigationStateName returns correct value', function testImpl() {
+  it('getNavigationStateName returns correct value', function testImpl() {
     $state.current = { name: 'fooBar'};
     var actualValue = fleetLocationVehicleDetailsModeService.getNavigationStateName();
     actualValue.should.equal('fooBar');
   });
 
   describe('isViewMode', function isViewModeTest() {
-    it.skip('returns false', function testImpl() {
+    it('returns false', function testImpl() {
       fleetLocationVehicleDetailsModeService.getNavigationStateName = function getNavigationStateName() {
         return 'fleet.locations.vehicles.view.foo';
       };
       fleetLocationVehicleDetailsModeService.isViewMode().should.be.false;
     });
 
-    it.skip('returns true', function testImpl() {
+    it('returns true', function testImpl() {
       fleetLocationVehicleDetailsModeService.getNavigationStateName = function getNavigationStateName() {
         return 'fleet.locations.vehicles.view';
       };
@@ -32,14 +34,14 @@ describe('fa.fleet.fleetLocationVehicleDetailsModeService > ', function describe
   });
 
   describe('isAddMode', function isAddModeTest() {
-    it.skip('returns false', function testImpl() {
+    it('returns false', function testImpl() {
       fleetLocationVehicleDetailsModeService.getNavigationStateName = function getNavigationStateName() {
         return 'fleet.locations.vehicles.add.foo';
       };
       fleetLocationVehicleDetailsModeService.isAddMode().should.be.false;
     });
 
-    it.skip('returns true', function testImpl() {
+    it('returns true', function testImpl() {
       fleetLocationVehicleDetailsModeService.getNavigationStateName = function getNavigationStateName() {
         return 'fleet.locations.vehicles.add';
       };
@@ -48,14 +50,14 @@ describe('fa.fleet.fleetLocationVehicleDetailsModeService > ', function describe
   });
 
   describe('isEditMode', function isEditModeTest() {
-    it.skip('returns false', function testImpl() {
+    it('returns false', function testImpl() {
       fleetLocationVehicleDetailsModeService.getNavigationStateName = function getNavigationStateName() {
         return 'fleet.locations.vehicles.edit.foo';
       };
       fleetLocationVehicleDetailsModeService.isAddMode().should.be.false;
     });
 
-    it.skip('returns true', function testImpl() {
+    it('returns true', function testImpl() {
       fleetLocationVehicleDetailsModeService.getNavigationStateName = function getNavigationStateName() {
         return 'fleet.locations.vehicles.edit';
       };

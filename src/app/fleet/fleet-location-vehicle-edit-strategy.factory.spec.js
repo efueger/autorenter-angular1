@@ -1,3 +1,10 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
+
+require('./fleet-location-vehicle-edit-strategy.factory');
+
 describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl() {
   var $q;
   var $rootScope;
@@ -20,7 +27,7 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
     fleetLocationVehicleEditStrategy = _fleetLocationVehicleEditStrategy_;
   }));
 
-  it.skip('getInitializationData returns vehicle and location data', function testImpl() {
+  it('getInitializationData returns vehicle and location data', function testImpl() {
     var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
     var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
     var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
@@ -33,7 +40,7 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
       year: 1990,
       miles: 452303,
       color: 'Gold',
-      isRentToOwn: false,
+      isRentToOwn: false
     };
     var location = {
       id: '1',
