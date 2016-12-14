@@ -27,7 +27,7 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
     fleetLocationVehicleAddStrategy = _fleetLocationVehicleAddStrategy_;
   }));
 
-  it('getInitializationData returns location, makes, models, years, and colors', function testImpl() {
+  it('getInitializationData returns vehicle and location data', function testImpl() {
     var location = {
       id: '1',
       siteId: 'ind',

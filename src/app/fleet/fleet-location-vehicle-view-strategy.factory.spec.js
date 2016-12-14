@@ -18,7 +18,7 @@ describe('fa.fleet.fleetLocationVehicleViewStrategy > ', function describeImpl()
     fleetLocationVehicleViewStrategy = _fleetLocationVehicleViewStrategy_;
   }));
 
-  it('getInitializationData returns state, location, year, make, model, and color data', function testImpl() {
+  it('getInitializationData returns vehicle and location data', function testImpl() {
     var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
     var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
     var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
