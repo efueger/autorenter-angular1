@@ -117,7 +117,7 @@ function FleetVehiclesController($state,
   self.populateGrid = function populateGrid() {
     vehiclesDataService.getVehicles($state.params.locationId)
       .then(function assignData(response) {
-        self.gridOptions.data = response.data.data;
+        self.gridOptions.data = response.data.vehicles;
       });
   };
 

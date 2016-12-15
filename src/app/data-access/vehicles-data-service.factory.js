@@ -6,14 +6,14 @@ var vehiclesDataService = function vehiclesDataService($q, $http, generalConfig,
   function getVehicles(locationId) {
     return $http({
       method: 'GET',
-      url: strings.format('{apiUrl}api/locations/{locationId}/vehicles/', {apiUrl: generalConfig.apiUrl, locationId: locationId})
+      url: strings.format('{apiUrl}locations/{locationId}/vehicles/', {apiUrl: generalConfig.apiUrlRoot, locationId: locationId})
     });
   }
 
   function addVehicleToLocation(locationId, vehicle) {
     return $http({
       method: 'POST',
-      url: strings.format('{apiUrl}api/locations/{locationId}/vehicles/', {apiUrl: generalConfig.apiUrl, locationId: locationId}),
+      url: strings.format('{apiUrl}locations/{locationId}/vehicles/', {apiUrl: generalConfig.apiUrlRoot, locationId: locationId}),
       data: vehicle
     });
   }
@@ -21,14 +21,14 @@ var vehiclesDataService = function vehiclesDataService($q, $http, generalConfig,
   function getVehicle(vehicleId) {
     return $http({
       method: 'GET',
-      url: strings.format('{apiUrl}api/vehicles/{vehicleId}', {apiUrl: generalConfig.apiUrl, vehicleId: vehicleId})
+      url: strings.format('{apiUrl}vehicles/{vehicleId}', {apiUrl: generalConfig.apiUrlRoot, vehicleId: vehicleId})
     });
   }
 
   function updateVehicle(vehicle) {
     return $http({
       method: 'PUT',
-      url: strings.format('{apiUrl}api/vehicles/{vehicleId}', {apiUrl: generalConfig.apiUrl, vehicleId: vehicle.id}),
+      url: strings.format('{apiUrl}vehicles/{vehicleId}', {apiUrl: generalConfig.apiUrlRoot, vehicleId: vehicle.id}),
       data: vehicle
     });
   }
@@ -36,7 +36,7 @@ var vehiclesDataService = function vehiclesDataService($q, $http, generalConfig,
   function deleteVehicle(vehicleId) {
     return $http({
       method: 'DELETE',
-      url: strings.format('{apiUrl}api/vehicles/{vehicleId}', {apiUrl: generalConfig.apiUrl, vehicleId: vehicleId})
+      url: strings.format('{apiUrl}vehicles/{vehicleId}', {apiUrl: generalConfig.apiUrlRoot, vehicleId: vehicleId})
     });
   }
 
