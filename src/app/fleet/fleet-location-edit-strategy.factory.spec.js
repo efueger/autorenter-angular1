@@ -101,7 +101,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
       sinon.stub(locationsDataService, 'updateLocation', function updateLocation() {
         var deferred = $q.defer();
         deferred.resolve({});
-      return deferred.promise;
+        return deferred.promise;
       });
       var notifySuccessStub = sinon.stub(fleetLocationEditStrategy, 'notifySuccess');
 
@@ -116,7 +116,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
       sinon.stub(locationsDataService, 'updateLocation', function updateLocation() {
         var deferred = $q.defer();
         deferred.resolve({});
-      return deferred.promise;
+        return deferred.promise;
       });
       var goStub = sinon.stub($state, 'go');
 

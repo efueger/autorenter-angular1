@@ -91,7 +91,7 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
       sinon.stub(vehiclesDataService, 'addVehicleToLocation', function addVehicleToLocation() {
         var deferred = $q.defer();
         deferred.resolve({});
-      return deferred.promise;
+        return deferred.promise;
       });
       var notifySuccessStub = sinon.stub(fleetLocationVehicleAddStrategy, 'notifySuccess');
 
@@ -103,10 +103,10 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
 
     it('navigates to the vehicles list', function testImpl() {
       sinon.stub(fleetLocationVehicleAddStrategy, 'notifySuccess');
-            sinon.stub(vehiclesDataService, 'addVehicleToLocation', function addVehicleToLocation() {
+      sinon.stub(vehiclesDataService, 'addVehicleToLocation', function addVehicleToLocation() {
         var deferred = $q.defer();
         deferred.resolve({});
-      return deferred.promise;
+        return deferred.promise;
       });
       var goStub = sinon.stub($state, 'go');
 

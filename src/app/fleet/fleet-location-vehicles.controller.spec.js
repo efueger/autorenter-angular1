@@ -148,7 +148,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
       sinon.stub(locationsDataService, 'getLocation', function getLocation() {
         var deferred = $q.defer();
         deferred.resolve({data: {location: location}});
-      return deferred.promise;
+        return deferred.promise;
       });
       $rootScope.$apply();
       controller.location.should.deep.equal(location);
