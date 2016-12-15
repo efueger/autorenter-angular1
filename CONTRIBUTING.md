@@ -14,7 +14,7 @@ Before you create a new Issue:
 
 ## Making changes
 
-* Create a feature branch from the master branch.
+* Create a feature branch from the development branch.
 * Check for unnecessary whitespace/changes with `git diff --check` before committing.
   * Also check that your code is formatted properly with spaces (hint: Use [.editorconfig](http://editorconfig.org/)).
 * Keep git commit messages clear and appropriate.
@@ -29,10 +29,10 @@ Before you create a new Issue:
 1. Update the README.md with details of changes to the interface or its usage. This includes new environment variables, exposed ports, useful file locations, and container parameters.
 1. Increase the version numbers in any example files and the README.md to the new version that this PR would represent. The versioning scheme we use is [SemVer](http://semver.org/).
 1. PRs must be approved before they can be merged.
-  * Merging of approved PRs to the master branch will be performed by the Product Owner.
+  * Merging of approved PRs to the development branch will be performed by the Product Owner.
   * Merging of approved PRs to a feature branch will typically be performed by the branch's creator.
 
-    > **Example**: Jon creates a PR for a new feature. To fix some problems he found in Jon's branch while reviewing Jon's PR, Dave creates a new branch from Jon's branch and opens a new PR. After getting necessary approval, Dave merges his PR into Jon's branch. Then, after Jon's PR has been approved, the Product Owner merges Jon's PR into the master branch.
+    > **Example**: Jon creates a PR for a new feature. To fix some problems he found in Jon's branch while reviewing Jon's PR, Dave creates a new branch from Jon's branch and opens a new PR. After getting necessary approval, Dave merges his PR into Jon's branch. Then, after Jon's PR has been approved, the Product Owner merges Jon's PR into the development branch.
 
 ## Contributor Covenant Code of Conduct
 
