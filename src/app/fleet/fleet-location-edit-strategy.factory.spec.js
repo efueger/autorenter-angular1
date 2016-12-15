@@ -62,7 +62,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
     sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {
       var deferred = $q.defer();
       if (locationId === location.id) {
-        deferred.resolve({data: location});
+        deferred.resolve({data:{location:location}});
       } else {
         deferred.reject();
       }
@@ -75,7 +75,6 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
         actualResponse = response;
       });
     $rootScope.$apply();
-
     actualResponse.should.deep.equal(expectedResponse);
   });
 
@@ -98,8 +97,12 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
     });
 
     it('notifies user of successful update', function testImpl() {
-      // Just stub it out to avoid the 'No more request expected' error.
       sinon.stub($state, 'go');
+      sinon.stub(locationsDataService, 'updateLocation', function updateLocation() {
+        var deferred = $q.defer();
+        deferred.resolve({});
+      return deferred.promise;
+      });
       var notifySuccessStub = sinon.stub(fleetLocationEditStrategy, 'notifySuccess');
 
       fleetLocationEditStrategy.save(location);
@@ -109,8 +112,12 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
     });
 
     it('navigates to the locations list', function testImpl() {
-      // Just stub it out to avoid the 'No more request expected' error.
       sinon.stub(fleetLocationEditStrategy, 'notifySuccess');
+      sinon.stub(locationsDataService, 'updateLocation', function updateLocation() {
+        var deferred = $q.defer();
+        deferred.resolve({});
+      return deferred.promise;
+      });
       var goStub = sinon.stub($state, 'go');
 
       fleetLocationEditStrategy.save(location);
