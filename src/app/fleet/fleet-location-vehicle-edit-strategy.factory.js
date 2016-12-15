@@ -45,7 +45,7 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
       });
     var locationPromise = locationsDataService.getLocation(locationId)
       .then(function setResult(response) {
-        initializationData.location = response.data.data;
+        initializationData.location = response.data.location;
       });
     var yearsPromise = getYears()
       .then(function setResult(response) {

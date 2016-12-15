@@ -88,7 +88,7 @@ function FleetLocationsController(generalConfig, locationsDataService, confirmat
   self.populateGrid = function populateGrid() {
     locationsDataService.getLocations()
       .then(function assignData(response) {
-        self.gridOptions.data = response.data.data;
+        self.gridOptions.data = response.data.locations;
       });
   };
 

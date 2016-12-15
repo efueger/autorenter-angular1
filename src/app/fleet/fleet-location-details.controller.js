@@ -6,9 +6,7 @@ function FleetLocationDetailsController($state, fleetLocationStrategyFactory, fl
   var self = this;
 
   self.location = {};
-
   self.states = {};
-
   self.selectedState = {};
 
   var implementationStrategy;

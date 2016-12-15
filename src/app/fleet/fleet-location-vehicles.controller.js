@@ -36,7 +36,7 @@ function FleetVehiclesController($state,
   self.initializeLocation = function initializeLocation(locationId) {
     locationsDataService.getLocation(locationId)
       .then(function setLocation(response) {
-        self.location = response.data.data;
+        self.location = response.data.location;
       });
   };
 
