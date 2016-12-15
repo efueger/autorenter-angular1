@@ -5,8 +5,7 @@ var fleetLocationVehiclesIdColumnTemplate = require('./fleet-location-vehicles-i
 var fleetLocationVehiclesRentToOwnColumnTemplate = require('./fleet-location-vehicles-rent-to-own-column.html');
 var fleetLocationVehiclesActionsColumnTemplate = require('./fleet-location-vehicles-actions-column.html');
 
-function FleetVehiclesController(generalConfig,
-                                 $state,
+function FleetVehiclesController($state,
                                  vehiclesDataService,
                                  locationsDataService,
                                  confirmationService,
@@ -128,7 +127,6 @@ function FleetVehiclesController(generalConfig,
 }
 
 FleetVehiclesController.$inject = [
-  'generalConfig',
   '$state',
   'vehiclesDataService',
   'locationsDataService',

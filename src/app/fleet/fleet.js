@@ -1,7 +1,5 @@
 'use strict';
 
-require('angular-ui-grid');
-
 var fleet = require('./fleet.module');
 
 require('./fleet.route.config');
@@ -10,6 +8,7 @@ require('./fleet-locations.controller');
 require('./fleet-location-vehicles.controller');
 
 require('./fleet-location-add-strategy.factory');
+require('./fleet-location-vehicle-add-strategy.factory');
 
 require('./fleet-location-strategy-factory.factory');
 require('./fleet-location-vehicle-strategy.factory');

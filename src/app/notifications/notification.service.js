@@ -61,7 +61,7 @@ function NotificationService($log, toaster, strings) {
     toaster.pop({
       type: 'success',
       title: notificationData.title || defaultTitle,
-      body: notificationData.userMessage || defaultUserMessage,
+      body: notificationData.userMessage || defaultUserMessage
     });
 
     if (notificationData.technicalMessage) {

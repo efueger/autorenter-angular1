@@ -23,7 +23,7 @@ function logApi(generalConfig, strings) {
 
     this.getXhr = function getXhr() {
       var ajax = new XMLHttpRequest();
-      ajax.open('POST', strings.format('{apiUrl}api/log', {apiUrl: generalConfig.apiUrl}));
+      ajax.open('POST', strings.format('{apiUrlRoot}log', {apiUrlRoot: generalConfig.apiUrlRoot}));
       ajax.setRequestHeader('Accept', 'application/json, text/plain, */*');
       ajax.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
       ajax.onreadystatechange = function onReadyStateChange() {
