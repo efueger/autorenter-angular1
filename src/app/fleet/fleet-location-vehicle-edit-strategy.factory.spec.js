@@ -60,12 +60,12 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
     };
     sinon.stub(vehiclesDataService, 'getVehicle', function getVehicle() {
       var deferred = $q.defer();
-      deferred.resolve({data: vehicle});
+      deferred.resolve({data: {vehicle: vehicle}});
       return deferred.promise;
     });
     sinon.stub(locationsDataService, 'getLocation', function getLocation() {
       var deferred = $q.defer();
-      deferred.resolve({data: location});
+      deferred.resolve({data: {location: location}});
       return deferred.promise;
     });
 

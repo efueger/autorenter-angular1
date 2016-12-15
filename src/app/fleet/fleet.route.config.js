@@ -81,7 +81,7 @@ function fleetRouteConfig($stateProvider) {
       views: {
         '@': {
           template: fleetLocationVehiclesTemplate,
-          controller: 'FleetVehiclesController',
+          controller: 'FleetLocationVehiclesController',
           controllerAs: 'vm'
         }
       },

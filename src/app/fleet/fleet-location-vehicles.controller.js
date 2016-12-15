@@ -5,7 +5,7 @@ var fleetLocationVehiclesIdColumnTemplate = require('./fleet-location-vehicles-i
 var fleetLocationVehiclesRentToOwnColumnTemplate = require('./fleet-location-vehicles-rent-to-own-column.html');
 var fleetLocationVehiclesActionsColumnTemplate = require('./fleet-location-vehicles-actions-column.html');
 
-function FleetVehiclesController($state,
+function FleetLocationVehiclesController($state,
                                  vehiclesDataService,
                                  locationsDataService,
                                  confirmationService,
@@ -13,9 +13,7 @@ function FleetVehiclesController($state,
   var self = this;
 
   self.gridOptions = {};
-
   self.vehicles = {};
-
   self.location = {};
 
   self.deleteVehicle = function deleteVehicle(vehicle) {
@@ -119,14 +117,14 @@ function FleetVehiclesController($state,
   self.populateGrid = function populateGrid() {
     vehiclesDataService.getVehicles($state.params.locationId)
       .then(function assignData(response) {
-        self.gridOptions.data = response.data;
+        self.gridOptions.data = response.data.vehicles;
       });
   };
 
   self.initialize();
 }
 
-FleetVehiclesController.$inject = [
+FleetLocationVehiclesController.$inject = [
   '$state',
   'vehiclesDataService',
   'locationsDataService',
@@ -134,4 +132,4 @@ FleetVehiclesController.$inject = [
   'strings'
 ];
 
-fleet.controller('FleetVehiclesController', FleetVehiclesController);
+fleet.controller('FleetLocationVehiclesController', FleetLocationVehiclesController);

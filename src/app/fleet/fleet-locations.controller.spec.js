@@ -181,7 +181,7 @@ describe('fa.fleet.FleetLocationsController > ', function describeImpl() {
     var expectedData = [location];
     locationsDataService.getLocations = function getLocations() {
       var deferred = $q.defer();
-      deferred.resolve({data: expectedData});
+      deferred.resolve({data: {locations: expectedData}});
       return deferred.promise;
     };
 
