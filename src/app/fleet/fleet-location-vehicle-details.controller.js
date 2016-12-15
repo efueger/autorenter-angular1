@@ -30,7 +30,7 @@ function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrat
   };
 
   self.save = function save() {
-    implementationStrategy.save(self.vehicle);
+    implementationStrategy.save(self.location.id, self.vehicle);
   };
 
   self.initialize();

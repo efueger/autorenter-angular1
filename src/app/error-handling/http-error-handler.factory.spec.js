@@ -1,6 +1,10 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
 require('./http-error-handler.factory');
 
-describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
+describe.skip('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
   var notifyErrorSpy;
   var $http;
   var $httpBackend;
@@ -14,8 +18,8 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
     notifyErrorSpy = sinon.spy(_notificationService_, 'notifyError');
   }));
 
-  it.skip('should notify user on status code 400', function testImpl() {
-    var actualArgs;
+  it('should notify user on status code 400', function testImpl() {
+    var actualArgs = {};
     var userMessage = 'some validation error message';
     $httpBackend.when('GET', '/foo').respond(400, {message: userMessage});
     $http.get('/foo')
@@ -24,14 +28,14 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
       });
     $httpBackend.flush();
     actualArgs.should.deep.equal({
-      title: 'Validation error',
-      userMessage: userMessage,
-      noLog: true
+        title: 'Validation error',
+        userMessage: userMessage,
+        noLog: true
     });
   });
 
-  it.skip('should notify user on status code 413', function testImpl() {
-    var actualArgs;
+  it('should notify user on status code 413', function testImpl() {
+    var actualArgs = {};
     $httpBackend.when('GET', '/foo').respond(413);
     $http.get('/foo')
       .catch(function handleResponseError() {
@@ -39,7 +43,7 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
       });
     $httpBackend.flush();
     actualArgs.should.deep.equal({
-      userMessage: 'The request could not be processed because it is too large for the system to handle.'
+        userMessage: 'The request could not be processed because it is too large for the system to handle.'
         + ' Please contact technical support.'
     });
   });
@@ -50,8 +54,8 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
       statusCodes.push(i);
     }
     statusCodes.forEach(function statusTest(status) {
-      it.skip('status code ' + status, function testImpl() {
-        var actualArgs;
+      it('status code ' + status, function testImpl() {
+        var actualArgs = {};
         $httpBackend.when('GET', '/foo').respond(status);
         $http.get('/foo')
           .catch(function handleResponseError() {
@@ -59,16 +63,16 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
           });
         $httpBackend.flush();
         actualArgs.should.deep.equal({
-          userMessage: 'The server is unavailable. Please try again.'
+            userMessage: 'The server is unavailable. Please try again.'
             + ' If the problem persists, please notify technical support.',
-          noLog: true
+            noLog: true
         });
       });
     });
   });
 
-  it.skip('should notify user on status code 404', function testImpl() {
-    var actualArgs;
+  it('should notify user on status code 404', function testImpl() {
+    var actualArgs = {};
     $httpBackend.when('GET', '/foo').respond(404);
     $http.get('/foo')
       .catch(function handleResponseError() {
@@ -76,15 +80,15 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
       });
     $httpBackend.flush();
     actualArgs.should.deep.equal({
-      title: 'Document not found',
-      userMessage: 'The data you are requesting does not exist.'
+        title: 'Document not found',
+        userMessage: 'The data you are requesting does not exist.'
     });
   });
 
   describe('should not notify user on', function negativeRangeTest() {
     var statusCodes = [401, 403];
     statusCodes.forEach(function statusTest(status) {
-      it.skip('status code ' + status, function testImpl() {
+      it('status code ' + status, function testImpl() {
         var isCalled;
         $httpBackend.when('GET', '/foo').respond(status);
         $http.get('/foo')
@@ -100,8 +104,8 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
     });
   });
 
-  it.skip('should notify user with general message on other status code', function testImpl() {
-    var actualArgs;
+  it('should notify user with general message on other status code', function testImpl() {
+    var actualArgs = {};
     $httpBackend.when('GET', '/foo').respond(600);
     $http.get('/foo')
       .catch(function handleResponseError() {
@@ -109,7 +113,7 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
       });
     $httpBackend.flush();
     actualArgs.should.deep.equal({
-      title: 'General response error'
+        title: 'General response error'
     });
   });
 });

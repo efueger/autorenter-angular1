@@ -1,4 +1,11 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
 require('./fleet-location-vehicles.controller');
+var fleetLocationVehiclesIdColumnTemplate = require('./fleet-location-vehicles-id-column.html');
+var fleetLocationVehiclesRentToOwnColumnTemplate = require('./fleet-location-vehicles-rent-to-own-column.html');
+var fleetLocationVehiclesActionsColumnTemplate = require('./fleet-location-vehicles-actions-column.html');
 
 describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
   var $q;
@@ -72,7 +79,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
       };
     });
 
-    it.skip('asks user to confirm the action', function testImpl() {
+    it('asks user to confirm the action', function testImpl() {
       var showSpy = sinon.spy(confirmationService, 'show');
 
       controller.deleteVehicle(vehicle);
@@ -82,7 +89,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
       showSpy.getCall(0).args[0].should.equal(expectedMessage);
     });
 
-    it.skip('should delete an existing record if user confirms', function testImpl() {
+    it('should delete an existing record if user confirms', function testImpl() {
       var deleteVehicleSpy = sinon.spy(vehiclesDataService, 'deleteVehicle');
       controller.deleteVehicle(vehicle);
       $rootScope.$apply();
@@ -90,7 +97,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
       deleteVehicleSpy.calledWith(vehicle.id).should.be.true;
     });
 
-    it.skip('should repopulate the grid if user confirms', function testImpl() {
+    it('should repopulate the grid if user confirms', function testImpl() {
       var populateGridSpy = sinon.spy(controller, 'populateGrid');
       controller.deleteVehicle(vehicle);
       $rootScope.$apply();
@@ -98,7 +105,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
       populateGridSpy.called.should.be.true;
     });
 
-    it.skip('should not delete an existing record if user cancels', function testImpl() {
+    it('should not delete an existing record if user cancels', function testImpl() {
       confirmationService.show = function show() {
         var deferred = $q.defer();
         deferred.reject();
@@ -114,35 +121,35 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
   });
 
   describe('initialize', function initializeImpl() {
-    it.skip('should initialize gridOptions.flatEntityAccess', function testImpl() {
+    it('should initialize gridOptions.flatEntityAccess', function testImpl() {
       controller.gridOptions.flatEntityAccess.should.be.true;
     });
 
-    it.skip('should initialize gridOptions.enableColumnResizing', function testImpl() {
+    it('should initialize gridOptions.enableColumnResizing', function testImpl() {
       controller.gridOptions.enableColumnResizing.should.be.true;
     });
 
-    it.skip('should initialize gridOptions.enableColumnMenus', function testImpl() {
+    it('should initialize gridOptions.enableColumnMenus', function testImpl() {
       controller.gridOptions.enableColumnMenus.should.be.false;
     });
 
-    it.skip('should initialize gridOptions.columnDefs', function testImpl() {
+    it('should initialize gridOptions.columnDefs', function testImpl() {
       var columnDefs = controller.getColumnDefs();
       controller.gridOptions.columnDefs.should.deep.equal(columnDefs);
     });
 
-    it.skip('should initialize gridOptions.onRegisterApi', function testImpl() {
+    it('should initialize gridOptions.onRegisterApi', function testImpl() {
       var onRegisterGridApiName = controller.onRegisterGridApi.name;
       controller.gridOptions.onRegisterApi.name.should.equal(onRegisterGridApiName);
     });
 
-    it.skip('should initialize self.location', function testImpl() {
+    it('should initialize self.location', function testImpl() {
       $rootScope.$apply();
       controller.location.should.deep.equal(location);
     });
   });
 
-  it.skip('initializeLocation initializes self.location', function testImpl() {
+  it('initializeLocation initializes self.location', function testImpl() {
     var expectedLocation = {id: 'abc123'};
     sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {
       var deferred = $q.defer();
@@ -154,8 +161,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
     controller.location.should.deep.equal(expectedLocation);
   });
 
-  it.skip('getColumnDefs should return expected data', function testImpl() {
-    var currentPath = 'app/';
+  it('getColumnDefs should return expected data', function testImpl() {
     var expectedColumnDefs = [
       {
         displayName: 'VIN',
@@ -167,51 +173,51 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
           priority: 0,
           direction: 'asc'
         },
-        cellTemplate: currentPath + 'fleet-location-vehicles-id-column.html'
+        cellTemplate: fleetLocationVehiclesIdColumnTemplate
       },
       {
         displayName: 'Make',
         field: 'make',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Model',
         field: 'model',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Year',
         field: 'year',
         type: 'number',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Miles',
         field: 'miles',
         type: 'number',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Color',
         field: 'color',
         type: 'string',
-        enableSorting: false,
+        enableSorting: false
       },
       {
         displayName: 'Rent to Own',
         field: 'isRentToOwn',
         type: 'boolean',
         enableSorting: false,
-        cellTemplate: currentPath + 'fleet-location-vehicles-rent-to-own-column.html'
+        cellTemplate: fleetLocationVehiclesRentToOwnColumnTemplate
       },
       {
         displayName: 'Actions',
         width: 200,
         field: 'id',
         enableSorting: false,
-        cellTemplate: currentPath + 'fleet-location-vehicles-actions-column.html'
+        cellTemplate: fleetLocationVehiclesActionsColumnTemplate
       }
     ];
 
@@ -219,7 +225,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
     actualColumnDefs.should.deep.equal(expectedColumnDefs);
   });
 
-  it.skip('onRegisterGridApi should populate grid', function testImpl() {
+  it('onRegisterGridApi should populate grid', function testImpl() {
     var populateFunctionWasInvoked;
     controller.populateGrid = function populateGrid() {
       populateFunctionWasInvoked = false;
@@ -229,7 +235,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
     populateFunctionWasInvoked.should.be.false;
   });
 
-  it.skip('populateGrid should set grid data', function testImpl() {
+  it('populateGrid should set grid data', function testImpl() {
     var vehicles = [
       {
         id: 1,
@@ -239,7 +245,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
         year: 1990,
         miles: 452303,
         color: 'Gold',
-        rentToOwn: false,
+        rentToOwn: false
       },
       {
         id: 2,
@@ -249,7 +255,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
         year: 1994,
         miles: 282563,
         color: 'Silver',
-        rentToOwn: false,
+        rentToOwn: false
       }];
     var expectedData = [vehicles];
     vehiclesDataService.getVehicles = function getVehicles() {

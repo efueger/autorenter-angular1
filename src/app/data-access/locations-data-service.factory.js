@@ -6,14 +6,14 @@ var locationsDataService = function locationsDataService($q, $http, generalConfi
   function getLocations() {
     return $http({
       method: 'GET',
-      url: strings.format('{apiUrl}api/locations', {apiUrl: generalConfig.apiUrl})
+      url: strings.format('{apiUrl}locations', {apiUrl: generalConfig.apiUrlRoot})
     });
   }
 
   function addLocation(location) {
     return $http({
       method: 'POST',
-      url: strings.format('{apiUrl}api/locations', {apiUrl: generalConfig.apiUrl}),
+      url: strings.format('{apiUrl}locations', {apiUrl: generalConfig.apiUrlRoot}),
       data: location
     });
   }
@@ -21,14 +21,14 @@ var locationsDataService = function locationsDataService($q, $http, generalConfi
   function getLocation(locationId) {
     return $http({
       method: 'GET',
-      url: strings.format('{apiUrl}api/locations/{locationId}', {apiUrl: generalConfig.apiUrl, locationId: locationId})
+      url: strings.format('{apiUrl}locations/{locationId}', {apiUrl: generalConfig.apiUrlRoot, locationId: locationId})
     });
   }
 
   function updateLocation(location) {
     return $http({
       method: 'PUT',
-      url: strings.format('{apiUrl}api/locations/{locationId}', {apiUrl: generalConfig.apiUrl, locationId: location.id}),
+      url: strings.format('{apiUrl}locations/{locationId}', {apiUrl: generalConfig.apiUrlRoot, locationId: location.id}),
       data: location
     });
   }
@@ -36,7 +36,7 @@ var locationsDataService = function locationsDataService($q, $http, generalConfi
   function deleteLocation(locationId) {
     return $http({
       method: 'DELETE',
-      url: strings.format('{apiUrl}api/locations/{locationId}', {apiUrl: generalConfig.apiUrl, locationId: locationId})
+      url: strings.format('{apiUrl}locations/{locationId}', {apiUrl: generalConfig.apiUrlRoot, locationId: locationId})
     });
   }
 

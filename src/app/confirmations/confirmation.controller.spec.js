@@ -1,3 +1,7 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
 require('./confirmation.controller');
 
 describe('fa.confirmations.ConfirmationController > ', function describeImpl() {

@@ -1,3 +1,7 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
 require('./fleet-location-view-strategy.factory');
 
 describe('fa.fleet.fleetLocationViewStrategy > ', function describeImpl() {
@@ -18,7 +22,7 @@ describe('fa.fleet.fleetLocationViewStrategy > ', function describeImpl() {
     fleetLocationViewStrategy = _fleetLocationViewStrategy_;
   }));
 
-  it.skip('getInitializationData returns state, location, and selectedState data', function testImpl() {
+  it('getInitializationData returns state, location, and selectedState data', function testImpl() {
     var states = [
       {
         'stateCode': 'IL',
