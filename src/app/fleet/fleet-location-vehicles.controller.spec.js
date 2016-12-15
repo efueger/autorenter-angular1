@@ -47,14 +47,14 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
 
     locationsDataService.getLocation = function getLocation() {
       var deferred = $q.defer();
-      deferred.resolve({data: location});
+      deferred.resolve({data: {location:location}});
       return deferred.promise;
     };
 
     angular.mock.inject([
       '$controller',
       function assignController($controller) {
-        controller = $controller('FleetVehiclesController', {
+        controller = $controller('FleetLocationVehiclesController', {
           '$state': $state,
           'vehiclesDataService': vehiclesDataService,
           'locationsDataService': locationsDataService,
@@ -121,6 +121,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
   });
 
   describe('initialize', function initializeImpl() {
+
     it('should initialize gridOptions.flatEntityAccess', function testImpl() {
       controller.gridOptions.flatEntityAccess.should.be.true;
     });
@@ -144,6 +145,11 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
     });
 
     it('should initialize self.location', function testImpl() {
+      sinon.stub(locationsDataService, 'getLocation', function getLocation() {
+        var deferred = $q.defer();
+        deferred.resolve({data: {location: location}});
+        return deferred.promise;
+      });
       $rootScope.$apply();
       controller.location.should.deep.equal(location);
     });
@@ -153,7 +159,7 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
     var expectedLocation = {id: 'abc123'};
     sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {
       var deferred = $q.defer();
-      deferred.resolve(locationId === expectedLocation.id ? {data: expectedLocation} : {});
+      deferred.resolve(locationId === expectedLocation.id ? {data: {location: expectedLocation}} : {});
       return deferred.promise;
     });
     controller.initializeLocation(expectedLocation.id);
@@ -257,16 +263,15 @@ describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
         color: 'Silver',
         rentToOwn: false
       }];
-    var expectedData = [vehicles];
-    vehiclesDataService.getVehicles = function getVehicles() {
+    var expectedData = vehicles;
+    sinon.stub(vehiclesDataService, 'getVehicles', function getVehicles() {
       var deferred = $q.defer();
-      deferred.resolve({data: expectedData});
+      deferred.resolve({data: {vehicles: vehicles}});
       return deferred.promise;
-    };
-
+    });
     controller.populateGrid();
     $rootScope.$apply();
-
-    controller.gridOptions.data.should.equal(expectedData);
+    var actualData = controller.gridOptions.data;
+    actualData.should.deep.equal(expectedData);
   });
 });

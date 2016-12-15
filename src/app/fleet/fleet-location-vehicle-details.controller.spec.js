@@ -105,7 +105,7 @@ describe('fa.fleet.FleetLocationVehicleDetailsController > ', function describeI
 
   describe('initialize', function initializeTest() {
     it('calls getInitializationData with correct arguments', function testImpl() {
-      getInitializationDataStub.calledWith(navigationState.locationId, parseInt(navigationState.vehicleId, 10)).should.be.true;
+      getInitializationDataStub.calledWith(navigationState.locationId, navigationState.vehicleId).should.be.true;
     });
 
     it('sets the correct location', function testImpl() {

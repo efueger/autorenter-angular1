@@ -31,7 +31,7 @@ var fleetLocationDetailsModeService = function fleetLocationDetailsModeService($
 };
 
 fleetLocationDetailsModeService.$inject = [
-  '$state',
+  '$state'
 ];
 
 fleet

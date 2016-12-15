@@ -54,7 +54,7 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
     };
     sinon.stub(locationsDataService, 'getLocation', function getLocation() {
       var deferred = $q.defer();
-      deferred.resolve({data: location});
+      deferred.resolve({data: {location: location}});
       return deferred.promise;
     });
 
@@ -87,8 +87,12 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
     });
 
     it('notifies user of successful add', function testImpl() {
-      // Just stub it out to avoid the 'No more request expected' error.
       sinon.stub($state, 'go');
+      sinon.stub(vehiclesDataService, 'addVehicleToLocation', function addVehicleToLocation() {
+        var deferred = $q.defer();
+        deferred.resolve({});
+        return deferred.promise;
+      });
       var notifySuccessStub = sinon.stub(fleetLocationVehicleAddStrategy, 'notifySuccess');
 
       fleetLocationVehicleAddStrategy.save(location.id, vehicle);
@@ -98,8 +102,12 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
     });
 
     it('navigates to the vehicles list', function testImpl() {
-      // Just stub it out to avoid the 'No more request expected' error.
       sinon.stub(fleetLocationVehicleAddStrategy, 'notifySuccess');
+      sinon.stub(vehiclesDataService, 'addVehicleToLocation', function addVehicleToLocation() {
+        var deferred = $q.defer();
+        deferred.resolve({});
+        return deferred.promise;
+      });
       var goStub = sinon.stub($state, 'go');
 
       fleetLocationVehicleAddStrategy.save(location.id, vehicle);

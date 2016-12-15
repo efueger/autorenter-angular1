@@ -5,19 +5,16 @@ var fleet = require('./fleet.module');
 function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrategyFactory, fleetLocationVehicleDetailsModeService) {
   var self = this;
 
-  self.location;
-
-  self.vehicle;
-
-  self.years;
-
-  self.colors;
+  self.location = {};
+  self.vehicle = {};
+  self.years = {};
+  self.colors = {};
 
   var implementationStrategy;
 
-  self.initialize =  function initialize() {
+  self.initialize = function initialize() {
     implementationStrategy = fleetLocationVehicleStrategyFactory.getStrategy();
-    implementationStrategy.getInitializationData($state.params.locationId, parseInt($state.params.vehicleId, 10))
+    implementationStrategy.getInitializationData($state.params.locationId, $state.params.vehicleId)
       .then(function init(initializationData) {
         self.location = initializationData.location;
         self.vehicle = initializationData.vehicle;

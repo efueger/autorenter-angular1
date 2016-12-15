@@ -41,11 +41,11 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
 
     var vehiclePromise = vehiclesDataService.getVehicle(vehicleId)
       .then(function setResult(response) {
-        initializationData.vehicle = response.data;
+        initializationData.vehicle = response.data.vehicle;
       });
     var locationPromise = locationsDataService.getLocation(locationId)
       .then(function setResult(response) {
-        initializationData.location = response.data;
+        initializationData.location = response.data.location;
       });
     var yearsPromise = getYears()
       .then(function setResult(response) {
