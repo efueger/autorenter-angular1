@@ -31,7 +31,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "rm -rf ./dist && webpack --progress --prod",
-    "build:ci": "webpack --progress --prod --ci",
+    "build:ci": "webpack --progress --prod --ci --bail",
     "test": "rm -rf ./coverage && karma start ./karma.conf.js",
     "test:ci": "karma start ./karma.conf.js --ci",
     "test:watch": "karma start ./karma.conf.js --watch"
@@ -89,6 +89,7 @@
     "postcss-loader": "1.2.1",
     "raw-loader": "0.5.1",
     "sinon": "1.17.5",
+    "style-loader": "0.13.1",
     "url-loader": "0.5.7",
     "webpack": "1.13.1",
     "webpack-dev-server": "1.14.1",
