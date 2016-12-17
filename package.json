@@ -69,7 +69,7 @@
     "isparta-loader": "2.0.0",
     "karma": "0.13.22",
     "karma-angular": "0.0.6",
-    "karma-bamboo-reporter": "github:dashlane/karma-bamboo-reporter",
+    "karma-bamboo-reporter": "0.1.2",
     "karma-chai": "0.1.0",
     "karma-cli": "1.0.1",
     "karma-coverage": "1.1.1",
