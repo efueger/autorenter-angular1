@@ -20,13 +20,15 @@ var preLoaders = [
 ];
 var loaders = [
   {test: /\.(png|jpg)$/, loader: 'null'},
-  {test: /\.(html)$/, loader: 'null'}
+  {test: /\.(html)$/, loader: 'html'}
 ];
 var processors = {};
 processors[unitTestEntry] = ['webpack', 'sourcemap'];
 processors['src/app/**/*.js'] = ['webpack', 'sourcemap'];
 
-var reporters = [
+var reporters = args.ci ? [
+  'mocha', 'coverage', 'bamboo'
+] : [
   'mocha', 'coverage'
 ];
 var coverageReporters = args.watch ? [

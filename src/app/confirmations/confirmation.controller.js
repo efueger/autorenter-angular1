@@ -3,15 +3,15 @@
 var confirmations = require('./confirmations.module');
 
 function ConfirmationController($uibModalInstance, popupText) {
-  var self = this;
+  var vm = this;
 
-  self.popupText = popupText;
+  vm.popupText = popupText;
 
-  self.confirm = function confirm() {
+  vm.confirm = function confirm() {
     $uibModalInstance.close();
   };
 
-  self.cancel = function cancel() {
+  vm.cancel = function cancel() {
     $uibModalInstance.dismiss('cancel');
   };
 }

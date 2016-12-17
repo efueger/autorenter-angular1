@@ -68,8 +68,10 @@ function NotificationService($log, toaster, strings) {
       $log.info(notificationData.technicalMessage);
     }
   };
+
+  return self;
 }
 
 NotificationService.$inject = ['$log', 'toaster', 'strings'];
 
-notifications.service('notificationService', NotificationService);
+notifications.factory('notificationService', NotificationService);

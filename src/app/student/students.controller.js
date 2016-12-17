@@ -3,22 +3,22 @@
 var students = require('./students.module');
 
 function StudentsController($http, $log, generalConfig, notificationService) {
-  var self = this;
+  var vm = this;
 
-  self.students = [
+  vm.students = [
     { name: 'Josh' },
     { name: 'Chris' },
     { name: 'Sarah' }];
 
-  self.addStudent = function addStudent(name) {
-    self.students.push({ name: name });
+  vm.addStudent = function addStudent(name) {
+    vm.students.push({ name: name });
     $log.debug('added ' + name);
     $log.info('added ' + name);
     $log.warn('added ' + name);
     $log.error('added ' + name);
   };
 
-  self.showError = function showError() {
+  vm.showError = function showError() {
     notificationService.notifyError({
       title: 'The error title',
       userMessage: 'Oops, an error!',
@@ -26,55 +26,55 @@ function StudentsController($http, $log, generalConfig, notificationService) {
     });
   };
 
-  self.showWarning = function showWarning() {
+  vm.showWarning = function showWarning() {
     notificationService.notifyWarning({
       userMessage: 'A warning',
       technicalMessage: 'technical warning message'
     });
   };
 
-  self.showInfo = function showInfo() {
+  vm.showInfo = function showInfo() {
     notificationService.notifyInfo({
       userMessage: 'An informational message',
       technicalMessage: 'technical info message'
     });
   };
 
-  self.showSuccess = function showSuccess() {
+  vm.showSuccess = function showSuccess() {
     notificationService.notifySuccess({
       userMessage: 'Hooray, it worked!',
       technicalMessage: 'technical success message'
     });
   };
 
-  self.throwException = function throwException() {
+  vm.throwException = function throwException() {
     throw new Error('the test exception');
   };
 
-  self.checkHttpErrorHandlerSuccess = function checkHttpErrorHandler() {
+  vm.checkHttpErrorHandlerSuccess = function checkHttpErrorHandler() {
     $http({
       method: 'GET',
       url: generalConfig.apiUrlRoot
     }).then(function successCallback(response) {
-      console.log('success - response = ' + response.status); // eslint-disable-line no-console
+      $log.log('success - response = ' + response.status);
     }, function errorCallback(response) {
-      console.log('unexpected error - response = ' + response.status); // eslint-disable-line no-console
+      $log.log('unexpected error - response = ' + response.status);
     });
   };
 
-  self.checkHttpErrorHandlerError = function checkHttpErrorHandler() {
+  vm.checkHttpErrorHandlerError = function checkHttpErrorHandler() {
     $http({
       method: 'GET',
       url: generalConfig.apiUrlRoot + 'raise-error'
     }).then(function successCallback(response) {
-      console.log('unexpected success - response = ' + response.status); // eslint-disable-line no-console
+      $log.log('unexpected success - response = ' + response.status);
     }, function errorCallback(response) {
-      console.log('error - response = ' + response.status); // eslint-disable-line no-console
+      $log.log('error - response = ' + response.status);
     });
   };
 
   $http.get(generalConfig.apiUrlRoot).then(function apiSuccess(res) {
-    self.apiResponse = res.data;
+    vm.apiResponse = res.data;
   }, function apiError() {
     // log error
   });

@@ -5,35 +5,35 @@ var fleetLocationIdColumnTemplate = require('./fleet-locations-id-column.html');
 var fleetLocationsActionsColumnTemplate = require('./fleet-locations-actions-column.html');
 
 function FleetLocationsController(generalConfig, locationsDataService, confirmationService, strings) {
-  var self = this;
+  var vm = this;
 
-  self.gridOptions = {};
+  vm.gridOptions = {};
 
-  self.deleteLocation = function deleteLocation(location) {
+  vm.deleteLocation = function deleteLocation(location) {
     confirmationService.show(strings.format('Delete location \'{siteId}\'?', {siteId: location.siteId}))
       .then(function deleteIt() {
         locationsDataService.deleteLocation(location.id)
           .then(function repopulateGrid() {
-            self.populateGrid();
+            vm.populateGrid();
           });
       });
   };
 
-  self.initialize = function initialize() {
-    self.configureGrid();
+  vm.initialize = function initialize() {
+    vm.configureGrid();
   };
 
-  self.configureGrid = function configureGrid() {
-    self.gridOptions = {
+  vm.configureGrid = function configureGrid() {
+    vm.gridOptions = {
       flatEntityAccess: true,
       enableColumnResizing: true,
       enableColumnMenus: false,
-      columnDefs: self.getColumnDefs(),
-      onRegisterApi: self.onRegisterGridApi.bind(self)
+      columnDefs: vm.getColumnDefs(),
+      onRegisterApi: vm.onRegisterGridApi.bind(vm)
     };
   };
 
-  self.getColumnDefs = function getColumnDefs() {
+  vm.getColumnDefs = function getColumnDefs() {
     return [
       {
         displayName: 'Site ID',
@@ -81,18 +81,18 @@ function FleetLocationsController(generalConfig, locationsDataService, confirmat
     ];
   };
 
-  self.onRegisterGridApi = function onRegisterGridApi() {
-    self.populateGrid();
+  vm.onRegisterGridApi = function onRegisterGridApi() {
+    vm.populateGrid();
   };
 
-  self.populateGrid = function populateGrid() {
+  vm.populateGrid = function populateGrid() {
     locationsDataService.getLocations()
       .then(function assignData(response) {
-        self.gridOptions.data = response.data.locations;
+        vm.gridOptions.data = response.data.locations;
       });
   };
 
-  self.initialize();
+  vm.initialize();
 }
 
 FleetLocationsController.$inject = [

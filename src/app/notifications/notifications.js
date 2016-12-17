@@ -2,6 +2,6 @@
 
 var notifications = require('./notifications.module');
 
-require('./notification.service');
+require('./notification-service.factory');
 
 module.exports = notifications;

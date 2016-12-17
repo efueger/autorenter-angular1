@@ -58,3 +58,4 @@ obj/
 .node-gyp
 /.sass-cache
 /connect.lock
+mocha.json

@@ -3,37 +3,37 @@
 var fleet = require('./fleet.module');
 
 function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrategyFactory, fleetLocationVehicleDetailsModeService) {
-  var self = this;
+  var vm = this;
 
-  self.location = {};
-  self.vehicle = {};
-  self.years = {};
-  self.colors = {};
+  vm.location = {};
+  vm.vehicle = {};
+  vm.years = {};
+  vm.colors = {};
 
   var implementationStrategy;
 
-  self.initialize = function initialize() {
+  vm.initialize = function initialize() {
     implementationStrategy = fleetLocationVehicleStrategyFactory.getStrategy();
     implementationStrategy.getInitializationData($state.params.locationId, $state.params.vehicleId)
       .then(function init(initializationData) {
-        self.location = initializationData.location;
-        self.vehicle = initializationData.vehicle;
-        self.colors = initializationData.colors;
-        self.years = initializationData.years;
-        self.makes = initializationData.makes;
-        self.models = initializationData.models;
+        vm.location = initializationData.location;
+        vm.vehicle = initializationData.vehicle;
+        vm.colors = initializationData.colors;
+        vm.years = initializationData.years;
+        vm.makes = initializationData.makes;
+        vm.models = initializationData.models;
       });
   };
 
-  self.isEditable = function isEditable() {
+  vm.isEditable = function isEditable() {
     return fleetLocationVehicleDetailsModeService.isAddMode() || fleetLocationVehicleDetailsModeService.isEditMode();
   };
 
-  self.save = function save() {
-    implementationStrategy.save(self.location.id, self.vehicle);
+  vm.save = function save() {
+    implementationStrategy.save(vm.location.id, vm.vehicle);
   };
 
-  self.initialize();
+  vm.initialize();
 }
 
 FleetLocationVehicleDetailsController.$inject = [

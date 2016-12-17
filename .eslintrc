@@ -1,35 +1,31 @@
 {
-  "rules": {
-    "indent": [
-      2,
-      2
-    ],
-    "quotes": [
-      2,
-      "single"
-    ],
-    "linebreak-style": [
-      2,
-      "unix"
-    ],
-    "semi": [
-      2,
-      "always"
-    ],
-    "comma-dangle": [
-      2,
-      "only-multiline"
-    ]
-  },
   "env": {
+    "browser": true,
     "mocha": true,
-    "node": true,
+    "node": true
   },
-  "parserOptions": {
-    "sourceType": "script"
+
+  "extends": ["eslint:recommended", "angular"],
+
+  "rules": {
+    "comma-dangle": ["error", "only-multiline"],
+    "indent": ["error", 2],
+    "linebreak-style": ["error", "unix"],
+    "no-use-before-define": ["error",
+      {
+        "functions": false,
+        "classes": true
+      }
+    ],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "angular/module-getter": 0,
+    "angular/module-setter": 0
   },
-  "extends": "eslint-config-es5",
+
   "globals": {
-      "inject": true
+    "require": true,
+    "module": true,
+    "inject": true
   }
 }

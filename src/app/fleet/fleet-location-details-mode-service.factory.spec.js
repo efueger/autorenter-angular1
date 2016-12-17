@@ -1,7 +1,5 @@
 var angular = require('angular');
-var sinon = require('sinon');
 require('angular-mocks');
-require('sinon-chai');
 require('./fleet-location-details-mode-service.factory');
 
 describe('fa.fleet.fleetLocationDetailsModeService > ', function describeImpl() {

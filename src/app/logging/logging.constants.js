@@ -1,5 +1,6 @@
 'use strict';
 
+var angular = require('angular');
 var loggingModule = require('./logging.module');
 
 loggingModule
@@ -16,7 +17,7 @@ loggingModule
           level: severity,
           username: 'bill'
         };
-        logApiProvider.$get().getXhr().send(JSON.stringify(payload));
+        logApiProvider.$get().getXhr().send(angular.toJson(payload));
       }
 
       function decorate() {

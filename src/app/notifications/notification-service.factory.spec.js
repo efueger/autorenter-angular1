@@ -2,7 +2,7 @@ var angular = require('angular');
 var sinon = require('sinon');
 require('angular-mocks');
 require('sinon-chai');
-require('./notification.service');
+require('./notification-service.factory');
 
 
 describe('fa.notifications.notificationService > ', function describeImpl() {

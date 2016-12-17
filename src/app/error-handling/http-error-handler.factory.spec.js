@@ -28,9 +28,9 @@ describe.skip('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
       });
     $httpBackend.flush();
     actualArgs.should.deep.equal({
-        title: 'Validation error',
-        userMessage: userMessage,
-        noLog: true
+      title: 'Validation error',
+      userMessage: userMessage,
+      noLog: true
     });
   });
 
@@ -43,7 +43,7 @@ describe.skip('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
       });
     $httpBackend.flush();
     actualArgs.should.deep.equal({
-        userMessage: 'The request could not be processed because it is too large for the system to handle.'
+      userMessage: 'The request could not be processed because it is too large for the system to handle.'
         + ' Please contact technical support.'
     });
   });
@@ -63,9 +63,9 @@ describe.skip('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
           });
         $httpBackend.flush();
         actualArgs.should.deep.equal({
-            userMessage: 'The server is unavailable. Please try again.'
+          userMessage: 'The server is unavailable. Please try again.'
             + ' If the problem persists, please notify technical support.',
-            noLog: true
+          noLog: true
         });
       });
     });
@@ -80,8 +80,8 @@ describe.skip('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
       });
     $httpBackend.flush();
     actualArgs.should.deep.equal({
-        title: 'Document not found',
-        userMessage: 'The data you are requesting does not exist.'
+      title: 'Document not found',
+      userMessage: 'The data you are requesting does not exist.'
     });
   });
 
@@ -113,7 +113,7 @@ describe.skip('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
       });
     $httpBackend.flush();
     actualArgs.should.deep.equal({
-        title: 'General response error'
+      title: 'General response error'
     });
   });
 });
