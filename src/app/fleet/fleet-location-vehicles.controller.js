@@ -1,9 +1,9 @@
 'use strict';
 
 var fleet = require('./fleet.module');
-var fleetLocationVehiclesIdColumnTemplate = require('./fleet-location-vehicles-id-column.html');
-var fleetLocationVehiclesRentToOwnColumnTemplate = require('./fleet-location-vehicles-rent-to-own-column.html');
-var fleetLocationVehiclesActionsColumnTemplate = require('./fleet-location-vehicles-actions-column.html');
+var fleetLocationVehiclesIdColumnTemplate = require('./templates/fleet-location-vehicles-id-column.html');
+var fleetLocationVehiclesRentToOwnColumnTemplate = require('./templates/fleet-location-vehicles-rent-to-own-column.html');
+var fleetLocationVehiclesActionsColumnTemplate = require('./templates/fleet-location-vehicles-actions-column.html');
 
 function FleetLocationVehiclesController($state,
                                  vehiclesDataService,
