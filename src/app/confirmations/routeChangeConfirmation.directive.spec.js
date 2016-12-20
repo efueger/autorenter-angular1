@@ -37,7 +37,7 @@ describe('fa.confirmations.faRouteChangeConfirmation > ', function describeImpl(
       return $q.when();
     };
     $state.go = function go() {
-      return;
+
     };
   }));
 

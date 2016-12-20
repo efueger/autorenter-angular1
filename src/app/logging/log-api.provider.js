@@ -35,7 +35,7 @@ function logApi(generalConfig, strings) {
             state: ajax.readyState,
             status: ajax.status
           });
-          console.error(technicalMessage); // eslint-disable-line no-console
+          console.error(technicalMessage); // eslint-disable-line no-console, angular/log
           self._notificationService.notifyError({
             title: 'Logging Notification',
             userMessage: 'The system was unable to communicate with the logging service. Please contact technical support.',

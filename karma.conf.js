@@ -1,5 +1,4 @@
 var path = require('path');
-var webpack = require('webpack');
 var args = require('yargs').argv;
 
 var unitTestEntry = 'src/app/specs.webpack.js';
@@ -20,13 +19,15 @@ var preLoaders = [
 ];
 var loaders = [
   {test: /\.(png|jpg)$/, loader: 'null'},
-  {test: /\.(html)$/, loader: 'null'}
+  {test: /\.(html)$/, loader: 'html'}
 ];
 var processors = {};
 processors[unitTestEntry] = ['webpack', 'sourcemap'];
 processors['src/app/**/*.js'] = ['webpack', 'sourcemap'];
 
-var reporters = [
+var reporters = args.ci ? [
+  'mocha', 'coverage', 'bamboo'
+] : [
   'mocha', 'coverage'
 ];
 var coverageReporters = args.watch ? [
@@ -53,14 +54,6 @@ module.exports = function karmaConfig(config) {
         ]
       },
       cache: true,
-      plugins: [
-        new webpack.ProvidePlugin({
-          $: 'jquery',
-          jQuery: 'jquery',
-          'window.jQuery': 'jquery',
-          _: 'lodash'
-        })
-      ],
       resolve: {
         alias: {
           sinon: 'sinon/pkg/sinon'

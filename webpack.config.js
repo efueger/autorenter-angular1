@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var autoprefixer = require('autoprefixer');
 var args = require('yargs').argv;
@@ -12,20 +12,15 @@ var entryJs = base + '/src/app/app.js';
 var appName = 'app';
 
 var plugins = [
-  new webpack.ProvidePlugin({
-    $: "jquery",
-    jQuery: "jquery",
-    "window.jQuery": "jquery",
-    _: "lodash"
-  }),
   new webpack.DefinePlugin({
     __PROD__: isProd
   }),
   new webpack.optimize.CommonsChunkPlugin('vendor', isProd ? 'vendor.[hash].js' : 'vendor.js'),
   new ExtractTextPlugin(isProd ? '[name].[hash].css' : '[name].css'),
   new HtmlWebpackPlugin( {
-    template: './src/index.html',
+    template: base + '/src/index.html',
     chunks: ['app', 'vendor'],
+    favicon: base + '/src/assets/img/favicon.ico',
     appName: appName
   }),
   new webpack.HotModuleReplacementPlugin({
@@ -33,7 +28,7 @@ var plugins = [
   })
 ];
 
-if(isProd) {
+if (isProd) {
   plugins.push(
     new webpack.NoErrorsPlugin(),
     new webpack.optimize.DedupePlugin(),
@@ -85,27 +80,30 @@ var config = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['ng-annotate'],
+        loader: 'ng-annotate',
         exclude: /node_modules/
       },
       {
-        test: /\.html$/,
+        test: /.html$/,
         loader: 'html',
-        exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('css?sourceMap')
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap|postcss')
       },
       {
         test: /\.(woff|woff2|ttf|eot|svg)(\?]?.*)?$/,
-        loader : 'file?name=assets/fonts/[name].[ext]?[hash]'
+        loader: 'file?name=assets/fonts/[name].[ext]?[hash]'
       },
       {
         test: /\.(png|jpg|jpeg|gif)$/,
         loader: 'url?limit=8192&name=assets/images/[name].[hash].[ext]'
       }
     ]
+  },
+  eslint: {
+    configFile: './.eslintrc',
+    failOnError: true
   },
   plugins: plugins,
   debug: !isProd,
@@ -124,7 +122,7 @@ var config = {
     host: '127.0.0.1',
     port: 8080
   },
-  postcss: function () {
+  postcss: function postcss() {
     return [autoprefixer({
       browsers: ['last 2 versions']
     })];

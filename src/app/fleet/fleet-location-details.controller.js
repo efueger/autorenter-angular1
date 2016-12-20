@@ -3,33 +3,33 @@
 var fleet = require('./fleet.module');
 
 function FleetLocationDetailsController($state, fleetLocationStrategyFactory, fleetLocationDetailsModeService) {
-  var self = this;
+  var vm = this;
 
-  self.location = {};
-  self.states = {};
-  self.selectedState = {};
+  vm.location = {};
+  vm.states = {};
+  vm.selectedState = {};
 
   var implementationStrategy;
 
-  self.initialize =  function initialize() {
+  vm.initialize =  function initialize() {
     implementationStrategy = fleetLocationStrategyFactory.getStrategy();
     implementationStrategy.getInitializationData($state.params.locationId)
       .then(function init(initializationData) {
-        self.location = initializationData.location;
-        self.states = initializationData.states;
-        self.selectedState = initializationData.selectedState;
+        vm.location = initializationData.location;
+        vm.states = initializationData.states;
+        vm.selectedState = initializationData.selectedState;
       });
   };
 
-  self.isEditable = function isEditable() {
+  vm.isEditable = function isEditable() {
     return fleetLocationDetailsModeService.isAddMode() || fleetLocationDetailsModeService.isEditMode();
   };
 
-  self.save = function save() {
-    implementationStrategy.save(self.location);
+  vm.save = function save() {
+    implementationStrategy.save(vm.location);
   };
 
-  self.initialize();
+  vm.initialize();
 }
 
 FleetLocationDetailsController.$inject = [

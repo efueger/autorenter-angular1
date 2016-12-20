@@ -63,14 +63,14 @@ describe('fa.logging.logApi > ', function describeImpl() {
     });
 
     afterEach(function afterEachImpl() {
-      console.error.restore(); // eslint-disable-line no-console
+      console.error.restore(); // eslint-disable-line angular/log, no-console
     });
 
     it('should log error to console', function testImpl() {
       request.onreadystatechange();
       var technicalMessage = 'A logging error has occurred: readyState = \'' + READY_STATE
         + '\', statusCode = \'' + SERVER_ERROR_CODE + '\'.';
-      console.error.getCall(0).args[0].should.equal(technicalMessage); // eslint-disable-line no-console
+      console.error.getCall(0).args[0].should.equal(technicalMessage); // eslint-disable-line angular/log, no-console
     });
 
     it('should report error via the notification service', function testImpl() {

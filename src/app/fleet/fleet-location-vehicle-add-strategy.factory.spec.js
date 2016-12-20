@@ -46,11 +46,11 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
     var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
     var makes = ['Chevrolet', 'Ford', 'Honda', 'Toyota'];
     var expectedResponse = {
-          location: location,
-          years: years,
-          colors: colors,
-          makes: makes,
-          models: models
+      location: location,
+      years: years,
+      colors: colors,
+      makes: makes,
+      models: models
     };
     sinon.stub(locationsDataService, 'getLocation', function getLocation() {
       var deferred = $q.defer();
@@ -78,7 +78,7 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
 
   describe('save', function saveTest() {
     var vehicleId = 1000;
-    var vehicle = {id: vehicleId, vin: '67012FD65DSA12349'};    
+    var vehicle = {id: vehicleId, vin: '67012FD65DSA12349'};
 
     it('persists the new vehicle', function testImpl() {
       var addVehicleSpy = sinon.spy(vehiclesDataService, 'addVehicleToLocation');

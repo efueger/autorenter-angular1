@@ -10,46 +10,46 @@ function FleetLocationVehiclesController($state,
                                  locationsDataService,
                                  confirmationService,
                                  strings) {
-  var self = this;
+  var vm = this;
 
-  self.gridOptions = {};
-  self.vehicles = {};
-  self.location = {};
+  vm.gridOptions = {};
+  vm.vehicles = {};
+  vm.location = {};
 
-  self.deleteVehicle = function deleteVehicle(vehicle) {
+  vm.deleteVehicle = function deleteVehicle(vehicle) {
     confirmationService.show(strings.format('Delete vehicle \'{vin}\'?', { vin: vehicle.vin }))
       .then(function deleteIt() {
         vehiclesDataService.deleteVehicle(vehicle.id)
           .then(function repopulateGrid() {
-            self.populateGrid();
+            vm.populateGrid();
           });
       });
   };
 
-  self.initialize = function initialize() {
-    self.configureGrid();
-    self.initializeLocation($state.params.locationId);
+  vm.initialize = function initialize() {
+    vm.configureGrid();
+    vm.initializeLocation($state.params.locationId);
   };
 
-  self.initializeLocation = function initializeLocation(locationId) {
+  vm.initializeLocation = function initializeLocation(locationId) {
     locationsDataService.getLocation(locationId)
       .then(function setLocation(response) {
-        self.location = response.data.location;
+        vm.location = response.data.location;
       });
   };
 
-  self.configureGrid = function configureGrid() {
-    self.gridOptions = {
+  vm.configureGrid = function configureGrid() {
+    vm.gridOptions = {
       flatEntityAccess: true,
       enableColumnResizing: true,
       enableColumnMenus: false,
-      columnDefs: self.getColumnDefs(),
-      onRegisterApi: self.onRegisterGridApi.bind(self),
-      appScopeProvider: self
+      columnDefs: vm.getColumnDefs(),
+      onRegisterApi: vm.onRegisterGridApi.bind(vm),
+      appScopeProvider: vm
     };
   };
 
-  self.getColumnDefs = function getColumnDefs() {
+  vm.getColumnDefs = function getColumnDefs() {
     return [
       {
         displayName: 'VIN',
@@ -110,18 +110,18 @@ function FleetLocationVehiclesController($state,
     ];
   };
 
-  self.onRegisterGridApi = function onRegisterGridApi() {
-    self.populateGrid();
+  vm.onRegisterGridApi = function onRegisterGridApi() {
+    vm.populateGrid();
   };
 
-  self.populateGrid = function populateGrid() {
+  vm.populateGrid = function populateGrid() {
     vehiclesDataService.getVehicles($state.params.locationId)
       .then(function assignData(response) {
-        self.gridOptions.data = response.data.vehicles;
+        vm.gridOptions.data = response.data.vehicles;
       });
   };
 
-  self.initialize();
+  vm.initialize();
 }
 
 FleetLocationVehiclesController.$inject = [

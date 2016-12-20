@@ -52,7 +52,7 @@ describe('fa.logging > ', function describeImpl() {
 
   it('should post info message to API', function testImpl() {
     fakeLogService.info('logged info!');
-    var expectedPayload = JSON.stringify({
+    var expectedPayload = angular.toJson({
       message: 'logged info!',
       level: 'info',
       username: 'bill'
@@ -62,7 +62,7 @@ describe('fa.logging > ', function describeImpl() {
 
   it('should post warn message to API', function testImpl() {
     fakeLogService.warn('logged warn!');
-    var expectedPayload = JSON.stringify({
+    var expectedPayload = angular.toJson({
       message: 'logged warn!',
       level: 'warn',
       username: 'bill'
@@ -72,7 +72,7 @@ describe('fa.logging > ', function describeImpl() {
 
   it('should post error message to API', function testImpl() {
     fakeLogService.error('logged error!');
-    var expectedPayload = JSON.stringify({
+    var expectedPayload = angular.toJson({
       message: 'logged error!',
       level: 'error',
       username: 'bill'
