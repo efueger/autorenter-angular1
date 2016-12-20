@@ -1,5 +1,4 @@
 var path = require('path');
-var webpack = require('webpack');
 var args = require('yargs').argv;
 
 var unitTestEntry = 'src/app/specs.webpack.js';
@@ -55,14 +54,6 @@ module.exports = function karmaConfig(config) {
         ]
       },
       cache: true,
-      plugins: [
-        new webpack.ProvidePlugin({
-          $: 'jquery',
-          jQuery: 'jquery',
-          'window.jQuery': 'jquery',
-          _: 'lodash'
-        })
-      ],
       resolve: {
         alias: {
           sinon: 'sinon/pkg/sinon'
