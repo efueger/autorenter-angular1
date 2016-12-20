@@ -80,7 +80,7 @@ var config = {
     loaders: [
       {
         test: /\.js$/,
-        loader: 'ng-annotate?add=true',
+        loader: 'ng-annotate',
         exclude: /node_modules/
       },
       {
