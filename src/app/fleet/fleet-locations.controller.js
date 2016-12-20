@@ -1,8 +1,8 @@
 'use strict';
 
 var fleet = require('./fleet.module');
-var fleetLocationIdColumnTemplate = require('./fleet-locations-id-column.html');
-var fleetLocationsActionsColumnTemplate = require('./fleet-locations-actions-column.html');
+var fleetLocationIdColumnTemplate = require('./templates/fleet-locations-id-column.html');
+var fleetLocationsActionsColumnTemplate = require('./templates/fleet-locations-actions-column.html');
 
 function FleetLocationsController(generalConfig, locationsDataService, confirmationService, strings) {
   var vm = this;

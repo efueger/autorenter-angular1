@@ -1,12 +1,12 @@
 'use strict';
 
 var fleet = require('./fleet.module');
-var fleetHeaderTemplate = require('./fleet.header.html');
-var fleetLocationsTemplate = require('./fleet-locations.html');
-var fleetLocationDetailsTemplate = require('./fleet-location-details.html');
-var fleetLocationVehiclesTemplate = require('./fleet-location-vehicles.html');
-var fleetLocationVehicleDetailsTemplate = require('./fleet-location-vehicle-details.html');
-var fleetReportsTemplate = require('./fleet-reports.html');
+var fleetHeaderTemplate = require('./templates/fleet.header.html');
+var fleetLocationsTemplate = require('./templates/fleet-locations.html');
+var fleetLocationDetailsTemplate = require('./templates/fleet-location-details.html');
+var fleetLocationVehiclesTemplate = require('./templates/fleet-location-vehicles.html');
+var fleetLocationVehicleDetailsTemplate = require('./templates/fleet-location-vehicle-details.html');
+var fleetReportsTemplate = require('./templates/fleet-reports.html');
 
 function fleetRouteConfig($stateProvider) {
   $stateProvider
