@@ -12,12 +12,6 @@ var entryJs = base + '/src/app/app.js';
 var appName = 'app';
 
 var plugins = [
-  new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
-    'window.jQuery': 'jquery',
-    _: 'lodash'
-  }),
   new webpack.DefinePlugin({
     __PROD__: isProd
   }),

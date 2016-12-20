@@ -45,9 +45,7 @@
     "angulartics": "1.0.3",
     "bootstrap": "3.3.6",
     "angular-ui-bootstrap": "2.1.4",
-    "fa-strings.js": "1.0.0",
-    "jquery": "2.2.3",
-    "lodash": "4.11.1"
+    "fa-strings.js": "1.0.0"
   },
   "devDependencies": {
     "angular-mocks": "1.5.5",
