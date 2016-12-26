@@ -16,9 +16,8 @@ var fleetLocationEditStrategy = function fleetLocationEditStrategy($q, $state, n
           }
         });
         return initializationData;
-    });
-  }
-
+      });
+  };
 
   function notifySuccess(siteId) {
     var message = strings.format('Location \'{siteId}\' was updated successfully.', { siteId: siteId });
