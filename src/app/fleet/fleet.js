@@ -25,6 +25,9 @@ require('./fleet-location-vehicle-details-mode-service.factory');
 require('./fleet-location-view-strategy.factory');
 require('./fleet-location-vehicle-view-strategy.factory');
 
+require('./fleet-location-initialization.factory');
+require('./fleet-location-vehicle-initialization.factory');
+
 require('./fleet-reports.controller');
 
 module.exports = fleet;

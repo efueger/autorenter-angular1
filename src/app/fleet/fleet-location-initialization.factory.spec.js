@@ -1,28 +1,29 @@
-var angular = require('angular');
-var sinon = require('sinon');
-require('angular-mocks');
-require('sinon-chai');
-require('./fleet-location-view-strategy.factory');
+require('./fleet-location-initialization.factory');
 
-describe('fa.fleet.fleetLocationViewStrategy > ', function describeImpl() {
+describe('fa.fleet.fleetLocationInitialization > ', function describeImpl() {
   var $q;
   var $rootScope;
+  var statesDataService;
+  var locationsDataService;
   var fleetLocationInitialization;
-  var fleetLocationViewStrategy;
+
+  var sinon = require('sinon');
 
   beforeEach(angular.mock.module('fa.fleet'));
 
   beforeEach(inject(function injectImpl(_$q_,
                                         _$rootScope_,
-                                        _fleetLocationInitialization_,
-                                        _fleetLocationViewStrategy_) {
+                                        _statesDataService_,
+                                        _locationsDataService_,
+                                        _fleetLocationInitialization_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
+    statesDataService = _statesDataService_;
+    locationsDataService = _locationsDataService_;
     fleetLocationInitialization = _fleetLocationInitialization_;
-    fleetLocationViewStrategy = _fleetLocationViewStrategy_;
   }));
 
-  it('getInitializationData returns state, location, and selectedState data', function testImpl() {
+  it('getInitializationData returns state and location data', function testImpl() {
     var states = [
       {
         'stateCode': 'IL',
@@ -41,22 +42,19 @@ describe('fa.fleet.fleetLocationViewStrategy > ', function describeImpl() {
       city: 'Indianapolis',
       stateCode: 'IN'
     };
-    var selectedState = {
-      'stateCode': 'IN',
-      'name': 'Indiana'
-    };
     var expectedResponse = {
       states: states,
-      location: location,
-      selectedState: selectedState
+      location: location
     };
-    sinon.stub(fleetLocationInitialization, 'getInitializationData', function getInitializationData(locationId) {
+    sinon.stub(statesDataService, 'getStates', function getStates() {
+      var deferred = $q.defer();
+      deferred.resolve({data: states});
+      return deferred.promise;
+    });
+    sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {
       var deferred = $q.defer();
       if (locationId === location.id) {
-        deferred.resolve({
-          states: states,
-          location: location
-        });
+        deferred.resolve({data: location});
       } else {
         deferred.reject();
       }
@@ -64,7 +62,7 @@ describe('fa.fleet.fleetLocationViewStrategy > ', function describeImpl() {
     });
 
     var actualResponse;
-    fleetLocationViewStrategy.getInitializationData(location.id)
+    fleetLocationInitialization.getInitializationData(location.id)
       .then(function setResponse(response) {
         actualResponse = response;
       });

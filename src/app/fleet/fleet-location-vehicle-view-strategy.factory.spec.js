@@ -8,18 +8,18 @@ require('./fleet-location-vehicle-view-strategy.factory');
 describe('fa.fleet.fleetLocationVehicleViewStrategy > ', function describeImpl() {
   var $q;
   var $rootScope;
-  var fleetLocationVehicleEditStrategy;
+  var fleetLocationVehicleInitialization;
   var fleetLocationVehicleViewStrategy;
 
   beforeEach(angular.mock.module('fa.fleet'));
 
   beforeEach(inject(function injectImpl(_$q_,
                                         _$rootScope_,
-                                        _fleetLocationVehicleEditStrategy_,
+                                        _fleetLocationVehicleInitialization_,
                                         _fleetLocationVehicleViewStrategy_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
-    fleetLocationVehicleEditStrategy = _fleetLocationVehicleEditStrategy_;
+    fleetLocationVehicleInitialization = _fleetLocationVehicleInitialization_;
     fleetLocationVehicleViewStrategy = _fleetLocationVehicleViewStrategy_;
   }));
 
@@ -54,7 +54,7 @@ describe('fa.fleet.fleetLocationVehicleViewStrategy > ', function describeImpl()
       makes: makes,
       models: models
     };
-    sinon.stub(fleetLocationVehicleEditStrategy, 'getInitializationData', function getInitializationData(locationId, vehicleId) {
+    sinon.stub(fleetLocationVehicleInitialization, 'getInitializationData', function getInitializationData(locationId, vehicleId) {
       var deferred = $q.defer();
       if (locationId === location.id && vehicleId === vehicle.id) {
         deferred.resolve({

@@ -12,6 +12,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
   var statesDataService;
   var locationsDataService;
   var fleetLocationEditStrategy;
+  var fleetLocationInitialization;
 
   beforeEach(angular.mock.module('fa.fleet'));
 
@@ -21,7 +22,8 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
                                         _notificationService_,
                                         _statesDataService_,
                                         _locationsDataService_,
-                                        _fleetLocationEditStrategy_) {
+                                        _fleetLocationEditStrategy_,
+                                        _fleetLocationInitialization_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
     $state = _$state_;
@@ -29,6 +31,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
     statesDataService = _statesDataService_;
     locationsDataService = _locationsDataService_;
     fleetLocationEditStrategy = _fleetLocationEditStrategy_;
+    fleetLocationInitialization = _fleetLocationInitialization_;
   }));
 
   it('getInitializationData returns state and location data', function testImpl() {
@@ -42,6 +45,10 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
         'name': 'Indiana'
       }
     ];
+    var selectedState = {
+        'stateCode': 'IN',
+        'name': 'Indiana'
+      };
     var location = {
       id: '1',
       siteId: 'ind',
@@ -52,17 +59,17 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
     };
     var expectedResponse = {
       states: states,
-      location: location
+      location: location,
+      selectedState: selectedState
     };
-    sinon.stub(statesDataService, 'getStates', function getStates() {
-      var deferred = $q.defer();
-      deferred.resolve({data: states});
-      return deferred.promise;
-    });
-    sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {
+    sinon.stub(fleetLocationInitialization, 'getInitializationData', function getInitializationData(locationId) {
       var deferred = $q.defer();
       if (locationId === location.id) {
-        deferred.resolve({data:{location:location}});
+        deferred.resolve({
+          states: states,
+          location: location,
+          selectedState: selectedState
+        });
       } else {
         deferred.reject();
       }
@@ -70,6 +77,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
     });
 
     var actualResponse;
+    
     fleetLocationEditStrategy.getInitializationData(location.id)
       .then(function setResponse(response) {
         actualResponse = response;

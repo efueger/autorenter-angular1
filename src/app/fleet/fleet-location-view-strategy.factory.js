@@ -2,9 +2,9 @@
 
 var fleet = require('./fleet.module');
 
-var fleetLocationViewStrategy = function fleetLocationViewStrategy(fleetLocationEditStrategy) {
+var fleetLocationViewStrategy = function fleetLocationViewStrategy(fleetLocationInitialization) {
   var getInitializationData = function getInitializationData(locationId) {
-    return fleetLocationEditStrategy.getInitializationData(locationId)
+    return fleetLocationInitialization.getInitializationData(locationId)
       .then(function setResult(initializationData) {
         initializationData.states.forEach(function setState(stateElement) {
           if (stateElement.stateCode === initializationData.location.stateCode) {
@@ -22,7 +22,7 @@ var fleetLocationViewStrategy = function fleetLocationViewStrategy(fleetLocation
 };
 
 fleetLocationViewStrategy.$inject = [
-  'fleetLocationEditStrategy'
+  'fleetLocationInitialization'
 ];
 
 fleet
