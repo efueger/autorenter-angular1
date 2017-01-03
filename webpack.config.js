@@ -50,7 +50,6 @@ var config = {
     ],
     vendor: [
       // 3rd dependencies
-      'bootstrap',
       'fa-strings.js',
 
       // angular

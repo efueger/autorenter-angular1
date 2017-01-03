@@ -39,12 +39,12 @@
   "dependencies": {
     "angular": "1.5.5",
     "angular-breadcrumb": "0.4.1",
+    "angular-ui-bootstrap": "2.1.4",
     "angular-ui-grid": "3.2.9",
     "angular-ui-router": "0.3.0",
     "angularjs-toaster": "2.0.0",
     "angulartics": "1.0.3",
     "bootstrap": "3.3.6",
-    "angular-ui-bootstrap": "2.1.4",
     "fa-strings.js": "1.0.0"
   },
   "devDependencies": {
