@@ -3,8 +3,8 @@
 var fleet = require('./fleet.module');
 
 var fleetLocationVehicleInitialization = function fleetLocationVehicleInitialization($q,
-
-                                                                   locationsDataService, vehiclesDataService) {
+                                                                                     locationsDataService,
+                                                                                     vehiclesDataService) {
   var fleetLocationVehicleInitializationInstance;
 
   var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
