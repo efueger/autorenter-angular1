@@ -1,32 +1,25 @@
-var angular = require('angular');
-var sinon = require('sinon');
-require('angular-mocks');
-require('sinon-chai');
+require('./fleet-location-vehicle-initialization.factory');
 
-require('./fleet-location-vehicle-edit-strategy.factory');
-
-describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl() {
+describe('fa.fleet.fleetLocationVehicleInitialization > ', function describeImpl() {
   var $q;
   var $rootScope;
-  var vehiclesDataService;
   var locationsDataService;
-  var fleetLocationVehicleEditStrategy;
+  var vehiclesDataService;
   var fleetLocationVehicleInitialization;
+
+  var sinon = require('sinon');
 
   beforeEach(angular.mock.module('fa.fleet'));
 
   beforeEach(inject(function injectImpl(_$q_,
                                         _$rootScope_,
-                                        _$state_,
-                                        _vehiclesDataService_,
                                         _locationsDataService_,
-                                        _fleetLocationVehicleEditStrategy_,
+                                        _vehiclesDataService_,
                                         _fleetLocationVehicleInitialization_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
-    vehiclesDataService = _vehiclesDataService_;
     locationsDataService = _locationsDataService_;
-    fleetLocationVehicleEditStrategy = _fleetLocationVehicleEditStrategy_;
+    vehiclesDataService = _vehiclesDataService_;
     fleetLocationVehicleInitialization = _fleetLocationVehicleInitialization_;
   }));
 
@@ -61,25 +54,19 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
       makes: makes,
       models: models
     };
-    sinon.stub(fleetLocationVehicleInitialization, 'getInitializationData', function getInitializationData(locationId, vehicleId) {
+    sinon.stub(vehiclesDataService, 'getVehicle', function getVehicle() {
       var deferred = $q.defer();
-      if (locationId === location.id && vehicleId === vehicle.id) {
-        deferred.resolve({
-          vehicle: vehicle,
-          location: location,
-          years: years,
-          colors: colors,
-          makes: makes,
-          models: models
-        });
-      } else {
-        deferred.reject();
-      }
+      deferred.resolve({data: {vehicle: vehicle}});
+      return deferred.promise;
+    });
+    sinon.stub(locationsDataService, 'getLocation', function getLocation() {
+      var deferred = $q.defer();
+      deferred.resolve({data: {location: location}});
       return deferred.promise;
     });
 
     var actualResponse;
-    fleetLocationVehicleEditStrategy.getInitializationData(location.id, vehicle.id)
+    fleetLocationVehicleInitialization.getInitializationData(location.id, vehicle.id)
       .then(function setResponse(response) {
         actualResponse = response;
       });

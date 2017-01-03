@@ -2,17 +2,9 @@
 
 var fleet = require('./fleet.module');
 
-var fleetLocationViewStrategy = function fleetLocationViewStrategy(fleetLocationEditStrategy) {
+var fleetLocationViewStrategy = function fleetLocationViewStrategy(fleetLocationInitializationFactory) {
   var getInitializationData = function getInitializationData(locationId) {
-    return fleetLocationEditStrategy.getInitializationData(locationId)
-      .then(function setResult(initializationData) {
-        initializationData.states.forEach(function setState(stateElement) {
-          if (stateElement.stateCode === initializationData.location.stateCode) {
-            initializationData.selectedState = stateElement;
-          }
-        });
-        return initializationData;
-      });
+    return fleetLocationInitializationFactory.getInitializationData(locationId);
   };
 
   return {
@@ -22,7 +14,7 @@ var fleetLocationViewStrategy = function fleetLocationViewStrategy(fleetLocation
 };
 
 fleetLocationViewStrategy.$inject = [
-  'fleetLocationEditStrategy'
+  'fleetLocationInitializationFactory'
 ];
 
 fleet
