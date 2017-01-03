@@ -42,9 +42,14 @@ describe('fa.fleet.fleetLocationInitializationFactory > ', function describeImpl
       city: 'Indianapolis',
       stateCode: 'IN'
     };
+    var selectedState = {
+      'stateCode': 'IN',
+      'name': 'Indiana'
+    };
     var expectedResponse = {
       states: states,
-      location: location
+      location: location,
+      selectedState: selectedState
     };
     sinon.stub(statesDataService, 'getStates', function getStates() {
       var deferred = $q.defer();

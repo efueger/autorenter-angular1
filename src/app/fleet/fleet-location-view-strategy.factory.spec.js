@@ -55,7 +55,8 @@ describe('fa.fleet.fleetLocationViewStrategy > ', function describeImpl() {
       if (locationId === location.id) {
         deferred.resolve({
           states: states,
-          location: location
+          location: location,
+          selectedState: selectedState
         });
       } else {
         deferred.reject();

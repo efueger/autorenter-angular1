@@ -9,14 +9,6 @@ var fleetLocationEditStrategy = function fleetLocationEditStrategy($q, $state, n
 
   var getInitializationData = function getInitializationData(locationId) {
     return fleetLocationInitializationFactory.getInitializationData(locationId)
-      .then(function setResult(initializationData) {
-        initializationData.states.forEach(function setState(stateElement) {
-          if (stateElement.stateCode === initializationData.location.stateCode) {
-            initializationData.selectedState = stateElement;
-          }
-        });
-        return initializationData;
-      });
   };
 
   function notifySuccess(siteId) {

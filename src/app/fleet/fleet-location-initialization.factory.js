@@ -19,6 +19,11 @@ var fleetLocationInitializationFactory = function fleetLocationInitializationFac
       });
     $q.all([locationPromise, statesPromise])
       .then(function setResult() {
+        initializationData.states.forEach(function setState(stateElement) {
+          if (stateElement.stateCode === initializationData.location.stateCode) {
+            initializationData.selectedState = stateElement;
+          }
+        });
         deferred.resolve(initializationData);
       });
     return deferred.promise;
