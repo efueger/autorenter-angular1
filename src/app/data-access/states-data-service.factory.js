@@ -33,7 +33,7 @@ var statesDataService = function statesDataService($q) {
 
   function getStates() {
     var deferred = $q.defer();
-    deferred.resolve({data: states});
+    deferred.resolve({data: {states: states}});
     return deferred.promise;
   }
 

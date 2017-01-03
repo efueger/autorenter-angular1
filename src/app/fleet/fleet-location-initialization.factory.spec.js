@@ -53,7 +53,7 @@ describe('fa.fleet.fleetLocationInitializationFactory > ', function describeImpl
     };
     sinon.stub(statesDataService, 'getStates', function getStates() {
       var deferred = $q.defer();
-      deferred.resolve({data: states});
+      deferred.resolve({data: {states: states}});
       return deferred.promise;
     });
     sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {

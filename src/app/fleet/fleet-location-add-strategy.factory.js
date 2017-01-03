@@ -9,7 +9,7 @@ var fleetLocationAddStrategy = function fleetLocationAddStrategy($state, notific
   function getInitializationData() {
     return statesDataService.getStates()
       .then(function setResult(response) {
-        return { states: response.data };
+        return { states: response.data.states };
       });
   }
 
