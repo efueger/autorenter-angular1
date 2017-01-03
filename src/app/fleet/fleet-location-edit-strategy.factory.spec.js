@@ -46,9 +46,9 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
       }
     ];
     var selectedState = {
-        'stateCode': 'IN',
-        'name': 'Indiana'
-      };
+      'stateCode': 'IN',
+      'name': 'Indiana'
+    };
     var location = {
       id: '1',
       siteId: 'ind',
@@ -77,7 +77,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
     });
 
     var actualResponse;
-    
+
     fleetLocationEditStrategy.getInitializationData(location.id)
       .then(function setResponse(response) {
         actualResponse = response;

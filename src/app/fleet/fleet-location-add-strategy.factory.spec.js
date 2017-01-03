@@ -45,7 +45,7 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
     var expectedResponse = {states: states};
     sinon.stub(statesDataService, 'getStates', function getStates() {
       var deferred = $q.defer();
-      deferred.resolve({data: states});
+      deferred.resolve({data: {states: states}});
       return deferred.promise;
     });
 

@@ -11,7 +11,7 @@ var fleetLocationInitializationFactory = function fleetLocationInitializationFac
     var initializationData = {};
     var statesPromise = statesDataService.getStates()
       .then(function setResult(response) {
-        initializationData.states = response.data;
+        initializationData.states = response.data.states;
       });
     var locationPromise = locationsDataService.getLocation(locationId)
       .then(function setResult(response) {
