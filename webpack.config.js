@@ -12,11 +12,6 @@ var entryJs = base + '/src/app/app.js';
 var appName = 'app';
 
 var plugins = [
-  new webpack.ProvidePlugin({
-    $: 'jquery',
-    jQuery: 'jquery',
-    'window.jQuery': 'jquery'
-  }),
   new webpack.DefinePlugin({
     __PROD__: isProd
   }),
@@ -55,7 +50,6 @@ var config = {
     ],
     vendor: [
       // 3rd dependencies
-      'bootstrap',
       'fa-strings.js',
 
       // angular
