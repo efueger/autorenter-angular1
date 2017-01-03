@@ -59,7 +59,7 @@ describe('fa.fleet.fleetLocationInitializationFactory > ', function describeImpl
     sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {
       var deferred = $q.defer();
       if (locationId === location.id) {
-        deferred.resolve({data: location});
+        deferred.resolve({data: {location: location}});
       } else {
         deferred.reject();
       }
