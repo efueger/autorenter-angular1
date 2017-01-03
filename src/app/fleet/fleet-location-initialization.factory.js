@@ -15,7 +15,7 @@ var fleetLocationInitializationFactory = function fleetLocationInitializationFac
       });
     var locationPromise = locationsDataService.getLocation(locationId)
       .then(function setResult(response) {
-        initializationData.location = response.data;
+        initializationData.location = response.data.location;
       });
     $q.all([locationPromise, statesPromise])
       .then(function setResult() {
