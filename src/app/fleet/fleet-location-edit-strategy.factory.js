@@ -3,12 +3,12 @@
 var fleet = require('./fleet.module');
 
 var fleetLocationEditStrategy = function fleetLocationEditStrategy($q, $state, notificationService, strings,
-                                                                   statesDataService, locationsDataService, fleetLocationInitialization) {
-  var fleetLocationEditStrategyInstance;
+                                                                   statesDataService, locationsDataService, fleetLocationInitializationFactory) {
+  var fleetLocationEditStrategyInstance
 
 
   var getInitializationData = function getInitializationData(locationId) {
-    return fleetLocationInitialization.getInitializationData(locationId)
+    return fleetLocationInitializationFactory.getInitializationData(locationId)
       .then(function setResult(initializationData) {
         initializationData.states.forEach(function setState(stateElement) {
           if (stateElement.stateCode === initializationData.location.stateCode) {
@@ -49,7 +49,7 @@ fleetLocationEditStrategy.$inject = [
   'strings',
   'statesDataService',
   'locationsDataService',
-  'fleetLocationInitialization'
+  'fleetLocationInitializationFactory'
 ];
 
 fleet

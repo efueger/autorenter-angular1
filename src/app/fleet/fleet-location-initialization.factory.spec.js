@@ -1,11 +1,11 @@
 require('./fleet-location-initialization.factory');
 
-describe('fa.fleet.fleetLocationInitialization > ', function describeImpl() {
+describe('fa.fleet.fleetLocationInitializationFactory > ', function describeImpl() {
   var $q;
   var $rootScope;
   var statesDataService;
   var locationsDataService;
-  var fleetLocationInitialization;
+  var fleetLocationInitializationFactory;
 
   var sinon = require('sinon');
 
@@ -15,12 +15,12 @@ describe('fa.fleet.fleetLocationInitialization > ', function describeImpl() {
                                         _$rootScope_,
                                         _statesDataService_,
                                         _locationsDataService_,
-                                        _fleetLocationInitialization_) {
+                                        _fleetLocationInitializationFactory_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
     statesDataService = _statesDataService_;
     locationsDataService = _locationsDataService_;
-    fleetLocationInitialization = _fleetLocationInitialization_;
+    fleetLocationInitializationFactory = _fleetLocationInitializationFactory_;
   }));
 
   it('getInitializationData returns state and location data', function testImpl() {
@@ -62,7 +62,7 @@ describe('fa.fleet.fleetLocationInitialization > ', function describeImpl() {
     });
 
     var actualResponse;
-    fleetLocationInitialization.getInitializationData(location.id)
+    fleetLocationInitializationFactory.getInitializationData(location.id)
       .then(function setResponse(response) {
         actualResponse = response;
       });

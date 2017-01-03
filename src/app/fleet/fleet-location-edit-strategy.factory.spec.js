@@ -12,7 +12,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
   var statesDataService;
   var locationsDataService;
   var fleetLocationEditStrategy;
-  var fleetLocationInitialization;
+  var fleetLocationInitializationFactory;
 
   beforeEach(angular.mock.module('fa.fleet'));
 
@@ -23,7 +23,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
                                         _statesDataService_,
                                         _locationsDataService_,
                                         _fleetLocationEditStrategy_,
-                                        _fleetLocationInitialization_) {
+                                        _fleetLocationInitializationFactory_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
     $state = _$state_;
@@ -31,7 +31,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
     statesDataService = _statesDataService_;
     locationsDataService = _locationsDataService_;
     fleetLocationEditStrategy = _fleetLocationEditStrategy_;
-    fleetLocationInitialization = _fleetLocationInitialization_;
+    fleetLocationInitializationFactory = _fleetLocationInitializationFactory_;
   }));
 
   it('getInitializationData returns state and location data', function testImpl() {
@@ -62,7 +62,7 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
       location: location,
       selectedState: selectedState
     };
-    sinon.stub(fleetLocationInitialization, 'getInitializationData', function getInitializationData(locationId) {
+    sinon.stub(fleetLocationInitializationFactory, 'getInitializationData', function getInitializationData(locationId) {
       var deferred = $q.defer();
       if (locationId === location.id) {
         deferred.resolve({

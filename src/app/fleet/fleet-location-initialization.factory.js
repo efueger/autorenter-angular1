@@ -2,9 +2,9 @@
 
 var fleet = require('./fleet.module');
 
-var fleetLocationInitialization = function fleetLocationInitialization($q,
+var fleetLocationInitializationFactory = function fleetLocationInitializationFactory($q,
                                                                    statesDataService, locationsDataService) {
-  var fleetLocationInitializationInstance;
+  var fleetLocationInitializationFactoryInstance;
 
   function getInitializationData(locationId) {
     var deferred = $q.defer();
@@ -24,17 +24,17 @@ var fleetLocationInitialization = function fleetLocationInitialization($q,
     return deferred.promise;
   }
 
-  fleetLocationInitializationInstance = {
+  fleetLocationInitializationFactoryInstance = {
     getInitializationData: getInitializationData
   };
-  return fleetLocationInitializationInstance;
+  return fleetLocationInitializationFactoryInstance;
 };
 
-fleetLocationInitialization.$inject = [
+fleetLocationInitializationFactory.$inject = [
   '$q',
   'statesDataService',
   'locationsDataService'
 ];
 
 fleet
-  .factory('fleetLocationInitialization', fleetLocationInitialization);
+  .factory('fleetLocationInitializationFactory', fleetLocationInitializationFactory);
