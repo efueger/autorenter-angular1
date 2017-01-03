@@ -4,11 +4,10 @@ var fleet = require('./fleet.module');
 
 var fleetLocationEditStrategy = function fleetLocationEditStrategy($q, $state, notificationService, strings,
                                                                    statesDataService, locationsDataService, fleetLocationInitializationFactory) {
-  var fleetLocationEditStrategyInstance
-
+  var fleetLocationEditStrategyInstance;
 
   var getInitializationData = function getInitializationData(locationId) {
-    return fleetLocationInitializationFactory.getInitializationData(locationId)
+    return fleetLocationInitializationFactory.getInitializationData(locationId);
   };
 
   function notifySuccess(siteId) {
