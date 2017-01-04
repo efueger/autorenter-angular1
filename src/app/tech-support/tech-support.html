@@ -1,35 +1,34 @@
 <div class="container">
 
-  <div ncy-breadcrumb="ncy-breadcrumb"></div>
+  <h2>Tech Support</h2>
 
-  <br />
-  <h4>Tech Support</h4>
-  <br />
-  <div class="tech-support">   
+  <div>   
     <!--Prove you can hit the API-->
     <h5>API</h5>
-    <div id="api-response" class="row">{{techSupportController.apiResponse}}</div>
+    <div class="form-group">
+      <div id="api-response">{{techSupportController.apiResponse}}</div>
+      <button ng-click="techSupportController.getApiInfo()" class="btn btn-primary">Refresh</button>
+    </div>
 
     <!-- Testing the toaster -->
     <h5>Notify</h5>
     <div class="form-group">
-      <button ng-click="techSupportController.showError()" class="btn btn-primary tech-support-theme">Error</button>
-      <button ng-click="techSupportController.showWarning()" class="btn btn-primary tech-support-theme">Warning</button>
-      <button ng-click="techSupportController.showInfo()" class="btn btn-primary tech-support-theme">Info</button>
-      <button ng-click="techSupportController.showSuccess()" class="btn btn-primary tech-support-theme">Success</button>
+      <button ng-click="techSupportController.showError()" class="btn btn-primary">Error</button>
+      <button ng-click="techSupportController.showWarning()" class="btn btn-primary">Warning</button>
+      <button ng-click="techSupportController.showInfo()" class="btn btn-primary">Info</button>
+      <button ng-click="techSupportController.showSuccess()" class="btn btn-primary">Success</button>
     </div>
 
     <!-- Testing exception handling -->
     <h5>Test Exception</h5>
     <div class="form-group">
-      <button ng-click="techSupportController.throwException()" class="btn btn-primary tech-support-theme">Throw Exception</button>
+      <button ng-click="techSupportController.throwException()" class="btn btn-primary">Throw Exception</button>
     </div>
 
     <!-- Testing http error handling -->
     <h5>Server Error</h5>
     <div class="form-group">
-      <button ng-click="techSupportController.checkHttpErrorHandlerSuccess()" class="btn btn-primary tech-support-theme">Http Success</button>
-      <button ng-click="techSupportController.checkHttpErrorHandlerError()" class="btn btn-primary tech-support-theme">Http Error</button>
+      <button ng-click="techSupportController.checkHttpErrorHandlerError()" class="btn btn-primary">Http Error</button>
     </div>
 
   </div>

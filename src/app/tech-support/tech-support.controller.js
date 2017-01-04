@@ -38,17 +38,6 @@ function TechSupportController($http, $log, generalConfig, notificationService) 
     throw new Error('the test exception');
   };
 
-  vm.checkHttpErrorHandlerSuccess = function checkHttpErrorHandler() {
-    $http({
-      method: 'GET',
-      url: generalConfig.apiUrlRoot
-    }).then(function successCallback(response) {
-      $log.log('success - response = ' + response.status);
-    }, function errorCallback(response) {
-      $log.log('unexpected error - response = ' + response.status);
-    });
-  };
-
   vm.checkHttpErrorHandlerError = function checkHttpErrorHandler() {
     $http({
       method: 'GET',
@@ -60,11 +49,14 @@ function TechSupportController($http, $log, generalConfig, notificationService) 
     });
   };
 
-  $http.get(generalConfig.apiUrlRoot).then(function apiSuccess(res) {
-    vm.apiResponse = res.data;
-  }, function apiError() {
-    // log error
-  });
+  vm.getApiInfo = function getApiInfo() {
+    $http.get(generalConfig.apiUrlRoot)
+      .then(function apiSuccess(res) {
+        vm.apiResponse = res.data;
+      });
+  };
+
+  vm.getApiInfo();
 }
 
 TechSupportController.$inject = ['$http', '$log', 'generalConfig', 'notificationService'];
