@@ -13,9 +13,6 @@ function techSupportRouteConfig($stateProvider) {
           controller: 'TechSupportController',
           controllerAs: 'techSupportController'
         }
-      },
-      ncyBreadcrumb: {
-        label: 'tech-support'
       }
     });
 }
