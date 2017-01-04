@@ -17,7 +17,7 @@ var logging = require('./logging/logging');
 var errorHandling = require('./error-handling/error-handling');
 var notifications = require('./notifications/notifications');
 var confirmations = require('./confirmations/confirmations');
-var students = require('./student/students');
+var techSupport = require('./tech-support/tech-support');
 var main = require('./main/main');
 var admin = require('./admin/admin');
 var fleet = require('./fleet/fleet');
@@ -31,7 +31,7 @@ module.exports =  angular.module('app', [
   errorHandling.name,
   notifications.name,
   confirmations.name,
-  students.name,
+  techSupport.name,
   main.name,
   admin.name,
   fleet.name,

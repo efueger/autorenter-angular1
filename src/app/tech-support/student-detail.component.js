@@ -1,9 +1,9 @@
 'use strict';
 
-var students = require('./students.module');
+var techSupport = require('./tech-support.module');
 var studentDetailTemplate = require('./student-detail.component.html');
 
-students.component('faStudentDetail', {
+techSupport.component('faStudentDetail', {
   template: studentDetailTemplate,
   bindings: {
     student: '<'

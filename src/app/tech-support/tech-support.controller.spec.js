@@ -1,3 +1,4 @@
+/*
 var angular = require('angular');
 require('angular-mocks');
 require('./students.controller');
@@ -15,3 +16,4 @@ describe('fa.students.controller > ', function init() {
     }));
   });
 });
+*/

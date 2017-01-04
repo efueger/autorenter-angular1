@@ -1,17 +1,17 @@
 'use strict';
 
-var students = require('./students.module');
+var techSupport = require('./tech-support.module');
 
-function StudentsController($http, $log, generalConfig, notificationService) {
+function TechSupportController($http, $log, generalConfig, notificationService) {
   var vm = this;
 
-  vm.students = [
+  vm.techSupport = [
     { name: 'Josh' },
     { name: 'Chris' },
     { name: 'Sarah' }];
 
   vm.addStudent = function addStudent(name) {
-    vm.students.push({ name: name });
+    vm.techSupport.push({ name: name });
     $log.debug('added ' + name);
     $log.info('added ' + name);
     $log.warn('added ' + name);
@@ -80,6 +80,6 @@ function StudentsController($http, $log, generalConfig, notificationService) {
   });
 }
 
-StudentsController.$inject = ['$http', '$log', 'generalConfig', 'notificationService'];
+TechSupportController.$inject = ['$http', '$log', 'generalConfig', 'notificationService'];
 
-students.controller('StudentsController', StudentsController);
+techSupport.controller('TechSupportController', TechSupportController);

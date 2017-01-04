@@ -1,0 +1,44 @@
+<div class="container">
+
+  <div ncy-breadcrumb="ncy-breadcrumb"></div>
+
+  <br />
+  <h4>Tech Support</h4>
+  <br />
+  <div class="add-student">
+    <label for="name_input">Add Student...</label>
+    <div class="form-group">
+      <input class="add-student-input form-control" type="text" id="name_input" ng-model="name">
+      <button ng-click="techSupportController.addStudent(name)" class="btn btn-primary student-theme">Add</button>
+    </div>
+    <br />
+    <div class="row">
+      <div ng-repeat="student in techSupportController.students" class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+        <fa-student-detail student="student"></fa-student-detail>
+        <br />
+      </div>
+    </div>    
+    <!--Prove you can hit the API-->
+    <div id="api-response" class="row">{{techSupportController.apiResponse}}</div>
+
+    <!-- Testing the toaster -->
+    <div class="form-group">
+      <button ng-click="techSupportController.showError()" class="btn btn-primary student-theme">Error</button>
+      <button ng-click="techSupportController.showWarning()" class="btn btn-primary student-theme">Warning</button>
+      <button ng-click="techSupportController.showInfo()" class="btn btn-primary student-theme">Info</button>
+      <button ng-click="techSupportController.showSuccess()" class="btn btn-primary student-theme">Success</button>
+    </div>
+
+    <!-- Testing exception handling -->
+    <div class="form-group">
+      <button ng-click="techSupportController.throwException()" class="btn btn-primary student-theme">Throw Exception</button>
+    </div>
+
+    <!-- Testing http error handling -->
+    <div class="form-group">
+      <button ng-click="techSupportController.checkHttpErrorHandlerSuccess()" class="btn btn-primary student-theme">Http Success</button>
+      <button ng-click="techSupportController.checkHttpErrorHandlerError()" class="btn btn-primary student-theme">Http Error</button>
+    </div>
+
+  </div>
+</div>
