@@ -9,20 +9,20 @@
     margin-left: 30px;
 }
 
-.add-student {
+.tech-support {
     font-size: 14px !important;
 }
 
-.add-student-input {
+.tech-support-input {
     display: inline-block;
     width: 300px;
 }
 
-.add-student-button {
+.tech-support-button {
     margin: -8px 0 0 20px;
 }
 
-.student-theme {
+.tech-support-theme {
     background-color: #00967A !important;
     color: #fff !important;
 }

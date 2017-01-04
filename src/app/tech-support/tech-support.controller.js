@@ -5,19 +5,6 @@ var techSupport = require('./tech-support.module');
 function TechSupportController($http, $log, generalConfig, notificationService) {
   var vm = this;
 
-  vm.techSupport = [
-    { name: 'Josh' },
-    { name: 'Chris' },
-    { name: 'Sarah' }];
-
-  vm.addStudent = function addStudent(name) {
-    vm.techSupport.push({ name: name });
-    $log.debug('added ' + name);
-    $log.info('added ' + name);
-    $log.warn('added ' + name);
-    $log.error('added ' + name);
-  };
-
   vm.showError = function showError() {
     notificationService.notifyError({
       title: 'The error title',
