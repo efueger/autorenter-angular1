@@ -1,22 +1,9 @@
 'use strict';
 
-var students = require('./students.module');
+var techSupport = require('./tech-support.module');
 
-function StudentsController($http, $log, generalConfig, notificationService) {
+function TechSupportController($http, $log, generalConfig, notificationService) {
   var vm = this;
-
-  vm.students = [
-    { name: 'Josh' },
-    { name: 'Chris' },
-    { name: 'Sarah' }];
-
-  vm.addStudent = function addStudent(name) {
-    vm.students.push({ name: name });
-    $log.debug('added ' + name);
-    $log.info('added ' + name);
-    $log.warn('added ' + name);
-    $log.error('added ' + name);
-  };
 
   vm.showError = function showError() {
     notificationService.notifyError({
@@ -51,17 +38,6 @@ function StudentsController($http, $log, generalConfig, notificationService) {
     throw new Error('the test exception');
   };
 
-  vm.checkHttpErrorHandlerSuccess = function checkHttpErrorHandler() {
-    $http({
-      method: 'GET',
-      url: generalConfig.apiUrlRoot
-    }).then(function successCallback(response) {
-      $log.log('success - response = ' + response.status);
-    }, function errorCallback(response) {
-      $log.log('unexpected error - response = ' + response.status);
-    });
-  };
-
   vm.checkHttpErrorHandlerError = function checkHttpErrorHandler() {
     $http({
       method: 'GET',
@@ -73,13 +49,16 @@ function StudentsController($http, $log, generalConfig, notificationService) {
     });
   };
 
-  $http.get(generalConfig.apiUrlRoot).then(function apiSuccess(res) {
-    vm.apiResponse = res.data;
-  }, function apiError() {
-    // log error
-  });
+  vm.getApiInfo = function getApiInfo() {
+    $http.get(generalConfig.apiUrlRoot)
+      .then(function apiSuccess(res) {
+        vm.apiResponse = res.data;
+      });
+  };
+
+  vm.getApiInfo();
 }
 
-StudentsController.$inject = ['$http', '$log', 'generalConfig', 'notificationService'];
+TechSupportController.$inject = ['$http', '$log', 'generalConfig', 'notificationService'];
 
-students.controller('StudentsController', StudentsController);
+techSupport.controller('TechSupportController', TechSupportController);

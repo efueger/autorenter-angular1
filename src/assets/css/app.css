@@ -9,24 +9,6 @@
     margin-left: 30px;
 }
 
-.add-student {
-    font-size: 14px !important;
-}
-
-.add-student-input {
-    display: inline-block;
-    width: 300px;
-}
-
-.add-student-button {
-    margin: -8px 0 0 20px;
-}
-
-.student-theme {
-    background-color: #00967A !important;
-    color: #fff !important;
-}
-
 .list-grid {
   width: 90%;
   height: 500px;
