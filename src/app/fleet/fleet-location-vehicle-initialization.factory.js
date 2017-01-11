@@ -33,16 +33,22 @@ var fleetLocationVehicleInitialization = function fleetLocationVehicleInitializa
       });
     var vehicleLookupDataPromise = lookupDataService.getVehicleLookupData()
       .then(function setResult(response) {
-        initializationData.makes = response.data.lookupData.makes.map(function (make) {
-          return make.name;
-        });
-        initializationData.models = response.data.lookupData.models.map(function (model) {
-          return model.name;
-        });
+        initializationData.makes = response.data.lookupData.makes;
+        initializationData.models = response.data.lookupData.models;
         initializationData.colors = response.data.lookupData.colors;
       });
     $q.all([locationPromise, vehiclePromise, yearsPromise, vehicleLookupDataPromise])
       .then(function setResult() {
+        initializationData.models.forEach(function setModel(modelElement) {
+          if (modelElement.id === initializationData.vehicle.model) {
+            initializationData.selectedModel = modelElement;
+          }
+        });
+        initializationData.makes.forEach(function setMake(makeElement) {
+          if (makeElement.id === initializationData.vehicle.make) {
+            initializationData.selectedMake = makeElement;
+          }
+        });
         deferred.resolve(initializationData);
       });
     return deferred.promise;

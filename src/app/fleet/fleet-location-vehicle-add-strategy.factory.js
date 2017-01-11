@@ -32,12 +32,8 @@ var fleetLocationVehicleAddStrategy = function fleetLocationVehicleAddStrategy($
       });
     var vehicleLookupDataPromise = lookupDataService.getVehicleLookupData()
       .then(function setResult(response) {
-        initializationData.makes = response.data.lookupData.makes.map(function (make) {
-          return make.name;
-        });
-        initializationData.models = response.data.lookupData.models.map(function (model) {
-          return model.name;
-        });
+        initializationData.makes = response.data.lookupData.makes;
+        initializationData.models = response.data.lookupData.models;
         initializationData.colors = response.data.lookupData.colors;
       });
     $q.all([locationPromise, yearsPromise, vehicleLookupDataPromise])

@@ -74,8 +74,8 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
       location: location,
       years: years,
       colors: colors,
-      makes: makes.map(function (make) { return make.name; }),
-      models: models.map(function (model) { return model.name; })
+      makes: makes,
+      models: models
     };
     sinon.stub(locationsDataService, 'getLocation', function getLocation() {
       var deferred = $q.defer();

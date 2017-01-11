@@ -9,6 +9,7 @@ function FleetLocationVehicleDetailsController($log, $state, fleetLocationVehicl
   vm.vehicle = {};
   vm.years = {};
   vm.colors = {};
+  vm.selectedMake = {};
 
   var implementationStrategy;
 
@@ -22,6 +23,8 @@ function FleetLocationVehicleDetailsController($log, $state, fleetLocationVehicl
         vm.years = initializationData.years;
         vm.makes = initializationData.makes;
         vm.models = initializationData.models;
+        vm.selectedMake = initializationData.selectedMake;
+        vm.selectedModel = initializationData.selectedModel;
       });
   };
 

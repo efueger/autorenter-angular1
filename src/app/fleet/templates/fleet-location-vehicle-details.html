@@ -35,16 +35,22 @@
         <label for="make" class="col-sm-2 control-label">Make</label>
 
         <div class="col-sm-6">
-          <select ng-options="make as make for make in vm.makes" ng-model="vm.vehicle.make" id="make"
-                  name="make" ng-if="vm.isEditable()" ng-change="vm.synchLookups('make')"
-                  class="form-control" required></select>
+          <select class="form-control" ng-if="vm.isEditable()"
+                  ng-model="vm.vehicle.make" id="make"
+                  name="make" ng-change="vm.synchLookups('make')"
+                  required>
+            <option ng-repeat="make in vm.makes"
+                    value="{{make.id}}">
+              {{make.name}}
+            </option>
+          </select>
           <span class="help-block text-danger" ng-if="vehicleForm.make.$error.required">
               "Make" is a required field
           </span>
 
           <p id="makeText" class="form-control-static"
              ng-if="!vm.isEditable()">
-            {{::vm.vehicle.make}}
+            {{::vm.selectedMake.name}}
           </p>
         </div>
       </div>
@@ -53,16 +59,22 @@
         <label for="model" class="col-sm-2 control-label">Model</label>
 
         <div class="col-sm-6">
-          <select ng-options="model as model for model in vm.models" ng-model="vm.vehicle.model" id="model"
-                  name="model" ng-if="vm.isEditable()" ng-change="vm.synchLookups('model')"
-                  class="form-control" required></select>
+          <select class="form-control" ng-if="vm.isEditable()"
+                  ng-model="vm.vehicle.model" id="model"
+                  name="model" ng-change="vm.synchLookups('model')"
+                  required>
+            <option ng-repeat="model in vm.models"
+                    value="{{model.id}}">
+              {{model.name}}
+            </option>
+          </select>
           <span class="help-block text-danger" ng-if="vehicleForm.model.$error.required">
               "Model" is a required field
           </span>
 
           <p id="modelText" class="form-control-static"
              ng-if="!vm.isEditable()">
-            {{::vm.vehicle.model}}
+            {{::vm.selectedModel.name}}
           </p>
         </div>
       </div>
