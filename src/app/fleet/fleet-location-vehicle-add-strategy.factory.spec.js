@@ -10,6 +10,7 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
   var $rootScope;
   var $state;
   var notificationService;
+  var lookupDataService;
   var locationsDataService;
   var vehiclesDataService;
   var fleetLocationVehicleAddStrategy;
@@ -20,6 +21,7 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
                                         _$rootScope_,
                                         _$state_,
                                         _notificationService_,
+                                        _lookupDataService_,
                                         _locationsDataService_,
                                         _vehiclesDataService_,
                                         _fleetLocationVehicleAddStrategy_) {
@@ -27,6 +29,7 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
     $rootScope = _$rootScope_;
     $state = _$state_;
     notificationService = _notificationService_;
+    lookupDataService = _lookupDataService_;
     locationsDataService = _locationsDataService_;
     vehiclesDataService = _vehiclesDataService_;
     fleetLocationVehicleAddStrategy = _fleetLocationVehicleAddStrategy_;
@@ -43,18 +46,53 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
     };
     var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
     var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
-    var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
-    var makes = ['Chevrolet', 'Ford', 'Honda', 'Toyota'];
+    var models = [
+      {
+        id: 'tms',
+        name: 'Model S'
+      },
+      {
+        id: 'tmx',
+        name: 'Model X'
+      },
+      {
+        id: 'cvt',
+        name: 'Corvette'
+      },
+    ];
+    var makes = [
+      {
+        id: 'tsl',
+        name: 'Tesla'
+      },
+      {
+        id: 'che',
+        name: 'Chevrolet'
+      }
+    ];
     var expectedResponse = {
       location: location,
       years: years,
       colors: colors,
-      makes: makes,
-      models: models
+      makes: makes.map(function (make) { return make.name; }),
+      models: models.map(function (model) { return model.name; })
     };
     sinon.stub(locationsDataService, 'getLocation', function getLocation() {
       var deferred = $q.defer();
       deferred.resolve({data: {location: location}});
+      return deferred.promise;
+    });
+    sinon.stub(lookupDataService, 'getVehicleLookupData', function getVehicleLookupData() {
+      var deferred = $q.defer();
+      deferred.resolve({
+        data: {
+                lookupData: {
+                  makes: makes,
+                  models: models,
+                  colors: colors
+                }
+        }
+      });
       return deferred.promise;
     });
 

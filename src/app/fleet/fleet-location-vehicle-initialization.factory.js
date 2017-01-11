@@ -3,36 +3,15 @@
 var fleet = require('./fleet.module');
 
 var fleetLocationVehicleInitialization = function fleetLocationVehicleInitialization($q,
+                                                                                     lookupDataService,
                                                                                      locationsDataService,
                                                                                      vehiclesDataService) {
   var fleetLocationVehicleInitializationInstance;
-
-  var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
   var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
-  var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
-  var makes = ['Chevrolet', 'Ford', 'Honda', 'Toyota'];
 
   function getYears() {
     var deferred = $q.defer();
     deferred.resolve({data: years});
-    return deferred.promise;
-  }
-
-  function getColors() {
-    var deferred = $q.defer();
-    deferred.resolve({data: colors});
-    return deferred.promise;
-  }
-
-  function getMakes() {
-    var deferred = $q.defer();
-    deferred.resolve({data: makes});
-    return deferred.promise;
-  }
-
-  function getModels() {
-    var deferred = $q.defer();
-    deferred.resolve({data: models});
     return deferred.promise;
   }
 
@@ -52,19 +31,17 @@ var fleetLocationVehicleInitialization = function fleetLocationVehicleInitializa
       .then(function setResult(response) {
         initializationData.years = response.data;
       });
-    var colorsPromise = getColors()
+    var vehicleLookupDataPromise = lookupDataService.getVehicleLookupData()
       .then(function setResult(response) {
-        initializationData.colors = response.data;
+        initializationData.makes = response.data.lookupData.makes.map(function (make) {
+          return make.name;
+        });
+        initializationData.models = response.data.lookupData.models.map(function (model) {
+          return model.name;
+        });
+        initializationData.colors = response.data.lookupData.colors;
       });
-    var makesPromise = getMakes()
-      .then(function setResult(response) {
-        initializationData.makes = response.data;
-      });
-    var modelsPromise = getModels()
-      .then(function setResult(response) {
-        initializationData.models = response.data;
-      });
-    $q.all([locationPromise, vehiclePromise, yearsPromise, colorsPromise, makesPromise, modelsPromise])
+    $q.all([locationPromise, vehiclePromise, yearsPromise, vehicleLookupDataPromise])
       .then(function setResult() {
         deferred.resolve(initializationData);
       });
@@ -79,6 +56,7 @@ var fleetLocationVehicleInitialization = function fleetLocationVehicleInitializa
 
 fleetLocationVehicleInitialization.$inject = [
   '$q',
+  'lookupDataService',
   'locationsDataService',
   'vehiclesDataService'
 ];
