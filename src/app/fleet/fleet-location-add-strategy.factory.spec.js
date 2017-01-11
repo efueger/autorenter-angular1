@@ -9,7 +9,7 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
   var $rootScope;
   var $state;
   var notificationService;
-  var statesDataService;
+  var lookupDataService;
   var locationsDataService;
   var fleetLocationAddStrategy;
 
@@ -19,14 +19,14 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
                                         _$rootScope_,
                                         _$state_,
                                         _notificationService_,
-                                        _statesDataService_,
+                                        _lookupDataService_,
                                         _locationsDataService_,
                                         _fleetLocationAddStrategy_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
     $state = _$state_;
     notificationService = _notificationService_;
-    statesDataService = _statesDataService_;
+    lookupDataService = _lookupDataService_;
     locationsDataService = _locationsDataService_;
     fleetLocationAddStrategy = _fleetLocationAddStrategy_;
   }));
@@ -43,7 +43,7 @@ describe('fa.fleet.fleetLocationAddStrategy > ', function describeImpl() {
       }
     ];
     var expectedResponse = {states: states};
-    sinon.stub(statesDataService, 'getStates', function getStates() {
+    sinon.stub(lookupDataService, 'getStates', function getStates() {
       var deferred = $q.defer();
       deferred.resolve({data: {states: states}});
       return deferred.promise;

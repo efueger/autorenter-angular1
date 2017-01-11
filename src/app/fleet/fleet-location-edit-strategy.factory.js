@@ -3,7 +3,7 @@
 var fleet = require('./fleet.module');
 
 var fleetLocationEditStrategy = function fleetLocationEditStrategy($q, $state, notificationService, strings,
-                                                                   statesDataService, locationsDataService, fleetLocationInitializationFactory) {
+                                                                   lookupDataService, locationsDataService, fleetLocationInitializationFactory) {
   var fleetLocationEditStrategyInstance;
 
   var getInitializationData = function getInitializationData(locationId) {
@@ -38,7 +38,7 @@ fleetLocationEditStrategy.$inject = [
   '$state',
   'notificationService',
   'strings',
-  'statesDataService',
+  'lookupDataService',
   'locationsDataService',
   'fleetLocationInitializationFactory'
 ];
