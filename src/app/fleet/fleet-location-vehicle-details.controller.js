@@ -10,6 +10,7 @@ function FleetLocationVehicleDetailsController($log, $state, fleetLocationVehicl
   vm.years = {};
   vm.colors = {};
   vm.selectedMake = {};
+  vm.selectedModel = {};
 
   var implementationStrategy;
 
