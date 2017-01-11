@@ -3,7 +3,7 @@ require('./fleet-location-initialization.factory');
 describe('fa.fleet.fleetLocationInitializationFactory > ', function describeImpl() {
   var $q;
   var $rootScope;
-  var statesDataService;
+  var lookupDataService;
   var locationsDataService;
   var fleetLocationInitializationFactory;
 
@@ -13,12 +13,12 @@ describe('fa.fleet.fleetLocationInitializationFactory > ', function describeImpl
 
   beforeEach(inject(function injectImpl(_$q_,
                                         _$rootScope_,
-                                        _statesDataService_,
+                                        _lookupDataService_,
                                         _locationsDataService_,
                                         _fleetLocationInitializationFactory_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
-    statesDataService = _statesDataService_;
+    lookupDataService = _lookupDataService_;
     locationsDataService = _locationsDataService_;
     fleetLocationInitializationFactory = _fleetLocationInitializationFactory_;
   }));
@@ -51,7 +51,7 @@ describe('fa.fleet.fleetLocationInitializationFactory > ', function describeImpl
       location: location,
       selectedState: selectedState
     };
-    sinon.stub(statesDataService, 'getStates', function getStates() {
+    sinon.stub(lookupDataService, 'getStates', function getStates() {
       var deferred = $q.defer();
       deferred.resolve({data: {states: states}});
       return deferred.promise;

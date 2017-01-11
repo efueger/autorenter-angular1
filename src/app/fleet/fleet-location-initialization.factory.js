@@ -3,13 +3,13 @@
 var fleet = require('./fleet.module');
 
 var fleetLocationInitializationFactory = function fleetLocationInitializationFactory($q,
-                                                                   statesDataService, locationsDataService) {
+                                                                   lookupDataService, locationsDataService) {
   var fleetLocationInitializationFactoryInstance;
 
   function getInitializationData(locationId) {
     var deferred = $q.defer();
     var initializationData = {};
-    var statesPromise = statesDataService.getStates()
+    var statesPromise = lookupDataService.getStates()
       .then(function setResult(response) {
         initializationData.states = response.data.states;
       });
@@ -37,7 +37,7 @@ var fleetLocationInitializationFactory = function fleetLocationInitializationFac
 
 fleetLocationInitializationFactory.$inject = [
   '$q',
-  'statesDataService',
+  'lookupDataService',
   'locationsDataService'
 ];
 
