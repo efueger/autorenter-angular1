@@ -2,7 +2,7 @@
 
 var fleet = require('./fleet.module');
 
-function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrategyFactory, fleetLocationVehicleDetailsModeService) {
+function FleetLocationVehicleDetailsController($log, $state, fleetLocationVehicleStrategyFactory, fleetLocationVehicleDetailsModeService) {
   var vm = this;
 
   vm.location = {};
@@ -25,6 +25,10 @@ function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrat
       });
   };
 
+  vm.synchLookups = function synchLookups(propertyName) {
+    $log.info('Property changed: ' + propertyName);
+  };
+
   vm.isEditable = function isEditable() {
     return fleetLocationVehicleDetailsModeService.isAddMode() || fleetLocationVehicleDetailsModeService.isEditMode();
   };
@@ -37,6 +41,7 @@ function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrat
 }
 
 FleetLocationVehicleDetailsController.$inject = [
+  '$log',
   '$state',
   'fleetLocationVehicleStrategyFactory',
   'fleetLocationVehicleDetailsModeService'
