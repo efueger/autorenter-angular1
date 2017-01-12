@@ -40,7 +40,7 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
     httpErrorHandler.responseError({status: options.status, data: options.data || {}});
 
     $rootScope.$digest();
-    return inputs.spies.notifyError.withArgs(options.expected).should.have.been.calledOnce;
+    return inputs.spies.notifyError.withArgs(options.expected).calledOnce.should.be.true;
   }
 
   it('should notify user on status code 400', function testImpl() {
@@ -103,7 +103,7 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
         httpErrorHandler.responseError({status: status, data: {}});
 
         $rootScope.$digest();
-        return inputs.spies.notifyError.should.not.have.been.calledOnce;
+        return inputs.spies.notifyError.called.should.be.false;
       });
     });
   });
