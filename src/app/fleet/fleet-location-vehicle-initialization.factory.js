@@ -2,11 +2,11 @@
 
 var fleet = require('./fleet.module');
 
-var fleetLocationVehicleInitialization = function fleetLocationVehicleInitialization($q,
+var fleetLocationVehicleInitializationFactory = function fleetLocationVehicleInitializationFactoryFactory($q,
                                                                                      lookupDataService,
                                                                                      locationsDataService,
                                                                                      vehiclesDataService) {
-  var fleetLocationVehicleInitializationInstance;
+  var fleetLocationVehicleInitializationFactoryInstance;
   var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
 
   function getYears() {
@@ -54,13 +54,13 @@ var fleetLocationVehicleInitialization = function fleetLocationVehicleInitializa
     return deferred.promise;
   }
 
-  fleetLocationVehicleInitializationInstance = {
+  fleetLocationVehicleInitializationFactoryInstance = {
     getInitializationData: getInitializationData
   };
-  return fleetLocationVehicleInitializationInstance;
+  return fleetLocationVehicleInitializationFactoryInstance;
 };
 
-fleetLocationVehicleInitialization.$inject = [
+fleetLocationVehicleInitializationFactory.$inject = [
   '$q',
   'lookupDataService',
   'locationsDataService',
@@ -68,4 +68,4 @@ fleetLocationVehicleInitialization.$inject = [
 ];
 
 fleet
-  .factory('fleetLocationVehicleInitialization', fleetLocationVehicleInitialization);
+  .factory('fleetLocationVehicleInitializationFactory', fleetLocationVehicleInitializationFactory);

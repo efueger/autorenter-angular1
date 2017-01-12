@@ -11,7 +11,7 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
   var vehiclesDataService;
   var locationsDataService;
   var fleetLocationVehicleEditStrategy;
-  var fleetLocationVehicleInitialization;
+  var fleetLocationVehicleInitializationFactory;
 
   beforeEach(angular.mock.module('fa.fleet'));
 
@@ -21,13 +21,13 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
                                         _vehiclesDataService_,
                                         _locationsDataService_,
                                         _fleetLocationVehicleEditStrategy_,
-                                        _fleetLocationVehicleInitialization_) {
+                                        _fleetLocationVehicleInitializationFactory_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
     vehiclesDataService = _vehiclesDataService_;
     locationsDataService = _locationsDataService_;
     fleetLocationVehicleEditStrategy = _fleetLocationVehicleEditStrategy_;
-    fleetLocationVehicleInitialization = _fleetLocationVehicleInitialization_;
+    fleetLocationVehicleInitializationFactory = _fleetLocationVehicleInitializationFactory_;
   }));
 
   it('getInitializationData returns vehicle and location data', function testImpl() {
@@ -61,7 +61,7 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
       makes: makes,
       models: models
     };
-    sinon.stub(fleetLocationVehicleInitialization, 'getInitializationData', function getInitializationData(locationId, vehicleId) {
+    sinon.stub(fleetLocationVehicleInitializationFactory, 'getInitializationData', function getInitializationData(locationId, vehicleId) {
       var deferred = $q.defer();
       if (locationId === location.id && vehicleId === vehicle.id) {
         deferred.resolve({
