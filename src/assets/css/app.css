@@ -28,3 +28,7 @@
 .nav-buttons {
   margin-bottom: 25px !important;
 }
+
+.navbar-nav>li>a {
+  color: #337ab7 !important;
+}
