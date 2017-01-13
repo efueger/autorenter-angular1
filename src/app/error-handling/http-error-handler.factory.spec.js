@@ -39,7 +39,7 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
   function assertNotifyErrorCalledCorrectly(options) {
     httpErrorHandler.responseError({status: options.status, data: options.data || {}});
 
-    $rootScope.$digest();
+    $rootScope.$apply();
     return inputs.spies.notifyError.withArgs(options.expected).calledOnce.should.be.true;
   }
 
@@ -102,7 +102,7 @@ describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
       it('status code ' + status, function testImpl() {
         httpErrorHandler.responseError({status: status, data: {}});
 
-        $rootScope.$digest();
+        $rootScope.$apply();
         return inputs.spies.notifyError.called.should.be.false;
       });
     });
