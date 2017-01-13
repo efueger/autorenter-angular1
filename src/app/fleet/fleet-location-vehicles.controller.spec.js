@@ -7,7 +7,7 @@ var fleetLocationVehiclesIdColumnTemplate = require('./templates/fleet-location-
 var fleetLocationVehiclesRentToOwnColumnTemplate = require('./templates/fleet-location-vehicles-rent-to-own-column.html');
 var fleetLocationVehiclesActionsColumnTemplate = require('./templates/fleet-location-vehicles-actions-column.html');
 
-describe('fa.fleet.FleetVehiclesController > ', function describeImpl() {
+describe('fa.fleet.FleetLocationVehiclesController > ', function describeImpl() {
   var $q;
   var $state;
   var $rootScope;
