@@ -4,47 +4,66 @@ require('angular-mocks');
 require('sinon-chai');
 require('./http-error-handler.factory');
 
-describe.skip('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
-  var notifyErrorSpy;
-  var $http;
-  var $httpBackend;
+describe('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
+  var httpErrorHandler;
+  var $rootScope;
+  var sandbox;
+  var inputs;
 
   beforeEach(angular.mock.module('fa.errorHandling'));
 
-  beforeEach(inject(function injectImpl(_notificationService_, _$http_, _$httpBackend_) {
-    $http = _$http_;
-    $httpBackend = _$httpBackend_;
+  beforeEach(function() {
+    sandbox = sinon.sandbox.create();
+    inputs = {
+      mocks: {
+        notificationService: {notifyError: function() {}}
+      },
+      spies: {}
+    };
+    inputs.spies.notifyError = sandbox.spy(inputs.mocks.notificationService, 'notifyError');
 
-    notifyErrorSpy = sinon.spy(_notificationService_, 'notifyError');
-  }));
+    angular.mock.module(function($provide) {
+      $provide.value('notificationService', inputs.mocks.notificationService);
+    });
 
-  it('should notify user on status code 400', function testImpl() {
-    var actualArgs = {};
-    var userMessage = 'some validation error message';
-    $httpBackend.when('GET', '/foo').respond(400, {message: userMessage});
-    $http.get('/foo')
-      .catch(function handleResponseError() {
-        actualArgs = notifyErrorSpy.getCall(0).args[0];
-      });
-    $httpBackend.flush();
-    actualArgs.should.deep.equal({
-      title: 'Validation error',
-      userMessage: userMessage,
-      noLog: true
+    inject(function injectImpl(_httpErrorHandler_, _$rootScope_) {
+      httpErrorHandler = _httpErrorHandler_;
+      $rootScope = _$rootScope_;
     });
   });
 
+  afterEach(function() {
+    sandbox.restore();
+  });
+
+  function assertNotifyErrorCalledCorrectly(options) {
+    httpErrorHandler.responseError({status: options.status, data: options.data || {}});
+
+    $rootScope.$apply();
+    return inputs.spies.notifyError.withArgs(options.expected).calledOnce.should.be.true;
+  }
+
+  it('should notify user on status code 400', function testImpl() {
+    var userMessage = 'some validation error message';
+    assertNotifyErrorCalledCorrectly({
+      status: 400,
+      data: {message: userMessage },
+      expected: {
+        title: 'Validation error',
+        userMessage: userMessage,
+        noLog: true
+      }
+    });
+
+  });
+
   it('should notify user on status code 413', function testImpl() {
-    var actualArgs = {};
-    $httpBackend.when('GET', '/foo').respond(413);
-    $http.get('/foo')
-      .catch(function handleResponseError() {
-        actualArgs = notifyErrorSpy.getCall(0).args[0];
-      });
-    $httpBackend.flush();
-    actualArgs.should.deep.equal({
-      userMessage: 'The request could not be processed because it is too large for the system to handle.'
+    assertNotifyErrorCalledCorrectly({
+      status: 413,
+      expected: {
+        userMessage: 'The request could not be processed because it is too large for the system to handle.'
         + ' Please contact technical support.'
+      }
     });
   });
 
@@ -55,33 +74,25 @@ describe.skip('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
     }
     statusCodes.forEach(function statusTest(status) {
       it('status code ' + status, function testImpl() {
-        var actualArgs = {};
-        $httpBackend.when('GET', '/foo').respond(status);
-        $http.get('/foo')
-          .catch(function handleResponseError() {
-            actualArgs = notifyErrorSpy.getCall(0).args[0];
-          });
-        $httpBackend.flush();
-        actualArgs.should.deep.equal({
-          userMessage: 'The server is unavailable. Please try again.'
+        assertNotifyErrorCalledCorrectly({
+          status: status,
+          expected: {
+            userMessage: 'The server is unavailable. Please try again.'
             + ' If the problem persists, please notify technical support.',
-          noLog: true
+            noLog: true
+          }
         });
       });
     });
   });
 
   it('should notify user on status code 404', function testImpl() {
-    var actualArgs = {};
-    $httpBackend.when('GET', '/foo').respond(404);
-    $http.get('/foo')
-      .catch(function handleResponseError() {
-        actualArgs = notifyErrorSpy.getCall(0).args[0];
-      });
-    $httpBackend.flush();
-    actualArgs.should.deep.equal({
-      title: 'Document not found',
-      userMessage: 'The data you are requesting does not exist.'
+    assertNotifyErrorCalledCorrectly({
+      status: 404,
+      expected: {
+        title: 'Document not found',
+        userMessage: 'The data you are requesting does not exist.'
+      }
     });
   });
 
@@ -89,31 +100,20 @@ describe.skip('fa.errorHandling.httpErrorHandler > ', function describeImpl() {
     var statusCodes = [401, 403];
     statusCodes.forEach(function statusTest(status) {
       it('status code ' + status, function testImpl() {
-        var isCalled;
-        $httpBackend.when('GET', '/foo').respond(status);
-        $http.get('/foo')
-          .then(function handleResponseSuccess() {
-            isCalled = notifyErrorSpy.called;
-          })
-          .catch(function handleResponseError() {
-            isCalled = notifyErrorSpy.called;
-          });
-        $httpBackend.flush();
-        isCalled.should.be.false;
+        httpErrorHandler.responseError({status: status, data: {}});
+
+        $rootScope.$apply();
+        return inputs.spies.notifyError.called.should.be.false;
       });
     });
   });
 
   it('should notify user with general message on other status code', function testImpl() {
-    var actualArgs = {};
-    $httpBackend.when('GET', '/foo').respond(600);
-    $http.get('/foo')
-      .catch(function handleResponseError() {
-        actualArgs = notifyErrorSpy.getCall(0).args[0];
-      });
-    $httpBackend.flush();
-    actualArgs.should.deep.equal({
-      title: 'General response error'
+    assertNotifyErrorCalledCorrectly({
+      status: 600,
+      expected: {
+        title: 'General response error'
+      }
     });
   });
 });

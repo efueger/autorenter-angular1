@@ -1,14 +1,15 @@
-<div class="row">
-  <span>
+<div class="row grid-buttons">
+  <div class="col-md-11">
     <input name="filter">
     <button type="button" class="btn btn-primary">Apply</button>
     <button type="button" class="btn btn-default">Clear</button>
-  </span>
+  </div>
 
-  <span class="pull-right">
+  <div class="col-md-1 text-right">
     <button type="button" class="btn btn-primary" ui-sref="fleet.locations.add">New</button>
-  </span>
-
+  </div>
 </div>
 
-<div id="grid1" ui-grid="vm.gridOptions" ui-grid-resize-columns="true" class="list-grid ui-grid-auto-resize>"></div>
+<div>
+  <div id="grid1" ui-grid="vm.gridOptions"></div>
+</div>
