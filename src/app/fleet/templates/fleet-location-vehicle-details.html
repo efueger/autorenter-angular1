@@ -37,7 +37,7 @@
         <div class="col-sm-6">
           <select class="form-control" ng-if="vm.isEditable()"
                   ng-model="vm.vehicle.make" id="make"
-                  name="make" ng-change="vm.synchLookups('make')"
+                  name="make" ng-change="vm.synchLookups()"
                   required>
             <option ng-repeat="make in vm.makes"
                     value="{{make.id}}">
@@ -61,7 +61,7 @@
         <div class="col-sm-6">
           <select class="form-control" ng-if="vm.isEditable()"
                   ng-model="vm.vehicle.model" id="model"
-                  name="model" ng-change="vm.synchLookups('model')"
+                  name="model" ng-change="vm.synchLookups()"
                   required>
             <option ng-repeat="model in vm.models"
                     value="{{model.id}}">
@@ -84,7 +84,7 @@
 
         <div class="col-sm-6">
           <select ng-options="year as year for year in vm.years" ng-model="vm.vehicle.year" id="year"
-                  name="year" ng-if="vm.isEditable()" ng-change="vm.synchLookups('year')"
+                  name="year" ng-if="vm.isEditable()" ng-change="vm.synchLookups()"
                   class="form-control" required></select>
           <span class="help-block text-danger" ng-if="vehicleForm.year.$error.required">
                                 "Year" is a required field
@@ -118,7 +118,7 @@
 
         <div class="col-sm-6">
           <select ng-options="color as color for color in vm.colors" ng-model="vm.vehicle.color" id="color"
-                  name="color" ng-if="vm.isEditable()" ng-change="vm.synchLookups('color')"
+                  name="color" ng-if="vm.isEditable()" ng-change="vm.synchLookups()"
                   class="form-control"></select>
 
           <p id="colorText" class="form-control-static"
