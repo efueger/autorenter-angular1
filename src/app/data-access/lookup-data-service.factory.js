@@ -17,7 +17,7 @@ var lookupDataService = function lookupDataService($http, generalConfig, strings
   function getVehicleLookupData() {
     return $http({
       method: 'GET',
-      url: strings.format('{apiUrl}lookup-data?makes&models&colors', { apiUrl: generalConfig.apiUrlRoot })
+      url: strings.format('{apiUrl}lookup-data?makes&models', { apiUrl: generalConfig.apiUrlRoot })
     });
   }
 

@@ -38,7 +38,6 @@ var fleetLocationVehicleInitializationFactory = function fleetLocationVehicleIni
       .then(function setResult(response) {
         initializationData.makes = response.data.lookupData.makes;
         initializationData.models = response.data.lookupData.models;
-        initializationData.colors = response.data.lookupData.colors;
       });
     promises.push(vehicleLookupDataPromise);
 

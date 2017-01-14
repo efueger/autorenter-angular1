@@ -4,6 +4,8 @@ var fleet = require('./fleet.module');
 
 require('./fleet.route.config');
 
+require('./fleet-vehicle-property-synchronizer');
+
 require('./fleet-locations.controller');
 require('./fleet-location-vehicles.controller');
 
