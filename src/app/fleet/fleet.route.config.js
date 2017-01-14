@@ -120,7 +120,7 @@ function fleetRouteConfig($stateProvider) {
       parent: 'fleet.locations.vehicles'
     })
     .state('fleet.locations.vehicles.add', {
-      url: '/{vehicleId}/add',
+      url: '/add',
       views: {
         '@': {
           template: fleetLocationVehicleDetailsTemplate,
