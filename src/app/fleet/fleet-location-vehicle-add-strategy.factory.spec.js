@@ -5,7 +5,7 @@ require('sinon-chai');
 
 require('./fleet-location-vehicle-add-strategy.factory');
 
-describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() {
+describe.skip('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() {
   var $q;
   var $rootScope;
   var $state;

@@ -36,7 +36,7 @@
 
         <div class="col-sm-6">
           <select class="form-control" ng-if="vm.isEditable()"
-                  ng-model="vm.vehicle.make" id="make"
+                  ng-model="vm.vehicle.makeId" id="make"
                   name="make" ng-change="vm.synchLookups()"
                   required>
             <option ng-repeat="make in vm.makes"
@@ -60,7 +60,7 @@
 
         <div class="col-sm-6">
           <select class="form-control" ng-if="vm.isEditable()"
-                  ng-model="vm.vehicle.model" id="model"
+                  ng-model="vm.vehicle.modelId" id="model"
                   name="model" ng-change="vm.synchLookups()"
                   required>
             <option ng-repeat="model in vm.models"

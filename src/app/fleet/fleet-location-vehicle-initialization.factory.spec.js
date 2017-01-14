@@ -1,6 +1,6 @@
 require('./fleet-location-vehicle-initialization.factory');
 
-describe('fa.fleet.fleetLocationVehicleInitializationFactory > ', function describeImpl() {
+describe.skip('fa.fleet.fleetLocationVehicleInitializationFactory > ', function describeImpl() {
   var $q;
   var $rootScope;
   var lookupDataService;

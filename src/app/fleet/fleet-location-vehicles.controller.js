@@ -65,13 +65,13 @@ function FleetLocationVehiclesController($state,
       },
       {
         displayName: 'Make',
-        field: 'make',
+        field: 'makeId',
         type: 'string',
         enableSorting: false
       },
       {
         displayName: 'Model',
-        field: 'model',
+        field: 'modelId',
         type: 'string',
         enableSorting: false
       },
