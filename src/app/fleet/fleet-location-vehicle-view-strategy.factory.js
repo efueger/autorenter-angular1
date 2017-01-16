@@ -5,10 +5,7 @@ var fleet = require('./fleet.module');
 var fleetLocationVehicleViewStrategy =
   function fleetLocationVehicleViewStrategy(fleetLocationVehicleInitializationFactory) {
     var getInitializationData = function getInitializationData(locationId, vehicleId) {
-      return fleetLocationVehicleInitializationFactory.getInitializationData(locationId, vehicleId)
-      .then(function setResult(initializationData) {
-        return initializationData;
-      });
+      return fleetLocationVehicleInitializationFactory.getInitializationData(locationId, vehicleId);
     };
 
     return {

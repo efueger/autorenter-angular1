@@ -5,13 +5,12 @@ require('sinon-chai');
 
 require('./fleet-location-vehicle-add-strategy.factory');
 
-describe.skip('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() {
+describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() {
   var $q;
   var $rootScope;
   var $state;
   var notificationService;
-  var lookupDataService;
-  var locationsDataService;
+  var fleetLocationVehicleInitializationFactory;
   var vehiclesDataService;
   var fleetLocationVehicleAddStrategy;
 
@@ -21,83 +20,36 @@ describe.skip('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeIm
                                         _$rootScope_,
                                         _$state_,
                                         _notificationService_,
-                                        _lookupDataService_,
-                                        _locationsDataService_,
+                                        _fleetLocationVehicleInitializationFactory_,
                                         _vehiclesDataService_,
                                         _fleetLocationVehicleAddStrategy_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
     $state = _$state_;
     notificationService = _notificationService_;
-    lookupDataService = _lookupDataService_;
-    locationsDataService = _locationsDataService_;
+    fleetLocationVehicleInitializationFactory = _fleetLocationVehicleInitializationFactory_;
     vehiclesDataService = _vehiclesDataService_;
     fleetLocationVehicleAddStrategy = _fleetLocationVehicleAddStrategy_;
   }));
 
   it('getInitializationData returns vehicle and location data', function testImpl() {
-    var location = {
-      id: '1',
-      siteId: 'ind',
-      name: 'Indianapolis International Airport',
-      vehicleCount: 255,
-      city: 'Indianapolis',
-      stateCode: 'IN'
+    var dummyInitializationData = {
+      theActualValues: 'do not matter for this test'
     };
-    var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
-    var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
-    var models = [
-      {
-        id: 'tms',
-        name: 'Model S'
-      },
-      {
-        id: 'tmx',
-        name: 'Model X'
-      },
-      {
-        id: 'cvt',
-        name: 'Corvette'
-      },
-    ];
-    var makes = [
-      {
-        id: 'tsl',
-        name: 'Tesla'
-      },
-      {
-        id: 'che',
-        name: 'Chevrolet'
+    var locationIdUsedInInvocation = 'foo';
+    sinon.stub(fleetLocationVehicleInitializationFactory, 'getInitializationData', function getInitializationData(locationId) {
+      var deferred = $q.defer();
+      if (locationId === locationIdUsedInInvocation) {
+        deferred.resolve(dummyInitializationData);
+      } else {
+        deferred.reject();
       }
-    ];
-    var expectedResponse = {
-      location: location,
-      years: years,
-      colors: colors,
-      makes: makes,
-      models: models
-    };
-    sinon.stub(locationsDataService, 'getLocation', function getLocation() {
-      var deferred = $q.defer();
-      deferred.resolve({data: {location: location}});
       return deferred.promise;
     });
-    sinon.stub(lookupDataService, 'getVehicleLookupData', function getVehicleLookupData() {
-      var deferred = $q.defer();
-      deferred.resolve({
-        data: {
-                lookupData: {
-                  makes: makes,
-                  models: models,
-                  colors: colors
-                }
-        }
-      });
-      return deferred.promise;
-    });
+    var expectedResponse = dummyInitializationData;
 
     var actualResponse;
-    fleetLocationVehicleAddStrategy.getInitializationData()
+    fleetLocationVehicleAddStrategy.getInitializationData(locationIdUsedInInvocation)
       .then(function setResponse(response) {
         actualResponse = response;
       });
