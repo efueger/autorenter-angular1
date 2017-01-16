@@ -5,7 +5,7 @@ require('sinon-chai');
 
 require('./fleet-location-vehicle-details.controller');
 
-describe.skip('fa.fleet.FleetLocationVehicleDetailsController > ', function describeImpl() {
+describe('fa.fleet.FleetLocationVehicleDetailsController > ', function describeImpl() {
   var $q;
   var $rootScope;
   var $state;
@@ -14,42 +14,33 @@ describe.skip('fa.fleet.FleetLocationVehicleDetailsController > ', function desc
   var fleetLocationVehicleDetailsModeService;
   var controller;
 
-  var vehicle = {
-    id: 1,
-    vin: '1XKDPB0X04R047346',
-    make: 'Toyota',
-    model: 'Tercel',
-    year: 1990,
-    miles: 452303,
-    color: 'Gold',
-    isRentToOwn: false
-  };
-  var location = {
-    id: '1',
-    siteId: 'ind',
-    name: 'Indianapolis International Airport',
-    vehicleCount: 255,
-    city: 'Indianapolis',
-    stateCode: 'IN'
-  };
-
-  var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
-  var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
-  var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
-  var makes = ['Chevrolet', 'Ford', 'Honda', 'Toyota'];
-
+  var vehicle = {id: 1};
+  var location = {id: '1'};
+  var selectedMake = { id: 'che', name: 'Chevrolet' };
+  var makes = [
+    { id: 'tsl', name: 'Tesla' },
+    selectedMake
+  ];
+  var selectedModel = { id: 'cvt', name: 'Corvette' };
+  var models = [
+    { id: 'tmx', name: 'Model X' },
+    selectedModel
+  ];
+  var years = [2016, 2017];
+  var colors = ['Black', 'Red', 'Silver'];
   var initializationData = {
     vehicle: vehicle,
     location: location,
-    years: years,
-    colors: colors,
     makes: makes,
-    models: models
+    selectedMake: selectedMake,
+    selectedModel: selectedModel
   };
 
   var navigationState = { vehicleId: '1000', locationId: 'fooßar'};
 
   var getInitializationDataStub;
+  var fakeFleetVehiclePropertySynchronizer;
+  var synchronizerInitializerSpy;
 
   beforeEach(angular.mock.module('fa.fleet'));
 
@@ -78,9 +69,7 @@ describe.skip('fa.fleet.FleetLocationVehicleDetailsController > ', function desc
       return implementationStrategy;
     };
 
-    getInitializationDataStub = sinon.stub(
-      implementationStrategy,
-      'getInitializationData',
+    getInitializationDataStub = sinon.stub(implementationStrategy, 'getInitializationData',
       function getInitializationData() {
         var deferred = $q.defer();
         deferred.resolve(initializationData);
@@ -88,13 +77,22 @@ describe.skip('fa.fleet.FleetLocationVehicleDetailsController > ', function desc
       }
     );
 
+    fakeFleetVehiclePropertySynchronizer = {
+      initialize: function initialize() { },
+      getSynchronizedData: function getSynchronizedData(actualVehicle) {
+        return (actualVehicle.id === vehicle.id) ? { models: models, years: years, colors: colors } : null;
+      }
+    };
+    synchronizerInitializerSpy = sinon.spy(fakeFleetVehiclePropertySynchronizer, 'initialize');
+
     angular.mock.inject([
       '$controller',
       function assignController($controller) {
         controller = $controller('FleetLocationVehicleDetailsController', {
           '$state': $state,
           'fleetLocationVehicleStrategyFactory': fleetLocationVehicleStrategyFactory,
-          'fleetLocationVehicleDetailsModeService': fleetLocationVehicleDetailsModeService
+          'fleetLocationVehicleDetailsModeService': fleetLocationVehicleDetailsModeService,
+          'fleetVehiclePropertySynchronizer': fakeFleetVehiclePropertySynchronizer
         });
       }
     ]);
@@ -116,16 +114,32 @@ describe.skip('fa.fleet.FleetLocationVehicleDetailsController > ', function desc
       controller.vehicle.should.deep.equal(initializationData.vehicle);
     });
 
-    it('sets the correct years', function testImpl() {
-      controller.years.should.deep.equal(initializationData.years);
-    });
-
     it('sets the correct makes', function testImpl() {
       controller.makes.should.deep.equal(initializationData.makes);
     });
 
-    it('sets the correct models', function testImpl() {
-      controller.models.should.deep.equal(initializationData.models);
+    it('sets the selected make', function testImpl() {
+      controller.selectedMake.should.deep.equal(initializationData.selectedMake);
+    });
+
+    it('sets the selected model', function testImpl() {
+      controller.selectedModel.should.deep.equal(initializationData.selectedModel);
+    });
+
+    it('initializes the synchronizer', function testImpl() {
+      synchronizerInitializerSpy.calledWith(initializationData).should.be.true;
+    });
+
+    it('sets the models', function testImpl() {
+      controller.models.should.deep.equal(models);
+    });
+
+    it('sets the years', function testImpl() {
+      controller.years.should.deep.equal(years);
+    });
+
+    it('sets the colors', function testImpl() {
+      controller.colors.should.deep.equal(colors);
     });
   });
 

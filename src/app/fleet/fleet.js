@@ -4,8 +4,6 @@ var fleet = require('./fleet.module');
 
 require('./fleet.route.config');
 
-require('./fleet-vehicle-property-synchronizer');
-
 require('./fleet-locations.controller');
 require('./fleet-location-vehicles.controller');
 
@@ -29,6 +27,8 @@ require('./fleet-location-vehicle-view-strategy.factory');
 
 require('./fleet-location-initialization.factory');
 require('./fleet-location-vehicle-initialization.factory');
+
+require('./fleet-vehicle-property-synchronizer');
 
 require('./fleet-reports.controller');
 
