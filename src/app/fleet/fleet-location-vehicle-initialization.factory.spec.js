@@ -14,8 +14,6 @@ describe('fa.fleet.fleetLocationVehicleInitializationFactory > ', function descr
   var vehiclesDataService;
   var fleetLocationVehicleInitializationFactory;
 
-  var sinon = require('sinon');
-
   beforeEach(angular.mock.module('fa.fleet'));
 
   beforeEach(inject(function injectImpl(_$q_,

@@ -71,7 +71,8 @@ var fleetVehiclePropertySynchronizer = function fleetVehiclePropertySynchronizer
 
   fleetVehiclePropertySynchronizerInstance = {
     initialize: initialize,
-    getSynchronizedData: getSynchronizedData
+    getSynchronizedData: getSynchronizedData,
+    cache: cache
   };
   return fleetVehiclePropertySynchronizerInstance;
 };

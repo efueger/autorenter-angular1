@@ -4,6 +4,7 @@ require('angular-mocks');
 require('sinon-chai');
 
 require('./fleet-location-vehicle-details.controller');
+require('./fleet-vehicle-property-synchronizer');
 
 describe('fa.fleet.FleetLocationVehicleDetailsController > ', function describeImpl() {
   var $q;
@@ -39,16 +40,16 @@ describe('fa.fleet.FleetLocationVehicleDetailsController > ', function describeI
   var navigationState = { vehicleId: '1000', locationId: 'fooßar'};
 
   var getInitializationDataStub;
-  var fakeFleetVehiclePropertySynchronizer;
   var synchronizerInitializerSpy;
+  var getSynchronizedDataStub;
 
   beforeEach(angular.mock.module('fa.fleet'));
-
   beforeEach(inject(function injectImpl(_$q_,
                                         _$rootScope_,
                                         _fleetLocationVehicleStrategyFactory_,
                                         _fleetLocationVehicleDetailsModeService_,
-                                        _fleetLocationVehicleEditStrategy_) {
+                                        _fleetLocationVehicleEditStrategy_,
+                                        _fleetVehiclePropertySynchronizer_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
     fleetLocationVehicleStrategyFactory = _fleetLocationVehicleStrategyFactory_;
@@ -77,13 +78,11 @@ describe('fa.fleet.FleetLocationVehicleDetailsController > ', function describeI
       }
     );
 
-    fakeFleetVehiclePropertySynchronizer = {
-      initialize: function initialize() { },
-      getSynchronizedData: function getSynchronizedData(actualVehicle) {
+    synchronizerInitializerSpy = sinon.spy(_fleetVehiclePropertySynchronizer_, 'initialize');
+    getSynchronizedDataStub = sinon.stub(_fleetVehiclePropertySynchronizer_, 'getSynchronizedData',
+      function getSynchronizedData(actualVehicle)  {
         return (actualVehicle.id === vehicle.id) ? { models: models, years: years, colors: colors } : null;
-      }
-    };
-    synchronizerInitializerSpy = sinon.spy(fakeFleetVehiclePropertySynchronizer, 'initialize');
+      });
 
     angular.mock.inject([
       '$controller',
@@ -92,7 +91,7 @@ describe('fa.fleet.FleetLocationVehicleDetailsController > ', function describeI
           '$state': $state,
           'fleetLocationVehicleStrategyFactory': fleetLocationVehicleStrategyFactory,
           'fleetLocationVehicleDetailsModeService': fleetLocationVehicleDetailsModeService,
-          'fleetVehiclePropertySynchronizer': fakeFleetVehiclePropertySynchronizer
+          'fleetVehiclePropertySynchronizer': _fleetVehiclePropertySynchronizer_
         });
       }
     ]);
@@ -130,16 +129,22 @@ describe('fa.fleet.FleetLocationVehicleDetailsController > ', function describeI
       synchronizerInitializerSpy.calledWith(initializationData).should.be.true;
     });
 
-    it('sets the models', function testImpl() {
-      controller.models.should.deep.equal(models);
-    });
+    describe('calls synchLookups and', function synchLookupsTest() {
+      it('synchronizes the lookup data', function testImpl() {
+        getSynchronizedDataStub.calledWith(vehicle).should.be.true;
+      });
 
-    it('sets the years', function testImpl() {
-      controller.years.should.deep.equal(years);
-    });
+      it('sets the models', function testImpl() {
+        controller.models.should.deep.equal(models);
+      });
 
-    it('sets the colors', function testImpl() {
-      controller.colors.should.deep.equal(colors);
+      it('sets the years', function testImpl() {
+        controller.years.should.deep.equal(years);
+      });
+
+      it('sets the colors', function testImpl() {
+        controller.colors.should.deep.equal(colors);
+      });
     });
   });
 
