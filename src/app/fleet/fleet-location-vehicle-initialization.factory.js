@@ -2,86 +2,81 @@
 
 var fleet = require('./fleet.module');
 
-var fleetLocationVehicleInitialization = function fleetLocationVehicleInitialization($q,
+var fleetLocationVehicleInitializationFactory = function fleetLocationVehicleInitializationFactoryFactory($q,
+                                                                                     lookupDataService,
+                                                                                     skuDataService,
                                                                                      locationsDataService,
                                                                                      vehiclesDataService) {
-  var fleetLocationVehicleInitializationInstance;
-
-  var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
-  var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
-  var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
-  var makes = ['Chevrolet', 'Ford', 'Honda', 'Toyota'];
-
-  function getYears() {
-    var deferred = $q.defer();
-    deferred.resolve({data: years});
-    return deferred.promise;
-  }
-
-  function getColors() {
-    var deferred = $q.defer();
-    deferred.resolve({data: colors});
-    return deferred.promise;
-  }
-
-  function getMakes() {
-    var deferred = $q.defer();
-    deferred.resolve({data: makes});
-    return deferred.promise;
-  }
-
-  function getModels() {
-    var deferred = $q.defer();
-    deferred.resolve({data: models});
-    return deferred.promise;
-  }
+  var fleetLocationVehicleInitializationFactoryInstance;
 
   function getInitializationData(locationId, vehicleId) {
     var deferred = $q.defer();
     var initializationData = {};
+    var promises = [];
 
-    var vehiclePromise = vehiclesDataService.getVehicle(vehicleId)
-      .then(function setResult(response) {
-        initializationData.vehicle = response.data.vehicle;
-      });
+    if (vehicleId) {
+      var vehiclePromise = vehiclesDataService.getVehicle(vehicleId)
+        .then(function setResult(response) {
+          initializationData.vehicle = response.data.vehicle;
+        });
+      promises.push(vehiclePromise);
+    }
+
     var locationPromise = locationsDataService.getLocation(locationId)
       .then(function setResult(response) {
         initializationData.location = response.data.location;
       });
-    var yearsPromise = getYears()
+    promises.push(locationPromise);
+
+    var skuPromise = skuDataService.getSkus()
       .then(function setResult(response) {
-        initializationData.years = response.data;
+        initializationData.skus = response.data.skus;
       });
-    var colorsPromise = getColors()
+    promises.push(skuPromise);
+
+    var vehicleLookupDataPromise = lookupDataService.getVehicleLookupData()
       .then(function setResult(response) {
-        initializationData.colors = response.data;
+        initializationData.makes = response.data.lookupData.makes;
+        initializationData.models = response.data.lookupData.models;
       });
-    var makesPromise = getMakes()
-      .then(function setResult(response) {
-        initializationData.makes = response.data;
-      });
-    var modelsPromise = getModels()
-      .then(function setResult(response) {
-        initializationData.models = response.data;
-      });
-    $q.all([locationPromise, vehiclePromise, yearsPromise, colorsPromise, makesPromise, modelsPromise])
+    promises.push(vehicleLookupDataPromise);
+
+    $q.all(promises)
       .then(function setResult() {
+        setSelectedVehicleData(initializationData);
         deferred.resolve(initializationData);
       });
     return deferred.promise;
   }
 
-  fleetLocationVehicleInitializationInstance = {
+  function setSelectedVehicleData(initializationData) {
+    if (initializationData.vehicle) {
+      initializationData.models.forEach(function setModel(modelElement) {
+        if (modelElement.id === initializationData.vehicle.modelId) {
+          initializationData.selectedModel = modelElement;
+        }
+      });
+      initializationData.makes.forEach(function setMake(makeElement) {
+        if (makeElement.id === initializationData.vehicle.makeId) {
+          initializationData.selectedMake = makeElement;
+        }
+      });
+    }
+  }
+
+  fleetLocationVehicleInitializationFactoryInstance = {
     getInitializationData: getInitializationData
   };
-  return fleetLocationVehicleInitializationInstance;
+  return fleetLocationVehicleInitializationFactoryInstance;
 };
 
-fleetLocationVehicleInitialization.$inject = [
+fleetLocationVehicleInitializationFactory.$inject = [
   '$q',
+  'lookupDataService',
+  'skuDataService',
   'locationsDataService',
   'vehiclesDataService'
 ];
 
 fleet
-  .factory('fleetLocationVehicleInitialization', fleetLocationVehicleInitialization);
+  .factory('fleetLocationVehicleInitializationFactory', fleetLocationVehicleInitializationFactory);

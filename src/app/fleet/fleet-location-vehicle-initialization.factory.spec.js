@@ -1,77 +1,136 @@
+var angular = require('angular');
+var sinon = require('sinon');
+require('angular-mocks');
+require('sinon-chai');
+
 require('./fleet-location-vehicle-initialization.factory');
 
-describe('fa.fleet.fleetLocationVehicleInitialization > ', function describeImpl() {
+describe('fa.fleet.fleetLocationVehicleInitializationFactory > ', function describeImpl() {
   var $q;
   var $rootScope;
+  var skuDataService;
+  var lookupDataService;
   var locationsDataService;
   var vehiclesDataService;
-  var fleetLocationVehicleInitialization;
-
-  var sinon = require('sinon');
+  var fleetLocationVehicleInitializationFactory;
 
   beforeEach(angular.mock.module('fa.fleet'));
 
   beforeEach(inject(function injectImpl(_$q_,
                                         _$rootScope_,
+                                        _skuDataService_,
+                                        _lookupDataService_,
                                         _locationsDataService_,
                                         _vehiclesDataService_,
-                                        _fleetLocationVehicleInitialization_) {
+                                        _fleetLocationVehicleInitializationFactory_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
+    skuDataService = _skuDataService_;
+    lookupDataService = _lookupDataService_;
     locationsDataService = _locationsDataService_;
     vehiclesDataService = _vehiclesDataService_;
-    fleetLocationVehicleInitialization = _fleetLocationVehicleInitialization_;
+    fleetLocationVehicleInitializationFactory = _fleetLocationVehicleInitializationFactory_;
   }));
 
-  it('getInitializationData returns vehicle and location data', function testImpl() {
-    var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
-    var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
-    var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
-    var makes = ['Chevrolet', 'Ford', 'Honda', 'Toyota'];
+  describe('getInitializationData', function describeImpl() {
+    var location = {
+      id: '1'
+    };
     var vehicle = {
       id: 1,
-      vin: '1XKDPB0X04R047346',
-      make: 'Toyota',
-      model: 'Tercel',
-      year: 1990,
-      miles: 452303,
-      color: 'Gold',
-      isRentToOwn: false
+      makeId: 'che',
+      modelId: 'cvt'
     };
-    var location = {
-      id: '1',
-      siteId: 'ind',
-      name: 'Indianapolis International Airport',
-      vehicleCount: 255,
-      city: 'Indianapolis',
-      stateCode: 'IN'
-    };
-    var expectedResponse = {
-      vehicle: vehicle,
-      location: location,
-      years: years,
-      colors: colors,
-      makes: makes,
-      models: models
-    };
-    sinon.stub(vehiclesDataService, 'getVehicle', function getVehicle() {
-      var deferred = $q.defer();
-      deferred.resolve({data: {vehicle: vehicle}});
-      return deferred.promise;
-    });
-    sinon.stub(locationsDataService, 'getLocation', function getLocation() {
-      var deferred = $q.defer();
-      deferred.resolve({data: {location: location}});
-      return deferred.promise;
-    });
+    var skus = [
+      { makeId: 'tsl', modelId: 'tmx', year: 2016, color: 'Black' },
+      { makeId: 'che', modelId: 'cvt', year: 2016, color: 'Black' }
+    ];
+    var selectedMake = { id: 'che', name: 'Chevrolet' };
+    var makes = [
+      { id: 'tsl', name: 'Tesla' },
+      selectedMake
+    ];
+    var selectedModel = { id: 'cvt', name: 'Corvette' };
+    var models = [
+      { id: 'tmx', name: 'Model X' },
+      selectedModel
+    ];
 
-    var actualResponse;
-    fleetLocationVehicleInitialization.getInitializationData(location.id, vehicle.id)
-      .then(function setResponse(response) {
-        actualResponse = response;
+    beforeEach(function beforeEachImpl() {
+      sinon.stub(vehiclesDataService, 'getVehicle', function getVehicle(vehicleId) {
+        var deferred = $q.defer();
+        if (vehicleId === vehicle.id) {
+          deferred.resolve({ data: { vehicle: vehicle } });
+        } else {
+          deferred.reject();
+        }
+        return deferred.promise;
       });
-    $rootScope.$apply();
+      sinon.stub(locationsDataService, 'getLocation', function getLocation(locationId) {
+        var deferred = $q.defer();
+        if (locationId === location.id) {
+          deferred.resolve({ data: { location: location } });
+        } else {
+          deferred.reject();
+        }
+        return deferred.promise;
+      });
+      sinon.stub(skuDataService, 'getSkus', function getSkus() {
+        var deferred = $q.defer();
+        deferred.resolve({ data: { skus: skus } });
+        return deferred.promise;
+      });
+      sinon.stub(lookupDataService, 'getVehicleLookupData', function getVehicleLookupData() {
+        var deferred = $q.defer();
+        deferred.resolve({
+          data: {
+            lookupData: {
+              makes: makes,
+              models: models
+            }
+          }
+        });
+        return deferred.promise;
+      });
+    });
 
-    actualResponse.should.deep.equal(expectedResponse);
+    it('returns partial set of data', function testImpl() {
+      var expectedResponse = {
+        location: location,
+        skus: skus,
+        makes: makes,
+        models: models
+      };
+
+      var actualResponse;
+      fleetLocationVehicleInitializationFactory.getInitializationData(location.id)
+        .then(function setResponse(response) {
+          actualResponse = response;
+        });
+      $rootScope.$apply();
+
+      actualResponse.should.deep.equal(expectedResponse);
+    });
+
+    it('returns full set of data', function testImpl() {
+      var expectedResponse = {
+        location: location,
+        vehicle: vehicle,
+        skus: skus,
+        makes: makes,
+        models: models,
+        selectedMake: selectedMake,
+        selectedModel: selectedModel
+      };
+
+      var actualResponse;
+      fleetLocationVehicleInitializationFactory.getInitializationData(location.id, vehicle.id)
+        .then(function setResponse(response) {
+          actualResponse = response;
+        });
+      $rootScope.$apply();
+
+      actualResponse.should.deep.equal(expectedResponse);
+    });
   });
 });

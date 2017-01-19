@@ -183,13 +183,13 @@ describe('fa.fleet.FleetLocationVehiclesController > ', function describeImpl() 
       },
       {
         displayName: 'Make',
-        field: 'make',
+        field: 'makeId',
         type: 'string',
         enableSorting: false
       },
       {
         displayName: 'Model',
-        field: 'model',
+        field: 'modelId',
         type: 'string',
         enableSorting: false
       },

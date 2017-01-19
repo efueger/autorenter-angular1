@@ -10,7 +10,7 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
   var $rootScope;
   var $state;
   var notificationService;
-  var locationsDataService;
+  var fleetLocationVehicleInitializationFactory;
   var vehiclesDataService;
   var fleetLocationVehicleAddStrategy;
 
@@ -20,46 +20,36 @@ describe('fa.fleet.fleetLocationVehicleAddStrategy > ', function describeImpl() 
                                         _$rootScope_,
                                         _$state_,
                                         _notificationService_,
-                                        _locationsDataService_,
+                                        _fleetLocationVehicleInitializationFactory_,
                                         _vehiclesDataService_,
                                         _fleetLocationVehicleAddStrategy_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
     $state = _$state_;
     notificationService = _notificationService_;
-    locationsDataService = _locationsDataService_;
+    fleetLocationVehicleInitializationFactory = _fleetLocationVehicleInitializationFactory_;
     vehiclesDataService = _vehiclesDataService_;
     fleetLocationVehicleAddStrategy = _fleetLocationVehicleAddStrategy_;
   }));
 
   it('getInitializationData returns vehicle and location data', function testImpl() {
-    var location = {
-      id: '1',
-      siteId: 'ind',
-      name: 'Indianapolis International Airport',
-      vehicleCount: 255,
-      city: 'Indianapolis',
-      stateCode: 'IN'
+    var dummyInitializationData = {
+      theActualValues: 'do not matter for this test'
     };
-    var colors = ['Black', 'Blue', 'Gold', 'Orange', 'Red', 'Silver'];
-    var years = [2011, 2012, 2013, 2014, 2015, 2016, 2017];
-    var models = [ 'Civic', 'Impala', 'Pinto', 'Tercel'];
-    var makes = ['Chevrolet', 'Ford', 'Honda', 'Toyota'];
-    var expectedResponse = {
-      location: location,
-      years: years,
-      colors: colors,
-      makes: makes,
-      models: models
-    };
-    sinon.stub(locationsDataService, 'getLocation', function getLocation() {
+    var locationIdUsedInInvocation = 'foo';
+    sinon.stub(fleetLocationVehicleInitializationFactory, 'getInitializationData', function getInitializationData(locationId) {
       var deferred = $q.defer();
-      deferred.resolve({data: {location: location}});
+      if (locationId === locationIdUsedInInvocation) {
+        deferred.resolve(dummyInitializationData);
+      } else {
+        deferred.reject();
+      }
       return deferred.promise;
     });
+    var expectedResponse = dummyInitializationData;
 
     var actualResponse;
-    fleetLocationVehicleAddStrategy.getInitializationData()
+    fleetLocationVehicleAddStrategy.getInitializationData(locationIdUsedInInvocation)
       .then(function setResponse(response) {
         actualResponse = response;
       });

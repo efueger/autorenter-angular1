@@ -2,13 +2,15 @@
 
 var fleet = require('./fleet.module');
 
-var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy($q, $state, notificationService, strings,
-                                                                   vehiclesDataService, locationsDataService,
-                                                                   fleetLocationVehicleInitialization) {
+var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy($state,
+                                                                                 notificationService,
+                                                                                 strings,
+                                                                                 vehiclesDataService,
+                                                                                 fleetLocationVehicleInitializationFactory) {
   var fleetLocationVehicleEditStrategyInstance;
 
   var getInitializationData = function getInitializationData(locationId, vehicleId) {
-    return fleetLocationVehicleInitialization.getInitializationData(locationId, vehicleId)
+    return fleetLocationVehicleInitializationFactory.getInitializationData(locationId, vehicleId)
       .then(function setResult(initializationData) {
         return initializationData;
       });
@@ -38,13 +40,11 @@ var fleetLocationVehicleEditStrategy = function fleetLocationVehicleEditStrategy
 };
 
 fleetLocationVehicleEditStrategy.$inject = [
-  '$q',
   '$state',
   'notificationService',
   'strings',
   'vehiclesDataService',
-  'locationsDataService',
-  'fleetLocationVehicleInitialization'
+  'fleetLocationVehicleInitializationFactory'
 ];
 
 fleet

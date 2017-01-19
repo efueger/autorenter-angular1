@@ -28,6 +28,8 @@ require('./fleet-location-vehicle-view-strategy.factory');
 require('./fleet-location-initialization.factory');
 require('./fleet-location-vehicle-initialization.factory');
 
+require('./fleet-vehicle-property-synchronizer');
+
 require('./fleet-reports.controller');
 
 module.exports = fleet;

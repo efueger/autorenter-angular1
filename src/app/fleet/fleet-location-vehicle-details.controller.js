@@ -2,13 +2,21 @@
 
 var fleet = require('./fleet.module');
 
-function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrategyFactory, fleetLocationVehicleDetailsModeService) {
+function FleetLocationVehicleDetailsController($log,
+                                               $state,
+                                               fleetLocationVehicleStrategyFactory,
+                                               fleetLocationVehicleDetailsModeService,
+                                               fleetVehiclePropertySynchronizer) {
   var vm = this;
 
   vm.location = {};
   vm.vehicle = {};
+  vm.makes = {};
+  vm.models = {};
   vm.years = {};
   vm.colors = {};
+  vm.selectedMake = {};
+  vm.selectedModel = {};
 
   var implementationStrategy;
 
@@ -17,12 +25,21 @@ function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrat
     implementationStrategy.getInitializationData($state.params.locationId, $state.params.vehicleId)
       .then(function init(initializationData) {
         vm.location = initializationData.location;
-        vm.vehicle = initializationData.vehicle;
-        vm.colors = initializationData.colors;
-        vm.years = initializationData.years;
+        vm.vehicle = initializationData.vehicle || {};
         vm.makes = initializationData.makes;
-        vm.models = initializationData.models;
+        vm.selectedMake = initializationData.selectedMake;
+        vm.selectedModel = initializationData.selectedModel;
+        fleetVehiclePropertySynchronizer.initialize(initializationData);
+
+        vm.synchLookups();
       });
+  };
+
+  vm.synchLookups = function synchLookups() {
+    var synchedData = fleetVehiclePropertySynchronizer.getSynchronizedData(vm.vehicle);
+    vm.models = synchedData.models;
+    vm.years = synchedData.years;
+    vm.colors = synchedData.colors;
   };
 
   vm.isEditable = function isEditable() {
@@ -37,9 +54,11 @@ function FleetLocationVehicleDetailsController($state, fleetLocationVehicleStrat
 }
 
 FleetLocationVehicleDetailsController.$inject = [
+  '$log',
   '$state',
   'fleetLocationVehicleStrategyFactory',
-  'fleetLocationVehicleDetailsModeService'
+  'fleetLocationVehicleDetailsModeService',
+  'fleetVehiclePropertySynchronizer'
 ];
 
 fleet.controller('FleetLocationVehicleDetailsController', FleetLocationVehicleDetailsController);

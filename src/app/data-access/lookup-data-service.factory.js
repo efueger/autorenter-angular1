@@ -2,7 +2,7 @@
 
 var dataAccess = require('./data-access.module');
 
-var lookupDataService = function lookupDataService($q, $http, generalConfig, strings) {
+var lookupDataService = function lookupDataService($http, generalConfig, strings) {
 
   function getStates() {
     return $http({
@@ -14,14 +14,20 @@ var lookupDataService = function lookupDataService($q, $http, generalConfig, str
     });
   }
 
+  function getVehicleLookupData() {
+    return $http({
+      method: 'GET',
+      url: strings.format('{apiUrl}lookup-data?makes&models', { apiUrl: generalConfig.apiUrlRoot })
+    });
+  }
+
   return {
-    getStates: getStates
-    // TODO: getVehicleLookupData: getVehicleLookupData
+    getStates: getStates,
+    getVehicleLookupData: getVehicleLookupData
   };
 };
 
 dataAccess.$inject = [
-  '$q',
   '$http',
   'generalConfig',
   'strings'
