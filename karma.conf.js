@@ -1,5 +1,6 @@
 var path = require('path');
 var args = require('yargs').argv;
+var webpack = require('webpack');
 
 var unitTestEntry = 'src/app/specs.webpack.js';
 
@@ -11,6 +12,13 @@ var browser = 'PhantomJS';
 
 var files = [unitTestEntry];
 var include = [path.resolve('./src')];
+
+var isProd = args.prod;
+
+var webpackPlugins = [
+  new webpack.DefinePlugin({
+    __PROD__: isProd
+  })];
 
 var preLoaders = [
   // Process all non-test code with Isparta
@@ -45,6 +53,7 @@ module.exports = function karmaConfig(config) {
     files: files,
     webpack: {
       devtool: 'inline-source-map',
+      plugins: webpackPlugins,
       module: {
         preLoaders: preLoaders,
         loaders: loaders,
