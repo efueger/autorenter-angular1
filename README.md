@@ -44,7 +44,7 @@ npm run test:watch
 To start the app with all debug logging enabled (recommended):
 
 ```bash
-npm start
+npm run dev
 ```
 
 ## Browse the App

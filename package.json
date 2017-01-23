@@ -29,9 +29,11 @@
   },
   "license": "MIT",
   "scripts": {
-    "start": "webpack-dev-server",
+    "dev": "webpack-dev-server",
     "build": "rm -rf ./dist && webpack --progress --prod",
     "build:ci": "webpack --progress --prod --ci --bail",
+    "postinstall": "npm run build",
+    "start": "node ./server.js",
     "test": "rm -rf ./coverage && karma start ./karma.conf.js",
     "test:ci": "karma start ./karma.conf.js --ci",
     "test:watch": "karma start ./karma.conf.js --watch"
@@ -45,6 +47,7 @@
     "angularjs-toaster": "2.0.0",
     "angulartics": "1.0.3",
     "bootstrap": "3.3.6",
+    "express": "4.14.0",
     "fa-strings.js": "1.0.0"
   },
   "devDependencies": {
