@@ -1,3 +1,5 @@
+[![Build Status][travis-image]][travis-url]
+
 # AutoRenter - Angular 1
 
 An Angular based implementation of the AutoRenter UI.
@@ -42,7 +44,7 @@ npm run test:watch
 To start the app with all debug logging enabled (recommended):
 
 ```bash
-npm start
+npm run dev
 ```
 
 ## Browse the App
@@ -101,3 +103,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 * Fusion Alliance for the initiative to create a community of open source development within our ranks.
+
+[travis-url]: https://travis-ci.org/fusionalliance/autorenter-angular1
+[travis-image]: https://travis-ci.org/fusionalliance/autorenter-angular1.svg?branch=development&style=flat-square

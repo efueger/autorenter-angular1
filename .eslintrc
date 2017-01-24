@@ -26,6 +26,7 @@
   "globals": {
     "require": true,
     "module": true,
-    "inject": true
+    "inject": true,
+    "__PROD__":  true
   }
 }
