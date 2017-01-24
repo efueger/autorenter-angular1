@@ -8,8 +8,6 @@ require('./fleet-location-vehicle-edit-strategy.factory');
 describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl() {
   var $q;
   var $rootScope;
-  var vehiclesDataService;
-  var locationsDataService;
   var fleetLocationVehicleEditStrategy;
   var fleetLocationVehicleInitializationFactory;
 
@@ -18,14 +16,10 @@ describe('fa.fleet.fleetLocationVehicleEditStrategy > ', function describeImpl()
   beforeEach(inject(function injectImpl(_$q_,
                                         _$rootScope_,
                                         _$state_,
-                                        _vehiclesDataService_,
-                                        _locationsDataService_,
                                         _fleetLocationVehicleEditStrategy_,
                                         _fleetLocationVehicleInitializationFactory_) {
     $q = _$q_;
     $rootScope = _$rootScope_;
-    vehiclesDataService = _vehiclesDataService_;
-    locationsDataService = _locationsDataService_;
     fleetLocationVehicleEditStrategy = _fleetLocationVehicleEditStrategy_;
     fleetLocationVehicleInitializationFactory = _fleetLocationVehicleInitializationFactory_;
   }));

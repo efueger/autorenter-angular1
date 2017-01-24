@@ -9,7 +9,6 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
   var $rootScope;
   var $state;
   var notificationService;
-  var lookupDataService;
   var locationsDataService;
   var fleetLocationEditStrategy;
   var fleetLocationInitializationFactory;
@@ -20,7 +19,6 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
                                         _$rootScope_,
                                         _$state_,
                                         _notificationService_,
-                                        _lookupDataService_,
                                         _locationsDataService_,
                                         _fleetLocationEditStrategy_,
                                         _fleetLocationInitializationFactory_) {
@@ -28,7 +26,6 @@ describe('fa.fleet.fleetLocationEditStrategy > ', function describeImpl() {
     $rootScope = _$rootScope_;
     $state = _$state_;
     notificationService = _notificationService_;
-    lookupDataService = _lookupDataService_;
     locationsDataService = _locationsDataService_;
     fleetLocationEditStrategy = _fleetLocationEditStrategy_;
     fleetLocationInitializationFactory = _fleetLocationInitializationFactory_;
